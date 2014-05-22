@@ -18,7 +18,7 @@ cat  > ${outdir}/index.html <<HTML
 HTML
 
 
-for name in $(find . -depth 1 -type d \( !  -name .git \)); do
+for name in $(find . -maxdepth 1 -type d \( !  -name .git \)); do
 	echo "            <li> <a href='${name}'/>${name}</li>" >> ${outdir}/index.html
 done
 
