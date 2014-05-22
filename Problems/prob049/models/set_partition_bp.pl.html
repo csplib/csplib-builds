@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>049: Number Partitioning</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+	
+  
+	<link type="text/css" rel="stylesheet" href="/syntax_highlighter/shCoreDefault.css"/>
+	
+</head>
+
+<body>
+	
+	<ol class="breadcrumb">
+    	  <li><a href="/">CSPlib</a></li>
+
+  <li><a href="/Problems">Problems</a></li>
+  <li><a href="/Problems/prob049">prob049</a></li>
+
+  <li><a href="/Problems/prob049/models">Models</a></li>
+  <li>set_partition_bp.pl</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>049: Number Partitioning</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/Problems/prob049/">Specification</a></li>
+
+  	 	<li><a class='no-files' href="/Problems/prob049/data">Data files</a></li>
+
+   	<li><a href="/Problems/prob049/results">Results</a></li>
+
+   	<li><a href="/Problems/prob049/references">References</a></li>
+
+   	<li><a href="/Problems/prob049/models">Models</a></li>
+
+   	<li><a href="/Problems/prob049/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob049/models/set_partition_bp.pl">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/Problems/prob049/models/set_partition_bp.pl">Download</a>
+<pre class ='brush: pl'>/*
+
+  Set partition problem in B-Prolog.
+
+  Problem formulation from
+    http://www.koalog.com/resources/samples/PartitionProblem.java.html
+  """
+   This is a partition problem.
+   Given the set S = {1, 2, ..., n}, 
+   it consists in finding two sets A and B such that:
+   &lt;ul&gt;
+   &lt;li&gt;A U B = S,&lt;/li&gt;
+   &lt;li&gt;|A| = |B|,&lt;/li&gt;
+   &lt;li&gt;sum(A) = sum(B),&lt;/li&gt;
+   &lt;li&gt;sum_squares(A) = sum_squares(B).&lt;/li&gt;
+   &lt;/ul&gt;
+  """
+
+  This model just implementa a two set version.
+
+  Model created by Hakan Kjellerstrand, hakank@gmail.com
+  See also my B-Prolog page: http://www.hakank.org/bprolog/
+
+*/
+
+% Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
+
+% find all (7) solutions for N = 16.
+go :-
+        findall(Sets,set_partition(16, Sets),L), 
+        length(L,Len),
+        format("It was ~d solutions.\n", [Len]).
+
+
+go2 :-
+        N :: 2..50,
+        indomain(N),
+        once(set_partition(N, _Sets)), 
+        nl,fail.
+
+
+
+set_partition(N,Sets) :-
+
+        writeln('\nN':N),
+
+        (N mod 2 &gt; 0 -&gt; format("~d is not a multiple of 2.\n", [N]), fail ; true ),
+        (N mod 4 &gt; 0 -&gt; format("~d is not a multiple of 4.\n", [N]), fail ; true ),
+
+        N2 is N //2,
+
+        [A,B] :: {}..{1..N},
+        Sets = [A,B],
+
+        % same cardinality
+        #A #= N2,
+        #A #= #B,
+
+        % A and B are disjoint
+        A #&lt;&gt; B,
+
+        % Symmetry breaking: 1 is in the A set
+        1 #&lt;- A,
+
+        % All numbers 1..N must be in some set
+        foreach(I in 1..N, (I #&lt;- A ; I #&lt;- B)),
+
+        % It seems that we must have the labeling
+        % already here...
+        indomain(A),
+        indomain(B),
+
+        set_to_list(A,AList),
+        set_to_list(B,BList),
+
+
+        % sum of the sets must be equal
+        ASum #= sum(AList),
+        BSum #= sum(BList),
+        ASum #= BSum,
+
+        % sum of the squares must be equal
+        ASumSquared #= sum([ T**2 : I in 1..AList^length, [T], T @= AList[I]]),
+        BSumSquared #= sum([ T**2 : I in 1..BList^length, [T], T @= BList[I]]),
+
+        ASumSquared #= BSumSquared,
+
+        % labeling([ASum,BSum,ASumSquared,BSumSquared]),
+
+        writeln(A),
+        writeln(B),
+        writeln(sums:[ASum,BSum]),
+        writeln(sumSquares:[ASumSquared,BSumSquared]),
+        nl.
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/js/shBrushEssence.js'],
+    ['js','javascript','/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>

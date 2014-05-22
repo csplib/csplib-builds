@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>019: Magic Squares and Sequences</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+	
+  
+	<link type="text/css" rel="stylesheet" href="/syntax_highlighter/shCoreDefault.css"/>
+	
+</head>
+
+<body>
+	
+	<ol class="breadcrumb">
+    	  <li><a href="/">CSPlib</a></li>
+
+  <li><a href="/Problems">Problems</a></li>
+  <li><a href="/Problems/prob019">prob019</a></li>
+
+  <li><a href="/Problems/prob019/models">Models</a></li>
+  <li>magic_sequence.cs</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>019: Magic Squares and Sequences</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/Problems/prob019/">Specification</a></li>
+
+  	 	<li><a class='no-files' href="/Problems/prob019/data">Data files</a></li>
+
+   	<li><a href="/Problems/prob019/results">Results</a></li>
+
+   	<li><a href="/Problems/prob019/references">References</a></li>
+
+   	<li><a href="/Problems/prob019/models">Models</a></li>
+
+   	<li><a href="/Problems/prob019/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob019/models/magic_sequence.cs">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/Problems/prob019/models/magic_sequence.cs">Download</a>
+<pre class ='brush: cs'>//
+// Copyright 2012 Hakan Kjellerstrand
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
+using System.Collections;
+using System.Linq;
+using System.IO;
+using System.Text.RegularExpressions;
+using Google.OrTools.ConstraintSolver;
+
+public class MagicSequence
+{
+
+  /**
+   *
+   * Magic sequence problem.
+   *
+   * This is a port of the Python model
+   * https://code.google.com/p/or-tools/source/browse/trunk/python/magic_sequence_distribute.py
+   * """
+   * This models aims at building a sequence of numbers such that the number of
+   * occurrences of i in this sequence is equal to the value of the ith number.
+   * It uses an aggregated formulation of the count expression called
+   * distribute().
+   * """
+   *
+   */
+  private static void Solve(int size)
+  {
+
+    Solver solver = new Solver("MagicSequence");
+
+    Console.WriteLine("\nSize: {0}", size);
+
+    //
+    // data
+    //
+    int[] all_values = new int[size];
+    for (int i = 0; i &lt; size; i++) {
+      all_values[i] = i;
+    }
+
+    //
+    // Decision variables
+    //
+    IntVar[] all_vars  = solver.MakeIntVarArray(size, 0, size - 1, "vars");
+
+    //
+    // Constraints
+    //
+    solver.Add(all_vars.Distribute(all_values, all_vars));
+    solver.Add(all_vars.Sum() == size);
+
+
+    //
+    // Search
+    //
+    DecisionBuilder db = solver.MakePhase(all_vars,
+                                          Solver.CHOOSE_FIRST_UNBOUND,
+                                          Solver.ASSIGN_MIN_VALUE);
+
+    solver.NewSearch(db);
+
+    while (solver.NextSolution()) {
+      for(int i = 0; i &lt; size; i++) {
+        Console.Write(all_vars[i].Value() + " ");
+      }
+      Console.WriteLine();
+    }
+
+    Console.WriteLine("\nSolutions: {0}", solver.Solutions());
+    Console.WriteLine("WallTime: {0}ms", solver.WallTime());
+    Console.WriteLine("Failures: {0}", solver.Failures());
+    Console.WriteLine("Branches: {0} ", solver.Branches());
+
+    solver.EndSearch();
+
+  }
+
+
+
+  public static void Main(String[] args)
+  {
+
+    if (args.Length &gt; 0) {
+
+      int size = Convert.ToInt32(args[0]);
+      Solve(size);
+
+    } else {
+      // Let's test some diferent sizes
+      foreach(int i in new int[] {2, 10, 100, 200, 500}) {
+        Solve(i);
+      }
+
+    }
+
+
+  }
+}
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/js/shBrushEssence.js'],
+    ['js','javascript','/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>
