@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>054: N-Queens</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/csplib-builds/master/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/master/syntax_highlighter/shCoreDefault.css"/>
+
+</head>
+
+<body>
+
+	<ol class="breadcrumb">
+    	  <li><a href="/csplib-builds/master/">CSPlib</a></li>
+
+  <li><a href="/csplib-builds/master/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob054">prob054</a></li>
+
+  <li><a href="/csplib-builds/master/Problems/prob054/models">Models</a></li>
+  <li>queensn.co</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>054: N-Queens</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/csplib-builds/master/Problems/prob054/">Specification</a></li>
+
+  	 	<li><a class='no-files' href="/csplib-builds/master/Problems/prob054/data">Data files</a></li>
+
+  	 	<li><a class='no-files' href="/csplib-builds/master/Problems/prob054/results">Results</a></li>
+
+   	<li><a href="/csplib-builds/master/Problems/prob054/references">References</a></li>
+
+   	<li><a href="/csplib-builds/master/Problems/prob054/models">Models</a></li>
+
+   	<li><a href="/csplib-builds/master/Problems/prob054/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob054/models/queensn.co">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/csplib-builds/master/Problems/prob054/models/queensn.co">Download</a>
+<pre >/*
+
+  n-queens problem in Comet.
+
+  From Pascal Van Hentenryck "The OPL Optimization Programming Language",
+  page 34.
+
+
+  This Comet model was created by Hakan Kjellerstrand (hakank@gmail.com)
+  Also, see my Comet page: http://www.hakank.org/comet 
+
+ */
+
+// Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
+
+import cotfd;
+
+int t0 = System.getCPUTime();
+
+cout << "Number of Variables: ";
+int n = cin.getInt();
+range Domain = 1..n;
+
+Solver<CP> m();
+var<CP>{int} queens[Domain](m, Domain);
+
+
+Integer num_solutions(0);
+
+// exploreall<m> {
+explore<m> {
+
+  forall(i in 1..n, j in 1..n : i < j) {
+    m.post(queens[i] != queens[j]);
+    m.post(queens[i] + i != queens[j] + j);
+    m.post(queens[i] - i != queens[j] - j);
+  }
+    
+
+} using {
+      
+  labelFF(m);
+  num_solutions++;
+  cout << queens << endl;
+
+}
+
+cout << "\nnum_solutions: " << num_solutions << endl;
+    
+int t1 = System.getCPUTime();
+cout << "time:      " << (t1-t0) << endl;
+cout << "#choices = " << m.getNChoice() << endl;
+cout << "#fail    = " << m.getNFail() << endl;
+cout << "#propag  = " << m.getNPropag() << endl;
+
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
+    ['js','javascript','/csplib-builds/master/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/master/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/master/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/master/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/master/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/master/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/master/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/master/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/master/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/master/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/master/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>
