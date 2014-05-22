@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>019: Magic Squares and Sequences</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/csplib-builds/languages_pages/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/csplib-builds/languages_pages/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/languages_pages/syntax_highlighter/shCoreDefault.css"/>
+
+</head>
+
+<body>
+
+	<ol class="breadcrumb">
+    	  <li><a href="/csplib-builds/languages_pages/">CSPlib</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/languages_pages/Problems/prob019">prob019</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems/prob019/models">Models</a></li>
+  <li>MagicSquare_jacop.scala</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>019: Magic Squares and Sequences</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob019/">Specification</a></li>
+
+  	 	<li><a class='no-files' href="/csplib-builds/languages_pages/Problems/prob019/data">Data files</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob019/results">Results</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob019/references">References</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob019/models">Models</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob019/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob019/models/MagicSquare_jacop.scala">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/csplib-builds/languages_pages/Problems/prob019/models/MagicSquare_jacop.scala">Download</a>
+<pre class ='brush: scala'>/*
+
+  Magic square in JaCoP/Scala.
+  
+  This model was written by Hakan Kjellerstrand (hakank@gmail.com).
+  See my JaCoP/Scala page: http://www.hakank.org/jacop/jacop_scala.html
+   
+*/
+
+% Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
+
+import scalaJaCoP._
+
+object MagicSquare extends App with jacop {
+
+
+  val n = 4
+  val n2 = n*n
+  val x = List.tabulate(n)(i=&gt; 
+                List.tabulate(n)(j=&gt;
+                  new IntVar("x("+i+","+j+")", 1, n2)))
+  // val total = new IntVar("total", 1, n*n*n)
+  val total = (n * (n*n + 1) / 2)
+
+
+  // constraints
+  alldifferent(x.flatten.toArray)
+
+  
+  // rows and columns
+  for(i &lt;- 0 until n) {
+    sum( Array.tabulate(n)(j=&gt; x(i)(j)) ) #= total
+    sum( Array.tabulate(n)(j=&gt; x(j)(i)) ) #= total
+  }
+  
+  // diagonals
+  sum( Array.tabulate(n)(i=&gt; x(i)(i)) ) #= total
+  sum( Array.tabulate(n)(i=&gt; x(i)(n-i-1)) ) #= total
+
+  // symmetry breaking
+  // x(0)(0)   #&lt; x(0)(n-1)
+  // x(0)(n-1) #&lt; x(n-1)(0)
+  // x(0)(0)   #&lt; x(n-1)(n-1)
+
+  // numberSolutions(2)
+
+   // search
+  val result = satisfyAll(search(x.flatten, smallest_min, indomain_min), printIt) 
+  
+
+  statistics
+ 
+  def printIt() {
+    println("\nSolution:")
+    for(i &lt;- 0 until n) {
+      for(j &lt;- 0 until n) {
+        print(x(i)(j).value + " ")
+      }
+      println()
+    }
+    println()
+  }
+     
+}
+
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/languages_pages/js/shBrushEssence.js'],
+    ['js','javascript','/csplib-builds/languages_pages/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/languages_pages/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/languages_pages/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/languages_pages/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/languages_pages/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>

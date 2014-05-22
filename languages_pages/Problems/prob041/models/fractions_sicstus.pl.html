@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>041: The n-Fractions Puzzle</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/csplib-builds/languages_pages/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/csplib-builds/languages_pages/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/languages_pages/syntax_highlighter/shCoreDefault.css"/>
+
+</head>
+
+<body>
+
+	<ol class="breadcrumb">
+    	  <li><a href="/csplib-builds/languages_pages/">CSPlib</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/languages_pages/Problems/prob041">prob041</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems/prob041/models">Models</a></li>
+  <li>fractions_sicstus.pl</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>041: The n-Fractions Puzzle</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob041/">Specification</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob041/data">Data files</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob041/results">Results</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob041/references">References</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob041/models">Models</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob041/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob041/models/fractions_sicstus.pl">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/csplib-builds/languages_pages/Problems/prob041/models/fractions_sicstus.pl">Download</a>
+<pre class ='brush: pl'>/*
+
+  Fractions problem in SICStus Prolog.
+
+  Prolog benchmark problem (BProlog)
+  """
+  Find distinct non-zero digits such that the following equation holds:
+         A        D        G
+      ------  + ----- + ------  = 1
+        B*C      E*F      H*I
+  """
+
+
+  Model created by Hakan Kjellerstrand, hakank@gmail.com
+  See also my SICStus Prolog page: http://www.hakank.org/sicstus/
+
+*/
+
+% Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
+
+:-use_module(library(clpfd)).
+:-use_module(library(lists)).
+
+go :-
+        findall(Digits,fractions(Digits), List),
+        ( foreach(L,List) do
+              write(L),nl
+        ),
+        fd_statistics.
+
+fractions(Digits) :-
+
+        Digits = [A,B,C,D,E,F,G,H,I],
+        domain(Digits,1,9),
+
+        DD = [D1,D2,D3],
+        domain(DD,1,81),
+
+        all_distinct(Digits),
+
+        D1 #= B*C,
+        D2 #= E*F,
+        D3 #= H*I,
+        A*D2*D3 + D*D1*D3 + G*D1*D2 #= D1*D2*D3,
+
+        % break the symmetry
+        A*D2 #&gt;= D*D1,
+        D*D3 #&gt;= G*D2,
+
+        %redundant constraints
+        3*A #&gt;= D1,
+        3*G #=&lt; D2,
+
+        % search
+        append(Digits,DD,Vars),
+        labeling([min,step,up], Vars).
+
+
+        
+
+ 
+
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/languages_pages/js/shBrushEssence.js'],
+    ['js','javascript','/csplib-builds/languages_pages/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/languages_pages/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/languages_pages/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/languages_pages/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/languages_pages/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>007: All-Interval Series</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/csplib-builds/languages_pages/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/csplib-builds/languages_pages/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/languages_pages/syntax_highlighter/shCoreDefault.css"/>
+
+</head>
+
+<body>
+
+	<ol class="breadcrumb">
+    	  <li><a href="/csplib-builds/languages_pages/">CSPlib</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/languages_pages/Problems/prob007">prob007</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems/prob007/models">Models</a></li>
+  <li>program.cpp</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>007: All-Interval Series</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob007/">Specification</a></li>
+
+  	 	<li><a class='no-files' href="/csplib-builds/languages_pages/Problems/prob007/data">Data files</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob007/results">Results</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob007/references">References</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob007/models">Models</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob007/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob007/models/program.cpp">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/csplib-builds/languages_pages/Problems/prob007/models/program.cpp">Download</a>
+<pre class ='brush: cpp'>
+#include&lt;ilsolver/ilcint.h&gt;
+
+ILOSTLBEGIN
+
+class IlcIntSelectMaxI : public IlcIntSelectI {
+public:
+    IlcIntSelectMaxI(){};
+    virtual IlcInt select(IlcIntVar var);
+};
+
+IlcInt IlcIntSelectMaxI::select(IlcIntVar var){
+    return var.getMax();
+}
+
+IlcIntSelect IlcIntSelectMax(IlcManager m){
+    return IlcIntSelect(new (m.getHeap()) IlcIntSelectMaxI());
+}
+
+void prob007large(IlcManager m, int n){
+  IlcIntVarArray x(m, n, 0, n-1);
+  IlcIntVarArray y(m, n-1, 1, n-1);
+  int i;
+  for (i=0; i&lt;n-1; i++){
+    m.add(y[i]==IlcAbs(x[i+1] - x[i]));
+  }
+  m.add(x[0] &lt; x[1]);
+  m.add(IlcAllDiff(x, IlcWhenRange));
+  m.add(IlcAllDiff(y, IlcWhenRange));
+  m.add(IlcGenerate(y, IlcChooseMaxMaxInt, IlcIntSelectMax(m)));
+  m.add(IlcGenerate(x));
+}
+
+void prob007AC(IlcManager m, int n){
+  IlcIntVarArray x(m, n, 0, n-1);
+  IlcIntVarArray y(m, n-1, 1, n-1);
+  IlcIntTupleSet set(m,3);
+  int i,j;
+  for(i=0;i&lt;n-1;i++){
+    for(j=i+1;j&lt;n;j++){
+      set.add(IlcIntArray(m,3, i, j, IlcAbs(j-i)));
+      set.add(IlcIntArray(m,3, j, i, IlcAbs(j-i)));
+    }
+  }
+  set.close();
+  for (i=0; i&lt;n-1; i++){
+    IlcIntVarArray vars(m, 3, x[i], x[i+1], y[i]);
+    m.add(IlcTableConstraint(vars, set, IlcTrue));
+  }
+  m.add(IlcAllDiff(x, IlcWhenDomain));
+  m.add(IlcAllDiff(y, IlcWhenDomain));
+  m.add(IlcGenerate(x, IlcChooseMinSizeInt));
+}
+
+void prob007(IlcManager m, int n) {
+  IlcIntVarArray x(m, n, 0, n-1);
+  IlcIntVarArray y(m, n-1, 1, n-1);
+  for (int i=0; i&lt;n-1; i++)
+    m.add(y[i]==IlcAbs(x[i+1] - x[i]));
+  m.add(IlcAllDiff(x, IlcWhenRange));
+  m.add(IlcAllDiff(y, IlcWhenRange));
+  m.add(IlcGenerate(x, IlcChooseMinSizeInt));
+}
+
+int main(int argc, char** argv) {
+  IlcManager m(IlcNoEdit);
+  int n = (argc&gt;1)? atoi(argv[1]): 10;
+  prob007(m, n);
+  //prob007AC(m, n);
+  int sol=0;
+  //m.nextSolution();
+  // m.nextSolution();
+
+  //m.out() &lt;&lt; x &lt;&lt; endl;
+   while(m.nextSolution()){
+      sol++;
+    }
+    m.out() &lt;&lt; sol &lt;&lt; endl;
+  m.printInformation();
+  m.end();
+  return 0;
+}
+
+
+
+
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/languages_pages/js/shBrushEssence.js'],
+    ['js','javascript','/csplib-builds/languages_pages/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/languages_pages/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/languages_pages/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/languages_pages/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/languages_pages/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>001: Car Sequencing</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/csplib-builds/languages_pages/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/csplib-builds/languages_pages/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/languages_pages/syntax_highlighter/shCoreDefault.css"/>
+
+</head>
+
+<body>
+
+	<ol class="breadcrumb">
+    	  <li><a href="/csplib-builds/languages_pages/">CSPlib</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/languages_pages/Problems/prob001">prob001</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems/prob001/models">Models</a></li>
+  <li>car.co</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>001: Car Sequencing</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob001/">Specification</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob001/data">Data files</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob001/results">Results</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob001/references">References</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob001/models">Models</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob001/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob001/models/car.co">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/csplib-builds/languages_pages/Problems/prob001/models/car.co">Download</a>
+<pre >/*
+
+  Car sequencing in Comet.
+
+  This is based on the OPL3 model car.mod.
+
+  This Comet model was created by Hakan Kjellerstrand (hakank@bonetmail.com)
+  Also, see my Comet page: http://www.hakank.org/comet 
+
+ */
+
+// Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
+
+import cotfd;
+
+int t0 = System.getCPUTime();
+
+int nbCars = 6;
+int nbOptions = 5;
+int nbSlots = 10;
+range Cars = 1..nbCars;
+range Options = 1..nbOptions;
+range Slots = 1..nbSlots;
+
+int demand[Cars] = [1, 1, 2, 2, 2, 2];
+
+
+int option[Options,Cars] =
+[
+ [ 1, 0, 0, 0, 1, 1],
+ [ 0, 0, 1, 1, 0, 1],
+ [ 1, 0, 0, 0, 1, 0],
+ [ 1, 1, 0, 1, 0, 0],
+ [ 0, 0, 1, 0, 0, 0]
+ ];
+
+
+tuple Tcapacity {
+   int l;
+   int u;
+}
+
+Tcapacity capacity[Options] = 
+[
+ Tcapacity(1,2),
+ Tcapacity(2,3),
+ Tcapacity(1,3),
+ Tcapacity(2,5),
+ Tcapacity(1,5)
+];
+
+int optionDemand[i in Options] = sum(j in Cars) demand[j] * option[i,j];
+
+cout << "optionDemand: " << optionDemand<< endl;
+
+Solver<CP> m();
+
+var<CP>{int} slot[Slots](m,Cars);
+var<CP>{int} setup[Options,Slots](m,0..1);
+
+Integer num_solutions(0);
+
+// exploreall<m> {
+minimize<m> sum(s in Cars) s*slot[s] subject to {
+
+  forall(c in Cars )
+    m.post(sum(s in Slots ) (slot[s] == c) == demand[c]);
+
+  forall(o in Options, s in 1..nbSlots - capacity[o].u + 1)
+    m.post(sum(j in s..s + capacity[o].u - 1) setup[o,j] <= capacity[o].l);
+
+  forall(o in Options, s in Slots )
+    m.post(setup[o,s] == option[o,slot[s]]);
+
+  forall(o in Options, i in 1..optionDemand[o])
+    m.post(sum(s in 1..(nbSlots - i * capacity[o].u)) setup[o,s] >=
+           (optionDemand[o] - i * capacity[o].l));
+
+
+} using {
+      
+  label(m);
+
+  num_solutions := num_solutions + 1;
+
+  cout << slot << endl;
+  forall(o in Options) {
+    cout << capacity[o].l << "/" << capacity[o].u << ": " ;
+    forall(s in Slots) {
+      cout << setup[o,s] << " ";
+    }
+  cout << endl;
+  }
+  cout << endl;
+    
+
+
+}
+
+
+cout << "\nnum_solutions: " << num_solutions << endl;
+    
+int t1 = System.getCPUTime();
+cout << "time:      " << (t1-t0) << endl;
+cout << "#choices = " << m.getNChoice() << endl;
+cout << "#fail    = " << m.getNFail() << endl;
+cout << "#propag  = " << m.getNPropag() << endl;
+
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/languages_pages/js/shBrushEssence.js'],
+    ['js','javascript','/csplib-builds/languages_pages/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/languages_pages/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/languages_pages/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/languages_pages/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/languages_pages/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>

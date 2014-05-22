@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>051: Tank Allocation</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/csplib-builds/languages_pages/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/csplib-builds/languages_pages/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/languages_pages/syntax_highlighter/shCoreDefault.css"/>
+
+</head>
+
+<body>
+
+	<ol class="breadcrumb">
+    	  <li><a href="/csplib-builds/languages_pages/">CSPlib</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/languages_pages/Problems/prob051">prob051</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems/prob051/models">Models</a></li>
+  <li>notes.inline.md</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>051: Tank Allocation</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob051/">Specification</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob051/data">Data files</a></li>
+
+  	 	<li><a class='no-files' href="/csplib-builds/languages_pages/Problems/prob051/results">Results</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob051/references">References</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob051/models">Models</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob051/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob051/models/notes.inline.md">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/csplib-builds/languages_pages/Problems/prob051/models/notes.inline.md">Download</a>
+<p>The model in [1] introduces two families of variables:</p>
+<ol>
+<li>One variable $X[t]$ for each tank t representing the product type to be placed inside that tank. The initial domain is $0&hellip;P$ (some tanks might be impossible for some products), 0 represents a dummy product meaning that no product is assigned to the tank $t$ (in this case $X[t]=0$).</li>
+<li>One load variable L[p] for each of the product $0..P$ to be loaded on the vessel. This variable represents how much tank volume is available/assigned to each product. The initial lower bound on this variable$ L[p]$ is the quantity of product p to be loaded. This guarantees enough space is available to accommodate this product p $(L[0] >= 0)$.</li>
+</ol>
+<p>These two sets of variables are linked with a bin-packing constraint$(X,caps,L)$ where $c$ is the vector of capacities for each tank. This constraint enforces $L[p]$ = $sum_{t in tanks}$ ($X[t]=p)*capa[t] \forall p$</p>
+<p>Some table constraints can be added on some pairs of neighbouring tank variables $x[i],x[j]$ to avoid incompatible products to be located next to each other.</p>
+<p>The objective is to maximise the empty volume i.e. variable $L[0]$.</p>
+<p>[1] Pierre Schaus, Jean-Charles R&eacute;gin, Rowan Van Schaeren, Wout Dullaert, Birger Raa: Cardinality Reasoning for Bin-Packing Constraint: Application to a Tank Allocation Problem. CP 2012: 815-822</p>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/languages_pages/js/shBrushEssence.js'],
+    ['js','javascript','/csplib-builds/languages_pages/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/languages_pages/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/languages_pages/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/languages_pages/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/languages_pages/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>

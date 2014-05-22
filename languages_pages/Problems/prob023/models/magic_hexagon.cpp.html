@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+	<title>023: Magic Hexagon</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/csplib-builds/languages_pages/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<link href="/csplib-builds/languages_pages/css/main.css" rel="stylesheet">
+	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	MathJax.Hub.Config({
+	  	tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    processEscapes: true
+	  	}
+	});
+	</script>
+
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/languages_pages/syntax_highlighter/shCoreDefault.css"/>
+
+</head>
+
+<body>
+
+	<ol class="breadcrumb">
+    	  <li><a href="/csplib-builds/languages_pages/">CSPlib</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/languages_pages/Problems/prob023">prob023</a></li>
+
+  <li><a href="/csplib-builds/languages_pages/Problems/prob023/models">Models</a></li>
+  <li>magic_hexagon.cpp</li>
+	</ol>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h1>023: Magic Hexagon</h1>
+
+
+<!-- macro to Not made a link if on the page the link links to -->
+
+
+<nav id="navigation">
+<ul>
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob023/">Specification</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob023/data">Data files</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob023/results">Results</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob023/references">References</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob023/models">Models</a></li>
+
+   	<li><a href="/csplib-builds/languages_pages/Problems/prob023/cite">Cite</a></li>
+
+ 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob023/models/magic_hexagon.cpp">Edit Page</a></li>
+</ul>
+</nav>
+
+
+
+		</div>
+
+
+<a href="/csplib-builds/languages_pages/Problems/prob023/models/magic_hexagon.cpp">Download</a>
+<pre class ='brush: cpp'>/*
+  
+  Magic Hexagon in Gecode.
+
+  Prob023: Magic Hexagon
+  http://www.comp.rgu.ac.uk/staff/ha/ZCSP/prob023/prob023.pdf
+  http://www.cse.unsw.edu.au/~tw/csplib/prob/prob023/
+
+  Compare with the following models:
+  * MiniZinc: http://www.hakank.org/minizinc/magic_hexagon.mzn
+  * SICStus Prolog: http://www.hakank.org/sicstus/magic_hexagon.ecl
+  * ECLiPSe: http://www.hakank.org/eclipse/magic_hexagon.ecl
+
+  This Gecode model was created by Hakan Kjellerstrand (hakank@gmail.com)
+  Also, see my Gecode page: http://www.hakank.org/gecode/ .
+
+*/
+
+#include &lt;gecode/driver.hh&gt;
+#include &lt;gecode/int.hh&gt;
+#include &lt;gecode/minimodel.hh&gt;
+
+using namespace Gecode;
+
+using std::cout;
+using std::endl;
+using std::setw;
+using std::string;
+
+
+class MagicHexagon : public Script {
+protected:
+
+  static const int len = 19;
+
+  IntVarArray x;
+
+public:
+
+  MagicHexagon(const Options&amp; opt) 
+    : 
+    x(*this, len, 1, len)
+  {
+
+    IntVar
+      a(x[0]),
+      b(x[1]),
+      c(x[2]),
+      d(x[3]),
+      e(x[4]),
+      f(x[5]),
+      g(x[6]),
+      h(x[7]),
+      i(x[8]),
+      j(x[9]),
+      k(x[10]),
+      l(x[11]),
+      m(x[12]),
+      n(x[13]),
+      o(x[14]),
+      p(x[15]),
+      q(x[16]),
+      r(x[17]),
+      s(x[18]);
+    
+    distinct(*this, x, opt.icl());
+
+    // Not very beautiful, but experimental...
+    rel(*this,
+        a + b + c ==  38 &amp;&amp;
+        d + e + f + g ==  38 &amp;&amp;
+        h + i + j + k + l ==  38 &amp;&amp; 
+        m + n + o + p ==  38 &amp;&amp; 
+        q + r + s ==  38 &amp;&amp; 
+        a + d + h ==  38 &amp;&amp; 
+        b + e + i + m ==  38 &amp;&amp; 
+        c + f + j + n + q ==  38 &amp;&amp; 
+        g + k + o + r ==  38 &amp;&amp; 
+        l + p + s ==  38 &amp;&amp; 
+        c + g + l ==  38 &amp;&amp; 
+        b + f + k + p ==  38 &amp;&amp; 
+        a + e + j + o + s ==  38 &amp;&amp; 
+        d + i + n + r ==  38 &amp;&amp; 
+        h + m + q ==  38 &amp;&amp; 
+        
+        a &lt; c &amp;&amp;
+        a &lt; h &amp;&amp;
+        a &lt; l &amp;&amp;
+        a &lt; q &amp;&amp;
+        a &lt; s &amp;&amp;
+        c &lt; h
+        );
+
+    // branching
+    branch(*this, x, INT_VAR_SIZE_MIN(), INT_VAL_MIN());
+
+  }
+
+  // Print solution
+  virtual void
+  print(std::ostream&amp; os) const {
+    os &lt;&lt; "x: " &lt;&lt; x &lt;&lt; endl;
+    os &lt;&lt; endl;
+
+  }
+
+
+  // Constructor for cloning s
+  MagicHexagon(bool share, MagicHexagon&amp; s) : Script(share,s) {
+    x.update(*this, share, s.x);
+  }
+
+  // Copy during cloning
+  virtual Space*
+  copy(bool share) {
+    return new MagicHexagon(share,*this);
+  }
+};
+
+
+int
+main(int argc, char* argv[]) {
+
+  Options opt("MagicHexagon");
+
+  opt.solutions(0);
+  opt.icl(ICL_DOM);
+
+  opt.parse(argc,argv);
+
+  Script::run&lt;MagicHexagon,DFS,Options&gt;(opt);
+    
+  return 0;
+}
+
+
+
+</pre>
+
+
+	</div>
+
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/languages_pages/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/languages_pages/js/shBrushEssence.js'],
+    ['js','javascript','/csplib-builds/languages_pages/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/languages_pages/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/languages_pages/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/languages_pages/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/languages_pages/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/languages_pages/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/languages_pages/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
+
+
+</body>
+
+</html>
