@@ -14,6 +14,17 @@
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 	<link href="/csplib-builds/master/css/main.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+
+	<!-- Enable table sorting -->
+	<script src="/csplib-builds/master/js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="/csplib-builds/master/js/tablesorter/blue/style.css" type="text/css"/>
+	<script type="text/javascript">
+	$(function() {
+		$(".tablesorter").tablesorter();
+	});
+	</script>
+
 	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	MathJax.Hub.Config({
 	  	tex2jax: {
@@ -70,55 +81,19 @@
 
 
 
-<table>
+<table class="tablesorter">
+<thead>
 <tr> <th>File</th> <th>Type</th> <th>Notes</th> </tr>
+</thead>
+<tbody>
 <tr>
 	<td>
-		<a href="models.inline.md.html">
-			models.inline.md
+		<a href="magic_hexagon.cpp.html">
+			magic_hexagon.cpp
 		</a>
 	</td>
 	<td>
-		
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="magic_hexagon_sicstus.pl.html">
-			magic_hexagon_sicstus.pl
-		</a>
-	</td>
-	<td>
-		SICStus Prolog
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="magic_hexagon.ecl.html">
-			magic_hexagon.ecl
-		</a>
-	</td>
-	<td>
-		ECLiPSe CLP
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="magic_hexagon.pi.html">
-			magic_hexagon.pi
-		</a>
-	</td>
-	<td>
-		Picat
+		Gecode
 	</td>
 	<td>
 	
@@ -139,12 +114,51 @@
 </tr>
 <tr>
 	<td>
-		<a href="magic_hexagon_bp.pl.html">
-			magic_hexagon_bp.pl
+		<a href="models.inline.md.html">
+			models.inline.md
 		</a>
 	</td>
 	<td>
-		B-Prolog
+		
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="Problems/prob023/models/magic_hexagon2.mod">
+			magic_hexagon2.mod
+		</a>
+	</td>
+	<td>
+		AMPL
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="magic_hexagon.ecl.html">
+			magic_hexagon.ecl
+		</a>
+	</td>
+	<td>
+		ECLiPSe CLP
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="magic_hexagon_sicstus.pl.html">
+			magic_hexagon_sicstus.pl
+		</a>
+	</td>
+	<td>
+		SICStus Prolog
 	</td>
 	<td>
 	
@@ -165,12 +179,25 @@
 </tr>
 <tr>
 	<td>
-		<a href="magic_hexagon.cpp.html">
-			magic_hexagon.cpp
+		<a href="magic_hexagon_bp.pl.html">
+			magic_hexagon_bp.pl
 		</a>
 	</td>
 	<td>
-		Gecode
+		B-Prolog
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="magic_hexagon.pi.html">
+			magic_hexagon.pi
+		</a>
+	</td>
+	<td>
+		Picat
 	</td>
 	<td>
 	
@@ -189,19 +216,7 @@
 	
 	</td>
 </tr>
-<tr>
-	<td>
-		<a href="Problems/prob023/models/magic_hexagon2.mod">
-			magic_hexagon2.mod
-		</a>
-	</td>
-	<td>
-		AMPL
-	</td>
-	<td>
-	
-	</td>
-</tr>
+</tbody>
 </table>
 
 	</div>

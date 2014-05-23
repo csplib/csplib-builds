@@ -14,6 +14,17 @@
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 	<link href="/csplib-builds/master/css/main.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+
+	<!-- Enable table sorting -->
+	<script src="/csplib-builds/master/js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="/csplib-builds/master/js/tablesorter/blue/style.css" type="text/css"/>
+	<script type="text/javascript">
+	$(function() {
+		$(".tablesorter").tablesorter();
+	});
+	</script>
+
 	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	MathJax.Hub.Config({
 	  	tex2jax: {
@@ -70,8 +81,11 @@
 
 
 
-<table>
+<table class="tablesorter">
+<thead>
 <tr> <th>File</th> <th>Type</th> <th>Notes</th> </tr>
+</thead>
+<tbody>
 <tr>
 	<td>
 		<a href="enumerate.pl.html">
@@ -85,6 +99,7 @@
 	
 	</td>
 </tr>
+</tbody>
 </table>
 
 	</div>

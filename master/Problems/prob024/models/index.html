@@ -14,6 +14,17 @@
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 	<link href="/csplib-builds/master/css/main.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+
+	<!-- Enable table sorting -->
+	<script src="/csplib-builds/master/js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="/csplib-builds/master/js/tablesorter/blue/style.css" type="text/css"/>
+	<script type="text/javascript">
+	$(function() {
+		$(".tablesorter").tablesorter();
+	});
+	</script>
+
 	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	MathJax.Hub.Config({
 	  	tex2jax: {
@@ -70,34 +81,11 @@
 
 
 
-<table>
+<table class="tablesorter">
+<thead>
 <tr> <th>File</th> <th>Type</th> <th>Notes</th> </tr>
-<tr>
-	<td>
-		<a href="models.inline.md.html">
-			models.inline.md
-		</a>
-	</td>
-	<td>
-		
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="Problems/prob024/models/Langford.aim">
-			Langford.aim
-		</a>
-	</td>
-	<td>
-		AIMMS+CP
-	</td>
-	<td>
-	
-	</td>
-</tr>
+</thead>
+<tbody>
 <tr>
 	<td>
 		<a href="langford.co.html">
@@ -106,6 +94,19 @@
 	</td>
 	<td>
 		Comet
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="models.inline.md.html">
+			models.inline.md
+		</a>
+	</td>
+	<td>
+		
 	</td>
 	<td>
 	
@@ -126,12 +127,12 @@
 </tr>
 <tr>
 	<td>
-		<a href="langford.cs.html">
-			langford.cs
+		<a href="langford.ecl.html">
+			langford.ecl
 		</a>
 	</td>
 	<td>
-		or-tools/C#
+		ECLiPSe CLP
 	</td>
 	<td>
 	
@@ -139,12 +140,12 @@
 </tr>
 <tr>
 	<td>
-		<a href="langford2.mzn.html">
-			langford2.mzn
+		<a href="langford.cs.html">
+			langford.cs
 		</a>
 	</td>
 	<td>
-		MiniZinc
+		or-tools/C#
 	</td>
 	<td>
 	
@@ -165,25 +166,12 @@
 </tr>
 <tr>
 	<td>
-		<a href="langford_bp.pl.html">
-			langford_bp.pl
+		<a href="langford2.mzn.html">
+			langford2.mzn
 		</a>
 	</td>
 	<td>
-		B-Prolog
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="Problems/prob024/models/langford.lp4">
-			langford.lp4
-		</a>
-	</td>
-	<td>
-		ASP Gringo 4
+		MiniZinc
 	</td>
 	<td>
 	
@@ -204,12 +192,64 @@
 </tr>
 <tr>
 	<td>
-		<a href="langford.ecl.html">
-			langford.ecl
+		<a href="ROD.pl.html">
+			ROD.pl
 		</a>
 	</td>
 	<td>
-		ECLiPSe CLP
+		pl
+	</td>
+	<td>
+	A Perl program written by John Miller based on a pattern found by Roy O. Davies that generates a single Langford sequence (for large n). Counting the number of sequences is likely to be intractable.
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="langford_ortools.py.html">
+			langford_ortools.py
+		</a>
+	</td>
+	<td>
+		or-tools/Python
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="Problems/prob024/models/langford.lp4">
+			langford.lp4
+		</a>
+	</td>
+	<td>
+		ASP Gringo 4
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="Problems/prob024/models/Langford.aim">
+			Langford.aim
+		</a>
+	</td>
+	<td>
+		AIMMS+CP
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="langford_bp.pl.html">
+			langford_bp.pl
+		</a>
+	</td>
+	<td>
+		B-Prolog
 	</td>
 	<td>
 	
@@ -228,32 +268,7 @@
 	
 	</td>
 </tr>
-<tr>
-	<td>
-		<a href="langford_ortools.py.html">
-			langford_ortools.py
-		</a>
-	</td>
-	<td>
-		or-tools/Python
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="ROD.pl.html">
-			ROD.pl
-		</a>
-	</td>
-	<td>
-		pl
-	</td>
-	<td>
-	A Perl program written by John Miller based on a pattern found by Roy O. Davies that generates a single Langford sequence (for large n). Counting the number of sequences is likely to be intractable.
-	</td>
-</tr>
+</tbody>
 </table>
 
 	</div>

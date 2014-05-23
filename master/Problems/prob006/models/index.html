@@ -14,6 +14,17 @@
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 	<link href="/csplib-builds/master/css/main.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+
+	<!-- Enable table sorting -->
+	<script src="/csplib-builds/master/js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="/csplib-builds/master/js/tablesorter/blue/style.css" type="text/css"/>
+	<script type="text/javascript">
+	$(function() {
+		$(".tablesorter").tablesorter();
+	});
+	</script>
+
 	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	MathJax.Hub.Config({
 	  	tex2jax: {
@@ -70,8 +81,24 @@
 
 
 
-<table>
+<table class="tablesorter">
+<thead>
 <tr> <th>File</th> <th>Type</th> <th>Notes</th> </tr>
+</thead>
+<tbody>
+<tr>
+	<td>
+		<a href="solver.cpp.html">
+			solver.cpp
+		</a>
+	</td>
+	<td>
+		cpp
+	</td>
+	<td>
+	A Solver program for finding Golomb rulers
+	</td>
+</tr>
 <tr>
 	<td>
 		<a href="golomb_ruler.cs.html">
@@ -87,15 +114,15 @@
 </tr>
 <tr>
 	<td>
-		<a href="solver.cpp.html">
-			solver.cpp
+		<a href="golomb_ruler_bp.pl.html">
+			golomb_ruler_bp.pl
 		</a>
 	</td>
 	<td>
-		cpp
+		B-Prolog
 	</td>
 	<td>
-	A Solver program for finding Golomb rulers
+	
 	</td>
 </tr>
 <tr>
@@ -124,19 +151,7 @@
 	
 	</td>
 </tr>
-<tr>
-	<td>
-		<a href="golomb_ruler_bp.pl.html">
-			golomb_ruler_bp.pl
-		</a>
-	</td>
-	<td>
-		B-Prolog
-	</td>
-	<td>
-	
-	</td>
-</tr>
+</tbody>
 </table>
 
 	</div>

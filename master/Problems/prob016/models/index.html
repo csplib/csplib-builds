@@ -14,6 +14,17 @@
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 	<link href="/csplib-builds/master/css/main.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+
+	<!-- Enable table sorting -->
+	<script src="/csplib-builds/master/js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="/csplib-builds/master/js/tablesorter/blue/style.css" type="text/css"/>
+	<script type="text/javascript">
+	$(function() {
+		$(".tablesorter").tablesorter();
+	});
+	</script>
+
 	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	MathJax.Hub.Config({
 	  	tex2jax: {
@@ -70,8 +81,11 @@
 
 
 
-<table>
+<table class="tablesorter">
+<thead>
 <tr> <th>File</th> <th>Type</th> <th>Notes</th> </tr>
+</thead>
+<tbody>
 <tr>
 	<td>
 		<a href="traffic_lights.mzn.html">
@@ -87,12 +101,12 @@
 </tr>
 <tr>
 	<td>
-		<a href="traffic_lights_sicstus.pl.html">
-			traffic_lights_sicstus.pl
+		<a href="traffic_lights.py.html">
+			traffic_lights.py
 		</a>
 	</td>
 	<td>
-		SICStus Prolog
+		or-tools/Python
 	</td>
 	<td>
 	
@@ -106,6 +120,71 @@
 	</td>
 	<td>
 		MiniZinc
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="traffic_lights.eprime.html">
+			traffic_lights.eprime
+		</a>
+	</td>
+	<td>
+		SavileRow
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="traffic_lights.ecl.html">
+			traffic_lights.ecl
+		</a>
+	</td>
+	<td>
+		ECLiPSe CLP
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="TrafficLights.scala.html">
+			TrafficLights.scala
+		</a>
+	</td>
+	<td>
+		OscaR
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="traffic_lights.cpp.html">
+			traffic_lights.cpp
+		</a>
+	</td>
+	<td>
+		Gecode
+	</td>
+	<td>
+	
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="traffic_lights.cs.html">
+			traffic_lights.cs
+		</a>
+	</td>
+	<td>
+		or-tools/C#
 	</td>
 	<td>
 	
@@ -139,12 +218,12 @@
 </tr>
 <tr>
 	<td>
-		<a href="traffic_lights.cpp.html">
-			traffic_lights.cpp
+		<a href="traffic_lights_bp.pl.html">
+			traffic_lights_bp.pl
 		</a>
 	</td>
 	<td>
-		Gecode
+		B-Prolog
 	</td>
 	<td>
 	
@@ -165,64 +244,12 @@
 </tr>
 <tr>
 	<td>
-		<a href="traffic_lights.cs.html">
-			traffic_lights.cs
+		<a href="traffic_lights_sicstus.pl.html">
+			traffic_lights_sicstus.pl
 		</a>
 	</td>
 	<td>
-		or-tools/C#
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="traffic_lights.ecl.html">
-			traffic_lights.ecl
-		</a>
-	</td>
-	<td>
-		ECLiPSe CLP
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="traffic_lights.eprime.html">
-			traffic_lights.eprime
-		</a>
-	</td>
-	<td>
-		SavileRow
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="traffic_lights_bp.pl.html">
-			traffic_lights_bp.pl
-		</a>
-	</td>
-	<td>
-		B-Prolog
-	</td>
-	<td>
-	
-	</td>
-</tr>
-<tr>
-	<td>
-		<a href="TrafficLights.scala.html">
-			TrafficLights.scala
-		</a>
-	</td>
-	<td>
-		OscaR
+		SICStus Prolog
 	</td>
 	<td>
 	
@@ -241,19 +268,7 @@
 	
 	</td>
 </tr>
-<tr>
-	<td>
-		<a href="traffic_lights.py.html">
-			traffic_lights.py
-		</a>
-	</td>
-	<td>
-		or-tools/Python
-	</td>
-	<td>
-	
-	</td>
-</tr>
+</tbody>
 </table>
 
 	</div>
