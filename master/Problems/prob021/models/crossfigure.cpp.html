@@ -25,7 +25,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -74,7 +74,7 @@
 
    	<li><a href="/csplib-builds/master/Problems/prob021/cite">Cite</a></li>
 
- 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob021/models/crossfigure.cpp">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob021/models/crossfigure.cpp">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -84,7 +84,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob021/models/crossfigure.cpp">Download</a>
-<pre class ='brush: cpp'>/*
+<pre >/*
 
   Crossfigure problem in Gecode.
 
@@ -117,20 +117,20 @@
 
 // Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
 
-#include &lt;gecode/driver.hh&gt;
-#include &lt;gecode/int.hh&gt;
-#include &lt;gecode/minimodel.hh&gt;
+#include <gecode/driver.hh>
+#include <gecode/int.hh>
+#include <gecode/minimodel.hh>
 
 using namespace Gecode;
 
 using std::cout;
 using std::endl;
 
-void to_num(Space &amp; space, IntVarArray x, IntVar z, int base = 10, IntConLevel icl = ICL_BND) {
+void to_num(Space & space, IntVarArray x, IntVar z, int base = 10, IntConLevel icl = ICL_BND) {
   
   int len = x.size();
   IntArgs coeffs(len);
-  for(int r = 0; r &lt; len; r++) {
+  for(int r = 0; r < len; r++) {
     coeffs[r] = pow(base, len-r-1);
   }
   
@@ -145,10 +145,10 @@ void to_num(Space &amp; space, IntVarArray x, IntVar z, int base = 10, IntConLev
 	'Len' digits starting at position (Row, Col) of the array 'Matrix'
 	and proceeding across.
 */
-void across(Space&amp; space, IntVarArray matrix, IntVar Across, int Len, int Row, int Col, int n) {
+void across(Space& space, IntVarArray matrix, IntVar Across, int Len, int Row, int Col, int n) {
   IntVarArray tmp(space, Len, 0, 9999);
   to_num(space, tmp, Across);
-  for(int i = 0; i &lt; Len; i++) {
+  for(int i = 0; i < Len; i++) {
     // also, convert to 0-based
     rel(space, matrix[(Row-1)*n+(Col-1)+i] == tmp[i]);
   }
@@ -160,32 +160,32 @@ void across(Space&amp; space, IntVarArray matrix, IntVar Across, int Len, int Ro
 	'Len' digits starting at position (Row, Col) of the array 'Matrix'
 	and proceeding down.
 */
-void down(Space&amp; space, IntVarArray matrix, IntVar Down, int Len, int Row, int Col, int n) {
+void down(Space& space, IntVarArray matrix, IntVar Down, int Len, int Row, int Col, int n) {
  
   IntVarArray tmp(space, Len, 0, 9999);
   to_num(space, tmp, Down);
-  for(int i = 0; i &lt; Len; i++) {
+  for(int i = 0; i < Len; i++) {
     // also, convert to 0-based
     rel(space, matrix[(Row-1+i)*n+Col-1] == tmp[i]);
   }
 }
 
 // is a square?
-void is_square(Space&amp; space, IntVar x) {
+void is_square(Space& space, IntVar x) {
   IntVar y(space, 0, 100);
   rel(space, y*y == x);
 }
 
 // is a prime?
-void is_prime(Space&amp; space, IntVar x) {
-  for(int i = 2; i &lt;= 99; i++) {
-    rel(space, (i &lt; x) &gt;&gt; (x % i &gt; 0));
+void is_prime(Space& space, IntVar x) {
+  for(int i = 2; i <= 99; i++) {
+    rel(space, (i < x) >> (x % i > 0));
   }
 }
 
 
 // fix the black boxes and convert to 0-based
-void fix_box(Space&amp; space, IntVarArray x, int r, int c, int n) {
+void fix_box(Space& space, IntVarArray x, int r, int c, int n) {
   rel(space, x[(r-1)*n+(c-1)] == 0);
 }
 
@@ -202,7 +202,7 @@ public:
 
 ;
 
-  Crossfigure(const SizeOptions&amp; opt) 
+  Crossfigure(const SizeOptions& opt) 
     : 
     x(*this, n*n, 0, 9)
   {
@@ -402,23 +402,23 @@ public:
 
   // Print solution
   virtual void
-  print(std::ostream&amp; os) const {
-    for(int r = 0; r &lt; n; r++) {
-      for(int c = 0; c &lt; n; c++) {
+  print(std::ostream& os) const {
+    for(int r = 0; r < n; r++) {
+      for(int c = 0; c < n; c++) {
         int t = x[r*n+c].val();
         if (t != 0) {
-          os &lt;&lt; t;
+          os << t;
         } else {
-          os &lt;&lt; " ";
+          os << " ";
         }
       }
-      os &lt;&lt; std::endl;
+      os << std::endl;
     }
-    os &lt;&lt; std::endl;
+    os << std::endl;
   }
 
   // Constructor for cloning s
-  Crossfigure(bool share, Crossfigure&amp; s) : Script(share,s) {
+  Crossfigure(bool share, Crossfigure& s) : Script(share,s) {
     x.update(*this, share, s.x);
   }
 
@@ -435,7 +435,7 @@ main(int argc, char* argv[]) {
   SizeOptions opt("Crossfigure");
   opt.solutions(0);
   opt.parse(argc,argv);
-  Script::run&lt;Crossfigure,DFS,SizeOptions&gt;(opt);
+  Script::run<Crossfigure,DFS,SizeOptions>(opt);
 
   return 0;
 }
@@ -455,7 +455,7 @@ main(int argc, char* argv[]) {
     SyntaxHighlighter.autoloader(
     ['essence','eprime','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
     ['js','javascript','/csplib-builds/master/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/master/syntax_highlighter/shBrushCpp.js'],
     ['erl','hrl', '/csplib-builds/master/syntax_highlighter/shBrushErlang.js'],
 
     ['java'   , '/csplib-builds/master/syntax_highlighter/shBrushJava.js']   ,
@@ -474,6 +474,27 @@ main(int argc, char* argv[]) {
 </script>
 
 
+</div>
+
+<div id="footer">
+ 
+    <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
+
+</div>
+  <!-- float footer to bottom of page -->
+  <script>
+
+    $(document).ready(function() {
+
+     var docHeight = $(window).height();
+     var footerHeight = $('#footer').height();
+     var footerTop = $('#footer').position().top + footerHeight;
+
+     if (footerTop + 20 < docHeight) {
+      $('#footer').css('margin-top',  (docHeight - (footerTop + 20)) + 'px');
+     }
+    });
+   </script>
 </body>
 
 </html>

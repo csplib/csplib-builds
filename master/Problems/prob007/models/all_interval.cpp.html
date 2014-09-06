@@ -25,7 +25,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -64,7 +64,7 @@
 <ul>
    	<li><a href="/csplib-builds/master/Problems/prob007/">Specification</a></li>
 
-  	 	<li><a class='no-files' href="/csplib-builds/master/Problems/prob007/data">Data files</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob007/data">Data files</a></li>
 
    	<li><a href="/csplib-builds/master/Problems/prob007/results">Results</a></li>
 
@@ -74,7 +74,7 @@
 
    	<li><a href="/csplib-builds/master/Problems/prob007/cite">Cite</a></li>
 
- 	<li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob007/models/all_interval.cpp">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob007/models/all_interval.cpp">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -84,7 +84,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob007/models/all_interval.cpp">Download</a>
-<pre class ='brush: cpp'>/*
+<pre >/*
   
   All interval problem  in Gecode.
 
@@ -129,9 +129,9 @@
 
 // Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
 
-#include &lt;gecode/driver.hh&gt;
-#include &lt;gecode/int.hh&gt;
-#include &lt;gecode/minimodel.hh&gt;
+#include <gecode/driver.hh>
+#include <gecode/int.hh>
+#include <gecode/minimodel.hh>
 
 using namespace Gecode;
 
@@ -151,25 +151,25 @@ protected:
 
 public:
 
-  AllInterval(const SizeOptions&amp; opt) 
+  AllInterval(const SizeOptions& opt) 
     : 
     n(opt.size()),
     x(*this, n, 1, n),
     diffs(*this, n-1, 0, n-1)
   {
 
-    cout &lt;&lt; "Size: " &lt;&lt; n &lt;&lt; endl;
+    cout << "Size: " << n << endl;
 
     distinct(*this, x, opt.icl());
     distinct(*this, diffs, opt.icl());
 
-    for(int k = 0; k &lt; n-1; k++) {
+    for(int k = 0; k < n-1; k++) {
       rel(*this, diffs[k] == abs(x[k+1] - x[k]), opt.icl());
     }
 
     // symmetry breaking
-    rel(*this, x[0] &lt; x[n-1], opt.icl());
-    rel(*this, diffs[0] &lt; diffs[1], opt.icl());
+    rel(*this, x[0] < x[n-1], opt.icl());
+    rel(*this, diffs[0] < diffs[1], opt.icl());
 
     // branching
     branch(*this, x, INT_VAR_SIZE_MIN(), INT_VAL_MIN());
@@ -178,15 +178,15 @@ public:
 
   // Print solution
   virtual void
-  print(std::ostream&amp; os) const {
-    os &lt;&lt; "x    : " &lt;&lt; x &lt;&lt; endl;
-    os &lt;&lt; "diffs: " &lt;&lt; diffs &lt;&lt; endl;
-    os &lt;&lt; endl;
+  print(std::ostream& os) const {
+    os << "x    : " << x << endl;
+    os << "diffs: " << diffs << endl;
+    os << endl;
   }
 
 
   // Constructor for cloning s
-  AllInterval(bool share, AllInterval&amp; s) : Script(share,s) {
+  AllInterval(bool share, AllInterval& s) : Script(share,s) {
     x.update(*this, share, s.x);
     diffs.update(*this, share, s.diffs);
   }
@@ -210,7 +210,7 @@ main(int argc, char* argv[]) {
 
   opt.parse(argc,argv);
 
-  Script::run&lt;AllInterval,DFS,SizeOptions&gt;(opt);
+  Script::run<AllInterval,DFS,SizeOptions>(opt);
     
   return 0;
 }
@@ -230,7 +230,7 @@ main(int argc, char* argv[]) {
     SyntaxHighlighter.autoloader(
     ['essence','eprime','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
     ['js','javascript','/csplib-builds/master/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '{prefix_path}}/syntax_highlighter/shBrushCpp.js'],
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/master/syntax_highlighter/shBrushCpp.js'],
     ['erl','hrl', '/csplib-builds/master/syntax_highlighter/shBrushErlang.js'],
 
     ['java'   , '/csplib-builds/master/syntax_highlighter/shBrushJava.js']   ,
@@ -249,6 +249,27 @@ main(int argc, char* argv[]) {
 </script>
 
 
+</div>
+
+<div id="footer">
+ 
+    <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
+
+</div>
+  <!-- float footer to bottom of page -->
+  <script>
+
+    $(document).ready(function() {
+
+     var docHeight = $(window).height();
+     var footerHeight = $('#footer').height();
+     var footerTop = $('#footer').position().top + footerHeight;
+
+     if (footerTop + 20 < docHeight) {
+      $('#footer').css('margin-top',  (docHeight - (footerTop + 20)) + 'px');
+     }
+    });
+   </script>
 </body>
 
 </html>
