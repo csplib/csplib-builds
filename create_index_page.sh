@@ -11,6 +11,7 @@ cat  > ${outdir}/index.html <<HTML
 <html class="no-js">
     <head>
         <meta charset="utf-8">
+        <meta name="robots" content="noindex">
         <title>CSPlib Development Builds</title>
     </head>
     <body>
