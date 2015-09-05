@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>065: Optimal Financial Portfolio Design</title>
+	<title>064: Generalised Balanced Academic Curriculum Problem</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -36,6 +37,32 @@
 	</script>
 
 
+	<style>
+	p.highlight{
+		border: 1px solid;
+		padding-left: 5px;
+		padding-right: 1px;
+	}
+	</style>
+
+	<script type="text/javascript">
+	$( document ).ready(function() {
+		ref_id= window.location.hash.substring(1);
+		if (ref_id){
+		  $('p#'+ ref_id).addClass('highlight');
+	 	}
+
+		$( "a.bibref" ).on("click", function() {
+			ref_id=$(this).attr("data-bibfragment")
+			$( "p.bib" ).removeClass('highlight')
+		 	$('p#'+ ref_id).addClass('highlight');
+		});
+
+	});
+
+	</script>
+
+
 </head>
 
 <body>
@@ -44,15 +71,15 @@
     	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
 
   <li><a href="/csplib-builds/master/Problems">Problems</a></li>
-  <li><a href="/csplib-builds/master/Problems/prob065">prob065</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob064">prob064</a></li>
 
-  <li><a href="/csplib-builds/master/Problems/prob065/data">Data</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob064/references">References</a></li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>065: Optimal Financial Portfolio Design</h1>
+			<h1>064: Generalised Balanced Academic Curriculum Problem</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -60,19 +87,19 @@
 
 <nav id="navigation">
 <ul>
-   	<li><a href="/csplib-builds/master/Problems/prob065/">Specification</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob064/">Specification</a></li>
 
-  	<li><p>Data files</p></li>
+   	<li><a href="/csplib-builds/master/Problems/prob064/data">Data files</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob065/results">Results</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob064/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob065/references">References</a></li>
+  	<li><p>References</p></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob065/models">Models</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob064/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob065/cite">Cite</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob064/cite">Cite</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob065/data">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob064/references">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -81,40 +108,20 @@
 		</div>
 
 
+<p>
+	<a href="/csplib-builds/master/Problems/prob064/references/prob064-refs.bib">Download bibtex</a>
+</p>
 
-	<table class="tablesorter">
-	<thead>
-	<tr>  <th>File</th>  <th>Type</th>  <th>Notes</th>  </tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>
-			<a href="instances_mzn.zip">
-				instances_mzn.zip
-			</a>
-		</td>
-		<td>
-			zip
-		</td>
-		<td>
-		Some Instances
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="opd.param.html">
-				opd.param
-			</a>
-		</td>
-		<td>
-			param
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	</tbody>
-	</table>
+
+
+<style>
+    .venue { font-style: italic; }
+    .title { font-weight: bold; }
+    .bibkey{
+        text-align:center;
+        font-size: 70%;
+    }
+</style>
 
 
 
