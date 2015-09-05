@@ -35,6 +35,8 @@
 	});
 	</script>
 
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/master/syntax_highlighter/shCoreDefault.css"/>
 
 </head>
 
@@ -47,6 +49,7 @@
   <li><a href="/csplib-builds/master/Problems/prob074">prob074</a></li>
 
   <li><a href="/csplib-builds/master/Problems/prob074/models">Models</a></li>
+  <li>naive.mzn</li>
 	</ol>
 
 	<div class="container">
@@ -68,11 +71,11 @@
 
    	<li><a href="/csplib-builds/master/Problems/prob074/references">References</a></li>
 
-  	<li><p>Models</p></li>
+   	<li><a href="/csplib-builds/master/Problems/prob074/models">Models</a></li>
 
    	<li><a href="/csplib-builds/master/Problems/prob074/cite">Cite</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob074/models">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob074/models/naive.mzn">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -81,42 +84,71 @@
 		</div>
 
 
+<a href="/csplib-builds/master/Problems/prob074/models/naive.mzn">Download</a>
+<pre class ='brush: mzn'>% Maximum Clique Problem (CSPLib 074)
+% Very naive model. This is not a good way of solving it, but it is easy to
+% understand.
+%
+% Ciaran McCreesh, c.mccreesh.1@research.gla.ac.uk
+% 2015-09-05
 
-	<p>A dedicated parallel solver in C++ is available at:</p>
-<p>https://github.com/ciaranm/parasols</p>
-<p>Implementations of several algorithms in Java are available at:</p>
-<p>http://www.dcs.gla.ac.uk/~pat/Downloads.html</p>
-<p>Implementations of a particular algorithm in several languages are available
-at:</p>
-<p>https://github.com/ciaranm/sicsa-multicore-challenge-iii</p>
+% --- instance, specified as an adjacency matrix, which must be symmetric, using ---
+% --- 0s and 1s rather than true and false because it looks prettier             ---
+int: n = 5;
+array[1..n, 1..n] of int: adj =
+    [| 0, 1, 0, 1, 0
+     | 1, 0, 1, 0, 0
+     | 0, 1, 0, 1, 1
+     | 1, 0, 1, 0, 1
+     | 0, 0, 1, 1, 0 |];
 
-	<table class="tablesorter">
-	<thead>
-	<tr>  <th>File</th>  <th>Type</th>  <th>Notes</th>  </tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>
-			<a href="naive.mzn.html">
-				naive.mzn
-			</a>
-		</td>
-		<td>
-			<a href="../../../Languages/MiniZinc">
-			MiniZinc
-			</a>
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	</tbody>
-	</table>
+% --- naive model ---
 
+% decision variables: which vertices are in the clique?
+array[1..n] of var bool: c;
+var int: size;
+
+% how many vertices have we selected?
+constraint size = sum(c);
+
+% we can only pick one of any non-adjacent pair of vertices
+constraint forall (i, j in 1..n where i &lt; j /\ 0 == adj[i,j]) (bool2int(c[i]) + bool2int(c[j]) &lt;= 1);
+
+solve maximize size;
+
+
+</pre>
 
 
 	</div>
 
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+    ['essence','eprime','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
+    ['minizinc','mzn', '/csplib-builds/master/js/shBrushMiniZinc.js'],
+    ['comet','co', '/csplib-builds/master/js/shBrushComet.js'],
+    ['js','javascript','/csplib-builds/master/syntax_highlighter/shBrushJScript.js'],
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/master/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/master/syntax_highlighter/shBrushErlang.js'],
+
+    ['java'   , '/csplib-builds/master/syntax_highlighter/shBrushJava.js']   ,
+    ['cs'     , '/csplib-builds/master/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy' , '/csplib-builds/master/syntax_highlighter/shBrushGroovy.js'] ,
+    ['pl'     , '/csplib-builds/master/syntax_highlighter/shBrushPerl.js']   ,
+    ['php'    , '/csplib-builds/master/syntax_highlighter/shBrushPhp.js']    ,
+    ['rb'     , '/csplib-builds/master/syntax_highlighter/shBrushRuby.js']   ,
+    ['py'     , '/csplib-builds/master/syntax_highlighter/shBrushPython.js'] ,
+    ['xml'    , '/csplib-builds/master/syntax_highlighter/shBrushXml.js']    ,
+    ['scala'  , '/csplib-builds/master/syntax_highlighter/shBrushScala.js']
+	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
 
 
 </div>
