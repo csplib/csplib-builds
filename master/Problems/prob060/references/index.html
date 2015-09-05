@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>012: Nonogram</title>
+	<title>060: Ridesharing</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -36,6 +37,32 @@
 	</script>
 
 
+	<style>
+	p.highlight{
+		border: 1px solid;
+		padding-left: 5px;
+		padding-right: 1px;
+	}
+	</style>
+
+	<script type="text/javascript">
+	$( document ).ready(function() {
+		ref_id= window.location.hash.substring(1);
+		if (ref_id){
+		  $('p#'+ ref_id).addClass('highlight');
+	 	}
+
+		$( "a.bibref" ).on("click", function() {
+			ref_id=$(this).attr("data-bibfragment")
+			$( "p.bib" ).removeClass('highlight')
+		 	$('p#'+ ref_id).addClass('highlight');
+		});
+
+	});
+
+	</script>
+
+
 </head>
 
 <body>
@@ -44,15 +71,15 @@
     	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
 
   <li><a href="/csplib-builds/master/Problems">Problems</a></li>
-  <li><a href="/csplib-builds/master/Problems/prob012">prob012</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob060">prob060</a></li>
 
-  <li><a href="/csplib-builds/master/Problems/prob012/models">Models</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob060/references">References</a></li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>012: Nonogram</h1>
+			<h1>060: Ridesharing</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -60,19 +87,19 @@
 
 <nav id="navigation">
 <ul>
-   	<li><a href="/csplib-builds/master/Problems/prob012/">Specification</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob060/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob012/data">Data files</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob060/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob012/results">Results</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob060/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob012/references">References</a></li>
+  	<li><p>References</p></li>
 
-  	<li><p>Models</p></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob060/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob012/cite">Cite</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob060/cite">Cite</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob012/models">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob060/references">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -81,126 +108,49 @@
 		</div>
 
 
+<p>
+	<a href="/csplib-builds/master/Problems/prob060/references/prob060-refs.bib">Download bibtex</a>
+</p>
 
-	<table class="tablesorter">
-	<thead>
-	<tr>  <th>File</th>  <th>Type</th>  <th>Notes</th>  </tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>
-			<a href="nonogram_automaton.co.html">
-				nonogram_automaton.co
-			</a>
-		</td>
-		<td>
-			<a href="../../../Languages/Comet">
-			Comet
-			</a>
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="nono.ecl.html">
-				nono.ecl
-			</a>
-		</td>
-		<td>
-			ecl
-		</td>
-		<td>
-		An ECLIPSE nonogram solver due to Joachim Schimpf
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="nonogram.essence.html">
-				nonogram.essence
-			</a>
-		</td>
-		<td>
-			<a href="../../../Languages/Essence">
-			Essence
-			</a>
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="non.mzn.html">
-				non.mzn
-			</a>
-		</td>
-		<td>
-			<a href="../../../Languages/MiniZinc">
-			MiniZinc
-			</a>
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="nonogram_create_automaton2.mzn.html">
-				nonogram_create_automaton2.mzn
-			</a>
-		</td>
-		<td>
-			<a href="../../../Languages/MiniZinc">
-			MiniZinc
-			</a>
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="nonogram_table2.py.html">
-				nonogram_table2.py
-			</a>
-		</td>
-		<td>
-			or-tools/python
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="nonogram_default_search.py.html">
-				nonogram_default_search.py
-			</a>
-		</td>
-		<td>
-			or-tools/python
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="sicstus_csplib012.pl.html">
-				sicstus_csplib012.pl
-			</a>
-		</td>
-		<td>
-			SICStus Prolog
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	</tbody>
-	</table>
+
+
+<style>
+    .venue { font-style: italic; }
+    .title { font-weight: bold; }
+    .bibkey{
+        text-align:center;
+        font-size: 70%;
+    }
+</style>
+<p id="ArmantICTAI2014" class='bib'>
+    <span class="bibkey">
+        [ArmantICTAI2014]
+    </span>
+    <br>
+    <span class="authors">
+        Vincent Armant and Kenneth N. Brown
+    </span>
+
+    <br>
+
+    <span class="title">
+        Minimizing the Driving Distance in Ride Sharing Systems
+    </span>
+
+    <br>
+
+    <span class="venuetype"></span>
+    <span class="venue">ICTAI 2014, Proc 26th IEEE International Conference on Tools with Artificial Intelligence</span>, 
+    <span class="date">
+        
+        2014
+    </span>
+
+    <span class="links">
+    </span>
+
+</p>
+
 
 
 
