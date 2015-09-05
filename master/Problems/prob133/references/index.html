@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>047: Supply Chain Coordinations</title>
+	<title>133: Knapsack Problem</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -36,6 +37,32 @@
 	</script>
 
 
+	<style>
+	p.highlight{
+		border: 1px solid;
+		padding-left: 5px;
+		padding-right: 1px;
+	}
+	</style>
+
+	<script type="text/javascript">
+	$( document ).ready(function() {
+		ref_id= window.location.hash.substring(1);
+		if (ref_id){
+		  $('p#'+ ref_id).addClass('highlight');
+	 	}
+
+		$( "a.bibref" ).on("click", function() {
+			ref_id=$(this).attr("data-bibfragment")
+			$( "p.bib" ).removeClass('highlight')
+		 	$('p#'+ ref_id).addClass('highlight');
+		});
+
+	});
+
+	</script>
+
+
 </head>
 
 <body>
@@ -44,15 +71,15 @@
     	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
 
   <li><a href="/csplib-builds/master/Problems">Problems</a></li>
-  <li><a href="/csplib-builds/master/Problems/prob047">prob047</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob133">prob133</a></li>
 
-  <li><a href="/csplib-builds/master/Problems/prob047/models">Models</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob133/references">References</a></li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>047: Supply Chain Coordinations</h1>
+			<h1>133: Knapsack Problem</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -60,19 +87,19 @@
 
 <nav id="navigation">
 <ul>
-   	<li><a href="/csplib-builds/master/Problems/prob047/">Specification</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob133/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob047/data">Data files</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob133/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob047/results">Results</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob133/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob047/references">References</a></li>
+  	<li><p>References</p></li>
 
-  	<li><p>Models</p></li>
+   	<li><a href="/csplib-builds/master/Problems/prob133/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob047/cite">Cite</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob133/cite">Cite</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob047/models">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob133/references">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -81,53 +108,49 @@
 		</div>
 
 
+<p>
+	<a href="/csplib-builds/master/Problems/prob133/references/prob133-refs.bib">Download bibtex</a>
+</p>
 
-	<table class="tablesorter">
-	<thead>
-	<tr>  <th>File</th>  <th>Type</th>  <th>Notes</th>  </tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>
-			<a href="root-model.txt.html">
-				root-model.txt
-			</a>
-		</td>
-		<td>
-			txt
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="intermediate-model.txt.html">
-				intermediate-model.txt
-			</a>
-		</td>
-		<td>
-			txt
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="leaf-model.txt.html">
-				leaf-model.txt
-			</a>
-		</td>
-		<td>
-			txt
-		</td>
-		<td>
-		
-		</td>
-	</tr>
-	</tbody>
-	</table>
+
+
+<style>
+    .venue { font-style: italic; }
+    .title { font-weight: bold; }
+    .bibkey{
+        text-align:center;
+        font-size: 70%;
+    }
+</style>
+<p id="martello1990knapsack" class='bib'>
+    <span class="bibkey">
+        [martello1990knapsack]
+    </span>
+    <br>
+    <span class="authors">
+        Silvano Martello and Paolo Toth
+    </span>
+
+    <br>
+
+    <span class="title">
+        Knapsack problems: Algorithms and computer interpretations
+    </span>
+
+    <br>
+
+    <span class="venuetype"></span>
+    <span class="venue">Hoboken, NJ: Wiley-Interscience</span>, 
+    <span class="date">
+        
+        1990
+    </span>
+
+    <span class="links">
+    </span>
+
+</p>
+
 
 
 
