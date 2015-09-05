@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>Essence</title>
+	<title>132: A Layout Problem</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -36,6 +37,32 @@
 	</script>
 
 
+	<style>
+	p.highlight{
+		border: 1px solid;
+		padding-left: 5px;
+		padding-right: 1px;
+	}
+	</style>
+
+	<script type="text/javascript">
+	$( document ).ready(function() {
+		ref_id= window.location.hash.substring(1);
+		if (ref_id){
+		  $('p#'+ ref_id).addClass('highlight');
+	 	}
+
+		$( "a.bibref" ).on("click", function() {
+			ref_id=$(this).attr("data-bibfragment")
+			$( "p.bib" ).removeClass('highlight')
+		 	$('p#'+ ref_id).addClass('highlight');
+		});
+
+	});
+
+	</script>
+
+
 </head>
 
 <body>
@@ -43,16 +70,16 @@
 	<ol class="breadcrumb">
     	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
 
-  <li><a href="/csplib-builds/master/Languages">Languages</a></li>
-  <li><a href="/csplib-builds/master/Languages/Essence">Essence</a></li>
+  <li><a href="/csplib-builds/master/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob132">prob132</a></li>
 
-  <li><a href="/csplib-builds/master/Languages/Essence/data">Data</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob132/references">References</a></li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>Essence</h1>
+			<h1>132: A Layout Problem</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -60,16 +87,19 @@
 
 <nav id="navigation">
 <ul>
-   	<li><a href="/csplib-builds/master/Languages/Essence/">Specification</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob132/">Specification</a></li>
 
-  	<li><p>Data files</p></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob132/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/master/Languages/Essence/references">References</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob132/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/master/Languages/Essence/models">Models</a></li>
+  	<li><p>References</p></li>
 
-   	<li><a href="/csplib-builds/master/Languages/Essence/cite">Cite</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob132/models">Models</a></li>
 
+   	<li><a href="/csplib-builds/master/Problems/prob132/cite">Cite</a></li>
+
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob132/references">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -78,74 +108,49 @@
 		</div>
 
 
+<p>
+	<a href="/csplib-builds/master/Problems/prob132/references/prob132-refs.bib">Download bibtex</a>
+</p>
 
-	<table class="tablesorter">
-	<thead>
-	<tr>  <th>File</th>  <th>Problem</th>  <th>Notes</th>  </tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob055/data/eparams.param.html">
-				eparams.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob055">
-			055: Equidistant Frequency Permutation Arrays
-			</a>
-		</td>
-		<td>
-		Example .param file for Essence model with parameters from specification
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob042/data/input.param.html">
-				input.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob042">
-			042: diagnosis
-			</a>
-		</td>
-		<td>
-		Example .param file describing full-adder example for use with Essence model
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob051/data/p01.param.html">
-				p01.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob051">
-			051: Tank Allocation
-			</a>
-		</td>
-		<td>
-		.param file for use with essence model, describes same problem as chemical.xml
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob040/data/p01.param.html">
-				p01.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob040">
-			040: A Distribution Problem with Wagner-Whitin Costs
-			</a>
-		</td>
-		<td>
-		Example .param file for use with Essence model, describes example problem from Tarim &amp; Miguel
-		</td>
-	</tr>
-	</tbody>
-	</table>
+
+
+<style>
+    .venue { font-style: italic; }
+    .title { font-weight: bold; }
+    .bibkey{
+        text-align:center;
+        font-size: 70%;
+    }
+</style>
+<p id="meseguer2001exploiting" class='bib'>
+    <span class="bibkey">
+        [meseguer2001exploiting]
+    </span>
+    <br>
+    <span class="authors">
+        Pedro Meseguer and Carme Torras
+    </span>
+
+    <br>
+
+    <span class="title">
+        <a href="http://cse.unl.edu/~choueiry/Documents/Meseguer-Torras-2001.pdf">Exploiting symmetries within constraint satisfaction search</a>
+    </span>
+
+    <br>
+
+    <span class="venuetype"></span>
+    <span class="venue">Artificial intelligence 129(1)</span>, 
+    <span class="date">
+        
+        2001
+    </span>
+
+    <span class="links">
+    </span>
+
+</p>
+
 
 
 

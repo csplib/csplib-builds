@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>Essence</title>
+	<title>132: A Layout Problem</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -41,18 +41,16 @@
 <body>
 
 	<ol class="breadcrumb">
-    	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
+  	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
 
-  <li><a href="/csplib-builds/master/Languages">Languages</a></li>
-  <li><a href="/csplib-builds/master/Languages/Essence">Essence</a></li>
-
-  <li><a href="/csplib-builds/master/Languages/Essence/data">Data</a></li>
+  <li><a href="/csplib-builds/master/Problems">Problems</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob132">prob132</a></li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>Essence</h1>
+			<h1>132: A Layout Problem</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -60,16 +58,19 @@
 
 <nav id="navigation">
 <ul>
-   	<li><a href="/csplib-builds/master/Languages/Essence/">Specification</a></li>
+  	<li><p>Specification</p></li>
 
-  	<li><p>Data files</p></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob132/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/master/Languages/Essence/references">References</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob132/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/master/Languages/Essence/models">Models</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob132/references">References</a></li>
 
-   	<li><a href="/csplib-builds/master/Languages/Essence/cite">Cite</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob132/models">Models</a></li>
 
+   	<li><a href="/csplib-builds/master/Problems/prob132/cite">Cite</a></li>
+
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob132/specification.md">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -78,75 +79,12 @@
 		</div>
 
 
+<p class='proposed'>
+Proposed by Özgür Akgün
+</p>
 
-	<table class="tablesorter">
-	<thead>
-	<tr>  <th>File</th>  <th>Problem</th>  <th>Notes</th>  </tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob055/data/eparams.param.html">
-				eparams.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob055">
-			055: Equidistant Frequency Permutation Arrays
-			</a>
-		</td>
-		<td>
-		Example .param file for Essence model with parameters from specification
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob042/data/input.param.html">
-				input.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob042">
-			042: diagnosis
-			</a>
-		</td>
-		<td>
-		Example .param file describing full-adder example for use with Essence model
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob051/data/p01.param.html">
-				p01.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob051">
-			051: Tank Allocation
-			</a>
-		</td>
-		<td>
-		.param file for use with essence model, describes same problem as chemical.xml
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="../../../Problems/prob040/data/p01.param.html">
-				p01.param
-			</a>
-		</td>
-		<td>
-			<a href="../../../Problems/prob040">
-			040: A Distribution Problem with Wagner-Whitin Costs
-			</a>
-		</td>
-		<td>
-		Example .param file for use with Essence model, describes example problem from Tarim &amp; Miguel
-		</td>
-	</tr>
-	</tbody>
-	</table>
-
+<p>Given a grid, we want to place a number of pieces such that every piece is completely included in the grid and no overlapping occurs between pieces.</p>
+<p>Section 3.3 of<span> <a class="bibref" data-bibfragment="meseguer2001exploiting" href="/csplib-builds/master/Problems/prob132/references/#meseguer2001exploiting">[meseguer2001exploiting]</a></span> gives a more detailed specification of the problem.</p>
 
 
 	</div>
