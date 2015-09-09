@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob024/models/langford.ecl">Download</a>
-<pre >/*
+<pre class ='brush: eclipse'>/*
 
   Langford's number problem in ECLiPSe.
 
@@ -193,7 +193,7 @@ langford(K, Solution, Position,Selection,Choice,Backtracks) :-
         %  symmetry breaking
         nth1(1,Solution,Solution1),
         nth1(K2,Solution,SolutionK2),
-        Solution1 #< SolutionK2,
+        Solution1 #&lt; SolutionK2,
 
 
         ( for(I,1,K), param(Position,Solution,K) do
@@ -227,6 +227,7 @@ langford(K, Solution, Position,Selection,Choice,Backtracks) :-
 <script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
+    ['eclipse', 'ecl', '/csplib-builds/master/js/shBrushECLiPSe.js'],
     ['essence','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
     ['essenceprime', '/csplib-builds/master/js/shBrushEssencePrime.js'],
     ['minizinc','mzn', '/csplib-builds/master/js/shBrushMiniZinc.js'],

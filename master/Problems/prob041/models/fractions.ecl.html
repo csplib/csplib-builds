@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob041/models/fractions.ecl">Download</a>
-<pre >/*
+<pre class ='brush: eclipse'>/*
 
   Fractions problem in ECLiPSe.
 
@@ -147,12 +147,12 @@ fractions(Selection, Choice, Digits, Backtracks) :-
         A*D2*D3 + D*D1*D3 + G*D1*D2 #= D1*D2*D3,
 
         % break the symmetry
-        A*D2 #>= D*D1,
-        D*D3 #>= G*D2,
+        A*D2 #&gt;= D*D1,
+        D*D3 #&gt;= G*D2,
 
         %redundant constraints
-        3*A #>= D1,
-        3*G #=< D2,
+        3*A #&gt;= D1,
+        3*G #=&lt; D2,
 
 
         % search
@@ -171,6 +171,7 @@ fractions(Selection, Choice, Digits, Backtracks) :-
 <script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
+    ['eclipse', 'ecl', '/csplib-builds/master/js/shBrushECLiPSe.js'],
     ['essence','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
     ['essenceprime', '/csplib-builds/master/js/shBrushEssencePrime.js'],
     ['minizinc','mzn', '/csplib-builds/master/js/shBrushMiniZinc.js'],

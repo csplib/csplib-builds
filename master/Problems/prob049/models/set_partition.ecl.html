@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob049/models/set_partition.ecl">Download</a>
-<pre >/*
+<pre class ='brush: eclipse'>/*
 
   Set partition problem in ECLiPSe.
 
@@ -95,12 +95,12 @@
    This is a partition problem.
    Given the set S = {1, 2, ..., n}, 
    it consists in finding two sets A and B such that:
-   <ul>
-   <li>A U B = S,</li>
-   <li>|A| = |B|,</li>
-   <li>sum(A) = sum(B),</li>
-   <li>sum_squares(A) = sum_squares(B).</li>
-   </ul>
+   &lt;ul&gt;
+   &lt;li&gt;A U B = S,&lt;/li&gt;
+   &lt;li&gt;|A| = |B|,&lt;/li&gt;
+   &lt;li&gt;sum(A) = sum(B),&lt;/li&gt;
+   &lt;li&gt;sum_squares(A) = sum_squares(B).&lt;/li&gt;
+   &lt;/ul&gt;
   """
 
   Compare with the following models:
@@ -159,7 +159,7 @@ set_partition(N,NumSets) :-
 
         % sanity check
         Mod is N mod NumSets,
-        ( Mod \= 0 -> 
+        ( Mod \= 0 -&gt; 
               printf("Error: %d is not a multiple of %d\n", [NumSets,N]),
               fail
         ;
@@ -306,6 +306,7 @@ same_cardinality3([S1,S2|Rest]) :- #(S1) #= #(S2), same_cardinality([S2|Rest]).
 <script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
+    ['eclipse', 'ecl', '/csplib-builds/master/js/shBrushECLiPSe.js'],
     ['essence','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
     ['essenceprime', '/csplib-builds/master/js/shBrushEssencePrime.js'],
     ['minizinc','mzn', '/csplib-builds/master/js/shBrushMiniZinc.js'],

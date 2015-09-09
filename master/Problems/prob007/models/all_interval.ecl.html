@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob007/models/all_interval.ecl">Download</a>
-<pre >/*
+<pre class ='brush: eclipse'>/*
 
   All interval problem in ECLiPSe..
   
@@ -154,8 +154,8 @@ all_interval(N) :-
         ),
         
         % symmetry breaking
-        X[1] #< X[N1],
-        Diffs[1] #< Diffs[2],
+        X[1] #&lt; X[N1],
+        Diffs[1] #&lt; Diffs[2],
 
         term_variables([X,Diffs], Vars),
 
@@ -182,6 +182,7 @@ all_interval(N) :-
 <script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
+    ['eclipse', 'ecl', '/csplib-builds/master/js/shBrushECLiPSe.js'],
     ['essence','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
     ['essenceprime', '/csplib-builds/master/js/shBrushEssencePrime.js'],
     ['minizinc','mzn', '/csplib-builds/master/js/shBrushMiniZinc.js'],

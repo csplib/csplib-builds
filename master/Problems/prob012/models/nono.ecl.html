@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob012/models/nono.ecl">Download</a>
-<pre >%
+<pre class ='brush: eclipse'>%
 % ECLiPSe Nonogram Solver
 %
 % by Joachim Schimpf, IC-Parc, Imperial College, London, January 2001
@@ -212,7 +212,7 @@ place_block(Line, Position, LeftGap, BlockSize, RightGap) :-
 place_block(Line, Position, LeftGap, BlockSize, RightGap) :-
 	var(Position),
 	suspend(place_block(Line, Position, LeftGap, BlockSize, RightGap), 2,
-		[Position->inst]).
+		[Position-&gt;inst]).
 
 
 
@@ -224,7 +224,7 @@ line_lookahead(NFields, Line, Blocks, Positions) :-
 	suspend(
 	    solve_line_problem(NFields, Line, Positions, Blocks),
 	    7,
-	    [Line->inst,Positions->ic:min,Positions->ic:max]
+	    [Line-&gt;inst,Positions-&gt;ic:min,Positions-&gt;ic:max]
 	) infers most.
 
 solve_line_problem(NFields, Line, Positions, Blocks) :-
@@ -249,8 +249,8 @@ pretty_print(Board) :-
 	( for(I,1,M), param(Board,N) do
 	    ( for(J,1,N), param(Board,I) do
 		X is Board[I,J],
-		( X==0 -> write("  ")
-		; X==1 -> write(" *")
+		( X==0 -&gt; write("  ")
+		; X==1 -&gt; write(" *")
 		;         write(" ?")
 		)
 	    ), nl
@@ -347,6 +347,7 @@ check_data(_,_,_,_) :-
 <script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
+    ['eclipse', 'ecl', '/csplib-builds/master/js/shBrushECLiPSe.js'],
     ['essence','param','solution', '/csplib-builds/master/js/shBrushEssence.js'],
     ['essenceprime', '/csplib-builds/master/js/shBrushEssencePrime.js'],
     ['minizinc','mzn', '/csplib-builds/master/js/shBrushMiniZinc.js'],
