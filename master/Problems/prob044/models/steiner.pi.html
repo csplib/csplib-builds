@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob044/models/steiner.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Steiner triplets in Picat.
 
@@ -117,16 +117,16 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
 
    N = 9,
    steiner(N,Steiner),
    writeln(Steiner),nl.
 
 
-steiner(N,Steiner) =>
+steiner(N,Steiner) =&gt;
 
    % number of sets
    Nb = (N * (N-1)) // 6,
@@ -140,9 +140,9 @@ steiner(N,Steiner) =>
        S1List = S1.to_list(),
        3 #= sum(S1List), % cardinality
        foreach({S2,J} in zip(Sets.to_list(),1..Nb))
-          if I > J then
+          if I &gt; J then
              union_card(S1List,S2.to_list(),Common),
-             Common #=< 1
+             Common #=&lt; 1
           end
        end
    end,
@@ -156,13 +156,13 @@ steiner(N,Steiner) =>
 %
 % number of common elements in two "sets"
 %
-union_card(S1,S2,CardCommon) =>
+union_card(S1,S2,CardCommon) =&gt;
    CardCommon #= sum([(SS1 + SS2 #= 2) : {SS1,SS2} in zip(S1,S2)]).
 
 %
 % convert a list of boolean to a "set"
 %
-boolean_to_set(List,Set) =>
+boolean_to_set(List,Set) =&gt;
    Set = [I : {C,I} in zip(List.to_list(), 1..List.length), C = 1].
 
 

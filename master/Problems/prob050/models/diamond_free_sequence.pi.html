@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob050/models/diamond_free_sequence.pi">Download</a>
-<pre >/* 
+<pre class ='brush: picat'>/* 
 
   Diamond free sequence (CSPLib #50) in Picat.
 
@@ -97,7 +97,7 @@
   undirected edges, the edge {u,v} is in E if and only if vertex u is adjacent to vertex v∈G. 
   The graph is simple in that there are no loop edges, i.e. we have no edges of the form {v,v}. 
   Each vertex v∈V has a degree dv i.e. the number of edges incident on that vertex. Consequently 
-  a graph has a degree sequence d1,…,dn, where di>=di+1. A diamond is a set of four vertices 
+  a graph has a degree sequence d1,…,dn, where di&gt;=di+1. A diamond is a set of four vertices 
   in V such that there are at least five edges between those vertices. Conversely, a graph is 
   diamond-free if it has no diamond as an induced subgraph, i.e. for every set of four vertices 
   the number of edges between those vertices is at most four.
@@ -109,7 +109,7 @@
   The problem is then for a given value of n, produce all unique degree sequences d1,…,dn such that
 
    * di≥di+1
-   * each degree di>0 and di is modulo 3
+   * each degree di&gt;0 and di is modulo 3
    * the sum of the degrees is modulo 12
    * there exists a simple diamond-free graph with that degree sequence
 
@@ -154,10 +154,10 @@
 import cp.
 
 
-main => go.
+main =&gt; go.
 
 
-go =>
+go =&gt;
   garbage_collect(200_000_000),
   N = 10,
   All = findall(Degrees, diamond_free_sequence(N, _, Degrees)).sort_remove_dups(),
@@ -168,7 +168,7 @@ go =>
 %
 % the different degrees
 %
-go2 => 
+go2 =&gt; 
   garbage_collect(200_000_000),
   Map = get_global_map(),
   foreach(N in 1..15) 
@@ -190,9 +190,9 @@ go2 =>
   nl.
 
 %
-% This takes too much RAM for N >= 15
+% This takes too much RAM for N &gt;= 15
 %
-go2b => 
+go2b =&gt; 
   garbage_collect(200_000_000),
   Num = [],
   foreach(N in 1..16) 
@@ -209,7 +209,7 @@ go2b =>
 %
 % count the number of different graphs (X)
 %
-go3 ?=>
+go3 ?=&gt;
   garbage_collect(200_000_000),
   N = 15,
   println(n=N),
@@ -220,11 +220,11 @@ go3 ?=>
   fail,
   nl.
 
-go3 => 
+go3 =&gt; 
   println(num=get_global_map().get(count)).
 
 
-diamond_free_sequence(N, X, Degrees) =>
+diamond_free_sequence(N, X, Degrees) =&gt;
 
   X = new_array(N,N),
   X :: 0..1,
@@ -233,8 +233,8 @@ diamond_free_sequence(N, X, Degrees) =>
   Degrees :: 1..N,
 
   % diamond free
-  foreach(I in 1..N, J in 1..N, K in 1..N, L in 1..N, I < J, J < K, K < L)
-     X[I,J] + X[I,K] + X[I,L] + X[J,K] + X[J,L] + X[K,L] #<= 4
+  foreach(I in 1..N, J in 1..N, K in 1..N, L in 1..N, I &lt; J, J &lt; K, K &lt; L)
+     X[I,J] + X[I,K] + X[I,L] + X[J,K] + X[J,L] + X[K,L] #&lt;= 4
   end,
 
   % undirected graph
@@ -262,10 +262,10 @@ diamond_free_sequence(N, X, Degrees) =>
   solve([split],Vars).
    
 
-decreasing(List) =>
-  foreach(I in 2..List.length) List[I-1] #>= List[I] end.
+decreasing(List) =&gt;
+  foreach(I in 2..List.length) List[I-1] #&gt;= List[I] end.
 
-lex2eq(X) =>
+lex2eq(X) =&gt;
  Len = X[1].length,
  foreach(I in 2..X.length) 
    lex_le([X[I-1,J] : J in 1..Len], [X[I,J] : J in 1..Len])

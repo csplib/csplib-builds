@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob024/models/langford.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Langford's number problem in Picat.
 
@@ -115,7 +115,7 @@
 
   Which this symmetry breaking
 
-     Solution[1] #< Solution[K2],
+     Solution[1] #&lt; Solution[K2],
 
   then just the second solution is shown.
 
@@ -132,9 +132,9 @@
 import util.
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
     K = 12,
     writef("K: %d\n", K),
     time2($langford(K, Solution, Position)),
@@ -144,7 +144,7 @@ go =>
 %
 % Get the first (if any) solutions for K in 2..40
 %
-go2 => 
+go2 =&gt; 
     foreach(K in 2..40) 
        writef("K: %d\n", K),
        if time2($langford(K, Solution, Position)) then
@@ -159,7 +159,7 @@ go2 =>
     end.
 
  
-langford(K, Solution, Position) =>
+langford(K, Solution, Position) =&gt;
 
         if not ((K mod 4 == 0; K mod 4 == 3)) then
            println("There is no solution for K unless K mod 4 == 0 or K mod 4 == 3"),
@@ -176,8 +176,8 @@ langford(K, Solution, Position) =>
         all_different(Position),
 
         % symmetry breaking:
-        Solution[1] #< Solution[K2],
-        % Solution[1] #> Solution[K2],
+        Solution[1] #&lt; Solution[K2],
+        % Solution[1] #&gt; Solution[K2],
 
         foreach(I in 1..K)
             % This "advanced" usage of element don't work

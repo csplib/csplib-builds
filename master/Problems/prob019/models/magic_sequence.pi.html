@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob019/models/magic_sequence.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Magic sequence problem in Picat.
 
@@ -106,14 +106,14 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
         magic_sequence(400,Sequence),
         writeln(Sequence).
 
 
-go2 =>
+go2 =&gt;
         foreach(N in 4..40)
            if magic_sequence(N,Sequence) then
               writeln(Sequence)
@@ -123,11 +123,11 @@ go2 =>
         end.
 
 
-scalar_product(A, X) = Product => 
+scalar_product(A, X) = Product =&gt; 
    Product #= sum([S : I in 1..A.length, S #= A[I]*X[I]]).
 
 
-magic_sequence(N, Sequence) =>
+magic_sequence(N, Sequence) =&gt;
 
         writef("\n%d: ",N),
 

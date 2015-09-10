@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob001/models/car.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Car sequencing in B-Prolog.
 
@@ -158,7 +158,7 @@ go :-
                ),
         foreach(O in Options, 
                 S in 1..NbSlots - Capacity[O,2] + 1,              
-                sum([Setup[O,J] : J in S..S + Capacity[O,2]- 1]) #=< Capacity[O,1]
+                sum([Setup[O,J] : J in S..S + Capacity[O,2]- 1]) #=&lt; Capacity[O,1]
                ),
 
         %% This don't work
@@ -175,7 +175,7 @@ go :-
 
         foreach(O in Options, I in 1..OptionDemand[O],
                 (
-                    sum([Setup[O,S] : S in 1..(NbSlots - I * Capacity[O,2])]) #>=
+                    sum([Setup[O,S] : S in 1..(NbSlots - I * Capacity[O,2])]) #&gt;=
                     (OptionDemand[O] - I * Capacity[O,1])
                 )
               ),

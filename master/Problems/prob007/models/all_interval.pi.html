@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob007/models/all_interval.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   All interval problem in Picat.
 
@@ -119,28 +119,28 @@
 
 import cp.
 
-main => time2(go).
+main =&gt; time2(go).
 
-go =>
+go =&gt;
         N = 12,
         L = findall(X,all_interval(N,X,[])),
         Len = length(L),
         writef("Total: %d\n", Len).
 
 % Just the first solution
-go2 =>
+go2 =&gt;
         foreach(N in 2..220) 
            writeln(n=N),
            time2($all_interval(N,_X,[ff,split]))
         end,
         nl.
 
-go3 => 
+go3 =&gt; 
    all_interval(2000,X,[ff,split]),
    writeln(X),
    nl.
 
-all_interval(N,X,Label) =>
+all_interval(N,X,Label) =&gt;
 
         X = new_list(N),
         X :: 1..N,
@@ -159,8 +159,8 @@ all_interval(N,X,Label) =>
         end,
         
         % symmetry breaking
-        X[1] #< X[N1],
-        Diffs[1] #< Diffs[2],
+        X[1] #&lt; X[N1],
+        Diffs[1] #&lt; Diffs[2],
 
         Vars = X ++ Diffs,
 
@@ -179,8 +179,8 @@ all_interval(N,X,Label) =>
         writef("x: %w  diffs: %w  [sum: %d]\n", X, Diffs, SumDistinct).
 
 
-increasing(List) =>
-   foreach(I in 2..List.length) List[I-1] #=< List[I] end.
+increasing(List) =&gt;
+   foreach(I in 2..List.length) List[I-1] #=&lt; List[I] end.
 
 </pre>
 

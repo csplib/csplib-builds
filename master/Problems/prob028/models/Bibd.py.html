@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob028/models/Bibd.py">Download</a>
-<pre >from Numberjack import *
+<pre class ='brush: numberjack'>from Numberjack import *
 
 # Balanced Incomplete Block Design (BIBD) --- CSPLib prob028
 
@@ -115,8 +115,8 @@ def solve(param):
     matrix, model = get_model(param['v'], param['b'], param['r'], param['k'], param['l'])
 
     if param['solver'] == 'Mistral':
-        model += [matrix.row[i] <= matrix.row[i+1] for i in range(param['v']-1)]
-        model += [matrix.col[i] <= matrix.col[i+1] for i in range(param['b']-1)]
+        model += [matrix.row[i] &lt;= matrix.row[i+1] for i in range(param['v']-1)]
+        model += [matrix.col[i] &lt;= matrix.col[i+1] for i in range(param['b']-1)]
 
     solver = model.load(param['solver'])
     solver.setVerbosity(param['verbose'])

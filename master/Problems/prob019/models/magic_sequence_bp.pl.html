@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob019/models/magic_sequence_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Magic sequence problem in B-Prolog.
 
@@ -143,9 +143,9 @@ solve(N, Sequence) :-
         Integers @= [ I : I in 0..N-1],
         scalar_product(Integers, Sequence, #=, N),
 
-        % labeling([inout],Sequence) -> 
-        labeling([degree],Sequence) -> 
-        % labeling([ff],Sequence) -> 
+        % labeling([inout],Sequence) -&gt; 
+        labeling([degree],Sequence) -&gt; 
+        % labeling([ff],Sequence) -&gt; 
             writeln(Sequence)
         ;
             writeln('Something wrong happened.'),

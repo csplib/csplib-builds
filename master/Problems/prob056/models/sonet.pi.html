@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob056/models/sonet.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   SONET problem in Picat.
 
@@ -123,9 +123,9 @@
 import util.
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
 
    R = 4,
    N = 5,
@@ -152,13 +152,13 @@ go =>
       if Demand[Client1,Client2] == 1 then
           matrix_element(Rings,Ring,Client1,R1),
           matrix_element(Rings,Ring,Client2,R2),
-          R1 + R2 #>= 2
+          R1 + R2 #&gt;= 2
       end
    end,
 
    % capacity of each ring must not be exceeded     
    foreach(Ring in 1..R)
-      sum([Rings[Ring,Client] : Client in 1..N]) #=< CapacityNodes[Ring] 
+      sum([Rings[Ring,Client] : Client in 1..N]) #=&lt; CapacityNodes[Ring] 
    end,
 
    % Z #= 7, % for showing all 6 optimal solutions
@@ -170,12 +170,12 @@ go =>
    foreach(RR in Rings) writeln(RR) end,
    nl.
    
-matrix_element(X, I, J, Val) =>
+matrix_element(X, I, J, Val) =&gt;
    nth(I, X, Row),
    element(J, Row, Val).
 
 
-% matrix_element(X, I, J, Val) =>
+% matrix_element(X, I, J, Val) =&gt;
 %    freeze(I, (element(I, X, Row),freeze(J,element(J,Row,Val)))).
 
 

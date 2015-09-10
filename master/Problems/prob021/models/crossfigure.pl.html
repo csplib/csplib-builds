@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob021/models/crossfigure.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Crossfigure problem (CSPLib #21) in B-Prolog.
 
@@ -368,7 +368,7 @@ down(Matrix, Down, Len, Row, Col) :-
 is_prime(X) :-
         fd_max(X,Max),
         foreach(I in 2..Max // 2,
-                I #\= X #=> X mod I #> 0
+                I #\= X #=&gt; X mod I #&gt; 0
                ).
 
 %
@@ -394,7 +394,7 @@ toNum(List, Base, Num) :-
 
 %
 % Exponents for toNum2: [Base^(N-1), Base^(N-2), .., Base^0],
-%    e.g. exp_list2(3, 10, ExpList) -> ExpList = [100,10,1]
+%    e.g. exp_list2(3, 10, ExpList) -&gt; ExpList = [100,10,1]
 %
 exp_list(N, Base, ExpList) :-
         length(ExpList, N),

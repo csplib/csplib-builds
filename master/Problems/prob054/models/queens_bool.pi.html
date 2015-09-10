@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob054/models/queens_bool.pi">Download</a>
-<pre >/* 
+<pre class ='brush: picat'>/* 
 
   Boolean N-Queens problem in Picat.
 
@@ -102,23 +102,23 @@ import util.
 import cp.
 
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
   bool_queens(16),
   nl.
 
 
-go2 =>
+go2 =&gt;
   _ = findall(_, bool_queens(8)),
   nl.
 
-go3 =>
+go3 =&gt;
   bool_queens(100),
   nl.
 
 
-bool_queens(N) =>
+bool_queens(N) =&gt;
 
   Qs = new_array(N,N),
   Qs :: 0..1,
@@ -130,10 +130,10 @@ bool_queens(N) =>
     sum([$Qs[I,J] : I in 1..N]) #= 1
   end,
   foreach(K in 1-N..N-1)
-    sum([$Qs[I,J] : I in 1..N, J in 1..N, I-J=K]) #=< 1
+    sum([$Qs[I,J] : I in 1..N, J in 1..N, I-J=K]) #=&lt; 1
   end,
   foreach(K in 2..2*N)
-    sum([$Qs[I,J] : I in 1..N, J in 1..N, I+J=K]) #=< 1
+    sum([$Qs[I,J] : I in 1..N, J in 1..N, I+J=K]) #=&lt; 1
   end,
 
   solve([inout],Qs),

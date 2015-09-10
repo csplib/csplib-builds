@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob024/models/Langford.py">Download</a>
-<pre >from Numberjack import *
+<pre class ='brush: numberjack'>from Numberjack import *
 
 
 def get_model(M, N):
@@ -93,7 +93,7 @@ def get_model(M, N):
 
     model = Model(
         AllDiff([X[i] + ((i + 2) * j) for j in range(M) for i in range(N)]),
-        X[0] > X[1]  # Break symmetry
+        X[0] &gt; X[1]  # Break symmetry
     )
     return X, model
 

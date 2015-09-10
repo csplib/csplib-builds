@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob057/models/killer_sudoku.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Killer Sudoku in Picat.
 
@@ -137,15 +137,15 @@
 import util.
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
    problem(1, Board),
    killer_sudoku(Board,X),
    print_board(X).
 
 
-killer_sudoku(Hints,X) =>
+killer_sudoku(Hints,X) =&gt;
 
    N = 3,
    N2 = N*N,
@@ -168,13 +168,13 @@ killer_sudoku(Hints,X) =>
 % Ensure a Latin square, 
 % i.e. all rows and all columns are different
 %
-latin_square(Board) =>
+latin_square(Board) =&gt;
    foreach(Row in Board) all_different(Row) end,
    foreach(Column in Board.columns()) all_different(Column) end.
 
 
 
-sudoku(N, Board) =>
+sudoku(N, Board) =&gt;
    N2 = N*N,
    % BoardVar = [BB : I in 1..N2, J in 1..N2, BB = Board[I,J]],
    % BoardVar :: 1..N2,
@@ -190,7 +190,7 @@ sudoku(N, Board) =>
 
 
 
-print_board(Board) =>
+print_board(Board) =&gt;
    N = Board.length,
    foreach(I in 1..N)
       foreach(J in 1..N)
@@ -202,7 +202,7 @@ print_board(Board) =>
    nl.
 
 
-problem(P, Hints) =>
+problem(P, Hints) =&gt;
   P = 1,
   Hints = 
         [% The hints:

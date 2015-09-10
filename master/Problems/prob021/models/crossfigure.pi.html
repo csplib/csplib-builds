@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob021/models/crossfigure.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Crossfigure problem (CSPLib #21) in Picat.
 
@@ -153,9 +153,9 @@
 import util.
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
 
    N = 9,
 
@@ -344,7 +344,7 @@ go =>
 	'Len' digits starting at position (Row, Col) of the array 'Matrix'
 	and proceeding across.
 */
-across(Matrix, Across, Len, Row, Col) =>
+across(Matrix, Across, Len, Row, Col) =&gt;
    Tmp = new_list(Len),
    Tmp :: 0..9999,
    to_num(Tmp, Across),
@@ -359,7 +359,7 @@ across(Matrix, Across, Len, Row, Col) =>
 	'Len' digits starting at position (Row, Col) of the array 'Matrix'
 	and proceeding down.
 */
-down(Matrix, Down, Len, Row, Col) =>
+down(Matrix, Down, Len, Row, Col) =&gt;
    Tmp = new_list(Len),
    Tmp :: 0..9999,
    to_num(Tmp, Down),
@@ -371,24 +371,24 @@ down(Matrix, Down, Len, Row, Col) =>
 /*
  x is a prime
 */
-is_prime(X) =>
+is_prime(X) =&gt;
    Max = fd_max(X),
    foreach(I in 2..Max // 2)
-      I #!= X #=> X mod I #> 0
+      I #!= X #=&gt; X mod I #&gt; 0
    end.
 
 %
 % x is a square
 %
-square(X) =>
+square(X) =&gt;
    Max = fd_max(X),
    Tmp :: 0..Max,
    X #= Tmp**2.
 
-to_num(List, Num) => 
+to_num(List, Num) =&gt; 
   to_num(List, 10, Num).
 
-to_num(List, Base, Num) =>
+to_num(List, Base, Num) =&gt;
         Len = length(List),
         Num #= sum([List[I]*Base**(Len-I) : I in 1..Len]).
 

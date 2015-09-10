@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob049/models/NumberPartitioning.py">Download</a>
-<pre ># Number Partitioning
+<pre class ='brush: numberjack'># Number Partitioning
 #
 # In this problem, the numbers 1 to N must be arranged in two
 # different groups A and B in such a way that:
@@ -96,7 +96,7 @@
 #
 # CSPLib Problem 049 - http://www.csplib.org/Problems/prob049/
 #
-# Note: There is no solution for N < 8! Also, there is no solution
+# Note: There is no solution for N &lt; 8! Also, there is no solution
 # if N is not a multiple of 4! (Source: CSPLib - see above link.)
 
 from Numberjack import *
@@ -121,10 +121,10 @@ def get_model(N):
     )
 
     # Symmetry breaking
-    model += A[0] < B[0]
+    model += A[0] &lt; B[0]
     for i in range(N / 2 - 1):
-        model += A[i] < A[i + 1]
-        model += B[i] < B[i + 1]
+        model += A[i] &lt; A[i + 1]
+        model += B[i] &lt; B[i + 1]
 
     return A, B, model
 

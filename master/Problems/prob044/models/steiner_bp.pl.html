@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob044/models/steiner_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Steiner triplets in B-Prolog.
 
@@ -141,9 +141,9 @@ steiner(N,Steiner) :-
                     foreach((S2,J) in (Sets,1..Nb),
                             [Common],
                             (
-                                I > J -> 
+                                I &gt; J -&gt; 
                                     union_card(S1,S2,Common),
-                                    Common #=< 1
+                                    Common #=&lt; 1
                             ;
                                     true
                             )

@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob041/models/fractions.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Fractions problem in Picat.
 
@@ -106,16 +106,16 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go ?=>
+go ?=&gt;
    fractions(Digits),
    writeln(Digits),
    fail.
 
-go => true.
+go =&gt; true.
 
-fractions(Digits) =>
+fractions(Digits) =&gt;
 
    Digits = [A,B,C,D,E,F,G,H,I],
    Digits :: 1..9,
@@ -131,12 +131,12 @@ fractions(Digits) =>
    A*D2*D3 + D*D1*D3 + G*D1*D2 #= D1*D2*D3,
 
    % break the symmetry
-   A*D2 #>= D*D1,
-   D*D3 #>= G*D2,
+   A*D2 #&gt;= D*D1,
+   D*D3 #&gt;= G*D2,
 
    %redundant constraints
-   3*A #>= D1,
-   3*G #=< D2,
+   3*A #&gt;= D1,
+   3*G #=&lt; D2,
 
 
    % search

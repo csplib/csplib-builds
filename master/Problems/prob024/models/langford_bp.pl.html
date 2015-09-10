@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob024/models/langford_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Langford's number problem in B-Prolog.
 
@@ -115,7 +115,7 @@
 
   Which this symmetry breaking
 
-     Solution[1] #< Solution[K2],
+     Solution[1] #&lt; Solution[K2],
 
   then just the second solution is shown.
  
@@ -189,7 +189,7 @@ go3 :-
                 [Solution,Position,Backtracks],
                 (
                     writeln(k:K),
-                    time(langford(K,Solution,Position,ff,down,Backtracks)) -> 
+                    time(langford(K,Solution,Position,ff,down,Backtracks)) -&gt; 
                         writeln(solution:Solution),
                         writeln(position:Position),
                         writeln(backtracks:Backtracks),
@@ -221,8 +221,8 @@ langford(K, Solution, Position,Selection,Choice,Backtracks) :-
         alldifferent(Position),
 
         % symmetry breaking:
-        Solution[1] #< Solution[K2],
-        % Solution[1] #> Solution[K2],
+        Solution[1] #&lt; Solution[K2],
+        % Solution[1] #&gt; Solution[K2],
 
         foreach(I in 1..K,
                 [IK,PositionI,PositionIK,SolutionPositionI,SolutionPositionIK],

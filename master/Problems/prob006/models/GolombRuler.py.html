@@ -85,12 +85,12 @@
 
 
 <a href="/csplib-builds/master/Problems/prob006/models/GolombRuler.py">Download</a>
-<pre >from Numberjack import *
+<pre class ='brush: numberjack'>from Numberjack import *
 
 
 # Golomb Ruler --- CSPLib prob006
 
-# A Golomb ruler may be defined as a set of m marks/integers 0 = a_1 < ... < a_m
+# A Golomb ruler may be defined as a set of m marks/integers 0 = a_1 &lt; ... &lt; a_m
 # such that the pairwise differences between marks are distinct. The objective
 # is to find optimal (minimum length) rulers.
 
@@ -105,11 +105,11 @@ def get_model(param):
     model = Model(
         Minimise(marks[-1]),  # objective function
 
-        [marks[i-1] < marks[i] for i in range(1, m)],
+        [marks[i-1] &lt; marks[i] for i in range(1, m)],
         AllDiff(distance),
         marks[0] == 0,  # symmetry breaking
 
-        [distance[i * (i - 1) / 2 + j] >= ruler[i - j] for i in range(1, m) for j in range(0, i - 1) if (i - j < m)]
+        [distance[i * (i - 1) / 2 + j] &gt;= ruler[i - j] for i in range(1, m) for j in range(0, i - 1) if (i - j &lt; m)]
     )
 
     return marks, model

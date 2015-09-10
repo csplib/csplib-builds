@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob064/data/gbac2dzn.py">Download</a>
-<pre >import sys
+<pre class ='brush: numberjack'>import sys
 
 def transform(infile,outfile,solfile=None):
     with open(infile,'r') as f:
@@ -181,10 +181,10 @@ def transform(infile,outfile,solfile=None):
                 print("fixed = array2d(1..0,1..2,[]);",file=out)
           
 if __name__ == "__main__":
-    if len(sys.argv) > 2:
+    if len(sys.argv) &gt; 2:
         fname = sys.argv[1]
         transform(fname,fname+".dzn",sys.argv[2])
-    elif len(sys.argv) > 1:
+    elif len(sys.argv) &gt; 1:
         fname = sys.argv[1]
         transform(fname,fname+".dzn")
     else:

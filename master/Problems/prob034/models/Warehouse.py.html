@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob034/models/Warehouse.py">Download</a>
-<pre >#! /usr/bin/env python
+<pre class ='brush: numberjack'>#! /usr/bin/env python
 
 from Numberjack import *
 
@@ -111,11 +111,11 @@ def solve(param):
         # Objective function
         Minimise(obj),
         # Channel from store opening to store supply matrix
-        [[var <= store for var in col] for (col, store) in zip(ShopSupplied.col, WareHouseOpen)],
+        [[var &lt;= store for var in col] for (col, store) in zip(ShopSupplied.col, WareHouseOpen)],
         # Make sure every shop if supplied by one store
         [Sum(row) == 1 for row in ShopSupplied.row],
         # Make sure that each store does not exceed it's supply capacity
-        [Sum(col) <= cap for (col, cap) in zip(ShopSupplied.col, data.get("Capacity"))]
+        [Sum(col) &lt;= cap for (col, cap) in zip(ShopSupplied.col, data.get("Capacity"))]
     )
 
     solver = model.load(param['solver'])

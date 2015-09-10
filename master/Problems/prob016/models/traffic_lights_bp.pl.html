@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob016/models/traffic_lights_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Traffic lights problem in B-Prolog.
 
@@ -99,7 +99,7 @@
   for the pedestrians and can be represented by the variables P1 to P4 with domains {r,g}.
   
   The constraints on these variables can be modelled by quaternary constraints on 
-  (Vi, Pi, Vj, Pj ) for 1<=i<=4, j=(1+i)mod 4 which allow just the tuples 
+  (Vi, Pi, Vj, Pj ) for 1&lt;=i&lt;=4, j=(1+i)mod 4 which allow just the tuples 
   {(r,r,g,g), (ry,r,y,r), (g,g,r,r), (y,r,ry,r)}.
  
   It would be interesting to consider other types of junction (e.g. five roads 
@@ -162,7 +162,7 @@ traffic_lights(V, P) :-
         P :: 1..N,
         foreach(I in 1..N, J in 1..N,[JJ,VI,PI,VJ,PJ],
                 (JJ is (1+I) mod N,
-                 J #= JJ ->
+                 J #= JJ -&gt;
                      VI @= V[I], PI @= P[I],
                      VJ @= V[J], PJ @= P[J],
                      check_allowed(VI, PI, VJ, PJ)               
@@ -200,7 +200,7 @@ traffic_lights_table(V, P) :-
         P :: 1..N,
         foreach(I in 1..N, J in 1..N,[JJ,VI,PI,VJ,PJ],
                 (JJ is (1+I) mod N,
-                 J #= JJ ->
+                 J #= JJ -&gt;
                      VI @= V[I], PI @= P[I],
                      VJ @= V[J], PJ @= P[J],
                      % Table constraint

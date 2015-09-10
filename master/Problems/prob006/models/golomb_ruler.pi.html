@@ -85,12 +85,12 @@
 
 
 <a href="/csplib-builds/master/Problems/prob006/models/golomb_ruler.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Golomb ruler in Picat.
 
-  A Golomb ruler is a set of integers (marks) a(1) < ...  < a(n) such
-  that all the differences a(i)-a(j) (i > j) are distinct.  Clearly we
+  A Golomb ruler is a set of integers (marks) a(1) &lt; ...  &lt; a(n) such
+  that all the differences a(i)-a(j) (i &gt; j) are distinct.  Clearly we
   may assume a(1)=0.  Then a(n) is the length of the Golomb ruler.
   For a given number of marks, n, we are interested in finding the
   shortest Golomb rulers.  Such rulers are called optimal. 
@@ -109,14 +109,14 @@ import util.
 import cp.
 
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
         time2($golomb(8, Xs)),
         writeln(Xs).
 
 
-golomb(N, Xs) =>
+golomb(N, Xs) =&gt;
 
         writeln(n=N),
         Xs = new_list(N),
@@ -133,14 +133,14 @@ golomb(N, Xs) =>
         all_different(Diffs),
 
         % Symmetry breaking
-        Diffs[1] #< Diffs[N],
-        Xs[2] - Xs[1] #< Xs[N] - Xs[N-1],
+        Diffs[1] #&lt; Diffs[N],
+        Xs[2] - Xs[1] #&lt; Xs[N] - Xs[N-1],
 
         Vars = Diffs ++ Xs,
         solve([$min(Xn),ff,down],Vars).
 
-increasing(List) =>
-   foreach(I in 2..List.length) List[I-1] #=< List[I] end.
+increasing(List) =&gt;
+   foreach(I in 2..List.length) List[I-1] #=&lt; List[I] end.
 
 
 </pre>

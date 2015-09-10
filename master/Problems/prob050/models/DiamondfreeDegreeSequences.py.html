@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob050/models/DiamondfreeDegreeSequences.py">Download</a>
-<pre ># Diamond-free Degree Sequences
+<pre class ='brush: numberjack'># Diamond-free Degree Sequences
 #
 # Fill in a binary matrix of size n * n in such a way that
 # - For every grouping of four rows, the sum of their non-symmetrical
@@ -113,7 +113,7 @@ def get_model(N):
 
     model = Model(
         # No rows contain just zeroes.
-        [Sum(row) > 0 for row in matrix.row],
+        [Sum(row) &gt; 0 for row in matrix.row],
 
         # Every row has a sum modulo 3.
         [Sum(row) % 3 == 0 for row in matrix.row],
@@ -127,7 +127,7 @@ def get_model(N):
     # Every grouping of 4 rows can have at most a sum of 4 between them.
     for a, b, c, d in combinations(range(N), 4):
         model += Sum([matrix[a][b], matrix[a][c], matrix[a][d],
-                      matrix[b][c], matrix[b][d], matrix[c][d]]) <= 4
+                      matrix[b][c], matrix[b][d], matrix[c][d]]) &lt;= 4
 
     # Undirected graph
     for i in range(N):

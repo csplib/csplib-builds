@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob010/models/social_golfers1.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Social golfer problem in Picat.
 
@@ -112,7 +112,7 @@
   """
 
   This model is a translation of the OPL code from 
-  http://www.dis.uniroma1.it/~tmancini/index.php?currItem=research.publications.webappendices.csplib2x.problemDetails&problemid=010
+  http://www.dis.uniroma1.it/~tmancini/index.php?currItem=research.publications.webappendices.csplib2x.problemDetails&amp;problemid=010
 
 
   Model created by Hakan Kjellerstrand, hakank@gmail.com
@@ -124,9 +124,9 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
 
    Weeks = 5,
    Groups = 7,
@@ -151,7 +151,7 @@ go =>
    foreach(G1 in Golfer,G2 in Golfer, W1 in Week, W2 in Week)
       if G1 != G2, W1 != W2 then
            (Assign[G1,W1] #= Assign[G2,W1]) + 
-           (Assign[G1,W2] #= Assign[G2,W2]) #=< 1
+           (Assign[G1,W2] #= Assign[G2,W2]) #=&lt; 1
       end
    end,
 
@@ -162,7 +162,7 @@ go =>
    foreach(G in Golfer) Assign[G,1] #= ((G-1) // GroupSize) + 1 end,
 
    foreach(G in Golfer)
-      if G =< GroupSize then Assign[G,2] #= G end
+      if G =&lt; GroupSize then Assign[G,2] #= G end
    end,
 
    solve([ff], Assign),

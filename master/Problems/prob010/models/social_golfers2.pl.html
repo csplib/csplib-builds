@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob010/models/social_golfers2.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Social golfer problem in B-Prolog.
 
@@ -113,7 +113,7 @@
 
 
   This model is a translation of the OPL code from 
-  http://www.dis.uniroma1.it/~tmancini/index.php?currItem=research.publications.webappendices.csplib2x.problemDetails&problemid=010
+  http://www.dis.uniroma1.it/~tmancini/index.php?currItem=research.publications.webappendices.csplib2x.problemDetails&amp;problemid=010
 
 
   Model created by Hakan Kjellerstrand, hakank@gmail.com
@@ -147,9 +147,9 @@ go :-
         % C2: Each pair of players only meets at most once
         foreach(G1 in Golfer,G2 in Golfer, W1 in Week, W2 in Week,
                 (G1 \= G2,
-                 W1 \= W2 ->
+                 W1 \= W2 -&gt;
                      (Assign[G1,W1] #= Assign[G2,W1]) + 
-                     (Assign[G1,W2] #= Assign[G2,W2]) #=< 1
+                     (Assign[G1,W2] #= Assign[G2,W2]) #=&lt; 1
                 ;
                      true
                 )),

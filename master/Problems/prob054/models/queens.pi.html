@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob054/models/queens.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   N-Queens problem in Picat.
 
@@ -100,12 +100,12 @@
 import util.
 import cp.
 
-main => go.
+main =&gt; go.
 
 %
 % Note that $Q[I] is needed here.
 %
-queens3(N, Q) =>
+queens3(N, Q) =&gt;
     Q=new_list(N),
     Q :: 1..N,
     all_different(Q),
@@ -113,13 +113,13 @@ queens3(N, Q) =>
     all_different([$Q[I]+I : I in 1..N]),
     solve([ff],Q).
 
-queens3(N) =>
+queens3(N) =&gt;
     queens3_all(N, Solutions),
     % writeln(Solutions),
     writeln(len=Solutions.length).
 
 % generate all solutions via solve_all (don't work right now)
-queens3_all(N, Solutions) =>
+queens3_all(N, Solutions) =&gt;
     Q=new_list(N),
     Q :: 1..N,
     all_different(Q),
@@ -132,7 +132,7 @@ queens3_all(N, Solutions) =>
 
 
 % Using all_distinct instead
-queens3b(N, Q) =>
+queens3b(N, Q) =&gt;
     Q=new_list(N),
     Q :: 1..N,
     all_distinct(Q),
@@ -142,7 +142,7 @@ queens3b(N, Q) =>
 
     
 % alternative approaches
-queens4(N, Q) =>
+queens4(N, Q) =&gt;
    Q = new_list(N),
    Q :: 1..N,
    foreach(A in [-1,0,1])
@@ -151,12 +151,12 @@ queens4(N, Q) =>
    solve([ff],Q).
 
 % Decomposition of alldifferent
-all_different_me(L) =>
+all_different_me(L) =&gt;
    Len = length(L),
    foreach(I in 1..Len, J in I+1..Len) L[I] #!= L[J] end.
 
 % Using all_different_me (my decomposition)
-queens5(N, Q) =>
+queens5(N, Q) =&gt;
     Q=new_list(N),
     Q :: 1..N,
     all_different_me(Q),
@@ -164,7 +164,7 @@ queens5(N, Q) =>
     all_different_me([$Q[I]+I : I in 1..N]),
     solve([ff],Q).
 
-go => 
+go =&gt; 
    queens3(8,Q),
    writeln(Q),
    N2 = 12, 
@@ -174,7 +174,7 @@ go =>
    writef("N:%w %w solutions.\n%w\n", N2, Len, Solutions).
   
 
-go2 => 
+go2 =&gt; 
     foreach(N in 2..14) 
        statistics(backtracks, Backtracks),
        statistics(runtime, [_, _Runtime1]),
@@ -194,7 +194,7 @@ go2 =>
 %   queens4 : 4.25s (2 backtracks)
 %   queens5 : 6.86s (2 backtracks)
 %
-go3 => 
+go3 =&gt; 
     Ps = [queens3=1000, queens3b=1000, queens4=1000,queens5=1000],
     foreach(P=N in Ps) 
        printf("%w(%d)\n", P, N),
@@ -204,7 +204,7 @@ go3 =>
     end.
 
 % Using permutations/1. Very slow.
-go4 => 
+go4 =&gt; 
     N = 8,
     C = 0,
     foreach(P in permutations(1..N))
@@ -216,19 +216,19 @@ go4 =>
     writeln(sols=C),
     nl.
 
-go5 =>
+go5 =&gt;
     N=100,
     queens3(N,Q),
     writeln(Q),
     nl.
 
-go6 =>
+go6 =&gt;
     N = 10000,
     println("timing queens4(10000,Q)"),
     time2(queens4(N,_Q)),
     nl.
 
-check4(P) =>
+check4(P) =&gt;
    N = length(P),
    foreach(I in 1..N, J in I+1..N) 
       P[I]-I != P[J]-J,

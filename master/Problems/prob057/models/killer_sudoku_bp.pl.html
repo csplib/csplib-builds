@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob057/models/killer_sudoku_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Killer Sudoku in B-Prolog.
 
@@ -154,7 +154,7 @@ killer_sudoku(Hints,X) :-
 
         % The hints (from kakuro.pl)
         foreach([Sum|List] in Hints,[XLine],
-                (XLine @= [X[R,C] : [R,C] in List, X[R,C] #> 0],
+                (XLine @= [X[R,C] : [R,C] in List, X[R,C] #&gt; 0],
                  sum(XLine) #= Sum,
                  alldifferent(XLine))
          ),
@@ -202,7 +202,7 @@ print_board(Board) :-
                 (foreach(J in 1..N,
                          [X],
                          (X @= Board[I,J],
-                          (var(X) -> write('  _') ; format('  ~q', [X]))
+                          (var(X) -&gt; write('  _') ; format('  ~q', [X]))
                          )
                         ),
                  nl

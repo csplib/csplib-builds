@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob023/models/magic_hexagon.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Magic hexagon in Picat.
 
@@ -101,9 +101,9 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
 
    LD = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S],
    LD :: 1..19,
@@ -126,12 +126,12 @@ go =>
    D + I + N + R #=  38, 
    H + M + Q #=  38, 
    
-   A #< C,
-   A #< H,
-   A #< L,
-   A #< Q,
-   A #< S,
-   C #< H,
+   A #&lt; C,
+   A #&lt; H,
+   A #&lt; L,
+   A #&lt; Q,
+   A #&lt; S,
+   C #&lt; H,
    
    solve([ff], LD),
 

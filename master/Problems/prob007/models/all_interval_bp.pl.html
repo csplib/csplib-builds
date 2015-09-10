@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob007/models/all_interval_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   All interval problem in B-Prolog.
 
@@ -156,8 +156,8 @@ all_interval(N,X) :-
         foreach(K in 1..N1, Diffs[K] #= abs(X[K+1] - X[K])),
         
         % symmetry breaking
-        X[1] #< X[N1],
-        Diffs[1] #< Diffs[2],
+        X[1] #&lt; X[N1],
+        Diffs[1] #&lt; Diffs[2],
 
         term_variables([X,Diffs], Vars),
 

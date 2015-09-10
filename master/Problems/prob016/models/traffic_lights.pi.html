@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob016/models/traffic_lights.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Traffic lights problem in Picat.
 
@@ -99,7 +99,7 @@
   for the pedestrians and can be represented by the variables P1 to P4 with domains {r,g}.
   
   The constraints on these variables can be modelled by quaternary constraints on 
-  (Vi, Pi, Vj, Pj ) for 1<=i<=4, j=(1+i)mod 4 which allow just the tuples 
+  (Vi, Pi, Vj, Pj ) for 1&lt;=i&lt;=4, j=(1+i)mod 4 which allow just the tuples 
   {(r,r,g,g), (ry,r,y,r), (g,g,r,r), (y,r,ry,r)}.
  
   It would be interesting to consider other types of junction (e.g. five roads 
@@ -127,9 +127,9 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go => 
+go =&gt; 
     L = findall([V,P], $traffic_lights(V,P)),
     writeln(L),
     print_results(L),
@@ -141,7 +141,7 @@ go =>
     nl.
 
 
-print_results(L) =>
+print_results(L) =&gt;
     foreach([V,P] in L)
        foreach(I in 1..4)
           tr(VC,V[I]),
@@ -151,7 +151,7 @@ print_results(L) =>
        nl
     end.
 
-traffic_lights(V, P) =>
+traffic_lights(V, P) =&gt;
     N  = 4,
 
     V = new_list(N),
@@ -176,7 +176,7 @@ traffic_lights(V, P) =>
     writeln(vars=Vars).
 
 
-check_allowed(VI, PI, VJ, PJ) ?=>
+check_allowed(VI, PI, VJ, PJ) ?=&gt;
     L1 = [],
     foreach(El in [VI, PI, VJ, PJ])
       if tr(C,El) then 
@@ -188,7 +188,7 @@ check_allowed(VI, PI, VJ, PJ) ?=>
     allowed(L).
 
 
-check_allowed2(VI, PI, VJ, PJ, Allowed) ?=>
+check_allowed2(VI, PI, VJ, PJ, Allowed) ?=&gt;
     L1 = [],
     foreach(El in [VI, PI, VJ, PJ])
       writeln(el=El),
@@ -207,7 +207,7 @@ check_allowed2(VI, PI, VJ, PJ, Allowed) ?=>
 %
 % Using table Allowed
 %
-traffic_lights_table(V, P) =>
+traffic_lights_table(V, P) =&gt;
     N  = 4,
 
     % allowed/1 as a table (translated)
@@ -235,16 +235,16 @@ traffic_lights_table(V, P) =>
 
 % Note: I'm not sure this is the best 
 %       representation...
-tr(L,A) ?=> L=r,  A=1.
-tr(L,A) ?=> L=ry, A=2.
-tr(L,A) ?=> L=g,  A=3.
-tr(L,A)  => L=y,  A=4.
+tr(L,A) ?=&gt; L=r,  A=1.
+tr(L,A) ?=&gt; L=ry, A=2.
+tr(L,A) ?=&gt; L=g,  A=3.
+tr(L,A)  =&gt; L=y,  A=4.
 
 % The allowed combinations
-allowed(A) ?=> A = [r,r,g,g].
-allowed(A) ?=> A = [ry,r,y,r]. 
-allowed(A) ?=> A = [g,g,r,r].
-allowed(A)  => A = [y,r,ry,r].
+allowed(A) ?=&gt; A = [r,r,g,g].
+allowed(A) ?=&gt; A = [ry,r,y,r]. 
+allowed(A) ?=&gt; A = [g,g,r,r].
+allowed(A)  =&gt; A = [y,r,ry,r].
 
 </pre>
 

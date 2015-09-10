@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob049/models/set_partition_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Set partition problem in B-Prolog.
 
@@ -95,12 +95,12 @@
    This is a partition problem.
    Given the set S = {1, 2, ..., n}, 
    it consists in finding two sets A and B such that:
-   <ul>
-   <li>A U B = S,</li>
-   <li>|A| = |B|,</li>
-   <li>sum(A) = sum(B),</li>
-   <li>sum_squares(A) = sum_squares(B).</li>
-   </ul>
+   &lt;ul&gt;
+   &lt;li&gt;A U B = S,&lt;/li&gt;
+   &lt;li&gt;|A| = |B|,&lt;/li&gt;
+   &lt;li&gt;sum(A) = sum(B),&lt;/li&gt;
+   &lt;li&gt;sum_squares(A) = sum_squares(B).&lt;/li&gt;
+   &lt;/ul&gt;
   """
 
   This model just implementa a two set version.
@@ -131,8 +131,8 @@ set_partition(N,Sets) :-
 
         writeln('\nN':N),
 
-        (N mod 2 > 0 -> format("~d is not a multiple of 2.\n", [N]), fail ; true ),
-        (N mod 4 > 0 -> format("~d is not a multiple of 4.\n", [N]), fail ; true ),
+        (N mod 2 &gt; 0 -&gt; format("~d is not a multiple of 2.\n", [N]), fail ; true ),
+        (N mod 4 &gt; 0 -&gt; format("~d is not a multiple of 4.\n", [N]), fail ; true ),
 
         N2 is N //2,
 
@@ -144,13 +144,13 @@ set_partition(N,Sets) :-
         #A #= #B,
 
         % A and B are disjoint
-        A #<> B,
+        A #&lt;&gt; B,
 
         % Symmetry breaking: 1 is in the A set
-        1 #<- A,
+        1 #&lt;- A,
 
         % All numbers 1..N must be in some set
-        foreach(I in 1..N, (I #<- A ; I #<- B)),
+        foreach(I in 1..N, (I #&lt;- A ; I #&lt;- B)),
 
         % It seems that we must have the labeling
         % already here...

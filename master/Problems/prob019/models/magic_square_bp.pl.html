@@ -85,7 +85,7 @@
 
 
 <a href="/csplib-builds/master/Problems/prob019/models/magic_square_bp.pl">Download</a>
-<pre >/*
+<pre class ='brush: b-prolog'>/*
 
   Magic squares in B-Prolog.
 
@@ -161,10 +161,10 @@ magic(N,Square) :-
         Sum #= sum(Square^diagonal2),% diagonal sums
 
         % Symmetry breaking
-        Square[1,1] #< Square[1,N],
-        Square[1,1] #< Square[N,N],
-        Square[1,1] #< Square[N,1],
-        Square[1,N] #< Square[N,1],
+        Square[1,1] #&lt; Square[1,N],
+        Square[1,1] #&lt; Square[N,N],
+        Square[1,1] #&lt; Square[N,1],
+        Square[1,N] #&lt; Square[N,1],
 
         labeling([ffd,updown],Vars),
         print_square(Square).
