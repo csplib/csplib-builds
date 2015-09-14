@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>049: Number Partitioning</title>
+	<title>054: N-Queens</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -46,16 +46,16 @@
     	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
 
   <li><a href="/csplib-builds/master/Problems">Problems</a></li>
-  <li><a href="/csplib-builds/master/Problems/prob049">prob049</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob054">prob054</a></li>
 
-  <li><a href="/csplib-builds/master/Problems/prob049/models">Models</a></li>
-  <li>set_partition.ecl</li>
+  <li><a href="/csplib-builds/master/Problems/prob054/models">Models</a></li>
+  <li>queens.ecl</li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>049: Number Partitioning</h1>
+			<h1>054: N-Queens</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -63,19 +63,19 @@
 
 <nav id="navigation">
 <ul>
-   	<li><a href="/csplib-builds/master/Problems/prob049/">Specification</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob054/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob049/data">Data files</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob054/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/results">Results</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob054/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/references">References</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob054/references">References</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/models">Models</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob054/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/cite">Cite</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob054/cite">Cite</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob049/models/set_partition.ecl">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob054/models/queens.ecl">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -84,134 +84,66 @@
 		</div>
 
 
-<a href="/csplib-builds/master/Problems/prob049/models/set_partition.ecl">Download</a>
-<pre class ='brush: eclipse'>/*
-
-  Set partition problem in ECLiPSe.
-
-  Problem formulation from
-    http://www.koalog.com/resources/samples/PartitionProblem.java.html
-  """
-   This is a partition problem.
-   Given the set S = {1, 2, ..., n}, 
-   it consists in finding two sets A and B such that:
-   &lt;ul&gt;
-   &lt;li&gt;A U B = S,&lt;/li&gt;
-   &lt;li&gt;|A| = |B|,&lt;/li&gt;
-   &lt;li&gt;sum(A) = sum(B),&lt;/li&gt;
-   &lt;li&gt;sum_squares(A) = sum_squares(B).&lt;/li&gt;
-   &lt;/ul&gt;
-  """
-
-  Compare with the following models:
-  * MiniZinc: http://www.hakank.org/minizinc/set_partition.mzn
-  * Gecode/R: http://www.hakank.org/gecode_r/set_partition.rb
-  * Comet   : http://www.hakank.org/comet/set_partition.co
-
-
-  Model created by Hakan Kjellerstrand, hakank@gmail.com
-  See also my ECLiPSe page: http://www.hakank.org/eclipse/
-
-  Model simplified by Joachim Schimpf
-
-*/
-
+<a href="/csplib-builds/master/Problems/prob054/models/queens.ecl">Download</a>
+<pre class ='brush: eclipse'>%
+% ECLiPSe sample program
 % Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
-
-:-lib(ic).
-:-lib(ic_sets).
-
-
-% find all (7) solutions for N = 16.
-go :-
-        N = 16,
-        NumSets = 2,
-        set_partition(N, NumSets, Sets, Sums),
-        writeln(sets:Sets), writeln(sums:Sums), nl,
-        fail.
-
 %
-% check for a solution between N = 17 and 32
+% Various models for the N-Queens problem
 %
-go2 :-
-        ic : '::'(N,17..32),
-        indomain(N),
-        NumSets = 2,
-        writeln(n:N),
-        set_partition(N, NumSets, Sets, Sums),
-        writeln(sets:Sets), writeln(sums:Sums), nl.
-
-
+% Author: Joachim Schimpf.  Use at your own risk for any purpose.
 %
-% Here we find the minimal N and NumSets for
-% a solution to the problem.
+% Sample run:
 %
-go3 :-
-        N #:: 2..20,
-        NumSets #:: 3..9,
-        indomain(N),
-        indomain(NumSets),
-        writeln([n:N,num_sets:NumSets]),
-        set_partition(N,NumSets).
+%     % eclipse -f queens.ecl -e "queens(8)"
+%     ....Q...
+%     Q.......
+%     .......Q
+%     ...Q....
+%     .Q......
+%     ......Q.
+%     ..Q.....
+%     .....Q..
+%     
 
-        
+:- lib(ic).
 
-set_partition(N, NumSets, Sets, [Sum,SumSquared]) :-
 
-        % create list of sets
-        intsets(Sets,NumSets,1,N),
+queens(N, Qs) :-
 
-        % create the universe for partition_set
-        % and the weights for weight/3 below.
-        dim(Weights,[N]),
-        dim(Weights2,[N]),
-        ( for(I,1,N), foreach(I,Universe),
-          foreacharg(I,Weights), foreacharg(W2,Weights2) do
-            W2 is I*I
+        % The model: Qs is a list of column numbers
+        length(Qs, N),
+        Qs :: 1..N,
+        ( fromto(Qs,[Q1|Q2s],Q2s,[]) do
+            ( foreach(Q2,Q2s), param(Q1), count(Dist,1,_) do
+                Q2 #\= Q1,
+                Q2-Q1 #\= Dist,
+                Q1-Q2 #\= Dist
+            )
         ),
 
-        % Sets must be a partition of the Universe
-        partition_set(Sets, Universe),
-
-        % all sets must have the same cardinality _C
-        ( foreach(Set,Sets), param(_C) do
-            #(Set, _C)
-        ),
-
-        % all sums and all squared sums must be equal
-        ( foreach(Set,Sets), param(Weights,Weights2,Sum,SumSquared) do
-            weight(Set, Weights, Sum),
-            weight(Set, Weights2, SumSquared)
-        ),
-
-        % symmetry breaking
-        [FirstSet|_] = Sets,
-        1 in FirstSet,
-
-        %
-        % search
-        % 
-        label_sets(Sets).
+        % Search heuristic for larger instances: start in the middle
+        lists:middle_out(Qs, Ordered),
+        search(Ordered, 0, first_fail, indomain_middle, complete, []).
 
 
+% With solution printing
 
-%
-% labeling the sets
-%
-label_sets([]).
-label_sets([S|Ss]) :-
-        insetdomain(S,increasing,big_first,in_notin),
-        label_sets(Ss).
+queens(N) :-
+        queens(N, Qs),
+        ( foreach(Q,Qs), param(N) do
+            L is Q-1, R is N-Q,
+            printf("%*cQ%*c%n", [L,0'.,R,0'.])
+        ).
 
 
-%
-% Partitions the list of sets S into disjoint sets.
-% All elements in the universe Universe must be
-% included in exactly one of the sets.
-%
-partition_set(S, Universe) :-
-        all_disjoint(S),
-        all_union(S,Universe).
+% Counting solutions
+
+queens_all(N) :-
+        shelf_create(count(0), Count),
+        \+ (queens(N, _), shelf_inc(Count, 1), fail),
+        shelf_get(Count, 1, NSol),
+        printf("%d queens: %d solutions%n", [N,NSol]).
 
 
 </pre>

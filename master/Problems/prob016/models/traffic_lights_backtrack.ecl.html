@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>049: Number Partitioning</title>
+	<title>016: Traffic Lights</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/csplib-builds/master/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -46,16 +46,16 @@
     	  <li><a href="/csplib-builds/master/">CSPLib</a></li>
 
   <li><a href="/csplib-builds/master/Problems">Problems</a></li>
-  <li><a href="/csplib-builds/master/Problems/prob049">prob049</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob016">prob016</a></li>
 
-  <li><a href="/csplib-builds/master/Problems/prob049/models">Models</a></li>
-  <li>set_partition.ecl</li>
+  <li><a href="/csplib-builds/master/Problems/prob016/models">Models</a></li>
+  <li>traffic_lights_backtrack.ecl</li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>049: Number Partitioning</h1>
+			<h1>016: Traffic Lights</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -63,19 +63,19 @@
 
 <nav id="navigation">
 <ul>
-   	<li><a href="/csplib-builds/master/Problems/prob049/">Specification</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob016/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob049/data">Data files</a></li>
+   	<li><a class='no-files' href="/csplib-builds/master/Problems/prob016/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/results">Results</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob016/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/references">References</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob016/references">References</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/models">Models</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob016/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/master/Problems/prob049/cite">Cite</a></li>
+   	<li><a href="/csplib-builds/master/Problems/prob016/cite">Cite</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob049/models/set_partition.ecl">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob016/models/traffic_lights_backtrack.ecl">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -84,134 +84,55 @@
 		</div>
 
 
-<a href="/csplib-builds/master/Problems/prob049/models/set_partition.ecl">Download</a>
-<pre class ='brush: eclipse'>/*
-
-  Set partition problem in ECLiPSe.
-
-  Problem formulation from
-    http://www.koalog.com/resources/samples/PartitionProblem.java.html
-  """
-   This is a partition problem.
-   Given the set S = {1, 2, ..., n}, 
-   it consists in finding two sets A and B such that:
-   &lt;ul&gt;
-   &lt;li&gt;A U B = S,&lt;/li&gt;
-   &lt;li&gt;|A| = |B|,&lt;/li&gt;
-   &lt;li&gt;sum(A) = sum(B),&lt;/li&gt;
-   &lt;li&gt;sum_squares(A) = sum_squares(B).&lt;/li&gt;
-   &lt;/ul&gt;
-  """
-
-  Compare with the following models:
-  * MiniZinc: http://www.hakank.org/minizinc/set_partition.mzn
-  * Gecode/R: http://www.hakank.org/gecode_r/set_partition.rb
-  * Comet   : http://www.hakank.org/comet/set_partition.co
-
-
-  Model created by Hakan Kjellerstrand, hakank@gmail.com
-  See also my ECLiPSe page: http://www.hakank.org/eclipse/
-
-  Model simplified by Joachim Schimpf
-
-*/
-
+<a href="/csplib-builds/master/Problems/prob016/models/traffic_lights_backtrack.ecl">Download</a>
+<pre class ='brush: eclipse'>%
+% ECLiPSe sample code
+% Author: Joachim Schimpf
 % Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
-
-:-lib(ic).
-:-lib(ic_sets).
-
-
-% find all (7) solutions for N = 16.
-go :-
-        N = 16,
-        NumSets = 2,
-        set_partition(N, NumSets, Sets, Sums),
-        writeln(sets:Sets), writeln(sums:Sums), nl,
-        fail.
-
 %
-% check for a solution between N = 17 and 32
+% Traffic lights (CSPLib problem 16, see http://csplib.org/Problems/prob016)
 %
-go2 :-
-        ic : '::'(N,17..32),
-        indomain(N),
-        NumSets = 2,
-        writeln(n:N),
-        set_partition(N, NumSets, Sets, Sums),
-        writeln(sets:Sets), writeln(sums:Sums), nl.
-
-
+% Specification:
+% Consider a four way traffic junction with eight traffic lights. 
+% Four of the traffic lights are for the vehicles and can be
+% represented by the variables V1 to V4 with domains {r,ry,g,y} (for
+% red, red-yellow, green and yellow).  The other four traffic lights
+% are for the pedestrians and can be represented by the variables P1
+% to P4 with domains {r,g}.  The constraints on these variables can be
+% modelled by quaternary constraints on (Vi, Pi, Vj, Pj ) for
+% 1&lt;=i&lt;=4, j=(1+i)mod 4 which allow just the tuples
+% {(r,r,g,g), (ry,r,y,r), (g,g,r,r), (y,r,ry,r)}.
 %
-% Here we find the minimal N and NumSets for
-% a solution to the problem.
+% We are interested in the set of all globally consistent 8-tuples
+% (which reflects the evolution of the traffic light sequence).
 %
-go3 :-
-        N #:: 2..20,
-        NumSets #:: 3..9,
-        indomain(N),
-        indomain(NumSets),
-        writeln([n:N,num_sets:NumSets]),
-        set_partition(N,NumSets).
-
-        
-
-set_partition(N, NumSets, Sets, [Sum,SumSquared]) :-
-
-        % create list of sets
-        intsets(Sets,NumSets,1,N),
-
-        % create the universe for partition_set
-        % and the weights for weight/3 below.
-        dim(Weights,[N]),
-        dim(Weights2,[N]),
-        ( for(I,1,N), foreach(I,Universe),
-          foreacharg(I,Weights), foreacharg(W2,Weights2) do
-            W2 is I*I
-        ),
-
-        % Sets must be a partition of the Universe
-        partition_set(Sets, Universe),
-
-        % all sets must have the same cardinality _C
-        ( foreach(Set,Sets), param(_C) do
-            #(Set, _C)
-        ),
-
-        % all sums and all squared sums must be equal
-        ( foreach(Set,Sets), param(Weights,Weights2,Sum,SumSquared) do
-            weight(Set, Weights, Sum),
-            weight(Set, Weights2, SumSquared)
-        ),
-
-        % symmetry breaking
-        [FirstSet|_] = Sets,
-        1 in FirstSet,
-
-        %
-        % search
-        % 
-        label_sets(Sets).
-
-
-
 %
-% labeling the sets
+% Sample run:
+%     % eclipse -f traffic_lights_backtrack.ecl -e main
+%     [r, r, g, g, r, r, g, g]
+%     [ry, r, y, r, ry, r, y, r]
+%     [g, g, r, r, g, g, r, r]
+%     [y, r, ry, r, y, r, ry, r]
 %
-label_sets([]).
-label_sets([S|Ss]) :-
-        insetdomain(S,increasing,big_first,in_notin),
-        label_sets(Ss).
+% Simple backtracking search solution, no constraint propagation
+%
 
+main :-
+	length(Xs, 8),
+	append(Xs, Xs, XsXs),
+	(
+	    for(_,1,4),
+	    fromto(XsXs, [Vi,Pi,Vj,Pj|XsXs1], [Vj,Pj|XsXs1], _)
+	do
+	    allowed(Vi,Pi,Vj,Pj)
+	),
+	writeln(Xs),
+	fail.
 
-%
-% Partitions the list of sets S into disjoint sets.
-% All elements in the universe Universe must be
-% included in exactly one of the sets.
-%
-partition_set(S, Universe) :-
-        all_disjoint(S),
-        all_union(S,Universe).
+allowed(r, r,g ,g).
+allowed(ry,r,y ,r). 
+allowed(g, g,r ,r).
+allowed(y, r,ry,r).
 
 
 </pre>
