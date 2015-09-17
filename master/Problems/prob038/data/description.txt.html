@@ -35,6 +35,8 @@
 	});
 	</script>
 
+  
+	<link type="text/css" rel="stylesheet" href="/csplib-builds/master/syntax_highlighter/shCoreDefault.css"/>
 
 </head>
 
@@ -46,7 +48,8 @@
   <li><a href="/csplib-builds/master/Problems">Problems</a></li>
   <li><a href="/csplib-builds/master/Problems/prob038">prob038</a></li>
 
-  <li><a href="/csplib-builds/master/Problems/prob038/cite">Cite</a></li>
+  <li><a href="/csplib-builds/master/Problems/prob038/data">Data</a></li>
+  <li>description.txt</li>
 	</ol>
 
 	<div class="container">
@@ -70,8 +73,9 @@
 
    	<li><a href="/csplib-builds/master/Problems/prob038/models">Models</a></li>
 
-  	<li><p>Cite</p></li>
+   	<li><a href="/csplib-builds/master/Problems/prob038/cite">Cite</a></li>
 
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob038/data/description.txt">Edit Page</a></li>
 </ul>
 </nav>
 
@@ -80,39 +84,54 @@
 		</div>
 
 
-<p>
-Authors of CSPLib problems, and
-the authors and maintainers of CSPLib itself, would very much appreciate citation in your publications if you use their (our) work.
-</p>
-<p>
-To cite this CSPLib problem, please use the following bibtex entry.
-</p>
+<a href="/csplib-builds/master/Problems/prob038/data/description.txt">Download</a>
+<pre >The format for the data file is as follows: 
 
-<pre>
-@misc{csplib:prob038,
-title        = {{CSPLib} Problem 038: Steel Mill Slab Design},
-author       = {Ian Miguel},
-editor       = {Jefferson, Christopher and Miguel, Ian and Hnich, Brahim and Walsh, Toby and Gent, Ian P.},
-booktitle    = {{CSPLib}: A problem library for constraints},
-howpublished = {\url{http://www.csplib.org/csplib-builds/master/Problems/prob038}}
-}
+<UL>
+<LI>&lt;no sizes&gt; &lt;sizes&gt;
+<LI>&lt;no colours&gt;
+<LI>&lt;no orders&gt;
+<LI>&lt;order size order colour&gt;*
+</UL>
 </pre>
-
-To cite CSPLib as a whole, please use the following bibtex entry:
-
-<pre>
-@misc{csplib,
-title        = {{CSPLib}: A problem library for constraints},
-editor       = {Jefferson, Christopher and Miguel, Ian and Hnich, Brahim and Walsh, Toby and Gent, Ian P.},
-year         = 1999,
-howpublished = {\url{http://www.csplib.org}},
-}
-</pre>
-
 
 
 	</div>
 
+
+<!-- Syntax highlighter  -->
+<script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shCore.js"></script>
+<script type="text/javascript" src="/csplib-builds/master/syntax_highlighter/shAutoloader.js" ></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/master/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/master/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/master/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/master/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/master/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/master/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/master/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/master/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/master/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/master/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/master/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/master/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/master/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/master/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/master/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/master/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/master/syntax_highlighter/shBrushXml.js']
+ 	);
+
+	SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+</script>
 
 
 </div>
