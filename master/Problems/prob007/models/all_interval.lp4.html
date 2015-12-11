@@ -143,11 +143,11 @@ diffs(K, S) :- S = |Val1-Val|, x(K+1, Val1), x(K,Val), diffs_ix(K).
  
 
 % symmetry breaking
-% x[1] < x[n-1]
-:- x(1,Val1), x(n-1, Val2), Val1 >= Val2.
+% x[1] &lt; x[n-1]
+:- x(1,Val1), x(n-1, Val2), Val1 &gt;= Val2.
 
-% diffs[1] < diffs[2]
-:- diffs(1, Val1), diffs(2, Val2), Val1 >= Val2.
+% diffs[1] &lt; diffs[2]
+:- diffs(1, Val1), diffs(2, Val2), Val1 &gt;= Val2.
 
 #show x/2.
 #show diffs/2.

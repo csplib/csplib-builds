@@ -88,82 +88,82 @@
 
 
 <a href="/csplib-builds/master/Problems/prob038/models/description.txt">Download</a>
-<pre >One straightforward way to model this problem is via a matrix model, as described here. See also [3] for a hybrid CP/IP model. More sophisticated models can be found in more recent papers - see the <A HREF="/Problems/prob038/references">references</A> page.
+<pre >One straightforward way to model this problem is via a matrix model, as described here. See also [3] for a hybrid CP/IP model. More sophisticated models can be found in more recent papers - see the &lt;A HREF="/Problems/prob038/references"&gt;references&lt;/A&gt; page.
 
-<H4>Slab Variables</H4>
-If we assume that the greatest order weight does not exceed the maximum slab size, the worst case will involve assigning each order to an individual slab. Hence, given <EM>d</EM> orders, a maximum of <EM>d</EM> slabs are required. We use variables <EM>s_1, ..., s_d</EM>, with domains of size <EM>&sigma;</EM> (the number of slab sizes the mill can produce) to decide the size of each slab. Generally, some slabs will remain unused, so 0 is added to the domain of each variable such that if <EM>s_i</EM> is assigned 0 by a particular solution, <EM>s_i</EM> is not used in that solution. The
-optimisation function, which must be minimised, is therefore simply the sum of the <EM>s_i</EM> variables.
+&lt;H4&gt;Slab Variables&lt;/H4&gt;
+If we assume that the greatest order weight does not exceed the maximum slab size, the worst case will involve assigning each order to an individual slab. Hence, given &lt;EM&gt;d&lt;/EM&gt; orders, a maximum of &lt;EM&gt;d&lt;/EM&gt; slabs are required. We use variables &lt;EM&gt;s_1, ..., s_d&lt;/EM&gt;, with domains of size &lt;EM&gt;&amp;sigma;&lt;/EM&gt; (the number of slab sizes the mill can produce) to decide the size of each slab. Generally, some slabs will remain unused, so 0 is added to the domain of each variable such that if &lt;EM&gt;s_i&lt;/EM&gt; is assigned 0 by a particular solution, &lt;EM&gt;s_i&lt;/EM&gt; is not used in that solution. The
+optimisation function, which must be minimised, is therefore simply the sum of the &lt;EM&gt;s_i&lt;/EM&gt; variables.
 
-<H4>The Order Matrix</H4>
-A <EM>d x d</EM> 0/1 matrix, <B>orders[]</B>, is used to represent the assignment of orders to slabs, where the <EM>o_i</EM> are the orders:
-<PRE>
+&lt;H4&gt;The Order Matrix&lt;/H4&gt;
+A &lt;EM&gt;d x d&lt;/EM&gt; 0/1 matrix, &lt;B&gt;orders[]&lt;/B&gt;, is used to represent the assignment of orders to slabs, where the &lt;EM&gt;o_i&lt;/EM&gt; are the orders:
+&lt;PRE&gt;
     o_1 o_2 ... o_d
 s_1 0/1 0/1 ... 0/1
 s_2 0/1 0/1 ... 0/1
 ... ... ... ... ...
 s_d 0/1 0/1 ... 0/1
-</PRE>
-Constraints on the rows ensure that the slab capacity is not exceeded, where <TT>weight</TT>(<EM>o_i</EM>) gives the weight associated with order <EM>o_i</EM>:
-<UL>
-<LI><TT>forall</TT> <EM>j</EM> in 1..<EM>d</EM>: <TT>sum</TT>_{<EM>i</EM> in 1..<EM>d</EM>} (<TT>weight</TT>(<EM>o_i</EM>) <EM>x</EM> <B>orders[</B><EM>i</EM>, <EM>j</EM><B>]</B>) <= <EM>s_j</EM>
-</UL>
+&lt;/PRE&gt;
+Constraints on the rows ensure that the slab capacity is not exceeded, where &lt;TT&gt;weight&lt;/TT&gt;(&lt;EM&gt;o_i&lt;/EM&gt;) gives the weight associated with order &lt;EM&gt;o_i&lt;/EM&gt;:
+&lt;UL&gt;
+&lt;LI&gt;&lt;TT&gt;forall&lt;/TT&gt; &lt;EM&gt;j&lt;/EM&gt; in 1..&lt;EM&gt;d&lt;/EM&gt;: &lt;TT&gt;sum&lt;/TT&gt;_{&lt;EM&gt;i&lt;/EM&gt; in 1..&lt;EM&gt;d&lt;/EM&gt;} (&lt;TT&gt;weight&lt;/TT&gt;(&lt;EM&gt;o_i&lt;/EM&gt;) &lt;EM&gt;x&lt;/EM&gt; &lt;B&gt;orders[&lt;/B&gt;&lt;EM&gt;i&lt;/EM&gt;, &lt;EM&gt;j&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt;) &lt;= &lt;EM&gt;s_j&lt;/EM&gt;
+&lt;/UL&gt;
 Constraints on the columns ensure that each order is assigned to one and only one slab:
-<UL>
-<LI><TT>forall</TT> <EM>i</EM> in 1..<EM>d</EM>: <TT>sum</TT>_{<EM>j</EM> in 1..<EM>d</EM>} (<B>orders[</B><EM>i</EM>, <EM>j</EM><B>]</B>) = 1
-</UL>
+&lt;UL&gt;
+&lt;LI&gt;&lt;TT&gt;forall&lt;/TT&gt; &lt;EM&gt;i&lt;/EM&gt; in 1..&lt;EM&gt;d&lt;/EM&gt;: &lt;TT&gt;sum&lt;/TT&gt;_{&lt;EM&gt;j&lt;/EM&gt; in 1..&lt;EM&gt;d&lt;/EM&gt;} (&lt;B&gt;orders[&lt;/B&gt;&lt;EM&gt;i&lt;/EM&gt;, &lt;EM&gt;j&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt;) = 1
+&lt;/UL&gt;
 
-<H4>The Colour Matrix</H4>
-A second 0/1 matrix, <B>colours[]</B>, with dimensions <EM>k x d</EM> (recall that <EM>k</EM> is the number of colours) is used to enforce the colour constraints:
-<PRE>
+&lt;H4&gt;The Colour Matrix&lt;/H4&gt;
+A second 0/1 matrix, &lt;B&gt;colours[]&lt;/B&gt;, with dimensions &lt;EM&gt;k x d&lt;/EM&gt; (recall that &lt;EM&gt;k&lt;/EM&gt; is the number of colours) is used to enforce the colour constraints:
+&lt;PRE&gt;
     red green ... brown
 s_1 0/1 0/1   ... 0/1
 s_2 0/1 0/1   ... 0/1
 ... ... ...   ... ...
 s_d 0/1 0/1   ... 0/1
-</PRE>
+&lt;/PRE&gt;
 
-Channelling constraints link <B>orders[]</B> to <B>colours[]</B>, where <TT>colour</TT>(<EM>o_i</EM>) gives the colour associated with order <EM>o_i</EM>:
-<UL>
-<LI> <TT>forall</TT> <EM>i, j</EM> in 1..<EM>d</EM>: <B>orders[</B><EM>i, j</EM><B>]</B> = 1 -> <B>colours[</B><TT>colour</TT>(<EM>o_i</EM>), <EM>j</EM><B>]</B>=1
-</UL>
+Channelling constraints link &lt;B&gt;orders[]&lt;/B&gt; to &lt;B&gt;colours[]&lt;/B&gt;, where &lt;TT&gt;colour&lt;/TT&gt;(&lt;EM&gt;o_i&lt;/EM&gt;) gives the colour associated with order &lt;EM&gt;o_i&lt;/EM&gt;:
+&lt;UL&gt;
+&lt;LI&gt; &lt;TT&gt;forall&lt;/TT&gt; &lt;EM&gt;i, j&lt;/EM&gt; in 1..&lt;EM&gt;d&lt;/EM&gt;: &lt;B&gt;orders[&lt;/B&gt;&lt;EM&gt;i, j&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt; = 1 -&gt; &lt;B&gt;colours[&lt;/B&gt;&lt;TT&gt;colour&lt;/TT&gt;(&lt;EM&gt;o_i&lt;/EM&gt;), &lt;EM&gt;j&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt;=1
+&lt;/UL&gt;
 
-Constraints on the rows of <B>colours[]</B> ensure that orders with at most <EM>p</EM> colours are assigned to each slab:
-<UL>
-<LI> <TT>forall</TT> <EM>j</EM> in 1..<EM>d</EM>: <TT>sum</TT>_{<EM>i</EM> in 1..<EM>k</EM>} (<B>colours[</B><EM>i</EM>, <EM>j</EM><B>]</B>) <= <EM>p</EM>
-</UL>
+Constraints on the rows of &lt;B&gt;colours[]&lt;/B&gt; ensure that orders with at most &lt;EM&gt;p&lt;/EM&gt; colours are assigned to each slab:
+&lt;UL&gt;
+&lt;LI&gt; &lt;TT&gt;forall&lt;/TT&gt; &lt;EM&gt;j&lt;/EM&gt; in 1..&lt;EM&gt;d&lt;/EM&gt;: &lt;TT&gt;sum&lt;/TT&gt;_{&lt;EM&gt;i&lt;/EM&gt; in 1..&lt;EM&gt;k&lt;/EM&gt;} (&lt;B&gt;colours[&lt;/B&gt;&lt;EM&gt;i&lt;/EM&gt;, &lt;EM&gt;j&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt;) &lt;= &lt;EM&gt;p&lt;/EM&gt;
+&lt;/UL&gt;
 
-The slab variables, <EM>s_1, ..., s_d</EM> are indistinguishable: the slab sizes assigned to each of these variables may be permuted without affecting the solution (assuming order assignments are updated appropriately). This symmetry can be broken by ordering the variables. The ordering is as follows so that the `used' slabs appear first:
-<UL>
-<LI><EM>s_1 >= s_2 >= ... >= s_d</EM>
-</UL>
-Furthermore, columns of <B>orders[]</B> associated with orders of equal weight and colour are symmetrical. One way of removing this symmetry is to impose a lexicographic order (see [1]) on the symmetrical columns, where <B>orders[</B><EM>i</EM>, _<B>]</B> is the <EM>i</EM>th column of <B>orders[]</B>:
-<UL>
-<LI><TT>weight</TT>(<EM>o_i</EM>) = <TT>weight</TT>(<EM>o_j</EM>) <TT>AND</TT> <TT>colour</TT>(<EM>o_i</EM>) = <TT>colour</TT>(<EM>o_j</EM>) -> <B>orders[</B><EM>i</EM>, _<B>]</B> >=(lex) <B>orders[</B><EM>j</EM>, _<B>]</B>
-</UL>
-Lastly, rows of <B>orders[]</B> associated with slabs of an equal size are also symmetrical. Again, this symmetry can be removed by imposing a lexicographic order on the symmetrical rows, where <B>orders[</B>_, <EM>i</EM><B>]</B> is the <EM>i</EM>th row of <B>orders[]</B>:
-<UL>
-<LI><TT>forall</TT> <EM>i</EM> in 1..<EM>d-1</EM>: <EM>s_i</EM> = <EM>s</EM>_{<EM>i</EM>+1} -> <B>orders[</B>_, <EM>i</EM><B>]</B> >=(lex) <B>orders[</B>_, <EM>i+1</EM><B>]</B>
-</UL>
+The slab variables, &lt;EM&gt;s_1, ..., s_d&lt;/EM&gt; are indistinguishable: the slab sizes assigned to each of these variables may be permuted without affecting the solution (assuming order assignments are updated appropriately). This symmetry can be broken by ordering the variables. The ordering is as follows so that the `used' slabs appear first:
+&lt;UL&gt;
+&lt;LI&gt;&lt;EM&gt;s_1 &gt;= s_2 &gt;= ... &gt;= s_d&lt;/EM&gt;
+&lt;/UL&gt;
+Furthermore, columns of &lt;B&gt;orders[]&lt;/B&gt; associated with orders of equal weight and colour are symmetrical. One way of removing this symmetry is to impose a lexicographic order (see [1]) on the symmetrical columns, where &lt;B&gt;orders[&lt;/B&gt;&lt;EM&gt;i&lt;/EM&gt;, _&lt;B&gt;]&lt;/B&gt; is the &lt;EM&gt;i&lt;/EM&gt;th column of &lt;B&gt;orders[]&lt;/B&gt;:
+&lt;UL&gt;
+&lt;LI&gt;&lt;TT&gt;weight&lt;/TT&gt;(&lt;EM&gt;o_i&lt;/EM&gt;) = &lt;TT&gt;weight&lt;/TT&gt;(&lt;EM&gt;o_j&lt;/EM&gt;) &lt;TT&gt;AND&lt;/TT&gt; &lt;TT&gt;colour&lt;/TT&gt;(&lt;EM&gt;o_i&lt;/EM&gt;) = &lt;TT&gt;colour&lt;/TT&gt;(&lt;EM&gt;o_j&lt;/EM&gt;) -&gt; &lt;B&gt;orders[&lt;/B&gt;&lt;EM&gt;i&lt;/EM&gt;, _&lt;B&gt;]&lt;/B&gt; &gt;=(lex) &lt;B&gt;orders[&lt;/B&gt;&lt;EM&gt;j&lt;/EM&gt;, _&lt;B&gt;]&lt;/B&gt;
+&lt;/UL&gt;
+Lastly, rows of &lt;B&gt;orders[]&lt;/B&gt; associated with slabs of an equal size are also symmetrical. Again, this symmetry can be removed by imposing a lexicographic order on the symmetrical rows, where &lt;B&gt;orders[&lt;/B&gt;_, &lt;EM&gt;i&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt; is the &lt;EM&gt;i&lt;/EM&gt;th row of &lt;B&gt;orders[]&lt;/B&gt;:
+&lt;UL&gt;
+&lt;LI&gt;&lt;TT&gt;forall&lt;/TT&gt; &lt;EM&gt;i&lt;/EM&gt; in 1..&lt;EM&gt;d-1&lt;/EM&gt;: &lt;EM&gt;s_i&lt;/EM&gt; = &lt;EM&gt;s&lt;/EM&gt;_{&lt;EM&gt;i&lt;/EM&gt;+1} -&gt; &lt;B&gt;orders[&lt;/B&gt;_, &lt;EM&gt;i&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt; &gt;=(lex) &lt;B&gt;orders[&lt;/B&gt;_, &lt;EM&gt;i+1&lt;/EM&gt;&lt;B&gt;]&lt;/B&gt;
+&lt;/UL&gt;
 
-<H4>Implied Constraints</H4>
+&lt;H4&gt;Implied Constraints&lt;/H4&gt;
 Several useful implied constraints can be added to this model, as described in [2].
-<OL>
- <LI>
+&lt;OL&gt;
+ &lt;LI&gt;
       A. M. Frisch, B. Hnich, Z. Kiziltan, I. Miguel, T. Walsh.
-      "<A HREF="http://www.cs.york.ac.uk/aig/projects/implied/docs/CPGACLex.pdf">Global Constraints for Lexicographic Orderings</A>,"
+      "&lt;A HREF="http://www.cs.york.ac.uk/aig/projects/implied/docs/CPGACLex.pdf"&gt;Global Constraints for Lexicographic Orderings&lt;/A&gt;,"
       Proceedings of the Eighth International Conference on Principles and Practice of Constraint Programming, pages 93-108, 2002. 
- </LI>
- <LI>
+ &lt;/LI&gt;
+ &lt;LI&gt;
       A. M. Frisch, I. Miguel, T. Walsh.
-      "<A HREF="http://www.cs.york.ac.uk/aig/projects/implied/docs/SMillModelling.pdf">Symmetry and Implied Constraints in the Steel Mill Slab Design Problem</A>,"
+      "&lt;A HREF="http://www.cs.york.ac.uk/aig/projects/implied/docs/SMillModelling.pdf"&gt;Symmetry and Implied Constraints in the Steel Mill Slab Design Problem&lt;/A&gt;,"
       Proceedings of the CP'01 Workshop on Modelling and Problem Formulation (Formul'01), pages 8-15, 2001.
- </LI>
- <LI>
+ &lt;/LI&gt;
+ &lt;LI&gt;
      B. Hnich, Z. Kiziltan, I. Miguel, T. Walsh.
-     "<A HREF="http://download.springer.com/static/pdf/339/art%253A10.1023%252FB%253AANOR.0000032568.51115.0d.pdf?auth66=1393669700_9ff4010d5fe4a0ec5f0868f17dd23f94&ext=.pdf">Hybrid Modelling for Robust Solving</A>,"   
+     "&lt;A HREF="http://download.springer.com/static/pdf/339/art%253A10.1023%252FB%253AANOR.0000032568.51115.0d.pdf?auth66=1393669700_9ff4010d5fe4a0ec5f0868f17dd23f94&amp;ext=.pdf"&gt;Hybrid Modelling for Robust Solving&lt;/A&gt;,"   
      Annals of Operations Research 130 (1-4), 19-39, 2003.
- </LI>
-</OL>
+ &lt;/LI&gt;
+&lt;/OL&gt;
 </pre>
 
 

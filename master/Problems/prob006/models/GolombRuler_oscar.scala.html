@@ -122,13 +122,13 @@ import Array._
   These problems are said to have many practical applications including 
   sensor placements for x-ray crystallography and radio astronomy. A 
   Golomb ruler may be defined as a set of m integers 
-  0 = a_1 < a_2 < ... < a_m such that the m(m-1)/2 differences 
-  a_j - a_i, 1 <= i < j <= m are distinct. Such a ruler is said to contain 
+  0 = a_1 &lt; a_2 &lt; ... &lt; a_m such that the m(m-1)/2 differences 
+  a_j - a_i, 1 &lt;= i &lt; j &lt;= m are distinct. Such a ruler is said to contain 
   m marks and is of length a_m. The objective is to find optimal (minimum 
   length) or near optimal rulers.
 
   Note that a symmetry can be removed by adding the constraint that 
-  a_2 - a_1 < a_m - a_{m-1}, the first difference is less than the last. 
+  a_2 - a_1 &lt; a_m - a_{m-1}, the first difference is less than the last. 
   """
 
   Also see:
@@ -144,8 +144,8 @@ import Array._
 object GolombRuler {
 
   def increasing(cp: CPSolver, y: Array[CPIntVar]) = {
-    for (i <- 1 until y.length) {
-      cp.add(y(i-1) <= y(i), Strong)
+    for (i &lt;- 1 until y.length) {
+      cp.add(y(i-1) &lt;= y(i), Strong)
     }
   }
 
@@ -158,7 +158,7 @@ object GolombRuler {
     //
     var m = 8
 
-    if (args.length > 0) {
+    if (args.length &gt; 0) {
       m = args(0).toInt
     }
 
@@ -168,7 +168,7 @@ object GolombRuler {
     // variables
     //
     val mark = Array.fill(m)(CPIntVar(0 to n)(cp))
-    val differences = for{i <- 0 until m; j <- i+1 until m} yield mark(j)-mark(i)
+    val differences = for{i &lt;- 0 until m; j &lt;- i+1 until m} yield mark(j)-mark(i)
                         
     //
     // constraints
@@ -183,11 +183,11 @@ object GolombRuler {
 
       // symmetry breaking
       cp.add(mark(0) == 0)
-      cp.add(mark(1)-mark(0) < mark(m-1) - mark(m-2))
+      cp.add(mark(1)-mark(0) &lt; mark(m-1) - mark(m-2))
 
       // ensure positive differences 
       // (Cred to Pierre Schaus.)
-      differences.foreach(d => cp.add(d > 0))
+      differences.foreach(d =&gt; cp.add(d &gt; 0))
 
      } search {
  

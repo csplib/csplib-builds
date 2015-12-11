@@ -120,8 +120,8 @@ public class SetPartition
                                       IntVar[,] x, int num_sets, int n)
     {
 
-      for(int i = 0; i <num_sets; i++) {
-        for(int j = 0; j <num_sets; j++) {
+      for(int i = 0; i &lt;num_sets; i++) {
+        for(int j = 0; j &lt;num_sets; j++) {
           if (i != j) {
             // b = solver.Sum([x[i,k]*x[j,k] for k in range(n)]);
             // solver.Add(b == 0);
@@ -172,8 +172,8 @@ public class SetPartition
     Console.WriteLine("n: {0}", n);
     Console.WriteLine("num_sets: {0}", num_sets);
 
-    IEnumerable<int> Sets = Enumerable.Range(0, num_sets);
-    IEnumerable<int> NRange = Enumerable.Range(0, n);
+    IEnumerable&lt;int&gt; Sets = Enumerable.Range(0, num_sets);
+    IEnumerable&lt;int&gt; NRange = Enumerable.Range(0, n);
 
 
     //
@@ -247,7 +247,7 @@ public class SetPartition
 
       // Show the numbers in each set
       foreach(int i in Sets) {
-        if ( (from j in NRange select a_val[i,j]).ToArray().Sum() > 0 ) {
+        if ( (from j in NRange select a_val[i,j]).ToArray().Sum() &gt; 0 ) {
           Console.Write(i+1 + ": ");
           foreach(int j in NRange) {
             if (a_val[i,j] == 1) {
@@ -275,11 +275,11 @@ public class SetPartition
     int n = 16;
     int num_sets = 2;
 
-    if (args.Length > 0) {
+    if (args.Length &gt; 0) {
       n = Convert.ToInt32(args[0]);
     }
 
-    if (args.Length > 1) {
+    if (args.Length &gt; 1) {
       num_sets = Convert.ToInt32(args[1]);
     }
 

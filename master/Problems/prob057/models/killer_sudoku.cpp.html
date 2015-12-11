@@ -136,8 +136,8 @@
 
 // Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
 
-#include <gecode/driver.hh>
-#include <gecode/int.hh>
+#include &lt;gecode/driver.hh&gt;
+#include &lt;gecode/int.hh&gt;
 #include "gecode/minimodel.hh"
 
 using namespace Gecode;
@@ -155,7 +155,7 @@ protected:
 public:
 
   // Actual model
-  KillerSudoku(const SizeOptions& opt) : 
+  KillerSudoku(const SizeOptions&amp; opt) : 
     x(*this, n*n, 1, n)
   {
 
@@ -199,28 +199,28 @@ public:
 
     // The usual Sudoku constraints
     // rows and columns
-    Matrix<IntVarArray> m(x, n, n);
-    for(int i = 0; i < n; i++) {
+    Matrix&lt;IntVarArray&gt; m(x, n, n);
+    for(int i = 0; i &lt; n; i++) {
       distinct(*this, m.row(i), opt.icl());
       distinct(*this, m.col(i), opt.icl());
     }
     // and the squares
     int nn = 3;
-    for (int i=0; i < n; i+=n) {
-      for (int j=0; j < n; j+=n) {
+    for (int i=0; i &lt; n; i+=n) {
+      for (int j=0; j &lt; n; j+=n) {
         distinct(*this, m.slice(i, i+nn, j, j+nn), opt.icl());
       }
     }
 
     // calculate the hints
-    for(int p = 0; p < num_p; p++) {
+    for(int p = 0; p &lt; num_p; p++) {
       IntVarArgs p_tmp;
-      for(int i = 0; i < num_hints; i++) {
+      for(int i = 0; i &lt; num_hints; i++) {
         int p_test = P[p*9 + 2*i+0];
-        if (p_test > 0) {
+        if (p_test &gt; 0) {
           int p1 = P[p*9+2*i+0]-1;
           int p2 = P[p*9+2*i+1]-1;
-          p_tmp << expr(*this, x[p1*n+p2]);
+          p_tmp &lt;&lt; expr(*this, x[p1*n+p2]);
         }
       }
       int p_sum = P[p*9+2*num_hints];
@@ -232,7 +232,7 @@ public:
   }
 
   // Constructor for cloning s
-  KillerSudoku(bool share, KillerSudoku& s) : Script(share,s) {
+  KillerSudoku(bool share, KillerSudoku&amp; s) : Script(share,s) {
     x.update(*this, share, s.x);
   }
 
@@ -244,15 +244,15 @@ public:
 
   // Print solution
   virtual void
-  print(std::ostream& os) const {
-    os << "Solution: " << endl;
-    for(int i = 0; i < n; i++) {
-      for(int j = 0; j < n; j++) {
-        os << x[i*n+j] << " ";        
+  print(std::ostream&amp; os) const {
+    os &lt;&lt; "Solution: " &lt;&lt; endl;
+    for(int i = 0; i &lt; n; i++) {
+      for(int j = 0; j &lt; n; j++) {
+        os &lt;&lt; x[i*n+j] &lt;&lt; " ";        
       }
-      os << endl;
+      os &lt;&lt; endl;
     }
-    os << endl;
+    os &lt;&lt; endl;
   }
 
 };
@@ -268,7 +268,7 @@ main(int argc, char* argv[]) {
 
   opt.parse(argc,argv);
 
-  Script::run<KillerSudoku,DFS,SizeOptions>(opt);
+  Script::run&lt;KillerSudoku,DFS,SizeOptions&gt;(opt);
 
   return 0;
 }

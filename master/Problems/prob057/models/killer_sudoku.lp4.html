@@ -190,7 +190,7 @@ border(1;4;7).
 
 % alldifferent boxes
 1 { x(X,Y,N) : val(X;Y),
-    X1<=X, X<=X1+2, Y1<=Y, Y<=Y1+2 } 1 :- val(N), border(X1;Y1).
+    X1&lt;=X, X&lt;=X1+2, Y1&lt;=Y, Y&lt;=Y1+2 } 1 :- val(N), border(X1;Y1).
 
 % 2 arguments
 :- p(Res, X1,X2, Y1,Y2), 

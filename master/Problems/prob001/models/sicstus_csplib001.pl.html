@@ -259,29 +259,29 @@ ac_automaton(Vars, K, Start, Arcs1) :-
 	(   foreach(Node,Closure),
 	    fromto(Sinks,Sinks0,Sinks1,[]),
 	    param(K)
-	do  (   arg(1, Node, K) -> Sinks0 = [sink(Node)|Sinks1]
+	do  (   arg(1, Node, K) -&gt; Sinks0 = [sink(Node)|Sinks1]
 	    ;   Sinks0 = Sinks1
 	    )
 	),
 	automaton(Vars, [source(Start0)|Sinks], Arcs2).
 
-ac_closure([], Closure, Closure, _, _) --> [].
-ac_closure([FromI|L1], Sofar1, Closure, K, Arcs) -->
+ac_closure([], Closure, Closure, _, _) --&gt; [].
+ac_closure([FromI|L1], Sofar1, Closure, K, Arcs) --&gt;
 	ac_arcs(Arcs, FromI, K, Incr),
 	{sort(Incr, Incr1)},
 	{ord_union(Sofar1, Incr1, Sofar2, L2)},
 	{append(L1, L2, L3)},
 	ac_closure(L3, Sofar2, Closure, K, Arcs).
 
-ac_arcs([], _, _, []) --> [].
-ac_arcs([arc(From,Via,To)|Arcs], FromI, K, [ToJ|Incr]) -->
+ac_arcs([], _, _, []) --&gt; [].
+ac_arcs([arc(From,Via,To)|Arcs], FromI, K, [ToJ|Incr]) --&gt;
 	{FromI =.. [From,I]},
 	{J is I+Via},
-	{J =< K},
+	{J =&lt; K},
 	{ToJ =.. [To,J]}, !,
 	[arc(FromI,Via,ToJ)],
 	ac_arcs(Arcs, FromI, K, Incr).
-ac_arcs([_|Arcs], FromI, K, Incr) -->
+ac_arcs([_|Arcs], FromI, K, Incr) --&gt;
 	ac_arcs(Arcs, FromI, K, Incr).
 
 % problem(ID, #cars, #options, #classes).
@@ -300,7 +300,7 @@ class(tiny, 4, 2, [1,0,1,0,0]).
 class(tiny, 5, 2, [1,1,0,0,0]).
 
 %---------------------------------
-% Problem 4/72  (Regin & Puget #1)
+% Problem 4/72  (Regin &amp; Puget #1)
 %---------------------------------
 
 problem('4/72', 100, 5, 22).

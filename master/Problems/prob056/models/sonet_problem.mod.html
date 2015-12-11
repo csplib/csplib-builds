@@ -132,7 +132,7 @@ param capacity_nodes{1..r};
 
 # decision variables
 var rings{1..r, 1..n} binary;
-var z >= 0 integer;
+var z &gt;= 0 integer;
 
 minimize obj: z;
 
@@ -143,15 +143,15 @@ minimize obj: z;
 # "if there is a demand between 2 nodes, then there has to exist 
 #  a ring, on which they are both installed"
 # 
-s.t. c1{client1 in 1..n, client2 in 1..n: client1 < client2}:
-   (demand[client1,client2] = 1) ==>
+s.t. c1{client1 in 1..n, client2 in 1..n: client1 &lt; client2}:
+   (demand[client1,client2] = 1) ==&gt;
         exists{ring in 1..r}
-              rings[ring,client1] + rings[ring, client2] >= 2
+              rings[ring,client1] + rings[ring, client2] &gt;= 2
 ;
 
 # capacity of each ring must not be exceeded     
 s.t. c2{ring in 1..r}:
-     sum{client in 1..n} rings[ring, client] <= capacity_nodes[ring] 
+     sum{client in 1..n} rings[ring, client] &lt;= capacity_nodes[ring] 
 ;
 
 

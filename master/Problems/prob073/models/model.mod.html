@@ -113,8 +113,8 @@ tuple Alloc {
 };
 
 {Alloc} Allocs = 
-  { <t.name, m> | t in Tasks, m in t.machines } union
-  { <t.name, m> | t in Tasks, m in Machines : card(t.machines)==0 };
+  { &lt;t.name, m&gt; | t in Tasks, m in t.machines } union
+  { &lt;t.name, m&gt; | t in Tasks, m in Machines : card(t.machines)==0 };
 
 dvar interval tasks[t in Tasks] size t.duration;
 dvar interval allocs[a in Allocs] optional;
@@ -131,7 +131,7 @@ subject to {
   forall(r in Resources) {
     noOverlap(all(t in Tasks: r in t.resources) tasks[t]);
   }
-  machines <= card(Machines);
+  machines &lt;= card(Machines);
 }
 
 </pre>

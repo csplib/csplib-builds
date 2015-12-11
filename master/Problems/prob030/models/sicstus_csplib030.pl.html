@@ -137,8 +137,8 @@ bacp(ID, CPeriods, Objective) :-
 	    foreach(H,Hs),
 	    param(CPPLB,CPPUB,ObjectiveGap)
 	do  Cnt in CPPLB..CPPUB,
-	    H #>= 0,
-	    H #=< ObjectiveGap
+	    H #&gt;= 0,
+	    H #=&lt; ObjectiveGap
 	),
 	(   foreach(CP,CPeriods),
 	    foreach(CL,CourseLoad),

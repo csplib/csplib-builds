@@ -133,7 +133,7 @@ sum_domain2(1..n*n*n / 2).
 %
 n / 2 { p(P, I) : val(I) } n / 2 :- partitions(P).
 % :- S1 = #sum [p(1, I) : val(I) = 1 ], S2 = #sum [p(2, I) : val(I) = 1 ], S1 != S2.
-% card(P,S) :- partitions(P), S = #sum [p(P, I) : val(I) = 1 ], S > 0.
+% card(P,S) :- partitions(P), S = #sum [p(P, I) : val(I) = 1 ], S &gt; 0.
 % :- card(1,C1), card(2, C2), C1 != C2.
 
 %

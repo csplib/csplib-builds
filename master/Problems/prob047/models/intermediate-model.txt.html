@@ -231,7 +231,7 @@ subject to
    forall(t in horizon, c in components) componentArrivals[t,c] = componentBatchSize[c] * componentDeliverySchedule[c,t];
       
    // Set the isorder variable correctly 
-   forall(t in horizon, c in components) maxNumComponentOrders[c] * isorder[t,c] >= componentDeliverySchedule[c,t];
+   forall(t in horizon, c in components) maxNumComponentOrders[c] * isorder[t,c] &gt;= componentDeliverySchedule[c,t];
    
    // Opening product inventory
    forall(p in products) productInventory[0,p]=openingProductInventory[p];
@@ -244,12 +244,12 @@ subject to
    forall(p in products) forall (t in [numPeriods-leadtime[p]+1..numPeriods]) deliveryQuantity[t,p] = 0;   
    
    // Set the isbuilt variable correctly - should be 1 if any of that product is built on that day
-   forall(t in horizon, p in products) maxManufacture * isbuilt[t,p] >= manufacture[t,p];
+   forall(t in horizon, p in products) maxManufacture * isbuilt[t,p] &gt;= manufacture[t,p];
    
 
    // Capacity constraint for manufacturing decision
    // The factory's capacity for each day cannot be exceeded
-   forall(t in horizon) sum(p in products) (manufacture[t,p]*cycles[p] + isbuilt[t,p]*setupCycles[p]) <= capacity[t];
+   forall(t in horizon) sum(p in products) (manufacture[t,p]*cycles[p] + isbuilt[t,p]*setupCycles[p]) &lt;= capacity[t];
    
 
    // The number of components needed is calculated by multiplying manufacturing decision by BOM

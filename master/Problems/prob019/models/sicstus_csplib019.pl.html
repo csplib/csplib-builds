@@ -122,8 +122,8 @@ magic_square(Lab, N) :-
 	    format(Fmt, Row)
 	).
 
-fmt(0) --> !, "\n".
-fmt(I) --> "~t~d~+",
+fmt(0) --&gt; !, "\n".
+fmt(I) --&gt; "~t~d~+",
 	{J is I-1},
 	fmt(J).
 
@@ -134,7 +134,7 @@ problem(N, Square) :-
 	domain(Square0, 1, NN),
 	sort(Square0, Square),
 	all_different(Square, [consistency(domain)]),
-	Sum is (N*(NN+1))>>1,
+	Sum is (N*(NN+1))&gt;&gt;1,
 	/* essential constraints */
 	rows(0, N, Square, Ss, Ss1),
 	columns(0, N, Square, Ss1, [SO,SW]),
@@ -155,19 +155,19 @@ problem(N, Square) :-
 	NNdown is NN-Ndown,
 	nth1(NNdown, Square, XN1),
 	nth1(N, Square, X1N),
-	X11 #> X1N,
-	X1N #> XN1,
+	X11 #&gt; X1N,
+	X1N #&gt; XN1,
 	true.
 
-rows(N, N, _) --> !.
-rows(I, N, L) --> [Row],
+rows(N, N, _) --&gt; !.
+rows(I, N, L) --&gt; [Row],
 	{J is I+1,
 	 Start is I*N+1,
 	 elts(N, Start, 1, L, Row)},
 	rows(J, N, L).
 
-columns(N, N, _) --> !.
-columns(I, N, L) --> [Column],
+columns(N, N, _) --&gt; !.
+columns(I, N, L) --&gt; [Column],
 	{J is I+1,
 	 elts(N, J, N, L, Column)},
 	columns(J, N, L).

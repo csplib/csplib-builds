@@ -148,9 +148,9 @@
 
  */
 
-#include <gecode/driver.hh>
-#include <gecode/int.hh>
-#include <gecode/minimodel.hh>
+#include &lt;gecode/driver.hh&gt;
+#include &lt;gecode/int.hh&gt;
+#include &lt;gecode/minimodel.hh&gt;
 
 using namespace Gecode;
 
@@ -174,7 +174,7 @@ public:
   }
 ;
 
-  Sonet(const Options& opt) 
+  Sonet(const Options&amp; opt) 
     : 
     rings(*this, r*n, 0, 1),
     z(*this, 0, 10)
@@ -198,26 +198,26 @@ public:
 
     linear(*this, rings, IRT_EQ, z, opt.icl());
  
-    Matrix<IntVarArray> rings_m(rings, n, r);
+    Matrix&lt;IntVarArray&gt; rings_m(rings, n, r);
 
     // original comment:
     // """
     // if there is a demand between 2 nodes, then there has to exist 
     // a ring, on which they are both installed
     // """
-    for(int client1 = 0; client1 < n; client1++) {
-      for(int client2 = client1 + 1; client2 < n; client2++) {
+    for(int client1 = 0; client1 &lt; n; client1++) {
+      for(int client2 = client1 + 1; client2 &lt; n; client2++) {
         if(demand[client1*n+client2] == 1) {
           // EssencePrime code:
           //   exists ring : int(1..r) .
-          //      rings[ring,client1] + rings[ring, client2] >= 2)
+          //      rings[ring,client1] + rings[ring, client2] &gt;= 2)
 
           // here we use reification: 
           BoolVarArray bs(*this, r, 0, 1);
-          for(int ring = 0; ring < r; ring++) {
+          for(int ring = 0; ring &lt; r; ring++) {
             // does this ring satisfy the condition?
             // note: the "~" is needed
-            bs[ring] = expr(*this, (rings_m(client1, ring) + rings_m(client2,ring) >= 2), opt.icl());
+            bs[ring] = expr(*this, (rings_m(client1, ring) + rings_m(client2,ring) &gt;= 2), opt.icl());
           }
           // at least one success is needed
           linear(*this, bs, IRT_GQ, 1, opt.icl());
@@ -230,7 +230,7 @@ public:
     // """
     // capacity of each ring must not be exceeded     
     // """
-    for(int ring = 0; ring < r; ring++) {
+    for(int ring = 0; ring &lt; r; ring++) {
       linear(*this, rings_m.row(ring), IRT_LQ, capacity_nodes[ring], opt.icl());
     }
 
@@ -251,15 +251,15 @@ public:
 
   // Print solution
   virtual void
-  print(std::ostream& os) const {
-    os << "z: " << z << std::endl;
-    for(int i = 0; i < r; i++) {
-      for(int j = 0; j < n; j++) {
-        os << rings[i*n+j] << " ";
+  print(std::ostream&amp; os) const {
+    os &lt;&lt; "z: " &lt;&lt; z &lt;&lt; std::endl;
+    for(int i = 0; i &lt; r; i++) {
+      for(int j = 0; j &lt; n; j++) {
+        os &lt;&lt; rings[i*n+j] &lt;&lt; " ";
       }
-      os << std::endl;
+      os &lt;&lt; std::endl;
     }
-    os << std::endl;
+    os &lt;&lt; std::endl;
   }
 
   // Return cost
@@ -269,7 +269,7 @@ public:
 
 
   // Constructor for cloning s
-  Sonet(bool share, Sonet& s) : MinimizeScript(share,s) {
+  Sonet(bool share, Sonet&amp; s) : MinimizeScript(share,s) {
     rings.update(*this, share, s.rings);
     z.update(*this, share, s.z);
   }
@@ -297,9 +297,9 @@ main(int argc, char* argv[]) {
   opt.parse(argc,argv);
 
   if (opt.search() == Sonet::SEARCH_DFS) {
-    Script::run<Sonet,DFS,Options>(opt);
+    Script::run&lt;Sonet,DFS,Options&gt;(opt);
   } else {
-    MinimizeScript::run<Sonet,BAB,Options>(opt);
+    MinimizeScript::run&lt;Sonet,BAB,Options&gt;(opt);
   }
 
 

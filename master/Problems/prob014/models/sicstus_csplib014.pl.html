@@ -106,11 +106,11 @@ torpedo(ID) :-
 	length(PerRowData, NRows),
 	length(PerColData, NCols),
 	% set up domains for the battleship variables
-	% a zero tally => that row or column must be empty
+	% a zero tally =&gt; that row or column must be empty
 	(   foreach(X1,PerColData),
 	    count(J1,1,_),
 	    fromto(NoCols1,S0a,Sa,[])
-	do  (X1=:=0 -> S0a = [J1|Sa] ; S0a = Sa)
+	do  (X1=:=0 -&gt; S0a = [J1|Sa] ; S0a = Sa)
 	),
 	list_to_fdset(NoCols1, NoCols2),
 	fdset_parts(XDom1, 1, NCols, []),
@@ -118,7 +118,7 @@ torpedo(ID) :-
 	(   foreach(X2,PerRowData),
 	    count(J2,1,_),
 	    fromto(NoRows1,S0b,Sb,[])
-	do  (X2=:=0 -> S0b = [J2|Sb] ; S0b = Sb)
+	do  (X2=:=0 -&gt; S0b = [J2|Sb] ; S0b = Sb)
 	),
 	list_to_fdset(NoRows1, NoRows2),
 	fdset_parts(YDom1, 1, NRows, []),
@@ -162,7 +162,7 @@ torpedo(ID) :-
 		foreach([X7,Y7],Origs)
 	    do  true
 	    ),
-	    lex_chain(Origs, [op(#<),global(true)])
+	    lex_chain(Origs, [op(#&lt;),global(true)])
 	),
 	% search: largest ship first
 	labeling([bisect], Vars),
@@ -177,10 +177,10 @@ ship(2, NCols, NRows, XDom2, YDom2, [2-ship(X,W,Y,H)|Ships], Ships, [X-Y,X1-Y1|C
 	Y in_set YDom2,
 	W in {2,3},
 	H in {2,3},
-	X+W #=< NCols+2,
-	Y+H #=< NRows+2,
-	H #= 2 #<=> Horiz,
-	W #= 2 #<=> Vert,
+	X+W #=&lt; NCols+2,
+	Y+H #=&lt; NRows+2,
+	H #= 2 #&lt;=&gt; Horiz,
+	W #= 2 #&lt;=&gt; Vert,
 	Horiz #\ Vert,
 	X1 #= X+Horiz,
 	Y1 #= Y+Vert.
@@ -189,10 +189,10 @@ ship(3, NCols, NRows, XDom2, YDom2, [3-ship(X,W,Y,H)|Ships], Ships, [X-Y,X1-Y1,X
 	Y in_set YDom2,
 	W in {2,4},
 	H in {2,4},
-	X+W #=< NCols+2,
-	Y+H #=< NRows+2,
-	H #= 2 #<=> Horiz,
-	W #= 2 #<=> Vert,
+	X+W #=&lt; NCols+2,
+	Y+H #=&lt; NRows+2,
+	H #= 2 #&lt;=&gt; Horiz,
+	W #= 2 #&lt;=&gt; Vert,
 	Horiz #\ Vert,
 	X1 #= X+Horiz,
 	Y1 #= Y+Vert,
@@ -203,10 +203,10 @@ ship(4, NCols, NRows, XDom2, YDom2, [4-ship(X,W,Y,H)|Ships], Ships, [X-Y,X1-Y1,X
 	Y in_set YDom2,
 	W in {2,5},
 	H in {2,5},
-	X+W #=< NCols+2,
-	Y+H #=< NRows+2,
-	H #= 2 #<=> Horiz,
-	W #= 2 #<=> Vert,
+	X+W #=&lt; NCols+2,
+	Y+H #=&lt; NRows+2,
+	H #= 2 #&lt;=&gt; Horiz,
+	W #= 2 #&lt;=&gt; Vert,
 	Horiz #\ Vert,
 	X1 #= X+Horiz,
 	Y1 #= Y+Vert,
@@ -227,19 +227,19 @@ draw_lines(I,  NR, NC, Ships) :-
 	format([0'||String], []),
 	draw_lines(R, NR, NC, Ships).
 
-ascii_line(NC, NC, _, _) --> !.
-ascii_line(I, NC, R, Ships) -->
+ascii_line(NC, NC, _, _) --&gt; !.
+ascii_line(I, NC, R, Ships) --&gt;
 	{J is I+1},
 	ascii_cell(R, J, Ships),
 	ascii_line(J, NC, R, Ships).
 
-ascii_cell(R, J, Ships) -->
+ascii_cell(R, J, Ships) --&gt;
 	{Template = ship(X,W,Y,H),
 	 member(Template, Ships),
-	 X=<J, J<X+W-1,
-	 Y=<R, R<Y+H-1}, !,
+	 X=&lt;J, J&lt;X+W-1,
+	 Y=&lt;R, R&lt;Y+H-1}, !,
 	"#".
-ascii_cell(_, _, _) --> " ".
+ascii_cell(_, _, _) --&gt; " ".
 
 % A couple of items from Moshe Rubin's
 % "List of unsolvable Solitaire Battleship boards"

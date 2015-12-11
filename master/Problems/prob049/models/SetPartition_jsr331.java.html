@@ -146,7 +146,7 @@ public class SetPartition {
 
         int n_in = 16;
 
-        if (args.length > 0) {
+        if (args.length &gt; 0) {
             n_in = Integer.parseInt(args[0]);
         }
 
@@ -167,21 +167,21 @@ public class SetPartition {
 
         Var[][] a = new Var[num_sets][n];
         a_flatten = new Var[num_sets*n];
-        for(int i = 0; i < num_sets; i++) {
-            for(int j = 0; j < n; j++) {
+        for(int i = 0; i &lt; num_sets; i++) {
+            for(int j = 0; j &lt; n; j++) {
                 a[i][j] = p.variable("a-"+i+"-"+j, 0, 1);
                 a_flatten[i*n+j] = a[i][j];
             }
         }
         
         // partition the sets (all different)
-        for(int k = 0; k < n; k++) {
+        for(int k = 0; k &lt; n; k++) {
             p.post(a[0][k], "!=" , a[1][k]);
         }
 
-        for(int i = 0; i < num_sets; i++) {
-            for(int j = 0; j < num_sets; j++) {
-                if (i < j) {
+        for(int i = 0; i &lt; num_sets; i++) {
+            for(int j = 0; j &lt; num_sets; j++) {
+                if (i &lt; j) {
                     Var[] s1 = new Var[n];
                     Var[] s2 = new Var[n];
                     Var[] sq1 = new Var[n];
@@ -189,7 +189,7 @@ public class SetPartition {
                     Var[] sqsq1 = new Var[n];
                     Var[] sqsq2 = new Var[n];
 
-                    for(int k = 0; k < n; k++) {
+                    for(int k = 0; k &lt; n; k++) {
                         // same cardinality
                         // m.post(sum(k in 1..n) a[i,k] == sum(k in 1..n) a[j,k]);
                         // s1[k] = new javax.constraints.impl.Var(this,"s1+"+i+"-"+j+"-"+k, 0,1);
@@ -290,9 +290,9 @@ public class SetPartition {
             Solution s = iter.next();
             // s.log();
 
-            for(int i = 0; i < num_sets; i++) {
+            for(int i = 0; i &lt; num_sets; i++) {
                 int sum = 0;
-                for(int j = 0; j < n; j++) {
+                for(int j = 0; j &lt; n; j++) {
                     if (s.getValue("a-"+i+"-"+j) == 1) {
                         System.out.format("%2s ", j+1);
                         sum += j+1;

@@ -103,7 +103,7 @@ range size 1..m;
 
 
 struct adj { int a; int b;};
-{adj} adjacent = {<i,j> | ordered i,j in size};
+{adj} adjacent = {&lt;i,j&gt; | ordered i,j in size};
 
 
 
@@ -118,7 +118,7 @@ in allowed;
 
 
 struct comp { int a; int b;};
-{comp} Comps = { <0,2>, <1,3>, <2,0>, <3,1> };
+{comp} Comps = { &lt;0,2&gt;, &lt;1,3&gt;, &lt;2,0&gt;, &lt;3,1&gt; };
 
 predicate link(int a, int b) in Comps;
 
@@ -147,16 +147,16 @@ forall(i in size)
 //This constraint enforces each pair of distinct words to
 //differ in at least 4 positions
 forall(ordered i,j in size)
-   sum(k in word)  (M[i,k]=M[j,k]) <= 4 ;
+   sum(k in word)  (M[i,k]=M[j,k]) &lt;= 4 ;
 
 //This constraint ensures that the reverse of a word and the
 //complement of any other word differ in at least 4 positions
 forall(ordered i,j in size)  
-  sum(k in word) (M[i,9-k]=MC[j,k]) <= 4;
+  sum(k in word) (M[i,9-k]=MC[j,k]) &lt;= 4;
 
 //Lex order the rows to break row symmetry
 forall(ordered i,j in size)
- M[i,1]*16384 + M[i,2]*4096 + M[i,3]*1024 + M[i,4]*256 + M[i,5]*64 + M[i,6]*16 + M[i,7]*4 + M[i,8] <
+ M[i,1]*16384 + M[i,2]*4096 + M[i,3]*1024 + M[i,4]*256 + M[i,5]*64 + M[i,6]*16 + M[i,7]*4 + M[i,8] &lt;
  M[j,1]*16384 + M[j,2]*4096 + M[j,3]*1024 + M[j,4]*256 + M[j,5]*64 + M[j,6]*16 + M[j,7]*4 + M[j,8];
 
 

@@ -136,8 +136,8 @@ object MagicSequence {
     //
     // data
     //
-    val n = if (args.length > 0) args(0).toInt else 10;
-    val all_values = Array.tabulate(n)(i=> (i,CPIntVar(0 to n-1)(cp)))
+    val n = if (args.length &gt; 0) args(0).toInt else 10;
+    val all_values = Array.tabulate(n)(i=&gt; (i,CPIntVar(0 to n-1)(cp)))
 
     //
     // variables
@@ -155,7 +155,7 @@ object MagicSequence {
       cp.add(sum(x) == n)
 
       cp.add(gcc(x, all_values), Strong)
-      for(i<- 0 until n) {
+      for(i&lt;- 0 until n) {
         cp.add(x(i) == all_values(i)._1)
       }
 

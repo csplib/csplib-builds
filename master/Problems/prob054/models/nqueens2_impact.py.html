@@ -202,7 +202,7 @@ def main(n=8, num_sol=0, print_sol=1):
                 print
             print
         num_solutions += 1
-        if num_sol > 0 and num_solutions >= num_sol:
+        if num_sol &gt; 0 and num_solutions &gt;= num_sol:
             break
     
     solver.EndSearch()
@@ -218,11 +218,11 @@ n = 8
 num_sol = 0
 print_sol = 1
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
+    if len(sys.argv) &gt; 1:
         n = int(sys.argv[1])
-    if len(sys.argv) > 2:
+    if len(sys.argv) &gt; 2:
         num_sol = int(sys.argv[2])       
-    if len(sys.argv) > 3:
+    if len(sys.argv) &gt; 3:
         print_sol = int(sys.argv[3])       
 
         

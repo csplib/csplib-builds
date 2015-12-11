@@ -118,9 +118,9 @@ cost_labeling(Vars, Cost) :-
 
 heur_labeling([], _, _, _).
 heur_labeling([Var-Row|Rest], Set, Size, LBW) :-
-	Size < LBW, !,
+	Size &lt; LBW, !,
 	member(_-Var, Row),
-	(   fdset_member(Var, Set) ->
+	(   fdset_member(Var, Set) -&gt;
 	    Set2 = Set,
 	    Size2 = Size
 	;   fdset_add_element(Set, Var, Set2),
@@ -150,7 +150,7 @@ warehouse(Key, Warehouses, Cost, LBW) :-
 	    B #= min(N,1)
 	),
 	build_cost_lb(Capacities, NStores, BuildCost, LBW, LBC),
-	BCost #>= LBC,
+	BCost #&gt;= LBC,
 	BCost + GCCOST #= Cost,
 	(   foreach(_,Binaries),
 	    foreach(BuildCost,BuildCosts),
@@ -172,8 +172,8 @@ build_cost_lb(Cap1, Demand, BC, LBW, LBC) :-
 	LBW is Len3-Len4,
 	LBC is BC*LBW.
 
-build_cost_lb(Demand) --> {Demand=<0}, !.
-build_cost_lb(Demand1) --> [C-_],
+build_cost_lb(Demand) --&gt; {Demand=&lt;0}, !.
+build_cost_lb(Demand1) --&gt; [C-_],
 	{Demand2 is Demand1+C},
 	build_cost_lb(Demand2).
 

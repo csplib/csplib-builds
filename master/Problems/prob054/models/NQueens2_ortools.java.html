@@ -142,7 +142,7 @@ public class NQueens2 {
 
     IntVar[] q1 = new IntVar[n];
     IntVar[] q2 = new IntVar[n];
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i &lt; n; i++) {
       q1[i] = solver.makeSum(q[i], i).Var();
       q2[i] = solver.makeSum(q[i], -i).Var();
     }
@@ -159,13 +159,13 @@ public class NQueens2 {
     int c = 0;
     while (solver.nextSolution()) {
       if (print != 0) {
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i &lt; n; i++) {
           System.out.print(q[i].value() + " ");
         }
         System.out.println();
       }
       c++;
-      if (num > 0 && c >= num) {
+      if (num &gt; 0 &amp;&amp; c &gt;= num) {
         break;
       }
     }
@@ -184,15 +184,15 @@ public class NQueens2 {
     int num = 0;
     int print = 1;
 
-    if (args.length > 0) {
+    if (args.length &gt; 0) {
       n = Integer.parseInt(args[0]);
     }
 
-    if (args.length > 1) {
+    if (args.length &gt; 1) {
       num = Integer.parseInt(args[1]);
     }
 
-    if (args.length > 2) {
+    if (args.length &gt; 2) {
       print = Integer.parseInt(args[2]);
     }
 

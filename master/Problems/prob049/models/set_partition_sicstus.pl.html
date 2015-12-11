@@ -98,9 +98,9 @@
    This is a partition problem.
    Given the set S = {1, 2, ..., n}, 
    it consists in finding two sets A and B such that:
-    - A U B = S,</li>
-    - |A| = |B|,</li>
-    - sum(A) = sum(B),</li>
+    - A U B = S,&lt;/li&gt;
+    - |A| = |B|,&lt;/li&gt;
+    - sum(A) = sum(B),&lt;/li&gt;
     - sum_squares(A) = sum_squares(B).
   """
 
@@ -179,7 +179,7 @@ set_partition(N,NumSets,ASet,Sums,SumSquared) :-
 
         % sanity check
         Mod is N mod NumSets,
-        ( Mod \= 0 -> 
+        ( Mod \= 0 -&gt; 
               format('Error: ~d is not a multiple of ~d\n', [NumSets,N]),
               fail
         ;
@@ -289,7 +289,7 @@ all_disjoint(Sets) :-
               ( foreach(S2,Sets),
                 count(J,1,_),
                 param(S1,I) do
-                    I < J ->
+                    I &lt; J -&gt;
                     ( foreach(SS1,S1),
                       foreach(SS2,S2) do
                           SS1 + SS2 #= 1
@@ -344,7 +344,7 @@ boolean_to_set(List,Set) :-
           count(I,1,_),
           fromto(Set,Out,In,[]) do
               El == 1 
-        ->
+        -&gt;
           Out = [I|In]
         ;
           Out = In

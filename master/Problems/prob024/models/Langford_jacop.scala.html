@@ -126,25 +126,25 @@ object Langford extends App with jacop {
   // data
   var k = 4
 
-  if (args.length > 0) {
+  if (args.length &gt; 0) {
     k = args(0).toInt
   }
 
   // variables
-  val position = Array.tabulate(2*k)(i=> new IntVar("position("+i+")", 0, 2*k-1))
-  val solution = Array.tabulate(2*k)(i=> new IntVar("solution("+i+")", 1, k))
+  val position = Array.tabulate(2*k)(i=&gt; new IntVar("position("+i+")", 0, 2*k-1))
+  val solution = Array.tabulate(2*k)(i=&gt; new IntVar("solution("+i+")", 1, k))
 
   // constraints
   alldifferent(position)
   
-  for(i <- 1 until k+1) {
+  for(i &lt;- 1 until k+1) {
     position(i+k-1) #= position(i-1) + i+1
     element(position(i-1), solution, i:IntVar, -1)
     element(position(k+i-1), solution, i:IntVar, -1)
   }
 
   // symmetry breaking
-  solution(0) #< solution(2*k-1)
+  solution(0) #&lt; solution(2*k-1)
 
   // search
   val result = satisfyAll(search(position ++ solution, max_regret, indomain_min), printIt) 
@@ -153,9 +153,9 @@ object Langford extends App with jacop {
   
   def printIt() {
     print("\nsolution: ")
-    solution.foreach(v=>print(v.value + " "))
+    solution.foreach(v=&gt;print(v.value + " "))
     print("\nposition: ")
-    position.foreach(v=>print(v.value + " "))
+    position.foreach(v=&gt;print(v.value + " "))
     println()
   }
      

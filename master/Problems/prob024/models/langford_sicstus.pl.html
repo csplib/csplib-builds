@@ -152,7 +152,7 @@ langford(K, Solution, Position) :-
         %  symmetry breaking
         nth1(1,Solution,Solution1),
         nth1(K2,Solution,SolutionK2),
-        Solution1 #< SolutionK2,
+        Solution1 #&lt; SolutionK2,
 
         ( for(I,1,K), 
           param(Position,Solution,K) 

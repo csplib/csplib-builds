@@ -140,17 +140,17 @@ MAIN MODEL Main_AllInterval
 
     CONSTRAINT:
        identifier   :  DiffsK
-       index domain :  i | i <> last( i1 )
+       index domain :  i | i &lt;&gt; last( i1 )
        definition   :  diffs(i) = Abs(x(i)-x(i+1))
        comment      :  "Note the special handling of the index domain for this constraint." ;
 
     CONSTRAINT:
        identifier   :  Symm1
-       definition   :  x(1) < x(n-1) ;
+       definition   :  x(1) &lt; x(n-1) ;
 
     CONSTRAINT:
        identifier   :  Symm2
-       definition   :  diffs(1) < diffs(2) ;
+       definition   :  diffs(1) &lt; diffs(2) ;
 
   ENDSECTION  ;
 
@@ -165,7 +165,7 @@ MAIN MODEL Main_AllInterval
       ShowProgressWindow ;
       solve AllIntervalPlan;
       
-      if (AllIntervalPlan.ProgramStatus <> 'Optimal') then
+      if (AllIntervalPlan.ProgramStatus &lt;&gt; 'Optimal') then
                 /* empty x, diffs; */
       endif;
       

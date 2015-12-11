@@ -134,7 +134,7 @@ constraints(ID, Xs, Ys, Sizes) :-
 	keysort(L1, L2),
 	keyclumped(L2, L3),
 	(   foreach(_-L,L3)
-	do  (L=[_] -> true ; lex_chain(L, [op(#<)]))
+	do  (L=[_] -&gt; true ; lex_chain(L, [op(#&lt;)]))
 	),
 	geost(Objs, Shapes, [cumulative(true),
 			     disjunctive(true),
@@ -153,8 +153,8 @@ by_interval(X, _,   _) :-
 by_interval(X, Len, W) :-
 	fd_min(X, Min),
 	fd_max(X, Max),
-	Mid is (Min+Max)>>1,
-	(   Max-Min < Len*W -> true
+	Mid is (Min+Max)&gt;&gt;1,
+	(   Max-Min &lt; Len*W -&gt; true
 	;   X in Min..Mid,
 	    by_interval(X, Len, W)
 	;   Mid1 is Mid+1,

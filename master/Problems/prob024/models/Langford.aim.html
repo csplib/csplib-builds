@@ -132,7 +132,7 @@ MAIN MODEL Main_Langford
 
     CONSTRAINT:
        identifier   :  pos1
-       index domain :  j |j <= k
+       index domain :  j |j &lt;= k
        definition   :  position(j) + j+1 = position(j+k)
        comment      :  "Note the index domain." ;
 
@@ -143,7 +143,7 @@ MAIN MODEL Main_Langford
 
     CONSTRAINT:
        identifier   :  pos3
-       index domain :  j |j <= k
+       index domain :  j |j &lt;= k
        definition   :  solution(position(k+j)) = j
        comment      :  "Note the index domain." ;
 
@@ -153,7 +153,7 @@ MAIN MODEL Main_Langford
 
     CONSTRAINT:
        identifier   :  symm1
-       definition   :  solution(1) > solution(k2) ;
+       definition   :  solution(1) &gt; solution(k2) ;
 
   ENDSECTION  ;
 
@@ -168,7 +168,7 @@ MAIN MODEL Main_Langford
       ShowProgressWindow;
       solve LangfordPlan;
       
-        if (LangfordPlan.ProgramStatus <> 'Optimal') then
+        if (LangfordPlan.ProgramStatus &lt;&gt; 'Optimal') then
              empty solution, position;
         endif;
       

@@ -140,7 +140,7 @@ dna(shave, NbOctos) :-
 		    list_to_fdset(Feas, Set),
 		    X in_set Set
 		),
-		labeling([], Octo) -> true
+		labeling([], Octo) -&gt; true
 	    )
 	),
 	display_each(Octos).
@@ -151,7 +151,7 @@ dna(seed, NbOctos) :-
 	    count(I,0,_),
 	    param(NbOctos)
 	do  Octo = [A|_],
-	    Bin is (I<<3)//NbOctos,
+	    Bin is (I&lt;&lt;3)//NbOctos,
 	    seed(Bin, A)
 	),
 	labeling([], Vars),
@@ -174,8 +174,8 @@ lab_min_conflict(X, Pos, Done) :-
 	member(_-X, S2).
 lab_min_conflict(_, _, _).
 
-conflicts([], _) --> [].
-conflicts([D|Ds], Pos) --> [X,Y1],
+conflicts([], _) --&gt; [].
+conflicts([D|Ds], Pos) --&gt; [X,Y1],
 	{conflict(Pos, D, X, Y)},
 	{Y1 is 3-Y},
 	conflicts(Ds, Pos).
@@ -239,7 +239,7 @@ system(NbOctos, Octos) :-
 	    foreach([A,B,C,D,E],Pentas)
 	do  true
 	),
-	lex_chain(Pentas, [op(#<)]), % saves runtime and backtracks
+	lex_chain(Pentas, [op(#&lt;)]), % saves runtime and backtracks
 	all_compl_local(Octos).
 
 /* Local handling of the all-diffs */
@@ -287,18 +287,18 @@ extension(eqcs, [ [0,0,0],  [0,1,1],  [0,10,0],  [0,11,0],
 /* Utilities */
 
 sumeq4([B1,B2,B3,B4,B5,B6,B7,B8]) :-
-% 	sum(Bs, #=<, 4).
+% 	sum(Bs, #=&lt;, 4).
 	sumeq4_ix(B1,B2,B3,B4,B5,B6,B7,B8).
 
 sumeq4_ix(B1,B2,B3,B4,B5,B6,B7,B8) +:
 	B1+B2+B3+B4+B5+B6+B7+B8 #= 4.
 
 sumle4([B1,B2,B3,B4,B5,B6,B7,B8]) :-
-% 	sum(Bs, #=<, 4).
+% 	sum(Bs, #=&lt;, 4).
 	sumle4_ix(B1,B2,B3,B4,B5,B6,B7,B8).
 
 sumle4_ix(B1,B2,B3,B4,B5,B6,B7,B8) +:
-	B1+B2+B3+B4+B5+B6+B7+B8 #=< 4.
+	B1+B2+B3+B4+B5+B6+B7+B8 #=&lt; 4.
 %     B1 in !(0..(4        -min(B2)-min(B3)-min(B4)-min(B5)-min(B6)-min(B7)-min(B8))),
 %     B2 in !(0..(4-min(B1)        -min(B3)-min(B4)-min(B5)-min(B6)-min(B7)-min(B8))),
 %     B3 in !(0..(4-min(B1)-min(B2)        -min(B4)-min(B5)-min(B6)-min(B7)-min(B8))),
@@ -331,8 +331,8 @@ all_compl_codes([Octo|Octos], I, [Code|Codes]) :-
 	scalar_product([256,64,16,4,1], Penta, #=, Code),
 	all_compl_codes(Octos, I, Codes).
 
-complements([], _) --> [].
-complements([[A,B,C,D,E,F,G,H]|Octos], Extension) --> [[H1,G1,F1,E1,D1,C1,B1,A1]],
+complements([], _) --&gt; [].
+complements([[A,B,C,D,E,F,G,H]|Octos], Extension) --&gt; [[H1,G1,F1,E1,D1,C1,B1,A1]],
 	{table([[A,A1,1],
 		[B,B1,1],
 		[C,C1,1],

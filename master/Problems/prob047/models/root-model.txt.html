@@ -243,24 +243,24 @@ subject to
 
    // The sum of the orders for any component should not be greater 
    // than the maximum number of orders required   
-   forall(c in components) sum(t in horizon) componentDeliverySchedule[c,t] <= numOrders[c];
+   forall(c in components) sum(t in horizon) componentDeliverySchedule[c,t] &lt;= numOrders[c];
    
    // Set the isorder variable correctly 
-   forall(t in horizon, c in components) maxNumComponentOrders[c] * isorder[t,c] >= componentDeliverySchedule[c,t];
+   forall(t in horizon, c in components) maxNumComponentOrders[c] * isorder[t,c] &gt;= componentDeliverySchedule[c,t];
     
    // Set the isbuilt variable correctly 
    // - should be 1 if any of that product is built on that day
-   forall(t in horizon, p in products) maxManufacture * isbuilt[t,p] >= manufacture[t,p];
+   forall(t in horizon, p in products) maxManufacture * isbuilt[t,p] &gt;= manufacture[t,p];
    
 
    // We can never deliver more than there is demand for
-   forall(p in products) forall (t in 1..numPeriods-leadtime[p]) deliveryQuantity[t,p] <= demand[t+leadtime[p],p];
-   forall(p in products) forall (t in [numPeriods-leadtime[p]+1..numPeriods]) deliveryQuantity[t,p] <= 0;
+   forall(p in products) forall (t in 1..numPeriods-leadtime[p]) deliveryQuantity[t,p] &lt;= demand[t+leadtime[p],p];
+   forall(p in products) forall (t in [numPeriods-leadtime[p]+1..numPeriods]) deliveryQuantity[t,p] &lt;= 0;
    
 
    // Capacity constraint for manufacturing decision
    // The factory's capacity for each day cannot be exceeded
-   forall(t in horizon) sum(p in products) (manufacture[t,p]*cycles[p] + isbuilt[t,p]*setupCycles[p]) <= capacity[t];
+   forall(t in horizon) sum(p in products) (manufacture[t,p]*cycles[p] + isbuilt[t,p]*setupCycles[p]) &lt;= capacity[t];
    
 
    // The number of components needed is calculated by multiplying manufacturing decision by BOM

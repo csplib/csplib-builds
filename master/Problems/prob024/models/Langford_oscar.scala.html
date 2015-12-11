@@ -146,8 +146,8 @@ object Langford {
     //
     // data
     //
-    val k = if (args.length > 0) args(0).toInt else 4;
-    val num_to_show = if (args.length > 1) args(1).toInt else 0;
+    val k = if (args.length &gt; 0) args(0).toInt else 4;
+    val num_to_show = if (args.length &gt; 1) args(1).toInt else 0;
 
     //
     // variables
@@ -165,14 +165,14 @@ object Langford {
       
       cp.add(allDifferent(position), Strong)
   
-      for(i <- 1 to k) {
+      for(i &lt;- 1 to k) {
         cp.add(position(i+k-1) == (position(i-1) + i+1))
         cp.add(solution(position(i-1)) == i)
         cp.add(solution(position(k+i-1)) == i)
       }
 
       // symmetry breaking
-      cp.add(solution(0) < solution(2*k-1))
+      cp.add(solution(0) &lt; solution(2*k-1))
 
     } search {
        

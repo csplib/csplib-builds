@@ -133,8 +133,8 @@ heur_order(Rows, RowData, Cols, ColData, Vars) :-
 	),
 	append(S3, Vars).
 
-tag_vars([], [], _) --> [].
-tag_vars([R|Rows], [D|Data], N) --> [Tag-R],
+tag_vars([], [], _) --&gt; [].
+tag_vars([R|Rows], [D|Data], N) --&gt; [Tag-R],
 	{sumlist(D, Sum)},
 	{Tag is N-Sum},
 	tag_vars(Rows, Data, N).
@@ -145,18 +145,18 @@ constrain([Row|Rows], [Datum|Data]) :-
 	automaton(Row, [source(Source),sink(Sink)], Auto),
 	constrain(Rows, Data).
 
-build_automaton([], S, S) --> [arc(S,0,S)].
-build_automaton([C|Cs], S0, S) -->  [arc(S0,0,S0)],
+build_automaton([], S, S) --&gt; [arc(S,0,S)].
+build_automaton([C|Cs], S0, S) --&gt;  [arc(S0,0,S0)],
 	build_ones(C, S0, S1),
 	build_cont(Cs, S1, S).
 
-build_cont([], S, S) --> !, [arc(S,0,S)].
-build_cont([C|Cs], S0, S) -->  [arc(S0,0,S1),arc(S1,0,S1)],
+build_cont([], S, S) --&gt; !, [arc(S,0,S)].
+build_cont([C|Cs], S0, S) --&gt;  [arc(S0,0,S1),arc(S1,0,S1)],
 	build_ones(C, S1, S2),
 	build_cont(Cs, S2, S).
 
-build_ones(0, S, S) --> !.
-build_ones(I, S0, S) --> [arc(S0,1,S1)],
+build_ones(0, S, S) --&gt; !.
+build_ones(I, S0, S) --&gt; [arc(S0,1,S1)],
 	{J is I-1},
 	build_ones(J, S1, S).
 
@@ -172,11 +172,11 @@ draw_lines(Cells, NC) :-
 	format([0'||String], []),
 	draw_lines(Cells1, NC).
 
-asciify(NC, NC, S, S) --> !.
-asciify(I, NC, [0|S0], S) --> " ", !,
+asciify(NC, NC, S, S) --&gt; !.
+asciify(I, NC, [0|S0], S) --&gt; " ", !,
 	{J is I+1},
 	asciify(J, NC, S0, S).
-asciify(I, NC, [1|S0], S) --> "#", !,
+asciify(I, NC, [1|S0], S) --&gt; "#", !,
 	{J is I+1},
 	asciify(J, NC, S0, S).
 

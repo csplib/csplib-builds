@@ -226,12 +226,12 @@ subject to
    
 
    // Set the isbuilt variable correctly - should be 1 if any of that product is built on that day
-   forall(t in horizon, p in products) maxManufacture * isbuilt[t,p] >= manufacture[t,p];
+   forall(t in horizon, p in products) maxManufacture * isbuilt[t,p] &gt;= manufacture[t,p];
    
 
    // Capacity constraint for manufacturing decision
    // The factory's capacity for each day cannot be exceeded
-   forall(t in horizon) sum(p in products) (manufacture[t,p]*cycles[p] + isbuilt[t,p]*setupCycles[p]) <= capacity[t];
+   forall(t in horizon) sum(p in products) (manufacture[t,p]*cycles[p] + isbuilt[t,p]*setupCycles[p]) &lt;= capacity[t];
    
 
    // The number of components needed is calculated by multiplying manufacturing decision by BOM

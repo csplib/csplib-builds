@@ -111,17 +111,17 @@ MAIN MODEL Main_NQueens
     CONSTRAINT:
        identifier   :  C1
        index domain :  (i,j)
-       definition   :  (i < j) and x(i) <> x(j)   ;
+       definition   :  (i &lt; j) and x(i) &lt;&gt; x(j)   ;
 
     CONSTRAINT:
        identifier   :  C2
        index domain :  (i,j)
-       definition   :  (i < j) and x(i) + i <> x(j) + j ;
+       definition   :  (i &lt; j) and x(i) + i &lt;&gt; x(j) + j ;
 
     CONSTRAINT:
        identifier   :  C3
        index domain :  (i,j)
-       definition   :  (i < j) and x(i) - i <> x(j) - j ;
+       definition   :  (i &lt; j) and x(i) - i &lt;&gt; x(j) - j ;
 
     CONSTRAINT:
        identifier   :  AllDiff
@@ -147,7 +147,7 @@ MAIN MODEL Main_NQueens
       ShowProgressWindow ;
       solve NQueensPlan;
       
-      if (NQueensPlan.ProgramStatus <> 'Optimal') then
+      if (NQueensPlan.ProgramStatus &lt;&gt; 'Optimal') then
           empty x;
       endif;
       DialogMessage(GMP::Solution::Count('NQueensPlan'));

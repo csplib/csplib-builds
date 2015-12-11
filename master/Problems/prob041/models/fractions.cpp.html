@@ -113,9 +113,9 @@
 
 // Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
 
-#include <gecode/driver.hh>
-#include <gecode/int.hh>
-#include <gecode/minimodel.hh>
+#include &lt;gecode/driver.hh&gt;
+#include &lt;gecode/int.hh&gt;
+#include &lt;gecode/minimodel.hh&gt;
 
 using namespace Gecode;
 
@@ -134,7 +134,7 @@ protected:
 
 public:
 
-  Fractions(const Options& opt) 
+  Fractions(const Options&amp; opt) 
     : 
     Vars(*this, n, 1, n)
   {
@@ -158,18 +158,18 @@ public:
     distinct(*this, Vars);
 
     rel(*this, 
-        D1 == 10*B+C &&
-        D2 == 10*E+F &&
-        D3 == 10*H+I &&
-        A*D2*D3 + D*D1*D3 + G*D1*D2 == D1*D2*D3 &&
+        D1 == 10*B+C &amp;&amp;
+        D2 == 10*E+F &amp;&amp;
+        D3 == 10*H+I &amp;&amp;
+        A*D2*D3 + D*D1*D3 + G*D1*D2 == D1*D2*D3 &amp;&amp;
 
         // break the symmetry
-        A*D2 >= D*D1 &&
-        D*D3 >= G*D2 &&
+        A*D2 &gt;= D*D1 &amp;&amp;
+        D*D3 &gt;= G*D2 &amp;&amp;
 
         //redundant constraints
-        3*A >= D1 &&
-        3*G <= D2
+        3*A &gt;= D1 &amp;&amp;
+        3*G &lt;= D2
         );
 
 
@@ -180,13 +180,13 @@ public:
 
   // Print solution
   virtual void
-  print(std::ostream& os) const {
-    os << "Vars: " << Vars << endl;
+  print(std::ostream&amp; os) const {
+    os &lt;&lt; "Vars: " &lt;&lt; Vars &lt;&lt; endl;
   }
 
 
   // Constructor for cloning s
-  Fractions(bool share, Fractions& s) : Script(share,s) {
+  Fractions(bool share, Fractions&amp; s) : Script(share,s) {
     Vars.update(*this, share, s.Vars);
   }
 
@@ -207,7 +207,7 @@ main(int argc, char* argv[]) {
 
   opt.parse(argc,argv);
 
-  Script::run<Fractions,DFS,Options>(opt);
+  Script::run&lt;Fractions,DFS,Options&gt;(opt);
     
   return 0;
 }

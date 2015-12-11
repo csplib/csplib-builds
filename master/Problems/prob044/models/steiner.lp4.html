@@ -130,7 +130,7 @@
 %   9    0.02s    412     136      1
 %  13    0.33s   6269    2385      6
 %  15    2.35s  22801   13755     10
-%  19    > 2h
+%  19    &gt; 2h
 
 #const n = 7.
 
@@ -151,13 +151,13 @@ sets(1..nb).
 % count the number of common occurrences of each pair of Sets
 check(Set1, Set2, Val, N) :- 
     sets(Set1;Set2), 
-    Set1 < Set2,
+    Set1 &lt; Set2,
     val(Val),
     N = #count { Val,Set1,Set2:x(Set1,Val), x(Set2,Val) }.
 
 % ensure that there are at most 1 occurrence 
 % with the same value  (i.e. N=2) for any two sets.
-:- sets(Set1), sets(Set2), Set1 < Set2, 2 #count{Set1,Set2:check(Set1, Set2, Val, 2)}.
+:- sets(Set1), sets(Set2), Set1 &lt; Set2, 2 #count{Set1,Set2:check(Set1, Set2, Val, 2)}.
 
 
 %
@@ -165,10 +165,10 @@ check(Set1, Set2, Val, N) :-
 % (What I would really like to do is 
 % to sort the sets lexicographically.)
 %
-% :- sets(Set1;Set2), Set1 < Set2, 
+% :- sets(Set1;Set2), Set1 &lt; Set2, 
 %     S1 = #sum{Val1:x(Set1, Val1)}, 
 %     S2 = #sum{Val2:x(Set2, Val2)}, 
-%     S1 >= S2.
+%     S1 &gt;= S2.
 
 #show x/2.
 

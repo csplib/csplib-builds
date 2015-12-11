@@ -89,7 +89,7 @@
 
 <a href="/csplib-builds/master/Problems/prob007/models/program.cpp">Download</a>
 <pre >
-#include<ilsolver/ilcint.h>
+#include&lt;ilsolver/ilcint.h&gt;
 
 ILOSTLBEGIN
 
@@ -111,10 +111,10 @@ void prob007large(IlcManager m, int n){
   IlcIntVarArray x(m, n, 0, n-1);
   IlcIntVarArray y(m, n-1, 1, n-1);
   int i;
-  for (i=0; i<n-1; i++){
+  for (i=0; i&lt;n-1; i++){
     m.add(y[i]==IlcAbs(x[i+1] - x[i]));
   }
-  m.add(x[0] < x[1]);
+  m.add(x[0] &lt; x[1]);
   m.add(IlcAllDiff(x, IlcWhenRange));
   m.add(IlcAllDiff(y, IlcWhenRange));
   m.add(IlcGenerate(y, IlcChooseMaxMaxInt, IlcIntSelectMax(m)));
@@ -126,14 +126,14 @@ void prob007AC(IlcManager m, int n){
   IlcIntVarArray y(m, n-1, 1, n-1);
   IlcIntTupleSet set(m,3);
   int i,j;
-  for(i=0;i<n-1;i++){
-    for(j=i+1;j<n;j++){
+  for(i=0;i&lt;n-1;i++){
+    for(j=i+1;j&lt;n;j++){
       set.add(IlcIntArray(m,3, i, j, IlcAbs(j-i)));
       set.add(IlcIntArray(m,3, j, i, IlcAbs(j-i)));
     }
   }
   set.close();
-  for (i=0; i<n-1; i++){
+  for (i=0; i&lt;n-1; i++){
     IlcIntVarArray vars(m, 3, x[i], x[i+1], y[i]);
     m.add(IlcTableConstraint(vars, set, IlcTrue));
   }
@@ -145,7 +145,7 @@ void prob007AC(IlcManager m, int n){
 void prob007(IlcManager m, int n) {
   IlcIntVarArray x(m, n, 0, n-1);
   IlcIntVarArray y(m, n-1, 1, n-1);
-  for (int i=0; i<n-1; i++)
+  for (int i=0; i&lt;n-1; i++)
     m.add(y[i]==IlcAbs(x[i+1] - x[i]));
   m.add(IlcAllDiff(x, IlcWhenRange));
   m.add(IlcAllDiff(y, IlcWhenRange));
@@ -154,18 +154,18 @@ void prob007(IlcManager m, int n) {
 
 int main(int argc, char** argv) {
   IlcManager m(IlcNoEdit);
-  int n = (argc>1)? atoi(argv[1]): 10;
+  int n = (argc&gt;1)? atoi(argv[1]): 10;
   prob007(m, n);
   //prob007AC(m, n);
   int sol=0;
   //m.nextSolution();
   // m.nextSolution();
 
-  //m.out() << x << endl;
+  //m.out() &lt;&lt; x &lt;&lt; endl;
    while(m.nextSolution()){
       sol++;
     }
-    m.out() << sol << endl;
+    m.out() &lt;&lt; sol &lt;&lt; endl;
   m.printInformation();
   m.end();
   return 0;

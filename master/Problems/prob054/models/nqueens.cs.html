@@ -117,7 +117,7 @@ public class NQueens
    * where 
    *    n    : size of board
    *    num  : number of solutions to calculate
-   *    print: print the results (if > 0)
+   *    print: print the results (if &gt; 0)
    *
    */
   private static void Solve(int n=8, int num=0, int print=1)
@@ -137,7 +137,7 @@ public class NQueens
 
     IntVar[] q1 = new IntVar[n];
     IntVar[] q2 = new IntVar[n];
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i &lt; n; i++) {
       q1[i] = (q[i] + i).Var();
       q2[i] = (q[i] - i).Var();
     }
@@ -163,15 +163,15 @@ public class NQueens
     solver.NewSearch(db);
     int c = 0;
     while (solver.NextSolution()) {
-      if (print > 0) {
-        for(int i = 0; i < n; i++) {
+      if (print &gt; 0) {
+        for(int i = 0; i &lt; n; i++) {
           Console.Write("{0} ", q[i].Value());
         }
       
         Console.WriteLine();
       }
       c++;
-      if (num > 0 && c >= num) {
+      if (num &gt; 0 &amp;&amp; c &gt;= num) {
         break;
       }
     }
@@ -191,14 +191,14 @@ public class NQueens
     int num = 0;
     int print = 1;
 
-    if (args.Length > 0) {
+    if (args.Length &gt; 0) {
       n = Convert.ToInt32(args[0]);
     }
 
-    if (args.Length > 1) {
+    if (args.Length &gt; 1) {
       num = Convert.ToInt32(args[1]);
     }
-    if (args.Length > 2) {
+    if (args.Length &gt; 2) {
       print = Convert.ToInt32(args[2]);
     }
 

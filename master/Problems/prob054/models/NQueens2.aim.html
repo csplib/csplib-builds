@@ -145,14 +145,14 @@ MAIN MODEL Main_NQueens2
       ShowProgressWindow;
       
       /*
-      ! Limit the number of stored solutions for n > 10
-      if (n <= 10) then
+      ! Limit the number of stored solutions for n &gt; 10
+      if (n &lt;= 10) then
         OptionSetValue( "CP Optimizer 12.4::solution_storage_limit", 10000 );
       else
         OptionSetValue( "CP Optimizer 12.4::solution_storage_limit", 1 );
       endif;
       */
-      if (solution_storage_limit > 1) then
+      if (solution_storage_limit &gt; 1) then
          OptionSetValue( "CP Optimizer 12.4::solution_storage_limit", solution_storage_limit);
       else
          OptionSetValue( "CP Optimizer 12.4::solution_storage_limit", 1);
@@ -160,12 +160,12 @@ MAIN MODEL Main_NQueens2
       
       solve NQueens2Plan;
       
-      if (NQueens2Plan.ProgramStatus <> 'Optimal') then
+      if (NQueens2Plan.ProgramStatus &lt;&gt; 'Optimal') then
         empty x
       endif;
       
       /*
-      if (n <= 10) then
+      if (n &lt;= 10) then
         DialogMessage("It was " + GMP::Solution::Count('NQueens2Plan') + " solution(s).");
       else
        DialogMessage("It was " + GMP::Solution::Count('NQueens2Plan') + " solution.");

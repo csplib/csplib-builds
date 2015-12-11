@@ -189,19 +189,19 @@ MAIN MODEL Main_MagicSquare
     CONSTRAINT:
        identifier   :  Symmetry2
        definition   :  if (UseSymmetry2) then
-                          x(1,1) < x(1,N)
+                          x(1,1) &lt; x(1,N)
                        endif ;
 
     CONSTRAINT:
        identifier   :  Symmetry3
        definition   :  if (UseSymmetry3) then
-                         x(1,N) < x(N,1)
+                         x(1,N) &lt; x(N,1)
                        endif ;
 
     CONSTRAINT:
        identifier   :  Symmetry4
        definition   :  if (UseSymmetry4) then
-                         x(1,1) < x(N,N)
+                         x(1,1) &lt; x(N,N)
                        endif ;
 
     MATHEMATICAL PROGRAM:
@@ -224,7 +224,7 @@ MAIN MODEL Main_MagicSquare
       ShowProgressWindow;
       solve MagicSquarePlan;
       NumSolutions:=GMP::Solution::Count('MagicSquarePlan');
-      if (MagicSquarePlan.ProgramStatus <> 'Optimal') then
+      if (MagicSquarePlan.ProgramStatus &lt;&gt; 'Optimal') then
            empty x, Total;
       endif;
       

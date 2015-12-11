@@ -155,16 +155,16 @@ vessels(Origins, Shapes) :-
 	do  memberchk(sbox(S1,_,Sh), Sboxes2)
 	).
 
-rules -->
-	[(xorigin(O1,S1) ---> O1^x(1)+S1^t(1)),
-	 (xend(O1,S1) ---> O1^x(1)+S1^t(1)+S1^l(1)),
-         (yorigin(O1,S1) ---> O1^x(2)+S1^t(2)),
-	 (yend(O1,S1) ---> O1^x(2)+S1^t(2)+S1^l(2)),
-         (apart(O1,S1,O2,S2) --->
-	     (xend(O1,S1) + 4 #=< xorigin(O2,S2) #\/
-	      xend(O2,S2) + 4 #=< xorigin(O1,S1) #\/
-	      yend(O1,S1) + 4 #=< yorigin(O2,S2) #\/
-	      yend(O2,S2) + 4 #=< yorigin(O1,S1))),
+rules --&gt;
+	[(xorigin(O1,S1) ---&gt; O1^x(1)+S1^t(1)),
+	 (xend(O1,S1) ---&gt; O1^x(1)+S1^t(1)+S1^l(1)),
+         (yorigin(O1,S1) ---&gt; O1^x(2)+S1^t(2)),
+	 (yend(O1,S1) ---&gt; O1^x(2)+S1^t(2)+S1^l(2)),
+         (apart(O1,S1,O2,S2) ---&gt;
+	     (xend(O1,S1) + 4 #=&lt; xorigin(O2,S2) #\/
+	      xend(O2,S2) + 4 #=&lt; xorigin(O1,S1) #\/
+	      yend(O1,S1) + 4 #=&lt; yorigin(O2,S2) #\/
+	      yend(O2,S2) + 4 #=&lt; yorigin(O1,S1))),
 	forall(O1,objects([4,5,6]),
 	       forall(S1,sboxes([O1^sid]),
 		      forall(O2,objects([7,8,9,10]),

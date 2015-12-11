@@ -106,9 +106,9 @@
 
 */
 
-#include <gecode/driver.hh>
-#include <gecode/int.hh>
-#include <gecode/minimodel.hh>
+#include &lt;gecode/driver.hh&gt;
+#include &lt;gecode/int.hh&gt;
+#include &lt;gecode/minimodel.hh&gt;
 
 using namespace Gecode;
 
@@ -127,7 +127,7 @@ protected:
 
 public:
 
-  MagicHexagon(const Options& opt) 
+  MagicHexagon(const Options&amp; opt) 
     : 
     x(*this, len, 1, len)
   {
@@ -157,28 +157,28 @@ public:
 
     // Not very beautiful, but experimental...
     rel(*this,
-        a + b + c ==  38 &&
-        d + e + f + g ==  38 &&
-        h + i + j + k + l ==  38 && 
-        m + n + o + p ==  38 && 
-        q + r + s ==  38 && 
-        a + d + h ==  38 && 
-        b + e + i + m ==  38 && 
-        c + f + j + n + q ==  38 && 
-        g + k + o + r ==  38 && 
-        l + p + s ==  38 && 
-        c + g + l ==  38 && 
-        b + f + k + p ==  38 && 
-        a + e + j + o + s ==  38 && 
-        d + i + n + r ==  38 && 
-        h + m + q ==  38 && 
+        a + b + c ==  38 &amp;&amp;
+        d + e + f + g ==  38 &amp;&amp;
+        h + i + j + k + l ==  38 &amp;&amp; 
+        m + n + o + p ==  38 &amp;&amp; 
+        q + r + s ==  38 &amp;&amp; 
+        a + d + h ==  38 &amp;&amp; 
+        b + e + i + m ==  38 &amp;&amp; 
+        c + f + j + n + q ==  38 &amp;&amp; 
+        g + k + o + r ==  38 &amp;&amp; 
+        l + p + s ==  38 &amp;&amp; 
+        c + g + l ==  38 &amp;&amp; 
+        b + f + k + p ==  38 &amp;&amp; 
+        a + e + j + o + s ==  38 &amp;&amp; 
+        d + i + n + r ==  38 &amp;&amp; 
+        h + m + q ==  38 &amp;&amp; 
         
-        a < c &&
-        a < h &&
-        a < l &&
-        a < q &&
-        a < s &&
-        c < h
+        a &lt; c &amp;&amp;
+        a &lt; h &amp;&amp;
+        a &lt; l &amp;&amp;
+        a &lt; q &amp;&amp;
+        a &lt; s &amp;&amp;
+        c &lt; h
         );
 
     // branching
@@ -188,15 +188,15 @@ public:
 
   // Print solution
   virtual void
-  print(std::ostream& os) const {
-    os << "x: " << x << endl;
-    os << endl;
+  print(std::ostream&amp; os) const {
+    os &lt;&lt; "x: " &lt;&lt; x &lt;&lt; endl;
+    os &lt;&lt; endl;
 
   }
 
 
   // Constructor for cloning s
-  MagicHexagon(bool share, MagicHexagon& s) : Script(share,s) {
+  MagicHexagon(bool share, MagicHexagon&amp; s) : Script(share,s) {
     x.update(*this, share, s.x);
   }
 
@@ -218,7 +218,7 @@ main(int argc, char* argv[]) {
 
   opt.parse(argc,argv);
 
-  Script::run<MagicHexagon,DFS,Options>(opt);
+  Script::run&lt;MagicHexagon,DFS,Options&gt;(opt);
     
   return 0;
 }

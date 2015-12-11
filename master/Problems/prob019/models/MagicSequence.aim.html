@@ -143,7 +143,7 @@ MAIN MODEL Main_MagicSequence
       ShowProgressWindow;
       solve MagicSequencePlan;
       
-      if (MagicSequencePlan.ProgramStatus <> 'Optimal') then
+      if (MagicSequencePlan.ProgramStatus &lt;&gt; 'Optimal') then
            empty x;
       endif;
 

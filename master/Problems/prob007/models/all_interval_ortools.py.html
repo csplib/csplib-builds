@@ -169,8 +169,8 @@ def main(n=12):
         solver.Add(diffs[k] == abs(x[k+1]-x[k]))
 
     # symmetry breaking
-    solver.Add(x[0] < x[n-1])
-    solver.Add(diffs[0] < diffs[1])
+    solver.Add(x[0] &lt; x[n-1])
+    solver.Add(diffs[0] &lt; diffs[1])
 
     #
     # solution and search
@@ -198,7 +198,7 @@ def main(n=12):
 
 n=12
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
+    if len(sys.argv) &gt; 1:
         n = string.atoi(sys.argv[1])
     main(n)
 

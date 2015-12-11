@@ -104,7 +104,7 @@
 set letters;
 param n;
 
-var x{letters} >= 0 <= 19 integer;
+var x{letters} &gt;= 0 &lt;= 19 integer;
 
 #
 # constraints
@@ -128,12 +128,12 @@ s.t. c2:
   x['d'] + x['i'] + x['n'] + x['r'] =  38 and 
   x['h'] + x['m'] + x['q'] =  38 and 
 
-  x['a'] < x['c'] and
-  x['a'] < x['h'] and
-  x['a'] < x['l'] and
-  x['a'] < x['q'] and
-  x['a'] < x['s'] and
-  x['c'] < x['h']
+  x['a'] &lt; x['c'] and
+  x['a'] &lt; x['h'] and
+  x['a'] &lt; x['l'] and
+  x['a'] &lt; x['q'] and
+  x['a'] &lt; x['s'] and
+  x['c'] &lt; x['h']
 ;
 
 data;

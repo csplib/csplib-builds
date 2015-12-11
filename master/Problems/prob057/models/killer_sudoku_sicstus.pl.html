@@ -178,7 +178,7 @@ killer_sudoku(Problem,X) :-
                 fromto(XLine,Out,In,[]),
                 param(X) do
                     matrix_element(X,R,C,XRC),
-                    XRC #> 0,
+                    XRC #&gt; 0,
                     Out = [XRC|In]
               ),
               sum(XLine,#=,Sum),

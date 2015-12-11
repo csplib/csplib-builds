@@ -102,7 +102,7 @@
   for the pedestrians and can be represented by the variables P1 to P4 with domains {r,g}.
   
   The constraints on these variables can be modelled by quaternary constraints on 
-  (Vi, Pi, Vj, Pj ) for 1<=i<=4, j=(1+i)mod 4 which allow just the tuples 
+  (Vi, Pi, Vj, Pj ) for 1&lt;=i&lt;=4, j=(1+i)mod 4 which allow just the tuples 
   {(r,r,g,g), (ry,r,y,r), (g,g,r,r), (y,r,ry,r)}.
  
   It would be interesting to consider other types of junction (e.g. five roads 
@@ -134,9 +134,9 @@
 
 // Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
 
-#include <gecode/driver.hh>
-#include <gecode/int.hh>
-#include <gecode/minimodel.hh>
+#include &lt;gecode/driver.hh&gt;
+#include &lt;gecode/int.hh&gt;
+#include &lt;gecode/minimodel.hh&gt;
 
 using namespace Gecode;
 using std::string;
@@ -152,7 +152,7 @@ protected:
 public:
 
   /// Actual model
-  TrafficLights(const Options& opt) : 
+  TrafficLights(const Options&amp; opt) : 
     V(*this, n, 1, n),
     P(*this, n, 1, n) 
   {
@@ -181,11 +181,11 @@ public:
     t2.finalize();
 
 
-    for(int i = 0; i < n; i++) {
-      for(int j = 0; j < n; j++) {
+    for(int i = 0; i &lt; n; i++) {
+      for(int j = 0; j &lt; n; j++) {
         if (j == (i+1) % n) {
           // Table constraint
-          extensional(*this, IntVarArgs() << V[i] << P[i] << V[j] << P[j], t2);
+          extensional(*this, IntVarArgs() &lt;&lt; V[i] &lt;&lt; P[i] &lt;&lt; V[j] &lt;&lt; P[j], t2);
         }
       }
     }
@@ -196,21 +196,21 @@ public:
   }
   /// Print solution
   virtual void
-  print(std::ostream& os) const {
+  print(std::ostream&amp; os) const {
     string s[] = {"", "r","ry","g","y"};
-    for(int i = 0; i < n; i++) {
-      os << V[i] << " " << P[i] << " ";
+    for(int i = 0; i &lt; n; i++) {
+      os &lt;&lt; V[i] &lt;&lt; " " &lt;&lt; P[i] &lt;&lt; " ";
     }
-    os << std::endl;
-    for(int i = 0; i < n; i++) {
-      os << s[V[i].val()] << " " << s[P[i].val()] << " ";
+    os &lt;&lt; std::endl;
+    for(int i = 0; i &lt; n; i++) {
+      os &lt;&lt; s[V[i].val()] &lt;&lt; " " &lt;&lt; s[P[i].val()] &lt;&lt; " ";
     }
-    os << std::endl;
-    os << std::endl;
+    os &lt;&lt; std::endl;
+    os &lt;&lt; std::endl;
 
   }
 
-  TrafficLights(bool share, TrafficLights& s) : Script(share,s) {
+  TrafficLights(bool share, TrafficLights&amp; s) : Script(share,s) {
     V.update(*this, share, s.V);
     P.update(*this, share, s.P);
   }
@@ -228,7 +228,7 @@ main(int argc, char* argv[]) {
   Options opt("TrafficLights");
   opt.solutions(0);
   opt.parse(argc,argv);
-  Script::run<TrafficLights,DFS,Options>(opt);
+  Script::run&lt;TrafficLights,DFS,Options&gt;(opt);
   return 0;
 }
 

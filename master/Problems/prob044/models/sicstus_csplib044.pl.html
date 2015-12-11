@@ -128,16 +128,16 @@ dual_labeling(N, N, _) :- !.
 dual_labeling(N1, N3, Vars) :-
 	N2 is N1+1,
 	split_by_min(Vars, N2, Cands, Rest, Rest2),
-	M is N3>>1,
+	M is N3&gt;&gt;1,
 	dual_choose(0, M, N2, Cands, Rest2),
 	dual_labeling(N2, N3, Rest).
 
-split_by_min([], _, []) --> [].
-split_by_min([X|L1], N, L2) --> [X],
+split_by_min([], _, []) --&gt; [].
+split_by_min([X|L1], N, L2) --&gt; [X],
 	{fd_min(X, Xmin)},
 	{Xmin=\=N}, !,
 	split_by_min(L1, N, L2).
-split_by_min([X|L1], N, [X|L2]) -->
+split_by_min([X|L1], N, [X|L2]) --&gt;
 	split_by_min(L1, N, L2).
 	
 dual_choose(M, M, _, Cands, Cands) :- !.
@@ -157,7 +157,7 @@ problem(N, Triples, Consistency) :-
 	    foreach([A,B],Tuples),
 	    param(N)
 	do  domain([A,B,C], 1, N),
-	    A #< B, B #< C
+	    A #&lt; B, B #&lt; C
 	),
 	lex_chain(Tuples,[increasing]),
 	pair_constraints(Triples, N, Consistency),
@@ -174,7 +174,7 @@ pair_constraints(Triples, N, Consistency) :-
 	all_distinct(Codes, [consistency(Consistency)]).
 
 card_constraint(Triples, N) :-
-	M is N>>1,
+	M is N&gt;&gt;1,
 	(   for(J,1,N),
 	    foreach(J-M,Cs),
 	    param(M)

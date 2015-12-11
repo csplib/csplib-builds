@@ -114,7 +114,7 @@ param sums{1..num_sums, 1..max_sums} symbolic default "-";
 param num_less;
 param less2{1..num_less, 1..2} symbolic;
 
-var x{letters} >= 1 <= 19 integer;
+var x{letters} &gt;= 1 &lt;= 19 integer;
 
 #
 # constraints
@@ -126,7 +126,7 @@ s.t. c2{i in 1..num_sums}:
 ;
 
 s.t. c3{i in 1..num_less}:
-    x[less2[i,1]] < x[less2[i,2]]
+    x[less2[i,1]] &lt; x[less2[i,2]]
 ;
 
 data;

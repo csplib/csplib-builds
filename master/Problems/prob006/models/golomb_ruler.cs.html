@@ -132,7 +132,7 @@ public class GolombRuler
     //
     IntVar[] ticks =  solver.MakeIntVarArray(m,
                                              0,
-                                             ((m < 31) ? (1 << (m + 1)) - 1 : 9999),
+                                             ((m &lt; 31) ? (1 &lt;&lt; (m + 1)) - 1 : 9999),
                                              "ticks");
 
     IntVar[] diff = new IntVar[(m * m - m) / 2];
@@ -143,23 +143,23 @@ public class GolombRuler
     //
     solver.Add(ticks[0] == 0);
 
-    for(int i = 0; i < ticks.Length - 1; i++) {
-      solver.Add(ticks[i] < ticks[i+1]);
+    for(int i = 0; i &lt; ticks.Length - 1; i++) {
+      solver.Add(ticks[i] &lt; ticks[i+1]);
     }
 
 
-    for (int k = 0, i = 0; i < m - 1; i++) {
-      for (int j = i + 1; j < m; j++, k++) {
+    for (int k = 0, i = 0; i &lt; m - 1; i++) {
+      for (int j = i + 1; j &lt; m; j++, k++) {
         diff[k] = (ticks[j]-ticks[i]).Var();
-        solver.Add(diff[k] >= (j - i) * (j - i + 1) / 2);
+        solver.Add(diff[k] &gt;= (j - i) * (j - i + 1) / 2);
       }
     }
 
     solver.Add(diff.AllDifferent());
 
     // break symetries
-    if (m > 2) {
-      solver.Add(diff[0] < diff[diff.Length - 1]);
+    if (m &gt; 2) {
+      solver.Add(diff[0] &lt; diff[diff.Length - 1]);
     }
 
 
@@ -177,7 +177,7 @@ public class GolombRuler
                                           Solver.ASSIGN_MIN_VALUE);
 
     // We just want the debug info for larger instances.
-    if (m >= 11) {
+    if (m &gt;= 11) {
 
       SearchMonitor log = solver.MakeSearchLog(10000, opt);
       solver.NewSearch(db, opt, log);
@@ -190,7 +190,7 @@ public class GolombRuler
 
     while (solver.NextSolution()) {
       Console.Write("opt: {0}  [ ", ticks[m-1].Value());
-      for(int i = 0; i < m; i++) {
+      for(int i = 0; i &lt; m; i++) {
           Console.Write("{0} ", ticks[i].Value());
       }
       Console.WriteLine("]");
@@ -209,7 +209,7 @@ public class GolombRuler
   public static void Main(String[] args)
   {
     int n = 8;
-    if (args.Length > 0) {
+    if (args.Length &gt; 0) {
       n = Convert.ToInt32(args[0]);
     }
 

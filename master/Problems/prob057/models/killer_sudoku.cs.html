@@ -186,9 +186,9 @@ public class KillerSudoku
 
     // size of matrix
     int cell_size = 3;
-    IEnumerable<int> CELL = Enumerable.Range(0, cell_size);
+    IEnumerable&lt;int&gt; CELL = Enumerable.Range(0, cell_size);
     int n = cell_size*cell_size;
-    IEnumerable<int> RANGE = Enumerable.Range(0, n);
+    IEnumerable&lt;int&gt; RANGE = Enumerable.Range(0, n);
 
     // For a better view of the problem, see
     //  http://en.wikipedia.org/wiki/File:Killersudoku_color.svg
@@ -270,12 +270,12 @@ public class KillerSudoku
 
 
     // Sum the segments and ensure alldifferent
-    for(int i = 0; i < num_p; i++) {
+    for(int i = 0; i &lt; num_p; i++) {
       int[] segment = problem[i];
 
       // Remove the sum from the segment
       int[] s2 = new int[segment.Length-1];
-      for(int j = 1; j < segment.Length; j++) {
+      for(int j = 1; j &lt; segment.Length; j++) {
         s2[j-1] = segment[j];
       }
 
@@ -299,10 +299,10 @@ public class KillerSudoku
     solver.NewSearch(db);
 
     while (solver.NextSolution()) {
-      for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
+      for(int i = 0; i &lt; n; i++) {
+        for(int j = 0; j &lt; n; j++) {
           int v = (int)x[i,j].Value();
-          if (v > 0) {
+          if (v &gt; 0) {
             Console.Write(v + " ");
           } else {
             Console.Write("  ");

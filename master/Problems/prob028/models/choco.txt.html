@@ -91,7 +91,7 @@
 <pre >
 
 [bibd(v:integer, b:integer, r:integer, k:integer, lambda:integer) : Problem
- -> let n := (v * b) + (b * v * (v - 1)) / 2,
+ -&gt; let n := (v * b) + (b * v * (v - 1)) / 2,
         pb := makeProblem("BIBD",n)
     in (for i in (1 .. v)
          (for j in (1 .. b)
@@ -127,27 +127,27 @@
 //
 // To run the program do as follows
 // 
-// > p:Problem := bibd(6,10,5,3,2)
-// > solve(p,false)
-// > look(p,6,10)
+// &gt; p:Problem := bibd(6,10,5,3,2)
+// &gt; solve(p,false)
+// &gt; look(p,6,10)
 //
 
 
 [M(A:list[IntVar],i:integer,j:integer,rows:integer,cols:integer) : IntVar
- -> A[cols * (i - 1) + j]]
+ -&gt; A[cols * (i - 1) + j]]
 
 [row(A:list[IntVar],i:integer,rows:integer,cols:integer) : list[IntVar]
- -> list{M(A,i,j,rows,cols) | j in (1 .. cols)}]
+ -&gt; list{M(A,i,j,rows,cols) | j in (1 .. cols)}]
 
 [column(A:list[IntVar],j:integer,rows:integer,cols:integer) : list[IntVar]
- -> list{M(A,i,j,rows,cols) | i in (1 .. rows)}]
+ -&gt; list{M(A,i,j,rows,cols) | i in (1 .. rows)}]
 
 [look(p:Problem,rows:integer,columns:integer) : void
- -> for i in (1 .. rows) 
+ -&gt; for i in (1 .. rows) 
       printf("\n ~S ",list{getValue(v) | v in row(p.vars,i,rows,columns)}),
     printf("\n")]
 //
-// Given a bibd p <v,b,r,k,lambda> display it as a 0/1 incidence matrix
+// Given a bibd p &lt;v,b,r,k,lambda&gt; display it as a 0/1 incidence matrix
 // look(p,v,b)
 //
 
@@ -161,7 +161,7 @@
 --------------------------cut here----------------------------
 
 Script started on Tue Sep 18 15:18:38 2001
->> choco -s 3 3
+&gt;&gt; choco -s 3 3
 increasing memory size by 2^3 and 2^3
 -- CLAIRE run-time library v 2.5.6 [os: ntv, C++:gcc ] --
 -- CLAIRE interpreter - Copyright (C) 1994-00 Y. Caseau (see about())
@@ -169,17 +169,17 @@ Choco version 1.07, Copyright (C) 1999-2001 F. Laburthe
 Choco comes with ABSOLUTELY NO WARRANTY; for details read licence.txt
 This is free software, and you are welcome to redistribute it
 under certain conditions; read licence.txt for details.
-choco> load("bibd")
-eval[0]> true
-choco> p:Problem := bibd(6,10,5,3,2)
-eval[1]> p
-choco> system.verbose := 1
-eval[2]> 1
-choco> solve(p,false)
-eval[3]> solve => 1 solution [76nd., 82bk.] in 40 ms.
+choco&gt; load("bibd")
+eval[0]&gt; true
+choco&gt; p:Problem := bibd(6,10,5,3,2)
+eval[1]&gt; p
+choco&gt; system.verbose := 1
+eval[2]&gt; 1
+choco&gt; solve(p,false)
+eval[3]&gt; solve =&gt; 1 solution [76nd., 82bk.] in 40 ms.
 true
-choco> look(p,6,10)
-eval[4]> 
+choco&gt; look(p,6,10)
+eval[4]&gt; 
  (0, 0, 0, 0, 0, 1, 1, 1, 1, 1) 
  (0, 0, 1, 1, 1, 0, 0, 0, 1, 1) 
  (0, 1, 0, 1, 1, 0, 1, 1, 0, 0) 
@@ -187,9 +187,9 @@ eval[4]>
  (1, 1, 0, 1, 0, 1, 0, 0, 0, 1) 
  (1, 1, 1, 0, 0, 0, 1, 0, 1, 0) 
 nil
-choco> q
-eval[5]> Bye.
->> exit
+choco&gt; q
+eval[5]&gt; Bye.
+&gt;&gt; exit
 exit
 
 Script done on Tue Sep 18 15:19:44 2001

@@ -121,7 +121,7 @@ fix_min([V|R], M, R) :-
         V = M,
         inc_choice.
 fix_min([V|R], M, [V|S]) :-
-        V #> M,
+        V #&gt; M,
         fix_min(R, M, S).
 
 lmindomain([H|T], M) :- 

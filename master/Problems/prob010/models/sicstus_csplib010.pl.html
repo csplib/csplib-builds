@@ -143,7 +143,7 @@ golfer(G, S, W, Schedule, PlayersByRow, PlayersByCol, Opt) :-
 		    fromto(Q0,Q1,Q2,_),
 		    param(S)
 		do  P1/S #= Q2,
-		    Q1 #< Q2
+		    Q1 #&lt; Q2
 		)
 	    ),
 	    seed_week(0, S, Week)
@@ -179,18 +179,18 @@ players_meet_disjoint(Schedule, G, S, Opt) :-
 	),
 	all_distinct(MeetVars, Opt).
 
-groups_meets([], Tuples, Tuples) --> [].
-groups_meets([Group|Groups], Tuples1, Tuples3) -->
+groups_meets([], Tuples, Tuples) --&gt; [].
+groups_meets([Group|Groups], Tuples1, Tuples3) --&gt;
 	group_meets(Group, Tuples1, Tuples2),
 	groups_meets(Groups, Tuples2, Tuples3).
 
-group_meets([], Tuples, Tuples) --> [].
-group_meets([P|Ps], Tuples1, Tuples3) -->
+group_meets([], Tuples, Tuples) --&gt; [].
+group_meets([P|Ps], Tuples1, Tuples3) --&gt;
 	group_meets(Ps, P, Tuples1, Tuples2),
 	group_meets(Ps, Tuples2, Tuples3).
 
-group_meets([], _, Tuples, Tuples) --> [].
-group_meets([Q|Qs], P, [[P,Q,PQ]|Tuples1], Tuples2) --> [PQ],
+group_meets([], _, Tuples, Tuples) --&gt; [].
+group_meets([Q|Qs], P, [[P,Q,PQ]|Tuples1], Tuples2) --&gt; [PQ],
 	group_meets(Qs, P, Tuples1, Tuples2).
 
 seed_week(S, S, Week) :- !,
@@ -202,7 +202,7 @@ seed_week(I, S, [[I|_]|Week]) :-
 
 seed_week([], _).
 seed_week([[J|_]|Week], I) :-
-	I #< J,
+	I #&lt; J,
 	seed_week(Week, J).
 
 ordered_players_by_week([W|Ws]) :-
@@ -212,7 +212,7 @@ ordered_players_by_week([], _).
 ordered_players_by_week([W|Ws], V) :-
 	W = [_,Y|_],
 	V = [_,X|_],
-	X #< Y,
+	X #&lt; Y,
 	ordered_players_by_week(Ws, W).
 
 first_s_alldiff(S, S, _Schedule, _) :- !.

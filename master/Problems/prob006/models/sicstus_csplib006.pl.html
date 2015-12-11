@@ -124,17 +124,17 @@ marks(N1, [0|Xs], Xn, Opt) :-
 	do  (   foreach(D,Row),
 		count(J,1,_)
 	    do  d(J, N2),
-		D #>= N2
+		D #&gt;= N2
 	    )
 	),
 	Xs = [X1|_],
 	last(Xs, Xn),
 	last(Triangle, [Dmn]),
-	X1 #< Dmn,		% break symmetries
+	X1 #&lt; Dmn,		% break symmetries
 	all_distinct(Ds, Opt).
 
-deltas([_], [], _Opt) --> !.
-deltas([X|Xs], [Row|Triangle], Opt) -->
+deltas([_], [], _Opt) --&gt; !.
+deltas([X|Xs], [Row|Triangle], Opt) --&gt;
 	(   foreach(Xj,Xs),
 	    foreach(Dij,Row),
 	    param([X,Opt])

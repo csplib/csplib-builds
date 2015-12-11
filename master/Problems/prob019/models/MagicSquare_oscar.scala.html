@@ -125,8 +125,8 @@ object MagicSquare {
 
     val cp = CPSolver()
 
-    val n = if (args.length > 0) args(0).toInt else 4;
-    val num_to_show = if (args.length > 1) args(1).toInt else 0;
+    val n = if (args.length &gt; 0) args(0).toInt else 4;
+    val num_to_show = if (args.length &gt; 1) args(1).toInt else 0;
 
     val n2 = n*n
 
@@ -150,19 +150,19 @@ object MagicSquare {
        cp.add(allDifferent(x.flatten), Strong)
 
        // rows and columns
-       for(i <- 0 until n) {
+       for(i &lt;- 0 until n) {
          cp.add(sum(x(i)) == total)
          cp.add(sum(x_t(i)) == total)
        }
   
        // diagonals
-       cp.add(sum( for(i <- 0 until n) yield x(i)(i)) == total)
-       cp.add(sum( for(i <- 0 until n) yield x(i)(n-i-1) ) == total)
+       cp.add(sum( for(i &lt;- 0 until n) yield x(i)(i)) == total)
+       cp.add(sum( for(i &lt;- 0 until n) yield x(i)(n-i-1) ) == total)
 
        // symmetry breaking
-       cp.add(x(0)(0)   < x(0)(n-1))
-       cp.add(x(0)(n-1) < x(n-1)(0))
-       cp.add(x(0)(0)   < x(n-1)(n-1))
+       cp.add(x(0)(0)   &lt; x(0)(n-1))
+       cp.add(x(0)(n-1) &lt; x(n-1)(0))
+       cp.add(x(0)(0)   &lt; x(n-1)(n-1))
 
 
      } search {
@@ -172,8 +172,8 @@ object MagicSquare {
      } onSolution {
        
        println("\nSolution:\ntotal " + total)
-       for(i <- 0 until n) {
-         println(x(i).map(j=>"%3d".format(j.value)).mkString(""))
+       for(i &lt;- 0 until n) {
+         println(x(i).map(j=&gt;"%3d".format(j.value)).mkString(""))
        }
        println()
        

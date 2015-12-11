@@ -89,12 +89,12 @@
 
 <a href="/csplib-builds/master/Problems/prob010/models/AMPLmodel.txt">Download</a>
 <pre >In sci.op-research, bigwind777@aol.com (Bigwind777) writes:
->
-> I have 32 golfers, individual play.
-> We will golf for 16 weeks.
-> I want to set up the foursomes so each person only golfs
-> with the same person once.
-> How many weeks can we do this before it starts to duplicate ?
+&gt;
+&gt; I have 32 golfers, individual play.
+&gt; We will golf for 16 weeks.
+&gt; I want to set up the foursomes so each person only golfs
+&gt; with the same person once.
+&gt; How many weeks can we do this before it starts to duplicate ?
 
 The structure of the problem is similar to the `progressive party
 problem' (see Smith et. al in "Constraints" Vol 1.), let's take a
@@ -124,7 +124,7 @@ looks like
   # variable P[i,j,t] means i plays in foursome j in week t
   var P { Players, Foursomes, Weeks } binary;
 
-  # auxiliary variable M[i,j,t] means i meets j in week t (i<j)
+  # auxiliary variable M[i,j,t] means i meets j in week t (i&lt;j)
   var M { Players, Players, Weeks } binary;
 
 
@@ -140,16 +140,16 @@ looks like
 
 
   # link the M and P variables
-  subject to LMP { i in Players, j in Players, f in Foursomes, t in Weeks: i<j }:
-	  P[i,f,t]+P[j,f,t] - M[i,j,t] <= 1;
+  subject to LMP { i in Players, j in Players, f in Foursomes, t in Weeks: i&lt;j }:
+	  P[i,f,t]+P[j,f,t] - M[i,j,t] &lt;= 1;
 
   # each pair of players only meets once
-  subject to MO { i in Players, j in Players: i<j }:
-	  sum { t in Weeks } M[i,j,t] <= 1;
+  subject to MO { i in Players, j in Players: i&lt;j }:
+	  sum { t in Weeks } M[i,j,t] &lt;= 1;
 
   # fix first round and some symmetry
   fix { p in Players } P[p,int((p-1)/4)+1,1] := 1;
-  fix { p in Players, t in Weeks: t >= 2 and p <= 4 } P[p,p,t] := 1;
+  fix { p in Players, t in Weeks: t &gt;= 2 and p &lt;= 4 } P[p,p,t] := 1;
 
 Spelled out, the above model has 5152 Boolean variables and 22652
 constraints.

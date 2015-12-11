@@ -148,14 +148,14 @@ bibd(Lex, V, B, R, K, Lambda, Cells, Rows) :-
 	    )
 	),
 	transpose(Rows, Columns),
-	(   Lex==lex ->
+	(   Lex==lex -&gt;
 	    Rows = LexRows,
 	    Columns = LexColumns
 	;   reverse(Rows, LexRows),
 	    reverse(Columns, LexColumns)
 	),
-	lex_chain(LexRows, [op(#<)/*,among(R,R,[1])*/]),
-	lex_chain(LexColumns, [op(#=<)/*,among(K,K,[1])*/]),
+	lex_chain(LexRows, [op(#&lt;)/*,among(R,R,[1])*/]),
+	lex_chain(LexColumns, [op(#=&lt;)/*,among(K,K,[1])*/]),
 	(   foreach(Row2,Rows),
 	    param(R)
 	do  sum(Row2, #=, R)
@@ -171,7 +171,7 @@ bibd(Lex, V, B, R, K, Lambda, Cells, Rows) :-
 	    do  (   foreach(X,Row0),
 		    foreach(Y,Row3),
 		    foreach(Z,S)
-		do  X #/\ Y #<=> Z
+		do  X #/\ Y #&lt;=&gt; Z
 		),
 		sum(S, #=, Lambda)
 	    )

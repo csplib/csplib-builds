@@ -125,7 +125,7 @@
   Haskell solution:
   http://twan.home.fmf.nl/blog/haskell/Nonograms.details
 
-  Brunetti, Sara & Daurat, Alain (2003)
+  Brunetti, Sara &amp; Daurat, Alain (2003)
   'An algorithm reconstructing convex lattice sets'
   http://geodisi.u-strasbg.fr/~daurat/papiers/tomoqconv.pdf
 
@@ -190,7 +190,7 @@ def make_transition_tuples(pattern):
       tuples.Insert3(state, 0, state)
       tuples.Insert3(state, 1, state + 1)
     else:
-      if i < num_states - 1:
+      if i &lt; num_states - 1:
         if tmp[i + 1] == 1:
           tuples.Insert3(state, 1, state + 1)
         else:
@@ -203,7 +203,7 @@ def make_transition_tuples(pattern):
 # check each rule by creating an automaton and transition constraint.
 #
 def check_rule(rules, y):
-  cleaned_rule = [rules[i] for i in range(len(rules)) if rules[i] > 0]
+  cleaned_rule = [rules[i] for i in range(len(rules)) if rules[i] &gt; 0]
   (transition_tuples, last_state) = make_transition_tuples(cleaned_rule)
 
   initial_state = 1
@@ -234,7 +234,7 @@ def main(rows, row_rule_len, row_rules, cols, col_rule_len, col_rules):
   # This labeling was inspired by a suggestion from
   # Pascal Van Hentenryck about my Comet nonogram model.
   board_label = []
-  if rows * row_rule_len < cols * col_rule_len:
+  if rows * row_rule_len &lt; cols * col_rule_len:
     for i in range(rows):
       for j in range(cols):
         board_label.append(board[i, j])
@@ -281,7 +281,7 @@ def main(rows, row_rule_len, row_rules, cols, col_rule_len, col_rules):
     print
     print '  ', '-' * cols
 
-    if num_solutions >= 2:
+    if num_solutions &gt;= 2:
       print '2 solutions is enough...'
       break
 
@@ -334,7 +334,7 @@ col_rules = [
 
 
 if __name__ == '__main__':
-  if len(sys.argv) > 1:
+  if len(sys.argv) &gt; 1:
     file = sys.argv[1]
     execfile(file)
   main(rows, row_rule_len, row_rules, cols, col_rule_len, col_rules)

@@ -161,9 +161,9 @@ all_interval(N) :-
         % symmetry breaking
         element(1,Xs,XsFirst),
         element(N1,Xs,XsLast),
-        XsFirst #< XsLast,
+        XsFirst #&lt; XsLast,
         Diffs = [Diffs1,Diffs2|_],
-        Diffs1 #< Diffs2,
+        Diffs1 #&lt; Diffs2,
 
         %
         % With labeling ff the first solution is found
