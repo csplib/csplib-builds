@@ -3,7 +3,8 @@
     "Unclassified"
   ],
   "extensions": [
-    "mzn"
+    "mzn",
+    "dzn"
   ],
   "id": "MiniZinc",
   "title": "MiniZinc"
