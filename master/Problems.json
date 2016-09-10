@@ -706,6 +706,17 @@
     ],
     "title": "Ridesharing"
   },
+  "prob062": {
+    "category": [
+      "TimeTabling"
+    ],
+    "id": "prob062",
+    "number": 62,
+    "proposer": [
+      "Helmut Simonis"
+    ],
+    "title": "Interview Assignment Problem"
+  },
   "prob063": {
     "category": [
       "Design and configuration"
