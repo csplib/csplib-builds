@@ -94,9 +94,9 @@ There are a set of precedence relations between pairs of activities which state 
 The set of precedence relations are usually given as a directed acyclic graph (DAG), where the edge (<em>u</em>,<em>v</em>) represents a precedence relation where <em>u</em> must finish before <em>v</em> begins. The DAG contains two additional activities with duration 0, the <em>source</em> and <em>sink</em>, where the <em>source</em> is the first activity and <em>sink</em> is the last activity (these are dummy activities).  </p>
 <p>There are a set of renewable resources. Each resource has a maximum capacity and at any given time slot no more than this amount can be in use. Each activity has a demand (possibly zero) on each resource. The dummy <em>source</em> and <em>sink</em> activities have zero demand on all resources. </p>
 <p>The problem is usually stated as an optimisation problem where the makespan (i.e. the completion time of the <em>sink</em> activity) is minimised. </p>
-<h1>Multi-mode Variant</h1>
+<h2>Multi-mode Variant</h2>
 <p>An extension of the basic RCPSP is the <em>multi-mode</em> variant where activities may have multiple <em>modes</em>. The mode dictates the duration and resource demands of the activity. In this variant, the schedule must give the mode of each activity as well as its starting time. </p>
-<h1>Non-Renewable Resources</h1>
+<h2>Non-Renewable Resources</h2>
 <p>Another extension concerns <em>non-renewable resources</em>. Each non-renewable resource has a capacity for the entire schedule. An example would be a financial budget that applies to the entire project. Modes of activities must be chosen to avoid exceeding the capacity of each of the non-renewable resources.</p>
 <p>The <a href="http://www.om-db.wi.tum.de/psplib/">PSPLIB repository</a> has a set of benchmark instances of various types of RCPSP<span> <a class="bibref" data-bibfragment="psplib_paper" href="/csplib-builds/master/Problems/prob061/references/#psplib_paper">[psplib_paper]</a></span>. </p>
 
