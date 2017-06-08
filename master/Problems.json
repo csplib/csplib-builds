@@ -890,6 +890,17 @@
     ],
     "title": "Costas Arrays"
   },
+  "prob077": {
+    "category": [
+      "Stochastic Constraint Programming"
+    ],
+    "id": "prob077",
+    "number": 77,
+    "proposer": [
+      "David Hemmi, Guido Tack and Mark Wallace"
+    ],
+    "title": "Stochastic Assignment and Scheduling Problem"
+  },
   "prob110": {
     "category": [
       "Combinatorial mathematics",
