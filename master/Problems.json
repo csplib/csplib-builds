@@ -901,6 +901,18 @@
     ],
     "title": "Stochastic Assignment and Scheduling Problem"
   },
+  "prob078": {
+    "category": [
+      "Scheduling and related problems"
+    ],
+    "id": "prob078",
+    "number": 78,
+    "proposer": [
+      "Quentin Cappart",
+      "Pierre Schaus"
+    ],
+    "title": "Train Traffic Rescheduling"
+  },
   "prob110": {
     "category": [
       "Combinatorial mathematics",
