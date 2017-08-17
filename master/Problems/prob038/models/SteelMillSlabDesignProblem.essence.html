@@ -110,7 +110,7 @@ find cut : function set of Order --&gt; sizes
 minimising sum (_,os) in toSet(cut) . os
 
 such that
-    forAll os1, os2 in defined(cut), os1 != os2 . |os1 intersect os2| = 0,
+    forAll os1, os2 in defined(cut), os2 &gt; os1 . |os1 intersect os2| = 0,
     forAll o : Order . exists os in defined(cut) . o in os,
     forAll os in defined(cut) . (sum o in os . ordSize(o)) &lt;= cut(os),
     forAll (os,cut_os) in toSet(cut) . (sum o in os . ordSize(o)) &lt;= cut_os,

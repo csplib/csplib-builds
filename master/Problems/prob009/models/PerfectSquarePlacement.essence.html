@@ -110,7 +110,7 @@ find x, y : function (total) Square --&gt; Index
 
 such that
     forAll s : Square . x(s) + s &lt; container_size /\ y(s) + s &lt; container_size,
-    forAll s1,s2 : Square , s1 != s2 .
+    forAll s1,s2 : Square , s2 &gt; s1 .
         max({x(s1),x(s2)}) - min({x(s1)+s1,x(s2)+s2}) &gt;= 0 \/
         max({y(s1),y(s2)}) - min({y(s1)+s1,y(s2)+s2}) &gt;= 0
 
