@@ -913,6 +913,28 @@
     ],
     "title": "Train Traffic Rescheduling"
   },
+  "prob079": {
+    "category": [
+      "Games and Puzzles"
+    ],
+    "id": "prob079",
+    "number": 79,
+    "proposer": [
+      "Ian Gent"
+    ],
+    "title": "n-Queens Completion Problem and Excluded Diagonals n-Queens Problem"
+  },
+  "prob080": {
+    "category": [
+      "Games and Puzzles"
+    ],
+    "id": "prob080",
+    "number": 80,
+    "proposer": [
+      "Ian Gent"
+    ],
+    "title": "Blocked n-Queens Problem"
+  },
   "prob110": {
     "category": [
       "Combinatorial mathematics",
