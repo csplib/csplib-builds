@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,36 +61,41 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-1/Problems/prob016/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-1/Problems/prob016.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob016/models/traffic_lights.pi">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
 
 
 <a href="/csplib-builds/turingfan-patch-1/Problems/prob016/models/traffic_lights.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Traffic lights problem in Picat.
 
   CSPLib problem 16
-  http://www.cs.st-andrews.ac.uk/~ianm/CSPLib/prob/prob016/index.html
+  http://www.csplib.org/Problems/prob016
   """
   Specification:
   Consider a four way traffic junction with eight traffic lights. Four of the traffic 
@@ -99,7 +104,7 @@
   for the pedestrians and can be represented by the variables P1 to P4 with domains {r,g}.
   
   The constraints on these variables can be modelled by quaternary constraints on 
-  (Vi, Pi, Vj, Pj ) for 1<=i<=4, j=(1+i)mod 4 which allow just the tuples 
+  (Vi, Pi, Vj, Pj ) for 1&lt;=i&lt;=4, j=(1+i)mod 4 which allow just the tuples 
   {(r,r,g,g), (ry,r,y,r), (g,g,r,r), (y,r,ry,r)}.
  
   It would be interesting to consider other types of junction (e.g. five roads 
@@ -127,9 +132,9 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go => 
+go =&gt; 
     L = findall([V,P], $traffic_lights(V,P)),
     writeln(L),
     print_results(L),
@@ -141,7 +146,7 @@ go =>
     nl.
 
 
-print_results(L) =>
+print_results(L) =&gt;
     foreach([V,P] in L)
        foreach(I in 1..4)
           tr(VC,V[I]),
@@ -151,7 +156,7 @@ print_results(L) =>
        nl
     end.
 
-traffic_lights(V, P) =>
+traffic_lights(V, P) =&gt;
     N  = 4,
 
     V = new_list(N),
@@ -176,7 +181,7 @@ traffic_lights(V, P) =>
     writeln(vars=Vars).
 
 
-check_allowed(VI, PI, VJ, PJ) ?=>
+check_allowed(VI, PI, VJ, PJ) ?=&gt;
     L1 = [],
     foreach(El in [VI, PI, VJ, PJ])
       if tr(C,El) then 
@@ -188,7 +193,7 @@ check_allowed(VI, PI, VJ, PJ) ?=>
     allowed(L).
 
 
-check_allowed2(VI, PI, VJ, PJ, Allowed) ?=>
+check_allowed2(VI, PI, VJ, PJ, Allowed) ?=&gt;
     L1 = [],
     foreach(El in [VI, PI, VJ, PJ])
       writeln(el=El),
@@ -207,7 +212,7 @@ check_allowed2(VI, PI, VJ, PJ, Allowed) ?=>
 %
 % Using table Allowed
 %
-traffic_lights_table(V, P) =>
+traffic_lights_table(V, P) =&gt;
     N  = 4,
 
     % allowed/1 as a table (translated)
@@ -235,16 +240,16 @@ traffic_lights_table(V, P) =>
 
 % Note: I'm not sure this is the best 
 %       representation...
-tr(L,A) ?=> L=r,  A=1.
-tr(L,A) ?=> L=ry, A=2.
-tr(L,A) ?=> L=g,  A=3.
-tr(L,A)  => L=y,  A=4.
+tr(L,A) ?=&gt; L=r,  A=1.
+tr(L,A) ?=&gt; L=ry, A=2.
+tr(L,A) ?=&gt; L=g,  A=3.
+tr(L,A)  =&gt; L=y,  A=4.
 
 % The allowed combinations
-allowed(A) ?=> A = [r,r,g,g].
-allowed(A) ?=> A = [ry,r,y,r]. 
-allowed(A) ?=> A = [g,g,r,r].
-allowed(A)  => A = [y,r,ry,r].
+allowed(A) ?=&gt; A = [r,r,g,g].
+allowed(A) ?=&gt; A = [ry,r,y,r]. 
+allowed(A) ?=&gt; A = [g,g,r,r].
+allowed(A)  =&gt; A = [y,r,ry,r].
 
 </pre>
 
@@ -257,23 +262,30 @@ allowed(A)  => A = [y,r,ry,r].
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-1/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-1/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-1/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -283,7 +295,7 @@ allowed(A)  => A = [y,r,ry,r].
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

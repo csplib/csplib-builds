@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-1/Problems/prob033.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob033/data/word.mod">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -100,7 +105,7 @@ range size 1..m;
 
 
 struct adj { int a; int b;};
-{adj} adjacent = {<i,j> | ordered i,j in size};
+{adj} adjacent = {&lt;i,j&gt; | ordered i,j in size};
 
 
 
@@ -115,7 +120,7 @@ in allowed;
 
 
 struct comp { int a; int b;};
-{comp} Comps = { <0,2>, <1,3>, <2,0>, <3,1> };
+{comp} Comps = { &lt;0,2&gt;, &lt;1,3&gt;, &lt;2,0&gt;, &lt;3,1&gt; };
 
 predicate link(int a, int b) in Comps;
 
@@ -144,16 +149,16 @@ forall(i in size)
 //This constraint enforces each pair of distinct words to
 //differ in at least 4 positions
 forall(ordered i,j in size)
-   sum(k in word)  (M[i,k]=M[j,k]) <= 4 ;
+   sum(k in word)  (M[i,k]=M[j,k]) &lt;= 4 ;
 
 //This constraint ensures that the reverse of a word and the
 //complement of any other word differ in at least 4 positions
 forall(ordered i,j in size)  
-  sum(k in word) (M[i,9-k]=MC[j,k]) <= 4;
+  sum(k in word) (M[i,9-k]=MC[j,k]) &lt;= 4;
 
 //Lex order the rows to break row symmetry
 forall(ordered i,j in size)
- M[i,1]*16384 + M[i,2]*4096 + M[i,3]*1024 + M[i,4]*256 + M[i,5]*64 + M[i,6]*16 + M[i,7]*4 + M[i,8] <
+ M[i,1]*16384 + M[i,2]*4096 + M[i,3]*1024 + M[i,4]*256 + M[i,5]*64 + M[i,6]*16 + M[i,7]*4 + M[i,8] &lt;
  M[j,1]*16384 + M[j,2]*4096 + M[j,3]*1024 + M[j,4]*256 + M[j,5]*64 + M[j,6]*16 + M[j,7]*4 + M[j,8];
 
 
@@ -413,23 +418,30 @@ G=[
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-1/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-1/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-1/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -439,7 +451,7 @@ G=[
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-1/Problems/prob049/data">Data files</a></li>
+     	<li><a class='no-files' href="/csplib-builds/turingfan-patch-1/Problems/prob049/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-1/Problems/prob049.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob049/models/set_partition.cpp">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -95,12 +100,12 @@
    This is a partition problem.
    Given the set S = {1, 2, ..., n}, 
    it consists in finding two sets A and B such that:
-   <ul>
-   <li>A U B = S,</li>
-   <li>|A| = |B|,</li>
-   <li>sum(A) = sum(B),</li>
-   <li>sum_squares(A) = sum_squares(B).</li>
-   </ul>
+   &lt;ul&gt;
+   &lt;li&gt;A U B = S,&lt;/li&gt;
+   &lt;li&gt;|A| = |B|,&lt;/li&gt;
+   &lt;li&gt;sum(A) = sum(B),&lt;/li&gt;
+   &lt;li&gt;sum_squares(A) = sum_squares(B).&lt;/li&gt;
+   &lt;/ul&gt;
   """
 
   Compare with my other models:
@@ -123,9 +128,9 @@
 
 // Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
 
-#include <gecode/driver.hh>
-#include <gecode/int.hh>
-#include <gecode/minimodel.hh>
+#include &lt;gecode/driver.hh&gt;
+#include &lt;gecode/int.hh&gt;
+#include &lt;gecode/minimodel.hh&gt;
 
 using namespace Gecode;
 
@@ -145,7 +150,7 @@ protected:
 
 public:
 
-  SetPartition(const SizeOptions& opt) 
+  SetPartition(const SizeOptions&amp; opt) 
   : 
     n(opt.size()),
     a(*this, num_sets, IntSet::empty, IntSet(1, n)),
@@ -159,30 +164,30 @@ public:
     // create sets for the weighted sums
     IntArgs weights1;
     IntArgs weights_squared;
-    for(int i = 1; i <= n; i++) {
-      weights1 << i;
-      weights_squared<< i*i;
+    for(int i = 1; i &lt;= n; i++) {
+      weights1 &lt;&lt; i;
+      weights_squared&lt;&lt; i*i;
     }
 
     //  use all the elements in S and it should be disjoint sets
-    for(int i = 0; i < num_sets; i++) {
+    for(int i = 0; i &lt; num_sets; i++) {
       cardinality(*this, a[i], card, card);
     }
     // disjoint sets
-    for(int i = 0; i < num_sets; i++) {
-      for(int j = 0; j < i; j++) {
+    for(int i = 0; i &lt; num_sets; i++) {
+      for(int j = 0; j &lt; i; j++) {
         rel(*this, a[i] || a[j]);
       }
     }
 
     // get the sums
-    for(int i = 0; i < num_sets; i++) {
+    for(int i = 0; i &lt; num_sets; i++) {
       weights(*this, weights1, weights1, a[i], sums[i]);
       weights(*this, weights1, weights_squared, a[i], sum_squared[i]);
     }
 
     // the sets have equal sums and equal squared sums
-    for(int i = 1; i < num_sets; i++) {
+    for(int i = 1; i &lt; num_sets; i++) {
       rel(*this, sums[i] == sums[i-1]);
       rel(*this, sum_squared[i] == sum_squared[i-1]);
     }
@@ -200,15 +205,15 @@ public:
 
   // Print solution
   virtual void
-  print(std::ostream& os) const {
-    os << "a          : " << a << std::endl;
-    os << "sums       : " << sums << std::endl;
-    os << "sum_squared: " << sum_squared << std::endl;
-    os << std::endl;
+  print(std::ostream&amp; os) const {
+    os &lt;&lt; "a          : " &lt;&lt; a &lt;&lt; std::endl;
+    os &lt;&lt; "sums       : " &lt;&lt; sums &lt;&lt; std::endl;
+    os &lt;&lt; "sum_squared: " &lt;&lt; sum_squared &lt;&lt; std::endl;
+    os &lt;&lt; std::endl;
   }
 
   // Constructor for cloning s
-  SetPartition(bool share, SetPartition& s) : Script(share,s), n(s.n)  {
+  SetPartition(bool share, SetPartition&amp; s) : Script(share,s), n(s.n)  {
     a.update(*this, share, s.a);
     sums.update(*this, share, s.sums);
     sum_squared.update(*this, share, s.sum_squared);
@@ -233,12 +238,12 @@ main(int argc, char* argv[]) {
 
   /*
   if (opt.size() % 2 == 1) {
-    std::cerr << "Size " << opt.size() << " is not even." << endl;
+    std::cerr &lt;&lt; "Size " &lt;&lt; opt.size() &lt;&lt; " is not even." &lt;&lt; endl;
     return 1;
   }
   */
 
-  Script::run<SetPartition,DFS,SizeOptions>(opt);
+  Script::run&lt;SetPartition,DFS,SizeOptions&gt;(opt);
 
   return 0;
 }
@@ -256,23 +261,30 @@ main(int argc, char* argv[]) {
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-1/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-1/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-1/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -282,7 +294,7 @@ main(int argc, char* argv[]) {
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

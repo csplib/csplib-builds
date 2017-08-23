@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-1/Problems/prob013/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-1/Problems/prob013.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob013/models/sicstus_csplib013.pl">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -107,7 +112,7 @@
  * Variables:
  * 
  *     h(I,T) in 1..13 : the host boat that guest boat I visits at time T
- *     m(I,J,T) #<=> h(I,T) #= h(J,T)
+ *     m(I,J,T) #&lt;=&gt; h(I,T) #= h(J,T)
  *     
  * 
  * Problem constraints:
@@ -118,17 +123,17 @@
  *                  task(1,1,2,4,h(13,1)), ..., task(6,1,7,4,h(13,6))],
  *		   [machine(1,10),...,machine(13,4)],
  *		   [bound(upper)])
- *     sum([m(I,J,1)...,m(I,J,6)], #=<, 1) % crews I,J can't meet twice
+ *     sum([m(I,J,1)...,m(I,J,6)], #=&lt;, 1) % crews I,J can't meet twice
  * 
  * Redundant constraints (do not seem to help):
  * 
- *     count(H, [h(1,T),...,h(29,T)], #>=, 1)
+ *     count(H, [h(1,T),...,h(29,T)], #&gt;=, 1)
  * 
  * Asymmetry constraints:
  * 
- *     h(1,1) #< ... #< h(1,6)
- *     I<J & crew(I) #= crew(J) #=> 
- *         (h(I,1) #=< h(J,1) #/\ (h(I,1) #< h(J,1) #\/ h(I,2) #< h(J,2)))
+ *     h(1,1) #&lt; ... #&lt; h(1,6)
+ *     I&lt;J &amp; crew(I) #= crew(J) #=&gt; 
+ *         (h(I,1) #=&lt; h(J,1) #/\ (h(I,1) #&lt; h(J,1) #\/ h(I,2) #&lt; h(J,2)))
  *
  * | ?- party.
  */
@@ -144,8 +149,8 @@ party :-
 	format('Guest~t~10|Hosts\n', []),
 	pp_party(13, 42, Vars).
 
-guest_vars(G, G, _) --> !.
-guest_vars(G0, G, Vars) -->
+guest_vars(G, G, _) --&gt; !.
+guest_vars(G0, G, Vars) --&gt;
 	{G1 is G0+1},
 	{aget(h(G1), Vars, Row)},
 	(foreach(X,Row) do [X]),		 
@@ -154,7 +159,7 @@ guest_vars(G0, G, Vars) -->
 pp_party(G, G, _) :- !.
 pp_party(I, G, Vars) :-
 	J is I+1,
-	(guest(J1, _, J) -> true),
+	(guest(J1, _, J) -&gt; true),
 	aget(h(J1), Vars, Row),
 	(   foreach(H,Row),
 	    foreach(H1,Row1)
@@ -184,7 +189,7 @@ party_constraints(Times, Vars) :-
 	do  (   for(H,1,G2-1),
 		param([G2,Vars])
 	    do  aget(m(G2,H), Vars, L2),
-		sum(L2, #=<, 1)
+		sum(L2, #=&lt;, 1)
 	    )
 	),
 	first_guest_order(Vars),
@@ -197,21 +202,21 @@ host_capacities(Hosts, Guests, Times, Vars) :-
 	host_cap_machines(0, Hosts, Mach, []),
 	cumulatives(Tasks, Mach, [bound(upper)]).
 
-host_cap_tasks(G, G, _, _) --> !.
-host_cap_tasks(G0, G, Times, Vars) -->
+host_cap_tasks(G, G, _, _) --&gt; !.
+host_cap_tasks(G0, G, Times, Vars) --&gt;
 	{G1 is G0+1},
 	guest_cap_tasks(0, Times, G1, Vars),
 	host_cap_tasks(G1, G, Times, Vars).
 
-guest_cap_tasks(T, T, _, _) --> !.
-guest_cap_tasks(T0, T, G1, Vars) --> [task(T0,1,T1,CrewSize,Host)],
+guest_cap_tasks(T, T, _, _) --&gt; !.
+guest_cap_tasks(T0, T, G1, Vars) --&gt; [task(T0,1,T1,CrewSize,Host)],
 	{T1 is T0+1},
 	{guest(G1, CrewSize, _)},
 	{aget(h(G1,T1), Vars, Host)},
 	guest_cap_tasks(T1, T, G1, Vars).
 
-host_cap_machines(H, H) --> !.
-host_cap_machines(H0, H) --> [machine(H1,Spare)],
+host_cap_machines(H, H) --&gt; !.
+host_cap_machines(H0, H) --&gt; [machine(H1,Spare)],
 	{H1 is H0+1},
 	{host(H1, Spare, _)},
 	host_cap_machines(H1, H).
@@ -222,7 +227,7 @@ first_guest_order(Vars) :-
 
 first_guest_order([], _).
 first_guest_order([H2|Hs], H1) :-
-	H1 #< H2,
+	H1 #&lt; H2,
 	first_guest_order(Hs, H2).
 
 % redundant(Hosts, Guests, Times, Vars)
@@ -232,7 +237,7 @@ redundant(H, G, T, Vars) :-
 	redundant(H, L),
 	(   for(I,1,H),
 	    param(L)
-	do  count(I, L, #>=, 1)
+	do  count(I, L, #&gt;=, 1)
 	),
 	T1 is T-1,
 	redundant(H, G, T1, Vars).
@@ -258,8 +263,8 @@ asym_crews1([G1,G2|Gs], Vars) :-
 	aget(h(G1,2), Vars, H12),
 	aget(h(G2,1), Vars, H21),
 	aget(h(G2,2), Vars, H22),
-	H11 #=< H21,
-	H11 #< H21 #\/ H12 #< H22,
+	H11 #=&lt; H21,
+	H11 #&lt; H21 #\/ H12 #&lt; H22,
 	asym_crews1([G2|Gs], Vars).
 
 h_array(0, _, _, _) :- !.
@@ -291,7 +296,7 @@ v_array2(_, _, 0, _, _) :- !.
 v_array2(I, J, T, Row, Vars) :-
 	arg(T, Row, X),
 	aget(h(I,T), Vars, Y),
-	Y #= J #<=> X,
+	Y #= J #&lt;=&gt; X,
 	T1 is T-1,
 	v_array2(I, J, T1, Row, Vars).
 
@@ -317,7 +322,7 @@ m_array2(I, J, T, Row, Vars) :-
 	arg(T, Row, X),
 	aget(h(I,T), Vars, Y),
 	aget(h(J,T), Vars, Z),
-	Y #= Z #<=> X,
+	Y #= Z #&lt;=&gt; X,
 	T1 is T-1,
 	m_array2(I, J, T1, Row, Vars).
 
@@ -444,23 +449,30 @@ sizes(13, 29).
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-1/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-1/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-1/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -470,7 +482,7 @@ sizes(13, 29).
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

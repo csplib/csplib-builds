@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-1/Problems/prob039.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob039/models/sicstus_csplib039.pl">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -107,19 +112,19 @@ rehearsal(ID) :-
 print_solution(Pieces, Players) :-
 	piece_events(Pieces, 0, L1, L2),
 	player_events(Players, 0, L2, []),
-	sort(L1, L3),		% for end < leave < arrive < start
+	sort(L1, L3),		% for end &lt; leave &lt; arrive &lt; start
 	(   foreach(Key-Val,L3)
 	do  print_event(Val, Key)
 	),
 	print_players(Players, 0, 0).
 
-piece_events([], _) --> [].
-piece_events([task(S,_,E,_,_)|L], I) --> [S-start(J),E-end(J)],
+piece_events([], _) --&gt; [].
+piece_events([task(S,_,E,_,_)|L], I) --&gt; [S-start(J),E-end(J)],
 	{J is I+1},
 	piece_events(L, J).
 
-player_events([], _) --> [].
-player_events([player(S,_,E,_,_)|L], I) --> [S-rive(J),E-leave(J)],
+player_events([], _) --&gt; [].
+player_events([player(S,_,E,_,_)|L], I) --&gt; [S-rive(J),E-leave(J)],
 	{J is I+1},
 	player_events(L, J).
 
@@ -148,8 +153,8 @@ search(Cost, Dur, TaskOrder) :-
 	min_max(1000000, Cost, [], TaskOrder, Dur, []).
 
 min_max(Cost0, Cost, _, TaskOrder, Dur, Ora1) :-
-	Cost #< Cost0,
-	findall(f(TaskOrder,Cost,Ora2), (left(TaskOrder,0,Dur,Ora1,Ora2)->true), [f(TO1,C1,O2)]), !,
+	Cost #&lt; Cost0,
+	findall(f(TaskOrder,Cost,Ora2), (left(TaskOrder,0,Dur,Ora1,Ora2)-&gt;true), [f(TO1,C1,O2)]), !,
 	min_max(C1, Cost, TO1, TaskOrder, Dur, O2).
 min_max(Cost, Cost, TaskOrder, TaskOrder, _, _).
 	
@@ -158,7 +163,7 @@ left(L1, Est, Lct, Ora1, [N|Ns]) :-
 	ora_head_tail(Ora1, M, Ms),
 	Item = task(Est,_,Est1,_,_),
 	select_nth(Item, L1, L2, 0, M, N),
-	(M=:=N -> Ora2=Ms ; Ora2=[]),
+	(M=:=N -&gt; Ora2=Ms ; Ora2=[]),
 	right(L2, Est1, Lct, Ora2, Ns).
 
 ora_head_tail([], 0, []).
@@ -169,7 +174,7 @@ right(L1, Est, Lct, Ora1, [N|Ns]) :-
 	ora_head_tail(Ora1, M, Ms),
 	Item = task(Lct1,_,Lct,_,_),
 	select_nth(Item, L1, L2, 0, M, N),
-	(M=:=N -> Ora2=Ms ; Ora2=[]),
+	(M=:=N -&gt; Ora2=Ms ; Ora2=[]),
 	left(L2, Est, Lct1, Ora2, Ns).
 
 system(ID, Cost, Dur, TaskOrder, Items, Players) :-
@@ -213,7 +218,7 @@ system(ID, Cost, Dur, TaskOrder, Items, Players) :-
 	),
 	% symmetries
 	TaskOrder = [task(S1,_,_,_,_),task(S2,_,_,_,_)|_],
-	S1 #< S2,
+	S1 #&lt; S2,
 	% redundant optimality constraints
 	findall(R, redundancy(PieceMat,PieceMatT,R), Red),
 	redundant(Red, Ss, Es, Players).
@@ -227,19 +232,19 @@ Redundancy idea 2: optimality constraints.
 Find Piece1 and Piece2 have identical columns except for some players Ps,
 who all play Piece2 but not Piece1. Then for any solution where:
 
-[1]  all P in Ps : min(P) < Piece1 < Piece2
+[1]  all P in Ps : min(P) &lt; Piece1 &lt; Piece2
 
 there is a solution which is no worse where:
 
-[2]  all P in Ps : min(P) < Piece2 < Piece1
+[2]  all P in Ps : min(P) &lt; Piece2 &lt; Piece1
 
 Similarly, for any solution where:
 
-[3]  all P in Ps : Piece2 < Piece1 < max(P)
+[3]  all P in Ps : Piece2 &lt; Piece1 &lt; max(P)
 
 there is a solution which is no worse where:
 
-[4]  all P in Ps : Piece1 < Piece2 < max(P)
+[4]  all P in Ps : Piece1 &lt; Piece2 &lt; max(P)
 
 So exclude [1] and [3], taking care to not wipe out
 a solution that matches both [1] and [3].
@@ -259,12 +264,12 @@ redundancy(Mat, _, subset(Player1,Player2,D)) :-
 % redundancy(Mat, _, disjoint(Player1,Player2)) :-
 % 	select_nth(Row1, Mat, _, 1, 1, Player1),
 % 	select_nth(Row2, Mat, _, 1, 1, Player2),
-% 	Player1 < Player2,
+% 	Player1 &lt; Player2,
 % 	disjoint_01(Row1, Row2).
 
 subset_01_diff([], [], D, D).
 subset_01_diff([X|L1], [Y|L2], D1, D3) :-
-	X =< Y,
+	X =&lt; Y,
 	D2 is D1+(Y-X),
 	subset_01_diff(L1, L2, D2, D3).
 
@@ -278,16 +283,16 @@ subset_01([0|L1], [1|L2], I, [J|L3]) :-
 
 % disjoint_01([], []).
 % disjoint_01([X|L1], [Y|L2]) :-
-% 	X+Y < 2,
+% 	X+Y &lt; 2,
 % 	disjoint_01(L1, L2).
 
 redundant([], _, _, _).
 redundant([subset(Player1,Player2,_)|Red], Ss, Es, MinMax) :- !,
 	nth1(Player1, MinMax, player(Min1,_D1,Max1,_,_)),
 	nth1(Player2, MinMax, player(Min2,_D2,Max2,_,_)),
-	Min1 #>= Min2, % helps
-	Max1 #=< Max2, % helps
-	% _D1 #=< _D2, % does not help
+	Min1 #&gt;= Min2, % helps
+	Max1 #=&lt; Max2, % helps
+	% _D1 #=&lt; _D2, % does not help
 	redundant(Red, Ss, Es, MinMax).
 % redundant([disjoint(Player1,Player2)|Red], Ss, Es, MinMax) :- !,
 % 	nth1(Player1, MinMax, player(Min1,_,Max1,_,_)),
@@ -302,8 +307,8 @@ redundant([swap(Players,Piece1,Piece2)|Red], Ss, Es, MinMax) :- !,
 	nth1(Piece1, Ss, S1),
 	nth1(Piece2, Ss, S2),
 	nth1(Piece1, Es, E1),
-	S1 #=< S2 #=> E1 #=< Min,
-	Min #= S2 #/\ S2 #=< S1 #=> S1 #>= Max, % not in the paper
+	S1 #=&lt; S2 #=&gt; E1 #=&lt; Min,
+	Min #= S2 #/\ S2 #=&lt; S1 #=&gt; S1 #&gt;= Max, % not in the paper
 	redundant(Red, Ss, Es, MinMax).
 
 mins_maxs([], _, [], []).
@@ -312,8 +317,8 @@ mins_maxs([P|Ps], MinMax, [Min|Mins], [Max|Maxs]) :-
 	mins_maxs(Ps, MinMax, Mins, Maxs).	
 
 % order: (i) min #occs, (ii) max dur
-tag_by_occ([], []) --> [].
-tag_by_occ([Col|Mat], [Item|Items]) --> [key(Occ,NDur)-Item],
+tag_by_occ([], []) --&gt; [].
+tag_by_occ([Col|Mat], [Item|Items]) --&gt; [key(Occ,NDur)-Item],
 	{Item = task(_,D,_,_,_)},
 	{NDur is -D},
 	{sumlist(Col, Occ)},
@@ -325,15 +330,15 @@ active([1|Row], [S|Ss], [E|Es], [D|Ds], [S|Ss1], [E|Es1], [D|Ds1]) :- !,
 active([0|Row], [_|Ss], [_|Es], [_|Ds], Ss1, Es1, Ds1) :-
 	active(Row, Ss, Es, Ds, Ss1, Es1, Ds1).
 
-costs([], [], Duty, Duty) --> [].
-costs([player(Min,Dur,Max,Duty,_)|MM], [Sal|Sals], Duty1, Duty3) --> [Sal-Dur],
+costs([], [], Duty, Duty) --&gt; [].
+costs([player(Min,Dur,Max,Duty,_)|MM], [Sal|Sals], Duty1, Duty3) --&gt; [Sal-Dur],
 	{Dur in Duty..sup},
 	{Dur #= Max-Min},
 	{Duty2 is Duty1+Sal*Duty},
 	costs(MM, Sals, Duty2, Duty3).
 
 select_nth(X, [Y|R],     R, K, Min, K) :-
-	K >= Min,
+	K &gt;= Min,
 	X = Y.
 select_nth(X, [A|L], [A|R], I, Min, K) :-
 	J is I+1,
@@ -386,23 +391,30 @@ durations(film2,       [1,1,1,1,3,1,1,1,1,1,1,1,1]).
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-1/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-1/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-1/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-1/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-1/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-1/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-1/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -412,7 +424,7 @@ durations(film2,       [1,1,1,1,3,1,1,1,1,1,1,1,1]).
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>
