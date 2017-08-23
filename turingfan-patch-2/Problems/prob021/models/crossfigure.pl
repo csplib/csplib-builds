@@ -3,7 +3,7 @@
   Crossfigure problem (CSPLib #21) in B-Prolog.
 
   CSPLib problem 21
-  http://www.cs.st-andrews.ac.uk/~ianm/CSPLib/prob/prob021/index.html
+  http://www.csplib.org/Problems/prob021
   """
   Crossfigures are the numerical equivalent of crosswords. You have a grid and some 
   clues with numerical answers to place on this grid. Clues come in several different 
@@ -31,7 +31,7 @@
 /*
 
   This model was inspired by the ECLiPSe model written by Warwick Harvey:
-  http://www.cs.st-andrews.ac.uk/~ianm/CSPLib/prob/prob021/code.html
+  http://www.csplib.org/Problems/prob021/models
  
  
   Data from 

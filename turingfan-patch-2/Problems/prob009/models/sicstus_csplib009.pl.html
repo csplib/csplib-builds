@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-2/Problems/prob009.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob009/models/sicstus_csplib009.pl">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -131,7 +136,7 @@ constraints(ID, Xs, Ys, Sizes) :-
 	keysort(L1, L2),
 	keyclumped(L2, L3),
 	(   foreach(_-L,L3)
-	do  (L=[_] -> true ; lex_chain(L, [op(#<)]))
+	do  (L=[_] -&gt; true ; lex_chain(L, [op(#&lt;)]))
 	),
 	geost(Objs, Shapes, [cumulative(true),
 			     disjunctive(true),
@@ -150,8 +155,8 @@ by_interval(X, _,   _) :-
 by_interval(X, Len, W) :-
 	fd_min(X, Min),
 	fd_max(X, Max),
-	Mid is (Min+Max)>>1,
-	(   Max-Min < Len*W -> true
+	Mid is (Min+Max)&gt;&gt;1,
+	(   Max-Min &lt; Len*W -&gt; true
 	;   X in Min..Mid,
 	    by_interval(X, Len, W)
 	;   Mid1 is Mid+1,
@@ -380,23 +385,30 @@ data(id207,25,661,[5,7,17,18,23,31,36,38,41,64,73,77,83,84,102,106,111,161,175,1
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-2/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-2/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-2/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -406,7 +418,7 @@ data(id207,25,661,[5,7,17,18,23,31,36,38,41,64,73,77,83,84,102,106,111,161,175,1
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

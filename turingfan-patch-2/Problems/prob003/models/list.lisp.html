@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-2/Problems/prob003/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-2/Problems/prob003.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob003/models/list.lisp">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -106,17 +111,17 @@
 
 (defun onetrie2oneclause (trie)
    (cond ((null trie) nil)
-         ((> (car trie) 0) (cons (car trie) (onetrie2oneclause (cdr trie))))
+         ((&gt; (car trie) 0) (cons (car trie) (onetrie2oneclause (cdr trie))))
          (t (cons (list 'not (- (car trie))) (onetrie2oneclause (cdr trie))))))
 
 
 #|
 ;; this version can be used to create variables from 1 to n^3 without gaps
-(defun encode-qg-atom (n i j k &optional (number 0))
+(defun encode-qg-atom (n i j k &amp;optional (number 0))
   (+ (* (+ (* (1- i) n) (1- j)) n) k))
 |#
 
-(defun encode-qg-atom (n i j k &optional (number 0))
+(defun encode-qg-atom (n i j k &amp;optional (number 0))
   (+ n (* number 25) (* 100 (+ (* (+ (* (1- i) n) (1- j)) n) (1- k)))))
 
 (defun decode-qg-atom (v)
@@ -133,48 +138,48 @@
 
 (defvar use-row-and-column-surjectivity t)
 
-(defun qg (v &key (number 0) not-necessarily-idempotent incomplete initial-values clause-set)
-  (myassert (< v 25))
-  (myassert (<= 0 number 3))
+(defun qg (v &amp;key (number 0) not-necessarily-idempotent incomplete initial-values clause-set)
+  (myassert (&lt; v 25))
+  (myassert (&lt;= 0 number 3))
   (let ((v-n (if incomplete (- v incomplete) v)))
     (unless not-necessarily-idempotent
       (loop for i from 1 upto v-n
 	    do (setq clause-set (dp-insert (list (encode-qg-atom v i i i number)) clause-set))))
-    (UNLESS (> NUMBER 0)
+    (UNLESS (&gt; NUMBER 0)
       (loop for i from 1 upto v-n
 	    do (loop for j from 1 upto v
-		     when (< (1+ j) i)
+		     when (&lt; (1+ j) i)
 		       do (setq clause-set (dp-insert (list (- (encode-qg-atom v i v j number))) clause-set)))))
     (loop for x in initial-values
 	  do (setq clause-set (dp-insert (list (encode-qg-atom v (first x) (second x) (third x))) clause-set)))
     (loop for i from 1 upto v
 	  do (loop for j from 1 upto v
-		   unless (and (> i v-n) (> j v-n))
+		   unless (and (&gt; i v-n) (&gt; j v-n))
 		     do (setq clause-set (dp-insert-sorted
-					   (loop for k from 1 upto (if (or (> i v-n) (> j v-n)) v-n v)
+					   (loop for k from 1 upto (if (or (&gt; i v-n) (&gt; j v-n)) v-n v)
 						 collect (encode-qg-atom v i j k number))
 					   clause-set))))
     (when use-row-and-column-surjectivity
       (loop for i from 1 upto v			;new clauses suggested by Fujita 2/24/93
 	    do (loop for j from 1 upto v
-		     unless (and (> i v-n) (> j v-n))
+		     unless (and (&gt; i v-n) (&gt; j v-n))
 		       do (setq clause-set (dp-insert-sorted
-					     (loop for k from 1 upto (if (or (> i v-n) (> j v-n)) v-n v)
+					     (loop for k from 1 upto (if (or (&gt; i v-n) (&gt; j v-n)) v-n v)
 						   collect (encode-qg-atom v i k j number))
 					     clause-set))
 			  (setq clause-set (dp-insert-sorted
-					     (loop for k from 1 upto (if (or (> i v-n) (> j v-n)) v-n v)
+					     (loop for k from 1 upto (if (or (&gt; i v-n) (&gt; j v-n)) v-n v)
 						   collect (encode-qg-atom v k i j number))
 					     clause-set)))))
     (loop for i from 1 upto v
 	  do (loop for j from 1 upto v
 		   do (loop for k1 from 1 upto v
 			    do (loop for k2 from (1+ k1) upto v
-				     do (unless (and (> i v-n) (> j v-n))
+				     do (unless (and (&gt; i v-n) (&gt; j v-n))
 					  (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v i j k1 number))
 										   (- (encode-qg-atom v i j k2 number)))
 									     clause-set)))
-					(unless (and (> i v-n) (or (> k1 v-n) (> k2 v-n)))
+					(unless (and (&gt; i v-n) (or (&gt; k1 v-n) (&gt; k2 v-n)))
 					  (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v i k1 j number))
 										   (- (encode-qg-atom v i k2 j number)))
 									     clause-set))
@@ -183,19 +188,19 @@
 									     clause-set)))))))
     clause-set))
 
-(defun qg1 (v &key not-necessarily-idempotent incomplete initial-values)
+(defun qg1 (v &amp;key not-necessarily-idempotent incomplete initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :not-necessarily-idempotent not-necessarily-idempotent :incomplete incomplete :initial-values initial-values)))
     (loop for a from 1 upto v
 	  do (loop for b from 1 upto v
-		   unless (and (> a v-n) (> b v-n))
+		   unless (and (&gt; a v-n) (&gt; b v-n))
 		     do (loop for c from 1 upto v
 			      do (loop for d from 1 upto v
-				       unless (and (> c v-n) (> d v-n))
+				       unless (and (&gt; c v-n) (&gt; d v-n))
 					 unless (and (= a c) (= b d))
 					   do (loop for ab from 1 upto v
 						    do (loop for x from 1 upto v
-							     unless (and (> x v-n) (or (> b v-n) (> d v-n)))
+							     unless (and (&gt; x v-n) (or (&gt; b v-n) (&gt; d v-n)))
 							       do (setq clause-set (dp-insert-sorted
 										     (list (- (encode-qg-atom v a b ab))
 											   (- (encode-qg-atom v c d ab))
@@ -204,19 +209,19 @@
 										     clause-set))))))))
     clause-set))
 
-(defun qg2 (v &key not-necessarily-idempotent incomplete initial-values)
+(defun qg2 (v &amp;key not-necessarily-idempotent incomplete initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :not-necessarily-idempotent not-necessarily-idempotent :incomplete incomplete :initial-values initial-values)))
     (loop for a from 1 upto v
 	  do (loop for b from 1 upto v
-		   unless (and (> a v-n) (> b v-n))
+		   unless (and (&gt; a v-n) (&gt; b v-n))
 		     do (loop for c from 1 upto v
 			      do (loop for d from 1 upto v
-				       unless (and (> c v-n) (> d v-n))
+				       unless (and (&gt; c v-n) (&gt; d v-n))
 					 unless (and (= a c) (= b d))
 					   do (loop for ab from 1 upto v
 						    do (loop for x from 1 upto v
-							     unless (and (> x v-n) (or (> b v-n) (> d v-n)))
+							     unless (and (&gt; x v-n) (or (&gt; b v-n) (&gt; d v-n)))
 							       do (setq clause-set (dp-insert-sorted
 										     (list (- (encode-qg-atom v a b ab))
 											   (- (encode-qg-atom v c d ab))
@@ -225,15 +230,15 @@
 										     clause-set))))))))
     clause-set))
 
-(defun qg3 (v &key not-necessarily-idempotent incomplete negative-equation-clauses initial-values)
+(defun qg3 (v &amp;key not-necessarily-idempotent incomplete negative-equation-clauses initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :not-necessarily-idempotent not-necessarily-idempotent :incomplete incomplete :initial-values initial-values)))
     (loop for a from 1 upto v
 	  do (loop for b from 1 upto v
-		   unless (and (> a v-n) (> b v-n))
+		   unless (and (&gt; a v-n) (&gt; b v-n))
 		     do (loop for ab from 1 upto v
 			      do (loop for ba from 1 upto v
-				       unless (and (> ab v-n) (> ba v-n))
+				       unless (and (&gt; ab v-n) (&gt; ba v-n))
 					 do (if negative-equation-clauses
 						(loop for u from 1 upto v
 						      unless (= a u)
@@ -248,10 +253,10 @@
     ;; Slaney: if a.ax=x or xa.a=x then a=x
     (loop for a from 1 upto v
 	  do (loop for x from 1 upto v
-		   unless (and (> a v-n) (> x v-n))
+		   unless (and (&gt; a v-n) (&gt; x v-n))
 		     unless (= a x)
 		       do (loop for u from 1 upto v
-				unless (and (> a v-n) (> u v-n))
+				unless (and (&gt; a v-n) (&gt; u v-n))
 				  do (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v a x u))
 									      (- (encode-qg-atom v a u x)))
 									clause-set))
@@ -260,15 +265,15 @@
 									clause-set)))))
     clause-set))
 
-(defun qg4 (v &key not-necessarily-idempotent incomplete negative-equation-clauses initial-values)
+(defun qg4 (v &amp;key not-necessarily-idempotent incomplete negative-equation-clauses initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :not-necessarily-idempotent not-necessarily-idempotent :incomplete incomplete :initial-values initial-values)))
     (loop for a from 1 upto v
 	  do (loop for b from 1 upto v
-		   unless (and (> a v-n) (> b v-n))
+		   unless (and (&gt; a v-n) (&gt; b v-n))
 		     do (loop for ab from 1 upto v
 			      do (loop for ba from 1 upto v
-				       unless (and (> ab v-n) (> ba v-n))
+				       unless (and (&gt; ab v-n) (&gt; ba v-n))
 					 do (if negative-equation-clauses
 						(loop for u from 1 upto v
 						      unless (= a u)
@@ -282,16 +287,16 @@
 										   clause-set)))))))
     clause-set))
 
-(defun qg5 (v &key not-necessarily-idempotent incomplete negative-equation-clauses no-extra-equation-clauses initial-values)
+(defun qg5 (v &amp;key not-necessarily-idempotent incomplete negative-equation-clauses no-extra-equation-clauses initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :not-necessarily-idempotent not-necessarily-idempotent :incomplete incomplete :initial-values initial-values)))
     (loop for a from 1 upto v
 	  do (loop for b from 1 upto v
-		   unless (and (> b v-n) (> a v-n))
+		   unless (and (&gt; b v-n) (&gt; a v-n))
 		     do (loop for ba from 1 upto v
-			      unless (and (> ba v-n) (> b v-n))
+			      unless (and (&gt; ba v-n) (&gt; b v-n))
 				do (loop for ba.b from 1 upto v
-					 unless (and (> ba.b v-n) (> b v-n))
+					 unless (and (&gt; ba.b v-n) (&gt; b v-n))
 					   do (if negative-equation-clauses
 						  (loop for u from 1 upto v
 							unless (= a u)
@@ -317,7 +322,7 @@
 											 CLAUSE-SET)))))))))
     clause-set))
 
-(defun qg6 (v &key incomplete negative-equation-clauses initial-values)
+(defun qg6 (v &amp;key incomplete negative-equation-clauses initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :incomplete incomplete :initial-values initial-values)))
     (if negative-equation-clauses
@@ -326,9 +331,9 @@
 		       unless (= ab.b a.ab)
 			 do (loop for a from 1 upto v
 				  do (loop for b from 1 upto v
-					   unless (and (> a v-n) (> b v-n))
+					   unless (and (&gt; a v-n) (&gt; b v-n))
 					     do (loop for ab from 1 upto v
-						      unless (and (> ab v-n) (or (> a v-n) (> b v-n)))
+						      unless (and (&gt; ab v-n) (or (&gt; a v-n) (&gt; b v-n)))
 							do (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v a b ab))
 												    (- (encode-qg-atom v ab b ab.b))
 												    (- (encode-qg-atom v a ab a.ab)))
@@ -336,9 +341,9 @@
 	(loop for x from 1 upto v
 	      do (loop for a from 1 upto v
 		       do (loop for b from 1 upto v
-				unless (and (> a v-n) (> b v-n))
+				unless (and (&gt; a v-n) (&gt; b v-n))
 				  do (loop for ab from 1 upto v
-					   unless (and (> ab v-n) (or (> a v-n) (> b v-n)))
+					   unless (and (&gt; ab v-n) (or (&gt; a v-n) (&gt; b v-n)))
 					     do (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v a b ab))
 											 (- (encode-qg-atom v ab b x))
 											 (encode-qg-atom v a ab x))
@@ -349,7 +354,7 @@
 										   clause-set)))))))
     clause-set))
 
-(defun qg7 (v &key incomplete negative-equation-clauses MORE-EQUATION-CLAUSES initial-values)
+(defun qg7 (v &amp;key incomplete negative-equation-clauses MORE-EQUATION-CLAUSES initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :incomplete incomplete :initial-values initial-values)))
     (if negative-equation-clauses
@@ -358,9 +363,9 @@
 		       unless (= ba.b a.ba)
 			 do (loop for a from 1 upto v
 				  do (loop for b from 1 upto v
-					   unless (and (> a v-n) (> b v-n))
+					   unless (and (&gt; a v-n) (&gt; b v-n))
 					     do (loop for ba from 1 upto v
-						      unless (and (> ba v-n) (or (> a v-n) (> b v-n)))
+						      unless (and (&gt; ba v-n) (or (&gt; a v-n) (&gt; b v-n)))
 							do (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v b a ba))
 												    (- (encode-qg-atom v ba b ba.b))
 												    (- (encode-qg-atom v a ba a.ba)))
@@ -368,9 +373,9 @@
 	(loop for x from 1 upto v
 	      do (loop for a from 1 upto v
 		       do (loop for b from 1 upto v
-				unless (and (> a v-n) (> b v-n))
+				unless (and (&gt; a v-n) (&gt; b v-n))
 				  do (loop for ba from 1 upto v
-					   unless (and (> ba v-n) (or (> a v-n) (> b v-n)))
+					   unless (and (&gt; ba v-n) (or (&gt; a v-n) (&gt; b v-n)))
 					     do (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v b a ba))
 											 (- (encode-qg-atom v ba b x))
 											 (encode-qg-atom v a ba x))
@@ -386,7 +391,7 @@
 										     CLAUSE-SET))))))))
     clause-set))
 
-(defun qg7a (v &key incomplete initial-values)
+(defun qg7a (v &amp;key incomplete initial-values)
   (let ((v-n (if incomplete (- v incomplete) v))
 	(clause-set (qg v :incomplete incomplete :initial-values initial-values)))
     ;;finds (132) conjugate equivalents, as suggested by Slaney
@@ -394,11 +399,11 @@
     ;; (xy.x)y=x
     (loop for x from 1 upto v
 	  do (loop for y from 1 upto v
-		   unless (and (> x v-n) (> y v-n))
+		   unless (and (&gt; x v-n) (&gt; y v-n))
 		     do (loop for xy from 1 upto v
-			      unless (and (> xy v-n) (> x v-n))
+			      unless (and (&gt; xy v-n) (&gt; x v-n))
 				do (loop for xy.x from 1 upto v
-					 unless (and (> xy.x v-n) (> y v-n))
+					 unless (and (&gt; xy.x v-n) (&gt; y v-n))
 					   do (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v x y xy))
 										       (- (encode-qg-atom v xy x xy.x))
 										       (encode-qg-atom v xy.x y x))
@@ -406,18 +411,18 @@
     ;; (xy.y).xy=x
     (loop for x from 1 upto v
 	  do (loop for y from 1 upto v
-		   unless (and (> x v-n) (> y v-n))
+		   unless (and (&gt; x v-n) (&gt; y v-n))
 		     do (loop for xy from 1 upto v
-			      unless (and (> xy v-n) (> y v-n))
+			      unless (and (&gt; xy v-n) (&gt; y v-n))
 				do (loop for xy.y from 1 upto v
-					 unless (and (> xy.y v-n) (> xy v-n))
+					 unless (and (&gt; xy.y v-n) (&gt; xy v-n))
 					   do (setq clause-set (dp-insert-sorted (list (- (encode-qg-atom v x y xy))
 										       (- (encode-qg-atom v xy y xy.y))
 										       (encode-qg-atom v xy.y xy x))
 										 clause-set))))))
     clause-set))
 
-(defun quasigroup-problem (problem order &rest other-args &key find-one-model INITIAL-CLAUSES &allow-other-keys)
+(defun quasigroup-problem (problem order &amp;rest other-args &amp;key find-one-model INITIAL-CLAUSES &amp;allow-other-keys)
   (let (clause-set x1)
     (setq problem (or (cdr (assoc problem '((1 . qg1) (2 . qg2) (3 . qg3) (4 . qg4) (5 . qg5) (6 . qg6) (7 . qg7)
 					    (7a . qg7a))))
@@ -441,7 +446,7 @@
     (print (list* 'end 'problem problem order other-args))
     nil))
 
-(defun quasigroup-problem-file (file problem order &rest other-args)
+(defun quasigroup-problem-file (file problem order &amp;rest other-args)
   (let (clause-set)
     (setq problem (or (cdr (assoc problem '((1 . qg1) (2 . qg2) (3 . qg3) (4 . qg4) (5 . qg5) (6 . qg6) (7 . qg7)))) problem))
     (setq clause-set (apply problem order other-args))
@@ -483,12 +488,12 @@
 ;;  (format t "~%")
     table))
 
-(defun verify-quasigroup-multiplication-table (table &optional type not-necessarily-idempotent)
+(defun verify-quasigroup-multiplication-table (table &amp;optional type not-necessarily-idempotent)
   (let ((n (1- (car (array-dimensions table)))))
     (and
       (loop for i from 1 upto n
 	    always (loop for j from 1 upto n
-			 always (and (integerp (aref table i j)) (<= 1 (aref table i j) n))))
+			 always (and (integerp (aref table i j)) (&lt;= 1 (aref table i j) n))))
       (or
 	not-necessarily-idempotent
 	(loop for i from 1 upto n
@@ -587,7 +592,7 @@
 (defun DP-INSERT-SORTED (clause clause-set)
   (trie-insert-sorted clause clause-set))
 
-(defun DP-INSERT-FILE (filename &optional clause-set)
+(defun DP-INSERT-FILE (filename &amp;optional clause-set)
   (when dp-print-summary
     (format t "~2%Problem from file ~A:" filename))
   (with-open-file (s filename :direction :input)
@@ -599,16 +604,16 @@
 	    do (warn "Skipping nonclause ~A in file." clause)
 	  finally (return clause-set))))
 
-(defun DP-COUNT (clause-set &optional print-p)
+(defun DP-COUNT (clause-set &amp;optional print-p)
   ;; (dp-count clause-set) returns and optionally prints the clause and literal count
   ;; of clauses stored in clause-set
   (trie-count clause-set print-p))
 
-(defun DP-CLAUSES (clause-set &optional decode-fun map-fun)
+(defun DP-CLAUSES (clause-set &amp;optional decode-fun map-fun)
   ;; either return or apply map-fun to all clauses in clause-set
   (trie-clauses clause-set decode-fun map-fun))
 
-(defun DP-CLAUSES-FILE (filename clause-set &optional decode-fun)
+(defun DP-CLAUSES-FILE (filename clause-set &amp;optional decode-fun)
   ;; write clauses in clause-set to a file
   (with-open-file (s filename :direction :output :if-exists :new-version)
     (dp-clauses clause-set decode-fun #'(lambda (clause) (princ clause s) (terpri s))))
@@ -621,15 +626,15 @@
 ;;;     atom   proposition symbol encoded as a positive number
 ;;;     trie1  subtrie for clauses here in trie containing atom positively
 ;;;     trie2  subtrie for clauses here in trie containing atom negatively
-;;;   alist pairs are ordered by <
+;;;   alist pairs are ordered by &lt;
 ;;; This is a very efficient representation for sets of clauses
 ;;; that was suggested by Johan deKleer (AAAI92).
 ;;;
 ;;; Propositional clause tries are constructed by inserting clauses one-by-one
 ;;; by the trie-insert function
-;;;   input for trie-insert: C v A v -B  =>  (1 -2 3)
+;;;   input for trie-insert: C v A v -B  =&gt;  (1 -2 3)
 ;;;     where A is encoded as 1, B as 2, and C as 3
-;;;   literals must be ordered by < on absolute value
+;;;   literals must be ordered by &lt; on absolute value
 ;;;   trie-insert-sorted sorts the clause before inserting it
 ;;;
 ;;; Proposition symbols are assumed to be encoded as fixnums for greater efficiency.
@@ -658,11 +663,11 @@
 (defun TRIE-INSERT (clause trie)
   ;; destructive insertion, but value must be used
   (myassert (not (null clause)))		;only nonempty clauses can be inserted
-  (myassert (not (zerop (first clause))))	;don't allow 0, since -0 = 0 => (not atom) = atom
+  (myassert (not (zerop (first clause))))	;don't allow 0, since -0 = 0 =&gt; (not atom) = atom
   (trie-insert* clause trie 0))
 
 (defun TRIE-INSERT* (clause trie previous-literal)
-  (myassert (<= (abs previous-literal) (abs (first clause))))	;literals in ascending order
+  (myassert (&lt;= (abs previous-literal) (abs (first clause))))	;literals in ascending order
   (cond
     ((empty-clause-trie-p trie)
      t)
@@ -675,13 +680,13 @@
      (let ((atom (abs (first clause))) v)
        (myassert (typep atom 'fixnum))
        (cond
-	 ((or (null trie) (< atom (tp-atom (first trie))))
+	 ((or (null trie) (&lt; atom (tp-atom (first trie))))
 	  (setq trie (cons (make-tp atom (setq v (cons nil nil))) trie)))
 	 ((= atom (tp-atom (first trie)))
 	  (setq v (tp-subtries (first trie))))
 	 (t
 	  (loop for trie on trie
-		when (or (null (rest trie)) (< atom (tp-atom (second trie))))
+		when (or (null (rest trie)) (&lt; atom (tp-atom (second trie))))
 		  do (setf (rest trie) (cons (make-tp atom (setq v (cons nil nil))) (rest trie)))
 		     (return nil)
 		when (= atom (tp-atom (second trie)))
@@ -689,14 +694,14 @@
 		     (return nil))))
        (let ((l1 (rest clause)))
 	 (cond
-	   ((> (first clause) 0)
+	   ((&gt; (first clause) 0)
 	    (setf (true-subtrie v) (if (null l1) t (trie-insert* l1 (true-subtrie v) (first clause)))))
 	   (t
 	    (setf (false-subtrie v) (if (null l1) t (trie-insert* l1 (false-subtrie v) (first clause)))))))
        trie))))
 
 (defun SORT-CLAUSE (clause)
-  ;; utility function returns < sorted variant of clause
+  ;; utility function returns &lt; sorted variant of clause
   ;; to use for insertion into a trie by trie-insert
   (cond
     ((null clause)
@@ -704,13 +709,13 @@
     ((null (rest clause))
      clause)
     ((null (rest (rest clause)))
-     (if (< (abs (first clause)) (abs (second clause)))
+     (if (&lt; (abs (first clause)) (abs (second clause)))
 	 clause
 	 (list (second clause) (first clause))))
     (t
-     (sort (copy-list clause) #'< :key #'abs))))
+     (sort (copy-list clause) #'&lt; :key #'abs))))
 
-(defun TRIE-COUNT (trie &optional print-p)
+(defun TRIE-COUNT (trie &amp;optional print-p)
   ;; (trie-count trie) returns and optionally prints the clause and literal count
   ;; of clauses stored in trie
   (let ((nclauses 0) (nliterals 0) (nnodes 0))
@@ -732,10 +737,10 @@
 			 (trie-count* false-subtrie (1+ length)))))))))
       (trie-count* trie 0)
       (when print-p
-	(format t "~&Trie contains ~D clauses with ~D literals using ~D nodes." nclauses nliterals nnodes))
+	(format t "~&amp;Trie contains ~D clauses with ~D literals using ~D nodes." nclauses nliterals nnodes))
       (values nclauses nliterals nnodes))))
 
-(defun TRIE-CLAUSES (trie &optional decode-fun map-fun)
+(defun TRIE-CLAUSES (trie &amp;optional decode-fun map-fun)
   ;; either return or apply map-fun to all clauses in trie
   (let (clauses)
     (labels
@@ -798,7 +803,7 @@
 	as atom1 = (tp-atom (first trie1))
 	as atom2 = (tp-atom (first trie2))
 	as tp = (cond
-		  ((<= (the fixnum atom1) (the fixnum atom2))
+		  ((&lt;= (the fixnum atom1) (the fixnum atom2))
 		   (cond
 		     ((= (the fixnum atom1) (the fixnum atom2))
 		      (let* ((v1 (tp-subtries (pop trie1)))
@@ -856,13 +861,13 @@
   ;; applies an assignment of truth values to atoms to a trie
   ;; assignment is list of dotted pairs of form (atom . truth-value)
   ;; where truth-value is :true or :false
-  ;; and assignment is ordered by < on atoms
+  ;; and assignment is ordered by &lt; on atoms
   (loop with tp = (first trie)
 	with atom = (tp-atom tp)
 	for l on assignment
 	as assign = (first l)
 	as x = (car assign)
-	when (<= (the fixnum atom) (the fixnum x))
+	when (&lt;= (the fixnum atom) (the fixnum x))
 	  return (if (= (the fixnum atom) (the fixnum x))
 		     (if (null (setq l (rest l)))
 			 (trie-merge (let ((v (if (eq (cdr assign) :true)
@@ -912,8 +917,8 @@
 	when (empty-clause-trie-p (false-subtrie subtries))
 	  collect (cons (tp-atom tp) :false)))
 
-(defun LENGTH-OF-SHORTEST-POSITIVE-CLAUSE-IN-TRIE (trie &optional bound)
-  ;; assume trie isn't t (just the empty clause) and bound if given is >= 2
+(defun LENGTH-OF-SHORTEST-POSITIVE-CLAUSE-IN-TRIE (trie &amp;optional bound)
+  ;; assume trie isn't t (just the empty clause) and bound if given is &gt;= 2
   ;; only look for clauses strictly shorter than bound
   (cond
     ((loop for tp in trie			;look for positive unit clause
@@ -958,10 +963,10 @@
 
 ;;; Examples.
 ;;; Clauses are represented by lists of literals.
-;;; Atomic formulas are represented by numbers > 0.
+;;; Atomic formulas are represented by numbers &gt; 0.
 ;;; For example, 3 is a positive literal and -3 is its negation.
 ;;; Clauses are added to a set of clauses by dp-insert.
-;;; Literals in clauses are required to be ordered by < on absolute value
+;;; Literals in clauses are required to be ordered by &lt; on absolute value
 ;;; dp-insert-sorted can be used instead of dp-insert to sort and add clauses.
 ;;; Tautologies and duplicate literals are automatically eliminated.
 
@@ -986,7 +991,7 @@
 (defun PIGEONHOLE-PROBLEM (nobjects)
   (dp-satisfiable-p (pigeonhole-problem-clauses nobjects)))
 
-(defun QUEENS-PROBLEM (n &optional find-all-models)
+(defun QUEENS-PROBLEM (n &amp;optional find-all-models)
   (dp-satisfiable-p (queens-problem-clauses n) find-all-models))
 
 (defun PIGEONHOLE-PROBLEM-CLAUSES (nobjects)
@@ -1020,11 +1025,11 @@
 	  do (loop for i2 from (1+ i1) upto n
 		   as d = (- i2 i1)
 		   do (loop for j1 from 1 upto n
-			    when (>= (- j1 d) 1)
+			    when (&gt;= (- j1 d) 1)
 			      do (setq clause-set (dp-insert-sorted (list (- (encode-example-atom n i1 j1))
 									  (- (encode-example-atom n i2 (- j1 d))))
 								    clause-set))
-			    when (<= (+ j1 d) n)
+			    when (&lt;= (+ j1 d) n)
 			      do (setq clause-set (dp-insert-sorted (list (- (encode-example-atom n i1 j1))
 									  (- (encode-example-atom n i2 (+ j1 d))))
 								    clause-set)))))
@@ -1057,23 +1062,30 @@
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-2/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-2/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-2/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -1083,7 +1095,7 @@
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

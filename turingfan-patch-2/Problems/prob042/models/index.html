@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -58,24 +58,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/data">Data files</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-2/Problems/prob042/results">Results</a></li>
+     	<li><a class='no-files' href="/csplib-builds/turingfan-patch-2/Problems/prob042/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/references">References</a></li>
 
-  	<li><p>Models</p></li>
+     	<li><a href="" class='current-item'>Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-2/Problems/prob042.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob042/models">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -87,11 +92,11 @@
 <p><center>
     <img alt="instance figure" src="../assets/c6288.gif" />
 </center></p>
-<p>High-level model of c6288 Multiplier Circuit and full adder module (images obtained from  http://www.eecs.umich.edu/~jhayes/iscas/).</p>
+<p>High-level model of c6288 Multiplier Circuit and full adder module (images obtained from  <a href="http://www.eecs.umich.edu/~jhayes/iscas/">http://www.eecs.umich.edu/~jhayes/iscas/</a>).</p>
 <p><em>C6288</em> is of special interest in that it has traditionally proven difficult to  diagnosis system.</p>
 <p>This diagnosis problem uses input vector  <code>01001000000100010001000110100000</code>, corresponding to the multiplication of <code>34834</code> by <code>1416</code>, returning <code>49324944</code>, represented in binary by (least significant bit  first) <code>00001001110001010000111101000000</code>. From this correct output, a bit at a  time is flipped, obtaining <code>32</code> incorrect output vectors. For each such incorrect output vector, the goal is to find the set of all single faults that explain it.</p>
 <p>Additionally, as a harder problem, the goal is extended to find the set of all  double faults that explain it.</p>
-<p>Circuit description (taken from http://www.eecs.umich.edu/~jhayes/iscas/ ) can be seen <a href="../assets/c6288.txt">here</a>.</p>
+<p>Circuit description (taken from <a href="http://www.eecs.umich.edu/~jhayes/iscas/">http://www.eecs.umich.edu/~jhayes/iscas/</a> ) can be seen <a href="../assets/c6288.txt">here</a>.</p>
 <p>The problem is also described in: &ldquo;Jos&eacute; J&uacute;lio Alferes, Francisco Azevedo, Pedro Barahona, Carlos V. Damasio and  Terrance Swift, <em>Deductive Diagnosis of Digital Circuits</em>, in First IFIP  Conference on Artificial Intelligence Applications and Innovations (AIAI&lsquo;2004),  Kluwer Academic Press, pages 155-165, 2004.&rdquo; where some results are presented.</p>
 
 	<table class="tablesorter">
@@ -124,7 +129,7 @@
 			zip
 		</td>
 		<td>
-		Essence
+		<p>Essence</p>
 		</td>
 	</tr>
 	</tbody>
@@ -139,7 +144,7 @@
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

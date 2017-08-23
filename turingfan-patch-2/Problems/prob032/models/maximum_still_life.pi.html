@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,41 +61,46 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-2/Problems/prob032/data">Data files</a></li>
+     	<li><a class='no-files' href="/csplib-builds/turingfan-patch-2/Problems/prob032/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-2/Problems/prob032.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob032/models/maximum_still_life.pi">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
 
 
 <a href="/csplib-builds/turingfan-patch-2/Problems/prob032/models/maximum_still_life.pi">Download</a>
-<pre >/*
+<pre class ='brush: picat'>/*
 
   Maximum density still life in Picat.
 
-  CSPLib 032: http://www.csplib.org/prob/prob032
+  CSPLib 032: http://www.csplib.org/Problems/prob032
 
   This model (or rather my earlier MiniZinc and Comet models) was 
   inspired by the OPL model from
   Toni Mancini, Davide Micaletto, Fabio Patrizi, Marco Cadoli: 
   "Evaluating ASP and commercial solvers on the CSPLib"
-  http://www.dis.uniroma1.it/~tmancini/index.php?problemid=032&solver=OPL&spec=BASE&currItem=research.publications.webappendices.csplib2x.problemDetails#listing
+  http://www.dis.uniroma1.it/~tmancini/index.php?problemid=032&amp;solver=OPL&amp;spec=BASE&amp;currItem=research.publications.webappendices.csplib2x.problemDetails#listing
 
   Model created by Hakan Kjellerstrand, hakank@gmail.com
   See also my Picat page: http://www.hakank.org/picat/
@@ -106,22 +111,22 @@
 
 import cp.
 
-main => go.
+main =&gt; go.
 
-go =>
+go =&gt;
    Size = 6,
    life(Size, Grid, Z),
    print_grid(Grid),
    writeln(z=Z),
    nl.
 
-print_grid(Grid) =>
+print_grid(Grid) =&gt;
    foreach(G in Grid) 
       foreach(V in G) printf("%d", V) end, nl
    end.
 
 
-life(Size, Grid, Z) =>
+life(Size, Grid, Z) =&gt;
 
    GridSize = Size+4,
 
@@ -152,13 +157,13 @@ life(Size, Grid, Z) =>
           Grid[R,C-1] + Grid[R,C+1] + 
           Grid[R+1,C-1] + Grid[R+1,C] + Grid[R+1,C+1]
         ) #= 3 
-      ) #=> (Grid[R,C] #= 1)
+      ) #=&gt; (Grid[R,C] #= 1)
       ,
            
       % C3: Each live cell must have 2 or 3 live neighbors (cells of the first/last 
       % row/column may be ignored by this constraint)
-      (Grid[R,C] #= 1) #=> 
-            2 #=< 
+      (Grid[R,C] #= 1) #=&gt; 
+            2 #=&lt; 
             ( Grid[R-1,C-1] + Grid[R-1,C] + Grid[R-1,C+1] +
               Grid[R,C-1] + Grid[R,C+1] +
               Grid[R+1,C-1] + Grid[R+1,C] + Grid[R+1,C+1] 
@@ -167,7 +172,7 @@ life(Size, Grid, Z) =>
             ( Grid[R-1,C-1] + Grid[R-1,C] + Grid[R-1,C+1] +
               Grid[R,C-1] + Grid[R,C+1] +
               Grid[R+1,C-1] + Grid[R+1,C] + Grid[R+1,C+1] 
-            ) #=< 3
+            ) #=&lt; 3
    end,
 
    % SBSO: Symmetry-breaking by selective ordering
@@ -177,8 +182,8 @@ life(Size, Grid, Z) =>
    % must be dead too 
    % - if the NE-corner cell is dead, the SW-corner cell must be dead too
    % 
-   Grid[2,2] #>= Grid[Size+1,Size+1],
-   Grid[2,Size+1] #>= Grid[Size+1,2],
+   Grid[2,2] #&gt;= Grid[Size+1,Size+1],
+   Grid[2,Size+1] #&gt;= Grid[Size+1,2],
 
    solve([$max(Z),min,updown], Vars).
 
@@ -194,23 +199,30 @@ life(Size, Grid, Z) =>
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-2/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-2/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-2/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -220,7 +232,7 @@ life(Size, Grid, Z) =>
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

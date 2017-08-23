@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,31 +61,36 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/">Specification</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-2/Problems/prob049/data">Data files</a></li>
+     	<li><a class='no-files' href="/csplib-builds/turingfan-patch-2/Problems/prob049/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-2/Problems/prob049.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob049/models/NumberPartitioning.py">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
 
 
 <a href="/csplib-builds/turingfan-patch-2/Problems/prob049/models/NumberPartitioning.py">Download</a>
-<pre ># Number Partitioning
+<pre class ='brush: py'># Number Partitioning
 #
 # In this problem, the numbers 1 to N must be arranged in two
 # different groups A and B in such a way that:
@@ -96,7 +101,7 @@
 #
 # CSPLib Problem 049 - http://www.csplib.org/Problems/prob049/
 #
-# Note: There is no solution for N < 8! Also, there is no solution
+# Note: There is no solution for N &lt; 8! Also, there is no solution
 # if N is not a multiple of 4! (Source: CSPLib - see above link.)
 
 from Numberjack import *
@@ -121,10 +126,10 @@ def get_model(N):
     )
 
     # Symmetry breaking
-    model += A[0] < B[0]
+    model += A[0] &lt; B[0]
     for i in range(N / 2 - 1):
-        model += A[i] < A[i + 1]
-        model += B[i] < B[i + 1]
+        model += A[i] &lt; A[i + 1]
+        model += B[i] &lt; B[i + 1]
 
     return A, B, model
 
@@ -165,23 +170,30 @@ if __name__ == '__main__':
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-2/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-2/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-2/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-2/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-2/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-2/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-2/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -191,7 +203,7 @@ if __name__ == '__main__':
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>
