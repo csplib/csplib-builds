@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/data">Data files</a></li>
 
-   	<li><a class='no-files' href="/csplib-builds/turingfan-patch-3/Problems/prob044/results">Results</a></li>
+     	<li><a class='no-files' href="/csplib-builds/turingfan-patch-3/Problems/prob044/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-3/Problems/prob044.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob044/models/steiner.lp4">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -127,7 +132,7 @@
 %   9    0.02s    412     136      1
 %  13    0.33s   6269    2385      6
 %  15    2.35s  22801   13755     10
-%  19    > 2h
+%  19    &gt; 2h
 
 #const n = 7.
 
@@ -148,13 +153,13 @@ sets(1..nb).
 % count the number of common occurrences of each pair of Sets
 check(Set1, Set2, Val, N) :- 
     sets(Set1;Set2), 
-    Set1 < Set2,
+    Set1 &lt; Set2,
     val(Val),
     N = #count { Val,Set1,Set2:x(Set1,Val), x(Set2,Val) }.
 
 % ensure that there are at most 1 occurrence 
 % with the same value  (i.e. N=2) for any two sets.
-:- sets(Set1), sets(Set2), Set1 < Set2, 2 #count{Set1,Set2:check(Set1, Set2, Val, 2)}.
+:- sets(Set1), sets(Set2), Set1 &lt; Set2, 2 #count{Set1,Set2:check(Set1, Set2, Val, 2)}.
 
 
 %
@@ -162,10 +167,10 @@ check(Set1, Set2, Val, N) :-
 % (What I would really like to do is 
 % to sort the sets lexicographically.)
 %
-% :- sets(Set1;Set2), Set1 < Set2, 
+% :- sets(Set1;Set2), Set1 &lt; Set2, 
 %     S1 = #sum{Val1:x(Set1, Val1)}, 
 %     S2 = #sum{Val2:x(Set2, Val2)}, 
-%     S1 >= S2.
+%     S1 &gt;= S2.
 
 #show x/2.
 
@@ -182,23 +187,30 @@ check(Set1, Set2, Val, N) :-
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-3/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-3/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-3/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -208,7 +220,7 @@ check(Set1, Set2, Val, N) :-
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

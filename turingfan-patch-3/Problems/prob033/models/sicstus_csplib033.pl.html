@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-3/Problems/prob033.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob033/models/sicstus_csplib033.pl">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -137,7 +142,7 @@ dna(shave, NbOctos) :-
 		    list_to_fdset(Feas, Set),
 		    X in_set Set
 		),
-		labeling([], Octo) -> true
+		labeling([], Octo) -&gt; true
 	    )
 	),
 	display_each(Octos).
@@ -148,7 +153,7 @@ dna(seed, NbOctos) :-
 	    count(I,0,_),
 	    param(NbOctos)
 	do  Octo = [A|_],
-	    Bin is (I<<3)//NbOctos,
+	    Bin is (I&lt;&lt;3)//NbOctos,
 	    seed(Bin, A)
 	),
 	labeling([], Vars),
@@ -171,8 +176,8 @@ lab_min_conflict(X, Pos, Done) :-
 	member(_-X, S2).
 lab_min_conflict(_, _, _).
 
-conflicts([], _) --> [].
-conflicts([D|Ds], Pos) --> [X,Y1],
+conflicts([], _) --&gt; [].
+conflicts([D|Ds], Pos) --&gt; [X,Y1],
 	{conflict(Pos, D, X, Y)},
 	{Y1 is 3-Y},
 	conflicts(Ds, Pos).
@@ -236,7 +241,7 @@ system(NbOctos, Octos) :-
 	    foreach([A,B,C,D,E],Pentas)
 	do  true
 	),
-	lex_chain(Pentas, [op(#<)]), % saves runtime and backtracks
+	lex_chain(Pentas, [op(#&lt;)]), % saves runtime and backtracks
 	all_compl_local(Octos).
 
 /* Local handling of the all-diffs */
@@ -284,18 +289,18 @@ extension(eqcs, [ [0,0,0],  [0,1,1],  [0,10,0],  [0,11,0],
 /* Utilities */
 
 sumeq4([B1,B2,B3,B4,B5,B6,B7,B8]) :-
-% 	sum(Bs, #=<, 4).
+% 	sum(Bs, #=&lt;, 4).
 	sumeq4_ix(B1,B2,B3,B4,B5,B6,B7,B8).
 
 sumeq4_ix(B1,B2,B3,B4,B5,B6,B7,B8) +:
 	B1+B2+B3+B4+B5+B6+B7+B8 #= 4.
 
 sumle4([B1,B2,B3,B4,B5,B6,B7,B8]) :-
-% 	sum(Bs, #=<, 4).
+% 	sum(Bs, #=&lt;, 4).
 	sumle4_ix(B1,B2,B3,B4,B5,B6,B7,B8).
 
 sumle4_ix(B1,B2,B3,B4,B5,B6,B7,B8) +:
-	B1+B2+B3+B4+B5+B6+B7+B8 #=< 4.
+	B1+B2+B3+B4+B5+B6+B7+B8 #=&lt; 4.
 %     B1 in !(0..(4        -min(B2)-min(B3)-min(B4)-min(B5)-min(B6)-min(B7)-min(B8))),
 %     B2 in !(0..(4-min(B1)        -min(B3)-min(B4)-min(B5)-min(B6)-min(B7)-min(B8))),
 %     B3 in !(0..(4-min(B1)-min(B2)        -min(B4)-min(B5)-min(B6)-min(B7)-min(B8))),
@@ -328,8 +333,8 @@ all_compl_codes([Octo|Octos], I, [Code|Codes]) :-
 	scalar_product([256,64,16,4,1], Penta, #=, Code),
 	all_compl_codes(Octos, I, Codes).
 
-complements([], _) --> [].
-complements([[A,B,C,D,E,F,G,H]|Octos], Extension) --> [[H1,G1,F1,E1,D1,C1,B1,A1]],
+complements([], _) --&gt; [].
+complements([[A,B,C,D,E,F,G,H]|Octos], Extension) --&gt; [[H1,G1,F1,E1,D1,C1,B1,A1]],
 	{table([[A,A1,1],
 		[B,B1,1],
 		[C,C1,1],
@@ -427,23 +432,30 @@ choose(56, [_,_,_,A,B,C,D,E], [A,B,C,D,E]).
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-3/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-3/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-3/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -453,7 +465,7 @@ choose(56, [_,_,_,A,B,C,D,E], [A,B,C,D,E]).
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

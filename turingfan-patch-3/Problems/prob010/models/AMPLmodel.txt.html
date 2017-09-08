@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,24 +61,29 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-3/Problems/prob010.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob010/models/AMPLmodel.txt">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
@@ -86,12 +91,12 @@
 
 <a href="/csplib-builds/turingfan-patch-3/Problems/prob010/models/AMPLmodel.txt">Download</a>
 <pre >In sci.op-research, bigwind777@aol.com (Bigwind777) writes:
->
-> I have 32 golfers, individual play.
-> We will golf for 16 weeks.
-> I want to set up the foursomes so each person only golfs
-> with the same person once.
-> How many weeks can we do this before it starts to duplicate ?
+&gt;
+&gt; I have 32 golfers, individual play.
+&gt; We will golf for 16 weeks.
+&gt; I want to set up the foursomes so each person only golfs
+&gt; with the same person once.
+&gt; How many weeks can we do this before it starts to duplicate ?
 
 The structure of the problem is similar to the `progressive party
 problem' (see Smith et. al in "Constraints" Vol 1.), let's take a
@@ -121,7 +126,7 @@ looks like
   # variable P[i,j,t] means i plays in foursome j in week t
   var P { Players, Foursomes, Weeks } binary;
 
-  # auxiliary variable M[i,j,t] means i meets j in week t (i<j)
+  # auxiliary variable M[i,j,t] means i meets j in week t (i&lt;j)
   var M { Players, Players, Weeks } binary;
 
 
@@ -137,16 +142,16 @@ looks like
 
 
   # link the M and P variables
-  subject to LMP { i in Players, j in Players, f in Foursomes, t in Weeks: i<j }:
-	  P[i,f,t]+P[j,f,t] - M[i,j,t] <= 1;
+  subject to LMP { i in Players, j in Players, f in Foursomes, t in Weeks: i&lt;j }:
+	  P[i,f,t]+P[j,f,t] - M[i,j,t] &lt;= 1;
 
   # each pair of players only meets once
-  subject to MO { i in Players, j in Players: i<j }:
-	  sum { t in Weeks } M[i,j,t] <= 1;
+  subject to MO { i in Players, j in Players: i&lt;j }:
+	  sum { t in Weeks } M[i,j,t] &lt;= 1;
 
   # fix first round and some symmetry
   fix { p in Players } P[p,int((p-1)/4)+1,1] := 1;
-  fix { p in Players, t in Weeks: t >= 2 and p <= 4 } P[p,p,t] := 1;
+  fix { p in Players, t in Weeks: t &gt;= 2 and p &lt;= 4 } P[p,p,t] := 1;
 
 Spelled out, the above model has 5152 Boolean variables and 22652
 constraints.
@@ -227,23 +232,30 @@ Joachim P. Walser ( http://www.ps.uni-sb.de/~walser )
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-3/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-3/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-3/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -253,7 +265,7 @@ Joachim P. Walser ( http://www.ps.uni-sb.de/~walser )
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>

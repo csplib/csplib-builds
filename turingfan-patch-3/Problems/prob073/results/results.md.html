@@ -26,7 +26,7 @@
 	});
 	</script>
 
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML.js">
 	MathJax.Hub.Config({
 	  	tex2jax: {
 	    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,31 +61,38 @@
 <!-- macro to Not made a link if on the page the link links to -->
 
 
-<nav id="navigation">
-<ul>
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/">Specification</a></li>
+<header class="nav-header">
+<div class="nav-container">
+  <nav class="nav">
+  <ul>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/">Specification</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/data">Data files</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/data">Data files</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/results">Results</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/results">Results</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/references">References</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/references">References</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/models">Models</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/models">Models</a></li>
 
-   	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/cite">Cite</a></li>
+     	<li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073/cite">Cite</a></li>
+
+    <li><a href="/csplib-builds/turingfan-patch-3/Problems/prob073.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/master/Problems/prob073/results/results.md">Edit Page</a></li>
-</ul>
-</nav>
-
+  </ul>
+  </nav>
+</div>
+</header>
 
 
 		</div>
 
 
 <a href="/csplib-builds/turingfan-patch-3/Problems/prob073/results/results.md">Download</a>
-<p>In the Industrial Modelling Competition at CP 2015, only a subset of the instances were used. Results are shown in the Table below, giving the best lower bound, the best upper bound and and indication if the solution is optimal. Results were obtained by Philippe Laborie with IBM&rsquo;s CP Optimizer. The OPL program used is shown in the model section.</p>
+<p>In the Industrial Modelling Competition at CP 2015, only a subset of the instances were used. Results are shown in the table below, giving the best lower bound, the best upper bound and an indication if the solution is optimal. Results were obtained by Philippe Laborie with IBM&rsquo;s CP Optimizer. The OPL program used is shown in the model section.</p>
+<p>The lower bound is computed from a graph of the binary disjunctive constraints between tests. The nodes of the graph are the tests, with weights given by their duration, two nodes are linked if there exists a disjunctive constraint on both tasks. The cost of the maximal weighted clique in that graph is a lower bound for the schedule, as no two tasks in the clique can be run concurrently. </p>
+<p>The tasks of the clique are also a good subset of activities to schedule first.</p>
 <table>
 <thead>
 <tr>
@@ -97,85 +104,85 @@
 </thead>
 <tbody>
 <tr>
-<td>t40m10r3-2.pl</td>
+<td><a href="http://t40m10r3-2.pl">t40m10r3-2.pl</a></td>
 <td align="right">1725</td>
 <td align="right">1725</td>
 <td>*</td>
 </tr>
 <tr>
-<td>t50m10r3-9.pl</td>
+<td><a href="http://t50m10r3-9.pl">t50m10r3-9.pl</a></td>
 <td align="right">7279</td>
 <td align="right">7279</td>
 <td>*</td>
 </tr>
 <tr>
-<td>t100m50r10-11.pl</td>
+<td><a href="http://t100m50r10-11.pl">t100m50r10-11.pl</a></td>
 <td align="right">4970</td>
 <td align="right">4970</td>
 <td>*</td>
 </tr>
 <tr>
-<td>t500m50r5-5.pl</td>
+<td><a href="http://t500m50r5-5.pl">t500m50r5-5.pl</a></td>
 <td align="right">33848</td>
 <td align="right">33848</td>
 <td>*</td>
 </tr>
 <tr>
-<td>t500m100r10-1.pl</td>
+<td><a href="http://t500m100r10-1.pl">t500m100r10-1.pl</a></td>
 <td align="right">48814</td>
 <td align="right">48814</td>
 <td>*</td>
 </tr>
 <tr>
-<td>t500m100r10-2.pl</td>
+<td><a href="http://t500m100r10-2.pl">t500m100r10-2.pl</a></td>
 <td align="right">38303</td>
 <td align="right">39130</td>
 <td></td>
 </tr>
 <tr>
-<td>t500m100r10-3.pl</td>
+<td><a href="http://t500m100r10-3.pl">t500m100r10-3.pl</a></td>
 <td align="right">35459</td>
 <td align="right">36018</td>
 <td></td>
 </tr>
 <tr>
-<td>t500m100r10-4.pl</td>
+<td><a href="http://t500m100r10-4.pl">t500m100r10-4.pl</a></td>
 <td align="right">37658</td>
 <td align="right">37921</td>
 <td></td>
 </tr>
 <tr>
-<td>t500m100r10-5.pl</td>
+<td><a href="http://t500m100r10-5.pl">t500m100r10-5.pl</a></td>
 <td align="right">33080</td>
 <td align="right">33338</td>
 <td></td>
 </tr>
 <tr>
-<td>t500m100r10-6.pl</td>
+<td><a href="http://t500m100r10-6.pl">t500m100r10-6.pl</a></td>
 <td align="right">41078</td>
 <td align="right">41078</td>
 <td>*</td>
 </tr>
 <tr>
-<td>t500m100r10-7.pl</td>
+<td><a href="http://t500m100r10-7.pl">t500m100r10-7.pl</a></td>
 <td align="right">38921</td>
 <td align="right">39790</td>
 <td></td>
 </tr>
 <tr>
-<td>t500m100r10-8.pl</td>
+<td><a href="http://t500m100r10-8.pl">t500m100r10-8.pl</a></td>
 <td align="right">42455</td>
 <td align="right">43199</td>
 <td></td>
 </tr>
 <tr>
-<td>t500m100r10-9.pl</td>
+<td><a href="http://t500m100r10-9.pl">t500m100r10-9.pl</a></td>
 <td align="right">38758</td>
 <td align="right">39083</td>
 <td></td>
 </tr>
 <tr>
-<td>t500m100r10-10.pl</td>
+<td><a href="http://t500m100r10-10.pl">t500m100r10-10.pl</a></td>
 <td align="right">42308</td>
 <td align="right">42308</td>
 <td>*</td>
@@ -192,23 +199,30 @@
 <script type="text/javascript" src="/csplib-builds/turingfan-patch-3/syntax_highlighter/shAutoloader.js" ></script>
 <script type="text/javascript">
     SyntaxHighlighter.autoloader(
-    ['essence','eprime','param','solution', '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
-    ['minizinc','mzn', '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
-    ['comet','co', '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
-    ['js','javascript','/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
-    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
-    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'],
 
-    ['java'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
-    ['cs'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
-    ['groovy' , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
-    ['pl'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
-    ['php'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
-    ['rb'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
-    ['py'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
-    ['xml'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']    ,
-    ['scala'  , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']
-	);
+    // Languages that have a language page in csplib
+    // Only the Title from specification.md converted to lower case should be used.
+    ['comet',        '/csplib-builds/turingfan-patch-3/js/shBrushComet.js'],
+    ['eclipse',      '/csplib-builds/turingfan-patch-3/js/shBrushECLiPSe.js'],
+    ['essence',      '/csplib-builds/turingfan-patch-3/js/shBrushEssence.js'],
+    ['essenceprime', '/csplib-builds/turingfan-patch-3/js/shBrushEssencePrime.js'],
+    ['minizinc',     '/csplib-builds/turingfan-patch-3/js/shBrushMiniZinc.js'],
+
+
+    // Standard Programming languages
+    ['cpp','hpp','hh','cc','h','c', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCpp.js'],
+    ['erl','hrl', '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushErlang.js'] ,
+    ['cs'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushCSharp.js'] ,
+    ['groovy'   , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushGroovy.js'] ,
+    ['java'     , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJava.js']   ,
+    ['js'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushJScript.js'],
+    ['php'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPhp.js']    ,
+    ['pl'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPerl.js']   ,
+    ['py'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushPython.js'] ,
+    ['rb'       , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushRuby.js']   ,
+    ['scala'    , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushScala.js']  ,
+    ['xml'      , '/csplib-builds/turingfan-patch-3/syntax_highlighter/shBrushXml.js']
+ 	);
 
 	SyntaxHighlighter.defaults['toolbar'] = false;
   SyntaxHighlighter.all();
@@ -218,7 +232,7 @@
 </div>
 
 <div id="footer">
- 
+
     <center><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. </center>
 
 </div>
