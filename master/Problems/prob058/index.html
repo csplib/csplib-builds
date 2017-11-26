@@ -91,7 +91,7 @@ Proposed by Vinasetan Ratheil Houndji, Pierre Schaus, Laurence Wolsey, Yves Devi
 <p>Discrete Lot Sizing and Scheduling Problem (DLSP) is a production planning problem which consists of determining a minimal cost production schedule (production costs, setup
 costs, changeover costs, stocking costs, etc.), such that machine capacity restrictions are not violated, and demand for all products is satisfied. The planning horizon is
 discrete and finite. </p>
-<p>The variant described here is the one used for experiments in <A HREF="data/stockingCostConstraint.pdf">The StockingCost Constraint</A>.</p>
+<p>The variant described here is the one used for experiments in <a href="data/stockingCostConstraint.pdf">The StockingCost Constraint</a>.</p>
 <p>It is a multi-item, single machine problem with capacity of production limited to one per period. 
 There are storage costs and sequence-dependent changeover costs, respecting the triangle inequality. 
 Each order consisting of one unit of a particular item has a due date and must be produced at latest by its due date. 
@@ -107,6 +107,8 @@ item $1$ in period $2$; item $2$ in period $3$ and item $1$ in period $5$.
 Note that there is no production in period $4$, it is an idle period. 
 The cost associated to this solution is $q^{2,1}+q^{1,2}+q^{2,1}+2*h = 15$ but it is not the optimal cost. 
 The optimal solution is $productionPlan = (2,1,0,1,2)$ with the cost $q^{2,1}+q^{1,2}+h= 10$.</p>
+<hr />
+<p>A <a href="https://doi.org/10.1016/j.cie.2017.10.017">Simulated Annealing metaheuristic approach</a> along with a dataset of <a href="data/UniUD-LotSizingLargeInstances.zip">large-size instances</a> has been developed by Sara Ceschia, Luca Di Gaspero and Andrea Schaerf. An online web solution checker and solution repository is available at <a href="https://opthub.uniud.it/problem/lsp"><a href="https://opthub.uniud.it/problem/lsp">https://opthub.uniud.it/problem/lsp</a></a>.</p>
 
 
 	</div>
