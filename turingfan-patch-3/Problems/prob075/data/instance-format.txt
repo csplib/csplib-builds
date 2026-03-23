@@ -1,2 +1,0 @@
-C : line 1
-P : line 2
