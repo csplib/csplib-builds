@@ -107,7 +107,7 @@ Proposed by George Assaf, Sven Löffler, and Petra Hofstedt
   means that the appointment must include a cardiologist, a neurologist, and a CT scan room.</p>
 </li>
 <li>
-<p><strong><em>d</em></strong>: The required <strong>duration</strong> of the appointment (in  slot).<br />
+<p><strong><em>d</em></strong>: The required <strong>duration</strong> of the appointment (in slots).<br />
   Assuming a slot is 15 minutes long,  <strong><em>d = 4</em></strong> implies an appointment duration of 60 minutes (1 hour).</p>
 </li>
 <li>
@@ -143,7 +143,7 @@ Proposed by George Assaf, Sven Löffler, and Petra Hofstedt
 <p><strong>Time Slot Identifier Domain</strong>: Describes the available time slots of all resource calendars. Each slot is uniquely encoded by an identifier based on its start time and date. A time slot domain corresponding a resource calendar can be seen as 2D matrix as shown below. The columns represent scheduling days (dates) and the rows model time slots (in our example 32 slots per day). Slot identifiers help to cope with tracking resource availability and extracting time and day (and date) information. For example, slot identifier 33 corresponds to the second scheduling day (or date) $\lfloor \frac{33}{32} \rfloor$  = 1 (second calendar date) mod 7 = 1 (Tu). The time slot corresponds to the slot identifer 33 is $33 \quad mod \quad 32 = 1$ (time slot index) corresponding to the slot starting at 08:15. From all resource calendars, a globla shared calendar representing the calendar of the medical facility can be built to reflect the structure of the scheduling horizon within the medical facility. Note that each resource has a local calendar, which maps to the shared global calendar used for synchronization.</p>
 </li>
 </ul>
-<p>In the modeling, we make use of slot identifiers and column/row indcies to express various time/date-related constraints. </p>
+<p>In the modeling, we make use of slot identifiers and column/row indices to express various time/date-related constraints. </p>
 <h2><img alt="Time slot matrix encoding a resource calendar" src="assets/timeSltMatrix.png" /></h2>
 <h2>Assumptions</h2>
 <p>In the prototype model (Choco implementation), we assume the duration of each time slot is 15 minutes and the number of slots per each calendar day is $M =24$ slots. Moreover, we assume that all resources have the same availability, i.e., they share slot identifiers. Please also note that, resource calendars are unfolded into 1 D array with previously calculated slot identifiers. To teach yourself on constructing time slot identifiers, please check our reference published paper.</p>
@@ -194,7 +194,7 @@ $$ </p>
 </li>
 <li>
 <p><strong>Eliminate undesired dates by patient</strong>
-This constraint is met when all resources do not match slots falling within the slots of the corresponding undeired dates. This constraint is expressed as:
+This constraint is met when all resources do not match slots falling within the slots of the corresponding undesired dates. This constraint is expressed as:
 $$
 \forall a \in A, \quad \forall d \in U:\quad
 \left\lfloor \frac{\text{a}}{M} \right\rfloor \ne d
@@ -213,13 +213,13 @@ v_{\text{date}, \text{aux}} =
     \left\lfloor \frac{\text{aux}}{M} \right\rfloor = \text{dateIndex}(p)
   \right) = 0
 $$</p>
-<p>Function $\textbf{dateIndex}$ returns the date index corresponding to a give date $p$. The total number of violations over all resource calendars is:</p>
+<p>Function $\textbf{dateIndex}$ returns the date index corresponding to a given date $p$. The total number of violations over all resource calendars is:</p>
 <p>$$
 \text{totalDateViolation} = \sum_{a \in \mathcal{A}} v_{\text{date}, \text{a}} 
 $$</p>
 <ul>
 <li><strong>Preferred Resource Violation</strong>:
-  Let $x$ be a decison variable describing a resource that is desired to be assigned an identifier $P_r$  corresponding to a resource specified by the patient. The decision variables that should be assigned preferred resources denoted by $\mathcal{V&rsquo;} \subset V$ . Then, the violation of this constraint occurs when the variable $x$ is assigned an identifier that differs from those given by the patient. This can be expressed as:</li>
+  Let $x$ be a decision variable describing a resource that is desired to be assigned an identifier $P_r$  corresponding to a resource specified by the patient. The decision variables that should be assigned preferred resources denoted by $\mathcal{V&rsquo;} \subset V$ . Then, the violation of this constraint occurs when the variable $x$ is assigned an identifier that differs from those given by the patient. This can be expressed as:</li>
 </ul>
 <p>$$
 v_\text{resource} =  {x \notin P_r}
