@@ -12,14 +12,14 @@
 	<title>131: Production Line Sequencing</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="/csplib-builds/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 
-	<link href="/csplib-builds/css/main.css" rel="stylesheet">
-	<script src="/csplib-builds/js/jquery.min.js" ></script>
+	<link href="./css/main.css" rel="stylesheet">
+	<script src="./js/jquery.min.js" ></script>
 
 	<!-- Enable table sorting -->
-	<script src="/csplib-builds/js/tablesorter/jquery.tablesorter.min.js"></script>
-	<link rel="stylesheet" href="/csplib-builds/js/tablesorter/blue/style.css" type="text/css"/>
+	<script src="./js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="./js/tablesorter/blue/style.css" type="text/css"/>
 	<script type="text/javascript">
 	$(function() {
 		$(".tablesorter").tablesorter();
@@ -41,10 +41,10 @@
 <body>
 
 	<ol class="breadcrumb">
-  	  <li><a href="/csplib-builds/">CSPLib</a></li>
+  	  <li><a href="./">CSPLib</a></li>
 
-  <li><a href="/csplib-builds/Problems">Problems</a></li>
-  <li><a href="/csplib-builds/Problems/prob131">prob131</a></li>
+  <li><a href="./Problems">Problems</a></li>
+  <li><a href="./Problems/prob131">prob131</a></li>
 	</ol>
 
 	<div class="container">
@@ -62,17 +62,17 @@
   <ul>
      	<li><a href="" class='current-item'>Specification</a></li>
 
-     	<li><a class='no-files' href="/csplib-builds/Problems/prob131/data">Data files</a></li>
+     	<li><a class='no-files' href="./Problems/prob131/data">Data files</a></li>
 
-     	<li><a class='no-files' href="/csplib-builds/Problems/prob131/results">Results</a></li>
+     	<li><a class='no-files' href="./Problems/prob131/results">Results</a></li>
 
-     	<li><a href="/csplib-builds/Problems/prob131/references">References</a></li>
+     	<li><a href="./Problems/prob131/references">References</a></li>
 
-     	<li><a class='no-files' href="/csplib-builds/Problems/prob131/models">Models</a></li>
+     	<li><a class='no-files' href="./Problems/prob131/models">Models</a></li>
 
-     	<li><a href="/csplib-builds/Problems/prob131/cite">Cite</a></li>
+     	<li><a href="./Problems/prob131/cite">Cite</a></li>
 
-    <li><a href="/csplib-builds/Problems/prob131.json" >Json</a></li>
+    <li><a href="./Problems/prob131.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob131/specification.md">Edit Page</a></li>
   </ul>
@@ -88,7 +88,7 @@
 Proposed by Özgür Akgün, Zeynep Kiziltan
 </p>
 
-<p>A problem description from the paper<span> <a class="bibref" data-bibfragment="bergen2001constraint" href="/csplib-builds/Problems/prob131/references/#bergen2001constraint">[bergen2001constraint]</a></span> is the following:</p>
+<p>A problem description from the paper<span> <a class="bibref" data-bibfragment="bergen2001constraint" href="./Problems/prob131/references/#bergen2001constraint">[bergen2001constraint]</a></span> is the following:</p>
 <p>The manufacturing plant that we study produces approximately 36,000 vehicles in a month on two assembly lines and the sequencing is done once per month.</p>
 <p>The input to the problem is a list of orders (an order is a quantity of identical vehicles) that need to be produced during that month, capacity values that specify how many vehicles can be produced on each day on each assembly line, and the user-specified constraints. As a first step, each order is split into several smaller quantities of vehicles called lots such that the size of each lot is less than or equal to 60 vehicles, called the batch size. The lots are then grouped together into batches by putting together similar lots with sizes that add up to the batch size. Each batch is assumed to take one hour of time to produce on an assembly line. A typical problem instance has lots with between one and 60 vehicles, and batches with between one and ten lots, with the majority of batches having only one lot. It is important to note that after batching, the lots are not sequenced in a batch and thus sequencing actually occurs at the lot level.</p>
 <p>The lots and batches have attributes. Some attributes are common to all problem instances and others are user-definable and thus specific to a problem instance. Common attributes include the assembly lines that a lot can be produced on, the date a lot must be produced after (line-on date), and the date a lot must be produced by (line-off date). User definable attributes are either selected from a set of basic attributes such as vehicle model, exterior colour, type of engine, and type of transmission; or are constructed from these basic attributes by Cartesian-product. A batch&rsquo;s attribute values are taken from the attribute values of its lots. Each attribute has a different method for deriving the batch attribute value from the lot values when the lot values differ.</p>

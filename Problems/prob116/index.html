@@ -12,14 +12,14 @@
 	<title>116: Vellino's Problem</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="/csplib-builds/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 
-	<link href="/csplib-builds/css/main.css" rel="stylesheet">
-	<script src="/csplib-builds/js/jquery.min.js" ></script>
+	<link href="./css/main.css" rel="stylesheet">
+	<script src="./js/jquery.min.js" ></script>
 
 	<!-- Enable table sorting -->
-	<script src="/csplib-builds/js/tablesorter/jquery.tablesorter.min.js"></script>
-	<link rel="stylesheet" href="/csplib-builds/js/tablesorter/blue/style.css" type="text/css"/>
+	<script src="./js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="./js/tablesorter/blue/style.css" type="text/css"/>
 	<script type="text/javascript">
 	$(function() {
 		$(".tablesorter").tablesorter();
@@ -41,10 +41,10 @@
 <body>
 
 	<ol class="breadcrumb">
-  	  <li><a href="/csplib-builds/">CSPLib</a></li>
+  	  <li><a href="./">CSPLib</a></li>
 
-  <li><a href="/csplib-builds/Problems">Problems</a></li>
-  <li><a href="/csplib-builds/Problems/prob116">prob116</a></li>
+  <li><a href="./Problems">Problems</a></li>
+  <li><a href="./Problems/prob116">prob116</a></li>
 	</ol>
 
 	<div class="container">
@@ -62,17 +62,17 @@
   <ul>
      	<li><a href="" class='current-item'>Specification</a></li>
 
-     	<li><a class='no-files' href="/csplib-builds/Problems/prob116/data">Data files</a></li>
+     	<li><a class='no-files' href="./Problems/prob116/data">Data files</a></li>
 
-     	<li><a class='no-files' href="/csplib-builds/Problems/prob116/results">Results</a></li>
+     	<li><a class='no-files' href="./Problems/prob116/results">Results</a></li>
 
-     	<li><a href="/csplib-builds/Problems/prob116/references">References</a></li>
+     	<li><a href="./Problems/prob116/references">References</a></li>
 
-     	<li><a href="/csplib-builds/Problems/prob116/models">Models</a></li>
+     	<li><a href="./Problems/prob116/models">Models</a></li>
 
-     	<li><a href="/csplib-builds/Problems/prob116/cite">Cite</a></li>
+     	<li><a href="./Problems/prob116/cite">Cite</a></li>
 
-    <li><a href="/csplib-builds/Problems/prob116.json" >Json</a></li>
+    <li><a href="./Problems/prob116.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob116/specification.md">Edit Page</a></li>
   </ul>
@@ -88,7 +88,7 @@
 Proposed by Özgür Akgün
 </p>
 
-<p>(See<span> <a class="bibref" data-bibfragment="van1999constraint" href="/csplib-builds/Problems/prob116/references/#van1999constraint">[van1999constraint]</a></span>)</p>
+<p>(See<span> <a class="bibref" data-bibfragment="van1999constraint" href="./Problems/prob116/references/#van1999constraint">[van1999constraint]</a></span>)</p>
 <p>Given a supply of components and bins of various types, Vellino&rsquo;s problem consists of assigning the components to the bins so that the bin constraints are satisfied and the smallest possible number of bins is used. There are five types of components, i.e., glass, plastic, steel, wood, and copper, and three types of bins, i.e., red, blue, green. The bins must obey a variety of configuration constraints. Containment constraints specify which components can go into which bins: red bins cannot contain plastic of steel, blue bins cannot contain wood or plastic, and green bins cannot contain steel or glass. Other constraints specify a limit for certain component types for some bins: red bins contain at most one wooden component and green bins contain at most two wooden components.
 Requirement constraints specify some compatibility constraints between the components: wood requires plastic, glass excludes copper and copper excludes plastic. In addition, we are given an initial capacity for each bin, i.e., red bins have a capacity of 3 components, blue bins of 1 and green bins of 4 and a demand for each component, i.e., 1 glass, 2 plastic, 1 steel, 3 wood, and 2 copper components.
 Finally, demands of the components must be met and the bin capacities should not be exceeded.</p>
