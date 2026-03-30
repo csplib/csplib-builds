@@ -12,14 +12,14 @@
 	<title>080: Blocked n-Queens Problem</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-	<link href="./css/main.css" rel="stylesheet">
-	<script src="./js/jquery.min.js" ></script>
+	<link href="/css/main.css" rel="stylesheet">
+	<script src="/js/jquery.min.js" ></script>
 
 	<!-- Enable table sorting -->
-	<script src="./js/tablesorter/jquery.tablesorter.min.js"></script>
-	<link rel="stylesheet" href="./js/tablesorter/blue/style.css" type="text/css"/>
+	<script src="/js/tablesorter/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="/js/tablesorter/blue/style.css" type="text/css"/>
 	<script type="text/javascript">
 	$(function() {
 		$(".tablesorter").tablesorter();
@@ -41,10 +41,10 @@
 <body>
 
 	<ol class="breadcrumb">
-  	  <li><a href="./">CSPLib</a></li>
+  	  <li><a href="/">CSPLib</a></li>
 
-  <li><a href="./Problems">Problems</a></li>
-  <li><a href="./Problems/prob080">prob080</a></li>
+  <li><a href="/Problems">Problems</a></li>
+  <li><a href="/Problems/prob080">prob080</a></li>
 	</ol>
 
 	<div class="container">
@@ -62,17 +62,17 @@
   <ul>
      	<li><a href="" class='current-item'>Specification</a></li>
 
-     	<li><a href="./Problems/prob080/data">Data files</a></li>
+     	<li><a href="/Problems/prob080/data">Data files</a></li>
 
-     	<li><a href="./Problems/prob080/results">Results</a></li>
+     	<li><a href="/Problems/prob080/results">Results</a></li>
 
-     	<li><a href="./Problems/prob080/references">References</a></li>
+     	<li><a href="/Problems/prob080/references">References</a></li>
 
-     	<li><a href="./Problems/prob080/models">Models</a></li>
+     	<li><a href="/Problems/prob080/models">Models</a></li>
 
-     	<li><a href="./Problems/prob080/cite">Cite</a></li>
+     	<li><a href="/Problems/prob080/cite">Cite</a></li>
 
-    <li><a href="./Problems/prob080.json" >Json</a></li>
+    <li><a href="/Problems/prob080.json" >Json</a></li>
 
     <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob080/specification.md">Edit Page</a></li>
   </ul>
@@ -89,21 +89,21 @@ Proposed by Ian Gent
 </p>
 
 <h1>Overview</h1>
-<p>The <span> <a href="./Problems/prob054">N-Queens</a></span> Problem, <span> <a href="./Problems/prob054">[prob054]</a></span>, suffers from the problem that its complexity is trivial as a decision problem.<br />
-The Blocked n-Queens problems is a variant of <span> <a href="./Problems/prob054">N-Queens</a></span> which has been proven to
+<p>The <span> <a href="/Problems/prob054">N-Queens</a></span> Problem, <span> <a href="/Problems/prob054">[prob054]</a></span>, suffers from the problem that its complexity is trivial as a decision problem.<br />
+The Blocked n-Queens problems is a variant of <span> <a href="/Problems/prob054">N-Queens</a></span> which has been proven to
 be NP-Complete as a decision problem and #P-Complete as a counting problem.</p>
 <p>The Blocked $n$-Queens problem is a variant where, as well as $n$, the input contains a list of squares which are blocked. A solution to the problem is a solution to the $n$-Queens problem containing no queens on any of the blocked 
 squares.</p>
-<p>The Blocked $n$-Queens problem is closely related to <span> <a href="./Problems/prob079">n-Queens Completion Problem and Excluded Diagonals n-Queens Problem</a></span>, <span> <a href="./Problems/prob079">[prob079]</a></span>.</p>
+<p>The Blocked $n$-Queens problem is closely related to <span> <a href="/Problems/prob079">n-Queens Completion Problem and Excluded Diagonals n-Queens Problem</a></span>, <span> <a href="/Problems/prob079">[prob079]</a></span>.</p>
 <h1>Instances</h1>
-<p>Python generators are available to implement the model from the paper<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="./Problems/prob080/references/#nqueenscompletion">[nqueenscompletion]</a></span>. 
+<p>Python generators are available to implement the model from the paper<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="/Problems/prob080/references/#nqueenscompletion">[nqueenscompletion]</a></span>. 
 <a href="data/blocked-gen.py.html">Generator for random blocked n-Queens instances</a></p>
 <p>Also provided are instances from the ASP Competitions (thanks to Martin Gebser for providing these.)   Results of ASP solvers on those instances can be found at 
 <a href="https://asparagus.cs.uni-potsdam.de/contest/">the 2007 ASP Competition</a> and 
 <a href="https://dtai.cs.kuleuven.be/events/ASP-competition/index.shtml">the 2009 ASP Competition</a> pages.</p>
 <h1>References</h1>
-<p>The Blocked $n$-Queens problem was proposed by<span> <a class="bibref" data-bibfragment="blocked_queens" href="./Problems/prob080/references/#blocked_queens">[blocked_queens]</a></span> and used in ASP Competitions
-<span> <a class="bibref" data-bibfragment="asp_competition_07" href="./Problems/prob080/references/#asp_competition_07">[asp_competition_07]</a></span>. The problem was proved NP-Complete and #P-Complete by<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="./Problems/prob080/references/#nqueenscompletion">[nqueenscompletion]</a></span>, and the same paper 
+<p>The Blocked $n$-Queens problem was proposed by<span> <a class="bibref" data-bibfragment="blocked_queens" href="/Problems/prob080/references/#blocked_queens">[blocked_queens]</a></span> and used in ASP Competitions
+<span> <a class="bibref" data-bibfragment="asp_competition_07" href="/Problems/prob080/references/#asp_competition_07">[asp_competition_07]</a></span>. The problem was proved NP-Complete and #P-Complete by<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="/Problems/prob080/references/#nqueenscompletion">[nqueenscompletion]</a></span>, and the same paper 
 introduced a generator of random instances.</p>
 
 
