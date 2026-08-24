@@ -93,13 +93,13 @@ Proposed by Joan Espasa Arxer & Ian Miguel & Mateu Villaret
 <p>The rules for what happens when a block hits the wall or falls onto the floor are as follows:</p>
 <ul>
 <li>If it hits a wall as it is travelling horizontally, it falls vertically downwards. In a typical level, additional walls are arranged to facilitate hitting the blocks from above.</li>
-<li>If it falls onto the floor, it rebounds into the avatar&rsquo;s hand.</li>
+<li>If it falls onto the floor, it rebounds into the avatar’s hand.</li>
 </ul>
 <p>The rules for a shot block <code>S</code> colliding with a block <code>B</code> in the grid are a bit more complex:</p>
 <ul>
-<li>If the first block <code>S</code> hits is of a different type from itself, <code>S</code> rebounds into the avatar&rsquo;s hand and the grid is unchanged &ndash; a null move.<ul>
+<li>If the first block <code>S</code> hits is of a different type from itself, <code>S</code> rebounds into the avatar’s hand and the grid is unchanged &mdash; a null move.<ul>
 <li>If <code>S</code> and <code>B</code> are of the same type, <code>B</code> is consumed and <code>S</code> continues to travel in the same direction. All blocks above <code>B</code> fall one grid cell each.</li>
-<li>If <code>S</code>, having already consumed a block of the same type, hits a block <code>B</code> of a different type, <code>S</code> replaces <code>B</code>, and <code>B</code> rebounds into the avatar&rsquo;s hand.</li>
+<li>If <code>S</code>, having already consumed a block of the same type, hits a block <code>B</code> of a different type, <code>S</code> replaces <code>B</code>, and <code>B</code> rebounds into the avatar’s hand.</li>
 </ul>
 </li>
 </ul>

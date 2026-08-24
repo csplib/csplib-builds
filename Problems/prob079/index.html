@@ -92,12 +92,13 @@ Proposed by Ian Gent
 <p>The <span> <a href="/Problems/prob054">N-Queens</a></span> Problem, <span> <a href="/Problems/prob054">[prob054]</a></span>, suffers from the problem that its complexity is trivial as a decision problem.<br />
 The n-Queens Completion and Blocked n-Queens problems are variants of <span> <a href="/Problems/prob054">N-Queens</a></span> which have been proven to
 be NP-Complete as decision problems and #P-Complete as counting problems.</p>
-<p><center>
+<center>
 <figure>
   <img src="assets/nqc1850.png" alt="An instance of n-Queens Completion" width="300" height="300">
   <figcaption>An instance of n-Queens Completion from 1850</figcaption>
 </figure>
-</center></p>
+</center>
+
 <p>For the $n$-Queens Completion Problem, as well as board size $n$, one is given some number of queens placed 
 on the board already. The problem is to provide a solution to the $n$-Queens problem containing all those queens. I.e. a superset of the preplaced queens of size $n$ and with no two queens on the same row, column, or diagonal.  (If any two of the preplaced queens attack each other it is considered to be trivially unsolvable).</p>
 <p>The image shows an example problem, originating in 1850<span> <a class="bibref" data-bibfragment="Nauck1850a" href="/Problems/prob079/references/#Nauck1850a">[Nauck1850a]</a></span>.  Can you place the other 6 queens to give a solution to the 8-Queens problem?  And in how many ways is this possible?  The answers are shown below.</p>
@@ -111,8 +112,8 @@ excluded diagonals.</p>
 <p>The two problems here are so similar it is best to think of them as the same problem, as processing to flip between them is very simple. </p>
 <p>To go from $n$-Queens Completion to Excluded Diagonals is very easy: simply allow only rows and columns with no queens preplaced, and exclude any diagonals (both sum and diagonal) on which there are preplaced queens.  </p>
 <p>The other direction is more complex but still fast, following a construction in<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="/Problems/prob079/references/#nqueenscompletion">[nqueenscompletion]</a></span>. It is implemented in the python files 
-<a href="models/diagtoqueens.py.html"><a href="http://diagtoqueens.py">diagtoqueens.py</a></a> and 
-<a href="models/queens-diag-transform.py.html"><a href="http://queens-diag-transform.py">queens-diag-transform.py</a></a>.</p>
+<a href="models/diagtoqueens.py.html">diagtoqueens.py</a> and 
+<a href="models/queens-diag-transform.py.html">queens-diag-transform.py</a>.</p>
 <p>The two problems are closely related to <span> <a href="/Problems/prob080">Blocked n-Queens Problem</a></span>, <span> <a href="/Problems/prob080">[prob080]</a></span>.</p>
 <h1>Random Instance Generators</h1>
 <p>Python generators are available to implement the models from the paper<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="/Problems/prob079/references/#nqueenscompletion">[nqueenscompletion]</a></span>. 
@@ -125,13 +126,13 @@ number, e.g. $d$, you can simply take the first $d$ diagonals and get a probabil
 <p>The n-Queens Completion problem was proposed in 1850<span> <a class="bibref" data-bibfragment="Nauck1850a" href="/Problems/prob079/references/#Nauck1850a">[Nauck1850a]</a></span></p>
 <p>The Excluded Diagonals Problem was proposed by<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="/Problems/prob079/references/#nqueenscompletion">[nqueenscompletion]</a></span></p>
 <p>Both problems were proved NP-Complete and #P-Complete by<span> <a class="bibref" data-bibfragment="nqueenscompletion" href="/Problems/prob079/references/#nqueenscompletion">[nqueenscompletion]</a></span></p>
-<p><center>
+<center>
 <figure>
   <img src="assets/nqc1850sol1.png" alt="An instance of n-Queens Completion" width="300" height="300">
   <img src="assets/nqc1850sol2.png" alt="An instance of n-Queens Completion" width="300" height="300">
   <figcaption>The Two Solutions to the n-Queens Completion from 1850</figcaption>
 </figure>
-</center></p>
+</center>
 
 
 	</div>

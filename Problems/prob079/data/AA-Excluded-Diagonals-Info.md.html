@@ -93,34 +93,33 @@
 <h1>Information about the Excluded Diagonals Generator and Format</h1>
 <p>Ian Gent, 8 Sep 2017</p>
 <p>Relevant to our paper &ldquo;Complexity of n-Queens Completion&rdquo;, JAIR 2017
-<a href=""><a href="http://jair.org/papers/paper5512.html">http://jair.org/papers/paper5512.html</a></a></p>
+<a href="">http://jair.org/papers/paper5512.html</a></p>
 <p>Supporting material for our paper can be found at the following links:</p>
 <ul>
-<li><a href=""><a href="https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-code.tgz">https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-code.tgz</a></a></li>
-<li><a href=""><a href="https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-results.tgz">https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-results.tgz</a></a></li>
-<li><a href=""><a href="https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-instances.tgz">https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-instances.tgz</a></a></li>
+<li><a href="">https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-code.tgz</a></li>
+<li><a href="">https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-results.tgz</a></li>
+<li><a href="">https://ipg.host.cs.st-andrews.ac.uk/n-queens-completion-experiments-instances.tgz</a></li>
 </ul>
 <p>We have provided three Python3 files</p>
 <ul>
-<li><a href="http://queens-diag-gen.py">queens-diag-gen.py</a> </li>
-<li><a href="http://queens-diag-transform.py">queens-diag-transform.py</a></li>
-<li><a href="http://diagtoqueens.py">diagtoqueens.py</a></li>
+<li>queens-diag-gen.py </li>
+<li>queens-diag-transform.py</li>
+<li>diagtoqueens.py</li>
 </ul>
 <h1>Excluded Diagonals Generator</h1>
-<p><a href="http://queens-diag-gen.py">queens-diag-gen.py</a> generates instances of the Excluded Diagonals problem. There 
+<p>queens-diag-gen.py generates instances of the Excluded Diagonals problem. There 
 are three arguments:
     n:          size of board and number of queens to place on it
     mininfile:  minimum number of unblocked squares required in each row/column
     seed:       an integer for Python to use as a seed</p>
 <p>For example:</p>
-<p>./<a href="http://queens-diag-gen.py">queens-diag-gen.py</a> 10 4 1</p>
+<p>./queens-diag-gen.py 10 4 1</p>
 <p>produces the following output on my machine</p>
 <pre><code>n =  10
 numdiags =  14
 diags =  [[4, 1], [2, 1], [14, 0], [8, 1], [8, 0], [7, 0], [3, 1], 
           [12, 1], [18, 0], [5, 0], [14, 1], [0, 0], [15, 1], [17, 1]]
 </code></pre>
-
 <p>The value numdiags is the number of diagonals in the list diags.  For any
 number d up to numdiags a valid excluded diagonals instance can be created by
 taking the FIRST d elements of the list diagas.  Other subsets should not be
@@ -140,27 +139,25 @@ difference diagonal 5-9=-4 (since 10-1=9). That is, it excludes the squares
 (0,4), (1,5), (2,6), (3,7), (4,8), (5,9).</p>
 <h1>Translation to n Queens Completion</h1>
 <p>Because the Excluded Diagonals problem is different to n Queens Completion, instances cannot be used directly with an n Queens Completion solver. For that reason we have created a Python translator from Excluded Diagonals to n Queens Completion. It does greatly increase the size of board but almost all queens are placed at the start.  Solutions are isomorphic in a simple way and the translated problem has the same number of solutions.</p>
-<p>For example if the above output of <a href="http://queens-diag-gen.py">queens-diag-gen.py</a> is in file diag-10-4-1.param then the following creates an equivalent example of n Queens Completion. In this case the parameter &ldquo;10&rdquo; indicates that the first 10 diagonals are to be used.</p>
+<p>For example if the above output of queens-diag-gen.py is in file diag-10-4-1.param then the following creates an equivalent example of n Queens Completion. In this case the parameter &ldquo;10&rdquo; indicates that the first 10 diagonals are to be used.</p>
 <pre><code>./queens-diag-transform.py 10 &lt; diag-10-4-1.param &gt; completion-10-4-1.param
 </code></pre>
-
 <p>The output file starts like this with most of it omitted: </p>
 <pre><code>letting n =  2550
 letting init =  [[52, 19], [58, 31], [59, 33], [48, 11], [61, 37], [66, 47], [14, 18], 
                   [16, 14], [10, 26], [15, 16], [6, 34], [4, 38], [3, 40], [2527, 1070], 
                     ...
 </code></pre>
-
 <p>Although the value of n is massively larger, in this example n=2550, only 10 queens remain to be placed, so in fact search in the two problems is equivalent. 
 Note the format is that the board size is 2550 and the bottom square is still (0,0). In this example there are queens placed at squares (52,19), (58,31) and so on.</p>
 <h1>Instances Used In The Paper</h1>
 <p>The following link contains all instances we used in the paper.  If you only wish the instances for Excluded Diagonals, with additional instances up to n=30, they are at this link</p>
 <ul>
-<li><a href=""><a href="https://ipg.host.cs.st-andrews.ac.uk/ExcludedDiagonalsInstances.zip">https://ipg.host.cs.st-andrews.ac.uk/ExcludedDiagonalsInstances.zip</a></a></li>
+<li><a href="">https://ipg.host.cs.st-andrews.ac.uk/ExcludedDiagonalsInstances.zip</a></li>
 </ul>
 <p>If you wish to experiment with n Queens Completion and cannot run the python translator, we have prepared a sample of 100 instances at each n from 10 to 30, with n diagonals excluded in each case.</p>
 <ul>
-<li><a href=""><a href="https://ipg.host.cs.st-andrews.ac.uk/ExcludedDiagonalsAsQueensCompletion.zip">https://ipg.host.cs.st-andrews.ac.uk/ExcludedDiagonalsAsQueensCompletion.zip</a></a></li>
+<li><a href="">https://ipg.host.cs.st-andrews.ac.uk/ExcludedDiagonalsAsQueensCompletion.zip</a></li>
 </ul>
 <h1>Comparisons With Our Results</h1>
 <p>As we discussed in the paper, we could only solve up to n=21 using all our solvers.  The bit manipulation solver was the fastest and could also solve up to n=22. However it is unlikely to scale so currently we have no method to reliably solve instances up to n=30.</p>
@@ -183,11 +180,9 @@ Note the format is that the board size is 2550 and the bottom square is still (0
 # 16 total wall time
 # 17 filename for result data
 </code></pre>
-
 <p>You should be able to find the result by looking for the instances you are comparing against.  E.g. the one mentioned generated with parameters 10 4 1, and taking the first 9 queens had results</p>
 <pre><code>10 9 1 UNSATISFIABLE   0   0  28 4000.6  34 4857.8  717 0.1  0.0  0.21 0.03 0.20  runs-diag-2/diag-10/diag-10-9/diag-10-4-1.param-9.result
 </code></pre>
-
 <p>You can see this one had no solution and had a total time (column 14) of 0.21s.
 You can search the data, for example to find the hardest one for this particular algorithm was n=21 excluded=19 id=259 which took about 2600s and was unsatisfiable.</p>
 

@@ -96,13 +96,13 @@ Proposed by George Assaf, Sven Löffler, and Petra Hofstedt
 <li>Time slots allocated for one appointment must be <strong>sequential</strong> (i.e., no gaps are allowed).</li>
 <li>The correct medical resource types must be chosen to serve the appointment&rsquo;s purpose. For example, a cardiologist is required for cardiological conditions.</li>
 <li>The appointment must not be scheduled on <strong>dates</strong> (i.e., those mandatorily excluded by the patient).</li>
-<li>Patient preferences&mdash;such as preferred dates, physicians, weekdays, and times&mdash;should be respected as much as possible.</li>
+<li>Patient preferences—such as preferred dates, physicians, weekdays, and times—should be respected as much as possible.</li>
 </ul>
 <hr />
 <h2>Model Parameters</h2>
 <ul>
 <li>
-<p><strong>T = { &tau;&#8321;, &hellip;, &tau;&#8343; }</strong>: A set of required <strong>resource types</strong>  (conjunction of types) for the appointment.<br />
+<p><strong>T = { τ₁, &hellip;, τₗ }</strong>: A set of required <strong>resource types</strong>  (conjunction of types) for the appointment.<br />
   Example:  <strong>T = { Cardiologist, Neurologist, CT_Room }</strong><br />
   means that the appointment must include a cardiologist, a neurologist, and a CT scan room.</p>
 </li>
@@ -136,7 +136,7 @@ Proposed by George Assaf, Sven Löffler, and Petra Hofstedt
 <p>We define two types of integer domains:</p>
 <ul>
 <li>
-<p><strong>Resource Identifier Domain (R)</strong>: Divided into sub-domains <strong>R<sub>&tau;</sub></strong> for each <strong>&tau; &isin; T</strong>, depending on the resource type.<br />
+<p><strong>Resource Identifier Domain (R)</strong>: Divided into sub-domains <strong>R<sub>τ</sub></strong> for each <strong>τ ∈ T</strong>, depending on the resource type.<br />
   For instance, all cardiology physicians form a cardiology sub-domain.</p>
 </li>
 <li>
@@ -151,19 +151,19 @@ Proposed by George Assaf, Sven Löffler, and Petra Hofstedt
 <h2>Decision Variables</h2>
 <ul>
 <li>
-<p><strong>V = { x&#8321;, &hellip;, x&#8343; }</strong>: A set of decision variables over domains <strong>R<sub>&tau;</sub></strong>, where <strong>&tau; &isin; T</strong>.<br />
+<p><strong>V = { x₁, &hellip;, xₗ }</strong>: A set of decision variables over domains <strong>R<sub>τ</sub></strong>, where <strong>τ ∈ T</strong>.<br />
   For example, if two cardiologists are needed, two variables over the cardiology domain are introduced.</p>
 </li>
 <li>
 <p>For each involved resource $z$ in resource domain, an auxiliary variable is declared:</p>
 </li>
 <li>
-<p><strong>aux<sub>z</sub> &isin; S<sub>z</sub> \ {&ndash;1}</strong>,<br />
-    where <strong>S<sub>z</sub></strong> is the calendar of resource <strong>z</strong> excluding unavailable slots (denoted by &ndash;1).<br />
+<p><strong>aux<sub>z</sub> ∈ S<sub>z</sub> \ {–1}</strong>,<br />
+    where <strong>S<sub>z</sub></strong> is the calendar of resource <strong>z</strong> excluding unavailable slots (denoted by –1).<br />
     These track time slot allocations for that resource. Each auxiliary variable can be seen as the start slot of the appointment nominated by the associated resource. The set of all auxiliary variables are indicated by $A = {aux_1, \dots, aux_n}$</p>
 </li>
 <li>
-<p><strong>d</strong> decision variables for encoding the time slots of the appointment: <strong>&forall;k &isin; {1, &hellip;, d}</strong>,  <strong>t<sub>k</sub> &isin; S<sub>g</sub></strong>, where <strong>S<sub>g</sub></strong> is the global time slot domain (facility-wide calendar).</p>
+<p><strong>d</strong> decision variables for encoding the time slots of the appointment: <strong>∀k ∈ {1, &hellip;, d}</strong>,  <strong>t<sub>k</sub> ∈ S<sub>g</sub></strong>, where <strong>S<sub>g</sub></strong> is the global time slot domain (facility-wide calendar).</p>
 </li>
 </ul>
 <hr />

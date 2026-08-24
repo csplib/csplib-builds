@@ -112,40 +112,41 @@ in time-units (say, hours) between different meeting locations.</p>
 <table>
 <thead>
 <tr>
-<th>Meeting</th>
-<th>Location</th>
-<th>Attending agents</th>
+<th style="text-align: center;">Meeting</th>
+<th style="text-align: center;">Location</th>
+<th style="text-align: center;">Attending agents</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>$m_1$</td>
-<td>$L_1$</td>
-<td>$A_1, A_3$</td>
+<td style="text-align: center;">$m_1$</td>
+<td style="text-align: center;">$L_1$</td>
+<td style="text-align: center;">$A_1, A_3$</td>
 </tr>
 <tr>
-<td>$m_2$</td>
-<td>$L_2$</td>
-<td>$A_2, A_3, A_4$</td>
+<td style="text-align: center;">$m_2$</td>
+<td style="text-align: center;">$L_2$</td>
+<td style="text-align: center;">$A_2, A_3, A_4$</td>
 </tr>
 <tr>
-<td>$m_3$</td>
-<td>$L_3$</td>
-<td>$A_1, A_4$</td>
+<td style="text-align: center;">$m_3$</td>
+<td style="text-align: center;">$L_3$</td>
+<td style="text-align: center;">$A_1, A_4$</td>
 </tr>
 <tr>
-<td>$m_4$</td>
-<td>$L_4$</td>
-<td>$A_1, A_2$</td>
+<td style="text-align: center;">$m_4$</td>
+<td style="text-align: center;">$L_4$</td>
+<td style="text-align: center;">$A_1, A_2$</td>
 </tr>
 </tbody>
 </table>
 <p>The distances (in time-slots) between the meetings are described by the
 following:</p>
-<p><CENTER>
+<CENTER>
 <IMG SRC="./assets/Distances.jpg" ALIGN=bottom
       WIDTH=350 HEIGHT=300>
-</CENTER></p>
+</CENTER>
+
 <p><em>The meeting scheduling problem as described above can be naturally
 represented as a constraints satisfaction problem (CSP) in the following way:</em></p>
 <ul>
@@ -182,10 +183,11 @@ slots to the number of total tuples ($D^2$). Therefore $p_2$ is defined as  </p>
 <p>where $s$ is the travelling time between the meeting locations.</p>
 <p>A Representation of a Meeting Scheduling Problem as CSP is described in
 Figure 2:</p>
-<p><CENTER>
+<CENTER>
 <IMG SRC="./assets/MSPasCSP.jpg" ALIGN=bottom
       WIDTH=550 HEIGHT=300>
-</CENTER></p>
+</CENTER>
+
 <p>The meeting scheduling problem is naturally described as a Distributed CSP.
 The representation of the MSP as DisCSP is based on the distributed nature
 of the problem. The MSP is a distributed negotiation problem between different
@@ -205,10 +207,11 @@ corresponding to the meeting $m_k$.</li>
 </ul>
 <p>A Representation of a Meeting Scheduling Problem as DisCSP is described in
 Figure 3.</p>
-<p><CENTER>
+<CENTER>
 <IMG SRC="./assets/MSPasDisCSP.jpg" ALIGN=bottom
       WIDTH=350 HEIGHT=300>
-</CENTER></p>
+</CENTER>
+
 <p><em>Random Meeting Scheduling Problem (RMSP) specification:</em></p>
 <p>The RMSP can be parameterized in many ways. Parameters can be the number of meetings,
 locations, number of agents, etc.</p>

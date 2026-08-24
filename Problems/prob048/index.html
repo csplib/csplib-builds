@@ -105,13 +105,14 @@ Proposed by David A. Burke, Kenneth N. Brown
 <p><strong>Hop-count variable:</strong> Each agent also has a hop-count variable, indicating how many hops that device is from the source device. A second inter-agent constraint between neighbouring agents ensures that the hop-count of a child in the broadcast tree is one greater than its parent, thus preventing cycles.</p>
 <h3>Example</h3>
 <p>Figure 1 displays an example MEB problem with 10 devices. This problem is modelled using the variables as specified in Table 1 and constraints as described in the previous paragraph. Its corresponding minimal energy broadcast tree is shown in Figure 2, and the optimal assignments to variables is shown in Table 2.</p>
-<p><center>
+<center>
     <img src="assets/meb-problem.jpg" align="bottom" width="336" height="284">
     <img src="assets/meb-result.jpg" align="bottom" width="336" height="284">
-</center></p>
+</center>
+
 <table border="">
   <caption align="LEFT"><b>Table 1.</b> Complete list of variables and domains of all agents in the problem.
-    Variable names begin with the agent name. Subscript &lsquo;h&rsquo; indicates hop count variable; &lsquo;r&rsquo; indicates relationship variable; &lsquo;p&rsquo; indicates broadcast power/energy cost variable. For relationship variables, -x indicates that variable is for the relationship with agent x. Similarly for energy cost variables, the -x indicates that this is the power required to reach agent x. 
+    Variable names begin with the agent name. Subscript 'h' indicates hop count variable; 'r' indicates relationship variable; 'p' indicates broadcast power/energy cost variable. For relationship variables, -x indicates that variable is for the relationship with agent x. Similarly for energy cost variables, the -x indicates that this is the power required to reach agent x. 
   </caption>
   <tbody>
     <tr>
@@ -556,7 +557,7 @@ Proposed by David A. Burke, Kenneth N. Brown
 <li>A maximum power <em>p</em> at which each device can broadcast at.</li>
 <li>A path loss exponent <em>exp</em>, which is the rate at which the radio signal attenuates.</li>
 </ul>
-<p>Each device is placed randomly in the area. To determine the power required for two devices a1 and a2 to communicate with each other, first calculate the distance, <em>d</em> between the devices: <em>d = &radic;((x2-x1)<sup>2</sup> + (y2-y1)<sup>2</sup>)</em>. The energy used (<em>w</em>=watts) to broadcast this distance is: <em>w = (d<sup>exp</sup>) x 0.0001</em>. If <em>w &lt; p</em>, then the devices can communicate.</p>
+<p>Each device is placed randomly in the area. To determine the power required for two devices a1 and a2 to communicate with each other, first calculate the distance, <em>d</em> between the devices: <em>d = √((x2-x1)<sup>2</sup> + (y2-y1)<sup>2</sup>)</em>. The energy used (<em>w</em>=watts) to broadcast this distance is: <em>w = (d<sup>exp</sup>) x 0.0001</em>. If <em>w &lt; p</em>, then the devices can communicate.</p>
 <h3>Notes</h3>
 <p>This problem is related to the Travelling Salesman Problem (TSP) and Minimum Spanning Tree (MST) problem. The key difference with the TSP is that in MEB the salesman/broadcast can travel more than one route out of a city/node. The difference with the Minimum Spanning Tree problem comes from the fact that the cost of broadcasting to multiple child nodes is the maximum cost over all the links to children as opposed to the sum of the links.</p>
 

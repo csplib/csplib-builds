@@ -128,23 +128,24 @@ However, in GSensorDisCSP the sensors are located on the nodes of a
 uniform grid of $n$ nodes, and the target objects are located within
 the surface enclosed by the grid (i.e., the grid specifies the
 generally trackable region).</p>
-<p><center>
+<center>
 <figure>
-  <figcaption><strong>Fig.1:</strong> <em>An example of the target tracking problem in distributed sensor networks.</em></figcaption>
+  <figcaption>**Fig.1:** *An example of the target tracking problem in distributed sensor networks.*</figcaption>
   <figure>
     <img src="assets/sensing.png" alt="Sensing graph" width="300">
-    <figcaption><em>(a): Sensing graph.</em></figcaption>
+    <figcaption>*(a): Sensing graph.*</figcaption>
   </figure>
   <figure>
     <img src="assets/communication.png" alt="Communication network" width="300">
-    <figcaption><em>(b): Communication network.</em></figcaption>
+    <figcaption>*(b): Communication network.*</figcaption>
   </figure>
   <figure>
     <img src="assets/solution.png" alt="Feasible sensors/target assignment" width="300">
-    <figcaption><em>(c): Feasible sensors/target assignment.</em></figcaption>
+    <figcaption>*(c): Feasible sensors/target assignment.*</figcaption>
   </figure>
 </figure>
-</center></p>
+</center>
+
 <p>Fig.1 shows an example of the target tracking problem in distributed
 sensor networks where $s_{i}$ represents the sensor and $t_{j}$
 represents the target. In this example sensors are arranged on
@@ -178,12 +179,13 @@ is the set of sensors that can detect the corresponding target
 The inter-agent constraints between the variables of one agent
 (target) specify that the three sensors assigned to the target
 must be distinct.</p>
-<p><center>
+<center>
 <figure>
-  <figcaption><strong>Fig.2:</strong> <em>Target as Variable formulation of the problem in Fig.1</em>.</figcaption>
+  <figcaption>**Fig.2:** *Target as Variable formulation of the problem in Fig.1*.</figcaption>
   <img src="assets/TaV.png" alt="Target as Variable formulation" width="600">
 </figure>
-</center></p>
+</center>
+
 <p>In Fig. 2, the instance of target tracking in distributed sensor network
 shown in Fig. 1 is formalized as a <strong>TaV</strong> problem. Each target is represented
 by an agent, i.e., there are two agents $A_{1}$ representing $t_{1}$ and
@@ -221,12 +223,13 @@ For each sensor, there is a constraint specifying that it can not track
 more than one target: $\forall s_{i}\in\mathcal{S},\sum_{j=1}^{m}{x_{i}^{j}}\leq 1$.
 For each target, there is a constraint specifying that it must be tracked
 by at least 3 sensors: $\forall t_{j}\in\mathcal{T},\sum_{i=1}^{n}{x_{i}^{j}}\geq 3$.</p>
-<p><center>
+<center>
 <figure>
-  <figcaption><strong>Fig.3:</strong> <em>Sensor-Target as Variable formulation of the problem in Fig.1</em>.</figcaption>
+  <figcaption>**Fig.3:** *Sensor-Target as Variable formulation of the problem in Fig.1*.</figcaption>
   <img src="assets/STaV.png" alt="Sensor-Target as Variable formulation" width="500">
 </figure>
-</center></p>
+</center>
+
 <p>An example of a sensor network shown in Fig. 1 is formalized as a
 <strong>STaV</strong> problem shown in Fig. 3.
 In Fig. 3, $x_{i}^{j}$ represents a variable of $s_{i}$ for target $t_{j}$.
@@ -260,12 +263,13 @@ sensor $s_{i}$ can track. There is an $\texttt{atleast}$ constraint
 on the variables $[x_{i},&hellip;,x_{k}]$ that can track each target,
 i.e., $\forall t_{j}\in\mathcal{T},\texttt{atleast}(3,[x_{i},\ldots,x_{k}],j)$
 such that $\forall x_{l}\in [x_{i},\ldots,x_{k}]$, $j\in D_{l}$.</p>
-<p><center>
+<center>
 <figure>
-  <figcaption><strong>Fig.4:</strong> <em>Sensor as Variable formulation of the problem in Fig.1</em>.</figcaption>
+  <figcaption>**Fig.4:** *Sensor as Variable formulation of the problem in Fig.1*.</figcaption>
   <img src="assets/SaV.png" alt="Sensor as Variable formulation" width="500">
 </figure>
-</center></p>
+</center>
+
 <p>An example of a sensor network shown in Fig. 1 is formalized as a
 <strong>SaV</strong> problem shown in Fig. 4.
 In Fig. 4, each sensor $s_{i}$ is represented by a variable $x_{i}$

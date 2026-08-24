@@ -89,7 +89,7 @@ Proposed by George Assaf, Petra Hofstedt, Sven Löffler
 </p>
 
 <h1>Model Description</h1>
-<p>The goal of the <strong>Medical Appointment Sequence Scheduling Problem (MASSP)</strong> is to determine a schedule for a series of medical appointments, where each appointment corresponds to a treatment stage within a patient&rsquo;s overall treatment plan. To schedule an appointment in the sequence, a set of medical resources such as specialists, medical equipment, and other necessary facilities must be selected from those available in the medical center. A resource is considered available if its calendar contains sufficient consecutive time slots that are unoccupied.</p>
+<p>The goal of the <strong>Medical Appointment Sequence Scheduling Problem (MASSP)</strong> is to determine a schedule for a series of medical appointments, where each appointment corresponds to a treatment stage within a patient’s overall treatment plan. To schedule an appointment in the sequence, a set of medical resources such as specialists, medical equipment, and other necessary facilities must be selected from those available in the medical center. A resource is considered available if its calendar contains sufficient consecutive time slots that are unoccupied.</p>
 <hr />
 <h2>Implicit Hard Constraints</h2>
 <ul>
@@ -123,8 +123,8 @@ Proposed by George Assaf, Petra Hofstedt, Sven Löffler
 <h2>Problem Modeling</h2>
 <p>Let the tuple $\mathcal{S} = (A_1, \dots, A_l)$ represent a sequence of $l$ medical appointments.<br />
 Each appointment $\mathcal{A}<em i_1="i,1">i = \langle R_i, T_i \rangle$, $i \in {1, \dots, l}$, is defined as follows.
-1. (R_i = {x</em>, \dots, x_{i,l}}) denotes the set of resources required by the (i)-th individual appointment.
-2. (T_i = {t_{i,1}, \dots, t_{i,m}}) denotes the set of time slot identifiers required to cover the (i)-th individual appointment, where (m) is the appointment length in slots. For example, if the appointment duration is 60 minutes and the length of each time slot is 15 minutes, then the appointment length $m = \frac{60}{15} = 4$ (slots).</p>
+1. (R_i = {x</em>}) denotes the set of resources required by the (i)-th individual appointment.
+2. (T_i = {t_{i,1}, \dots, t_{i,m}}) denotes the set of time slot identifiers required to cover the (i)-th individual appointment, where (m) is the appointment length in slots. For example, if the appointment duration is 60 minutes and the length of each time slot is 15 minutes, then the appointment length $m = \frac{60}{15} = 4$ (slots).}, \dots, x_{i,l</p>
 <p>In the following, we describe the problem constraints.</p>
 <ol>
 <li><strong>Distinct resources within an appointment.</strong><br />
@@ -134,7 +134,7 @@ $$
 $$</li>
 </ol>
 <p>The constraint given in Example 1 is encoded using this constraint.</p>
-<ol>
+<ol start="2">
 <li>
 <p><strong>Type consistency / continuity (when required).</strong> If continuity of care is required for a given resource type across appointments (A_i) and (A_j), then the same individual must be used:
 $$
@@ -173,7 +173,7 @@ t_{i,1} \;\le\; t_{j,1} + d_j + \alpha_{i,j}
 $$</li>
 </ol>
 <p>As an example, the constraint given in Example 4 (upper bound) is encoded using this constraint.</p>
-<ol>
+<ol start="7">
 <li><strong>Patient unavailability (exclude dates).</strong><br />
 Let (N) be the number of slots per day, and let (D_{\text{absence}}) be the set of calendar <strong>column indices</strong> (days) on which the patient is unavailable. Then the first slot of each appointment must not fall on an absence day:
 $$
@@ -185,7 +185,7 @@ $$</li>
 $$
 \left\lfloor \frac{t_{1,1}}{N} \right\rfloor \neq 1.
 $$</p>
-<ol>
+<ol start="8">
 <li><strong>Predefined chronological order.</strong><br />
 Given an order (O = (o_1,o_2,\dots,o_l)) over appointments, enforce:
 $$
@@ -195,7 +195,7 @@ $$
 For instance, the constraint given in Example 2 is encoded using this constraint.</li>
 </ol>
 <h3>9. Workload-Balanced Resource Assignment</h3>
-<p>The optimization objective is to assign medical resources to appointments in a way that minimizes the maximum workload across all resources, promoting balanced utilization. Let $w_r$ denote the initial workload of resource $r$, and let $d_a$ be the duration of appointment $a$. The binary indicator (\mathbb{1}<em a_i="a,i">{x</em> = r}) equals 1 if resource $r$ is assigned to the $i$-th resource requirement of appointment $a$. The final workload $W_r$ for resource $r$ is calculated as:</p>
+<p>The optimization objective is to assign medical resources to appointments in a way that minimizes the maximum workload across all resources, promoting balanced utilization. Let $w_r$ denote the initial workload of resource $r$, and let $d_a$ be the duration of appointment $a$. The binary indicator (\mathbb{1}<em a_i="a,i">{x</em>) equals 1 if resource $r$ is assigned to the $i$-th resource requirement of appointment $a$. The final workload $W_r$ for resource $r$ is calculated as:} = r</p>
 <p>$$
 W_{r} = w_{r} + \sum_{a=1}^{l} \sum_{i=1}^{|R_a|} x_{a,i}=r \cdot d_a
 \quad \forall r \in R.
