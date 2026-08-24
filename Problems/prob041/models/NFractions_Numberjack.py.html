@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>006: Golomb rulers</title>
+	<title>041: The n-Fractions Puzzle</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -46,16 +46,16 @@
     	  <li><a href="/">CSPLib</a></li>
 
   <li><a href="/Problems">Problems</a></li>
-  <li><a href="/Problems/prob006">prob006</a></li>
+  <li><a href="/Problems/prob041">prob041</a></li>
 
-  <li><a href="/Problems/prob006/models">Models</a></li>
-  <li>GolombRuler.py</li>
+  <li><a href="/Problems/prob041/models">Models</a></li>
+  <li>NFractions_Numberjack.py</li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>006: Golomb rulers</h1>
+			<h1>041: The n-Fractions Puzzle</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -65,21 +65,21 @@
 <div class="nav-container">
   <nav class="nav">
   <ul>
-     	<li><a href="/Problems/prob006/">Specification</a></li>
+     	<li><a href="/Problems/prob041/">Specification</a></li>
 
-     	<li><a href="/Problems/prob006/data">Data files</a></li>
+     	<li><a href="/Problems/prob041/data">Data files</a></li>
 
-     	<li><a href="/Problems/prob006/results">Results</a></li>
+     	<li><a href="/Problems/prob041/results">Results</a></li>
 
-     	<li><a href="/Problems/prob006/references">References</a></li>
+     	<li><a href="/Problems/prob041/references">References</a></li>
 
-     	<li><a href="/Problems/prob006/models">Models</a></li>
+     	<li><a href="/Problems/prob041/models">Models</a></li>
 
-     	<li><a href="/Problems/prob006/cite">Cite</a></li>
+     	<li><a href="/Problems/prob041/cite">Cite</a></li>
 
-    <li><a href="/Problems/prob006.json" >Json</a></li>
+    <li><a href="/Problems/prob041.json" >Json</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob006/models/GolombRuler.py">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob041/models/NFractions_Numberjack.py">Edit Page</a></li>
   </ul>
   </nav>
 </div>
@@ -89,61 +89,58 @@
 		</div>
 
 
-<a href="/Problems/prob006/models/GolombRuler.py">Download</a>
-<pre class ='brush: py'>from Numberjack import *
+<a href="/Problems/prob041/models/NFractions_Numberjack.py">Download</a>
+<pre class ='brush: py'># N Fractions - non-generalized version
+#
+# You must assign the digits 1 to 9 to the variables
+# A, B, C, D, E, F, G, H, I, such that each digit may
+# occur only once, and the following equation is satisfied:
+#
+#  A      D      G
+# ---- + ---- + ---- = 1
+#  BC     EF     HI
+#
+# CSPlib Problem 041 - http://www.csplib.org/Problems/prob041/
+
+from Numberjack import *
 
 
-# Golomb Ruler --- CSPLib prob006
-
-# A Golomb ruler may be defined as a set of m marks/integers 0 = a_1 &lt; ... &lt; a_m
-# such that the pairwise differences between marks are distinct. The objective
-# is to find optimal (minimum length) rulers.
-
-
-def get_model(param):
-    m = param['marks']
-    n = 2 ** (m - 1)
-
-    marks = VarArray(m, n, 'm')
-    distance = [marks[i] - marks[j] for i in range(1, m) for j in range(i)]
+def modelNFractions():
+    a, b, c, d, e, f, g, h, i = VarArray(9, 1, 9)
 
     model = Model(
-        Minimise(marks[-1]),  # objective function
+        # Rearrange the equation to avoid the usage of floats.
+        a * (10 * e + f) * (10 * h + i) +
+        d * (10 * b + c) * (10 * h + i) +
+        g * (10 * b + c) * (10 * e + f) ==
+        (10 * b + c) * (10 * e + f) * (10 * h + i),
 
-        [marks[i-1] &lt; marks[i] for i in range(1, m)],
-        AllDiff(distance),
-        marks[0] == 0,  # symmetry breaking
+        # Each digit must occurr once
+        AllDiff([a, b, c, d, e, f, g, h, i]))
 
-        [distance[i * (i - 1) / 2 + j] &gt;= ruler[i - j] for i in range(1, m) for j in range(0, i - 1) if (i - j &lt; m)]
-    )
-
-    return marks, model
+    return (a, b, c, d, e, f, g, h, i, model)
 
 
 def solve(param):
-    marks, model = get_model(param)
-
-    solver = model.load(param['solver'], marks)
-    solver.setHeuristic(param['heuristic'])
-    solver.setVerbosity(param['verbose'])
-    solver.setTimeLimit(param['tcutoff'])
-
+    (a, b, c, d, e, f, g, h, i, model) = modelNFractions()
+    solver = model.load(param["solver"])
     solver.solve()
 
-    out = ''
     if solver.is_sat():
-        out = str(marks)
-    out += ('\nNodes: ' + str(solver.getNodes()))
-    return out
-
-
-ruler = (0, 1, 3, 6, 11, 17, 25, 34, 44, 55, 72, 85, 106, 127)
-default = {'solver': 'Mistral', 'marks': 6, 'heuristic': 'Impact', 'verbose': 0, 'tcutoff': 60}
+        print "(" + str(a) + " / " + str(b) + str(c) + ") + " + \
+              "(" + str(d) + " / " + str(e) + str(f) + ") + " + \
+              "(" + str(g) + " / " + str(h) + str(i) + ") = 1"
+    elif solver.is_unsat():
+        print "Unsatisfiable"
+    else:
+        print "Timed out"
 
 
 if __name__ == '__main__':
+    default = {'solver': 'Mistral', 'verbose': 1}
     param = input(default)
-    print solve(param)
+    solve(param)
+
 
 </pre>
 

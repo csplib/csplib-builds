@@ -49,7 +49,7 @@
   <li><a href="/Problems/prob019">prob019</a></li>
 
   <li><a href="/Problems/prob019/models">Models</a></li>
-  <li>MagicSequence.py</li>
+  <li>MagicSequence_PyCSP3.py</li>
 	</ol>
 
 	<div class="container">
@@ -79,7 +79,7 @@
 
     <li><a href="/Problems/prob019.json" >Json</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob019/models/MagicSequence.py">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob019/models/MagicSequence_PyCSP3.py">Edit Page</a></li>
   </ul>
   </nav>
 </div>
@@ -89,52 +89,29 @@
 		</div>
 
 
-<a href="/Problems/prob019/models/MagicSequence.py">Download</a>
-<pre class ='brush: py'># Magic Sequences - Magic Square variant
-#
-# A magic sequence of length n is a sequence of integers x[0]
-# to x[n-1], such that for all i in 0 to n-1, the number i occurs
-# exactly x[i] times in the sequence.
-#
-# For instance, 6,2,1,0,0,0,1,0,0,0 is a magic sequence since 0
-# occurs 6 times in it, 1 occurs twice, 2 occurs once, ...
-#
-# CSPlib Problem 019 - http://www.csplib.org/Problems/prob019/
+<a href="/Problems/prob019/models/MagicSequence_PyCSP3.py">Download</a>
+<pre class ='brush: py'>"""
+PyCSP3 Model (see pycsp.org)
 
-from Numberjack import *
+Examples:
+  python Magicsequence.py
+  python Magicsequence.py -data=10
+"""
 
+from pycsp3 import *
 
-def get_model(N):
-    seq = VarArray(N, N)
+n = data or 8
 
-    model = Model()
-    for i in xrange(N):
-        model += seq[i] == Sum([seq[j] == i for j in xrange(N)])
+# x[i] is the ith value of the sequence
+x = VarArray(size=n, dom=range(n))
 
-    return seq, model
+satisfy(
+    # each value i occurs exactly x[i] times in the sequence
+    Cardinality(x, occurrences={i: x[i] for i in range(n)}),
 
-
-def solve(param):
-    N = param['N']
-
-    seq, model = get_model(N)
-
-    solver = model.load(param['solver'])
-    solver.setVerbosity(param['verbose'])
-    solver.solve()
-
-    if solver.is_sat():
-        print str(seq)
-    elif solver.is_unsat():
-        print "Unsatisfiable"
-    else:
-        print "Timed out"
-
-
-if __name__ == '__main__':
-    default = {'N': 10, 'solver': 'Mistral', 'verbose': 0}
-    param = input(default)
-    solve(param)
+    # tag(redundant-constraints)
+    [Sum(x) == n, Sum((i - 1) * x[i] for i in range(n)) == 0]
+)
 
 
 </pre>

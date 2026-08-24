@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>006: Golomb rulers</title>
+	<title>019: Magic Squares and Sequences</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -46,16 +46,16 @@
     	  <li><a href="/">CSPLib</a></li>
 
   <li><a href="/Problems">Problems</a></li>
-  <li><a href="/Problems/prob006">prob006</a></li>
+  <li><a href="/Problems/prob019">prob019</a></li>
 
-  <li><a href="/Problems/prob006/models">Models</a></li>
-  <li>Golombruler.py</li>
+  <li><a href="/Problems/prob019/models">Models</a></li>
+  <li>MagicSquare_PyCSP3.py</li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>006: Golomb rulers</h1>
+			<h1>019: Magic Squares and Sequences</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -65,21 +65,21 @@
 <div class="nav-container">
   <nav class="nav">
   <ul>
-     	<li><a href="/Problems/prob006/">Specification</a></li>
+     	<li><a href="/Problems/prob019/">Specification</a></li>
 
-     	<li><a href="/Problems/prob006/data">Data files</a></li>
+     	<li><a href="/Problems/prob019/data">Data files</a></li>
 
-     	<li><a href="/Problems/prob006/results">Results</a></li>
+     	<li><a href="/Problems/prob019/results">Results</a></li>
 
-     	<li><a href="/Problems/prob006/references">References</a></li>
+     	<li><a href="/Problems/prob019/references">References</a></li>
 
-     	<li><a href="/Problems/prob006/models">Models</a></li>
+     	<li><a href="/Problems/prob019/models">Models</a></li>
 
-     	<li><a href="/Problems/prob006/cite">Cite</a></li>
+     	<li><a href="/Problems/prob019/cite">Cite</a></li>
 
-    <li><a href="/Problems/prob006.json" >Json</a></li>
+    <li><a href="/Problems/prob019.json" >Json</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob006/models/Golombruler.py">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob019/models/MagicSquare_PyCSP3.py">Edit Page</a></li>
   </ul>
   </nav>
 </div>
@@ -89,56 +89,39 @@
 		</div>
 
 
-<a href="/Problems/prob006/models/Golombruler.py">Download</a>
+<a href="/Problems/prob019/models/MagicSquare_PyCSP3.py">Download</a>
 <pre class ='brush: py'>"""
 PyCSP3 Model (see pycsp.org)
 
+Data can come:
+ - either directly from a JSON file
+ - or from an intermediate parser
+
 Examples:
-  python3 GolombRuler.py
-  python3 GolombRuler.py -data=10
-  python3 GolombRuler.py -data=10 -variant=dec
-  python3 GolombRuler.py -data=10 -variant=aux
+  python Magicsquare.py -data=[4,null]
+  python Magicsquare.py -data=MagicSquare_example0.txt -dataparser=MagicSquare_Parser.py
 """
 
 from pycsp3 import *
 
-n = data or 8
-ub = n * n + 1  # a trivial upper-bound of an optimal ruler length
+n, clues = data
+magic = n * (n * n + 1) // 2
 
-# x[i] is the position of the ith tick
-x = VarArray(size=n, dom=range(ub))
-
-if not variant():
-    satisfy(
-        # all distances are different
-        AllDifferent(abs(x[i] - x[j]) for i, j in combinations(n, 2))
-    )
-elif variant("dec"):
-    satisfy(
-        # all distances are different
-        abs(x[i] - x[j]) != abs(x[k] - x[l]) for i, j in combinations(range(n), 2) for k, l in combinations(range(i + 1, n), 2)
-    )
-elif variant("aux"):
-    # y[i][j] is the distance between x[i] and x[j], for i strictly less than j
-    y = VarArray(size=[n, n], dom=lambda i, j: range(1, ub) if i &lt; j else None)
-
-    satisfy(
-        # all distances are different
-        AllDifferent(y),
-
-        # linking variables from both arrays
-        [x[j] == x[i] + y[i][j] for i, j in combinations(n, 2)]
-    )
-    annotate(decision=x)
+# x[i][j] is the value at row i and column j of the magic square
+x = VarArray(size=[n, n], dom=range(1, n * n + 1))
 
 satisfy(
-    # tag(symmetry-breaking)
-    [x[0] == 0, Increasing(x, strict=True)]
-)
+    AllDifferent(x),
 
-minimize(
-    # minimizing the position of the rightmost tick
-    Maximum(x)
+    [Sum(row) == magic for row in x],
+
+    [Sum(col) == magic for col in columns(x)],
+
+    # tag(diagonals)
+    [Sum(dgn) == magic for dgn in [diagonal_down(x), diagonal_up(x)]],
+
+    # respecting specified clues (if any)  tag(clues)
+    [x[i][j] == clues[i][j] for i in range(n) for j in range(n) if clues and clues[i][j] != 0]
 )
 
 

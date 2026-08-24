@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>049: Number Partitioning</title>
+	<title>019: Magic Squares and Sequences</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -46,16 +46,16 @@
     	  <li><a href="/">CSPLib</a></li>
 
   <li><a href="/Problems">Problems</a></li>
-  <li><a href="/Problems/prob049">prob049</a></li>
+  <li><a href="/Problems/prob019">prob019</a></li>
 
-  <li><a href="/Problems/prob049/models">Models</a></li>
-  <li>Numberpartitioning.py</li>
+  <li><a href="/Problems/prob019/models">Models</a></li>
+  <li>MagicSequence_Numberjack.py</li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>049: Number Partitioning</h1>
+			<h1>019: Magic Squares and Sequences</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -65,21 +65,21 @@
 <div class="nav-container">
   <nav class="nav">
   <ul>
-     	<li><a href="/Problems/prob049/">Specification</a></li>
+     	<li><a href="/Problems/prob019/">Specification</a></li>
 
-     	<li><a class='no-files' href="/Problems/prob049/data">Data files</a></li>
+     	<li><a href="/Problems/prob019/data">Data files</a></li>
 
-     	<li><a href="/Problems/prob049/results">Results</a></li>
+     	<li><a href="/Problems/prob019/results">Results</a></li>
 
-     	<li><a href="/Problems/prob049/references">References</a></li>
+     	<li><a href="/Problems/prob019/references">References</a></li>
 
-     	<li><a href="/Problems/prob049/models">Models</a></li>
+     	<li><a href="/Problems/prob019/models">Models</a></li>
 
-     	<li><a href="/Problems/prob049/cite">Cite</a></li>
+     	<li><a href="/Problems/prob019/cite">Cite</a></li>
 
-    <li><a href="/Problems/prob049.json" >Json</a></li>
+    <li><a href="/Problems/prob019.json" >Json</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob049/models/Numberpartitioning.py">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob019/models/MagicSequence_Numberjack.py">Edit Page</a></li>
   </ul>
   </nav>
 </div>
@@ -89,48 +89,53 @@
 		</div>
 
 
-<a href="/Problems/prob049/models/Numberpartitioning.py">Download</a>
-<pre class ='brush: py'>"""
-PyCSP3 Model (see pycsp.org)
+<a href="/Problems/prob019/models/MagicSequence_Numberjack.py">Download</a>
+<pre class ='brush: py'># Magic Sequences - Magic Square variant
+#
+# A magic sequence of length n is a sequence of integers x[0]
+# to x[n-1], such that for all i in 0 to n-1, the number i occurs
+# exactly x[i] times in the sequence.
+#
+# For instance, 6,2,1,0,0,0,1,0,0,0 is a magic sequence since 0
+# occurs 6 times in it, 1 occurs twice, 2 occurs once, ...
+#
+# CSPlib Problem 019 - http://www.csplib.org/Problems/prob019/
 
-Examples:
-  python Numberpartitioning.py
-  python Numberpartitioning.py -data=10
-"""
+from Numberjack import *
 
-from pycsp3 import *
 
-n = data or 8
-assert n % 2 == 0, "The value of n must be even"
+def get_model(N):
+    seq = VarArray(N, N)
 
-# x[i] is the ith value of the first set
-x = VarArray(size=n // 2, dom=range(1, n + 1))
+    model = Model()
+    for i in xrange(N):
+        model += seq[i] == Sum([seq[j] == i for j in xrange(N)])
 
-# y[i] is the ith value of the second set
-y = VarArray(size=n // 2, dom=range(1, n + 1))
+    return seq, model
 
-satisfy(
-    AllDifferent(x + y),
 
-    # tag(power1)
-    [
-        Sum(x) == n * (n + 1) // 4,
-        Sum(y) == n * (n + 1) // 4
-    ],
+def solve(param):
+    N = param['N']
 
-    # tag(power2)
-    [
-        Sum(x[i] * x[i] for i in range(n // 2)) == n * (n + 1) * (2 * n + 1) // 12,
-        Sum(y[i] * y[i] for i in range(n // 2)) == n * (n + 1) * (2 * n + 1) // 12
-    ],
+    seq, model = get_model(N)
 
-    # tag(symmetry-breaking)
-    [
-        x[0] == 1,
-        Increasing(x, strict=True),
-        Increasing(y, strict=True)
-    ]
-)
+    solver = model.load(param['solver'])
+    solver.setVerbosity(param['verbose'])
+    solver.solve()
+
+    if solver.is_sat():
+        print str(seq)
+    elif solver.is_unsat():
+        print "Unsatisfiable"
+    else:
+        print "Timed out"
+
+
+if __name__ == '__main__':
+    default = {'N': 10, 'solver': 'Mistral', 'verbose': 0}
+    param = input(default)
+    solve(param)
+
 
 </pre>
 

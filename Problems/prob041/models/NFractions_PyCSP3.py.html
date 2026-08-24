@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>019: Magic Squares and Sequences</title>
+	<title>041: The n-Fractions Puzzle</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -46,16 +46,16 @@
     	  <li><a href="/">CSPLib</a></li>
 
   <li><a href="/Problems">Problems</a></li>
-  <li><a href="/Problems/prob019">prob019</a></li>
+  <li><a href="/Problems/prob041">prob041</a></li>
 
-  <li><a href="/Problems/prob019/models">Models</a></li>
-  <li>Magicsequence.py</li>
+  <li><a href="/Problems/prob041/models">Models</a></li>
+  <li>NFractions_PyCSP3.py</li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>019: Magic Squares and Sequences</h1>
+			<h1>041: The n-Fractions Puzzle</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -65,21 +65,21 @@
 <div class="nav-container">
   <nav class="nav">
   <ul>
-     	<li><a href="/Problems/prob019/">Specification</a></li>
+     	<li><a href="/Problems/prob041/">Specification</a></li>
 
-     	<li><a href="/Problems/prob019/data">Data files</a></li>
+     	<li><a href="/Problems/prob041/data">Data files</a></li>
 
-     	<li><a href="/Problems/prob019/results">Results</a></li>
+     	<li><a href="/Problems/prob041/results">Results</a></li>
 
-     	<li><a href="/Problems/prob019/references">References</a></li>
+     	<li><a href="/Problems/prob041/references">References</a></li>
 
-     	<li><a href="/Problems/prob019/models">Models</a></li>
+     	<li><a href="/Problems/prob041/models">Models</a></li>
 
-     	<li><a href="/Problems/prob019/cite">Cite</a></li>
+     	<li><a href="/Problems/prob041/cite">Cite</a></li>
 
-    <li><a href="/Problems/prob019.json" >Json</a></li>
+    <li><a href="/Problems/prob041.json" >Json</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob019/models/Magicsequence.py">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob041/models/NFractions_PyCSP3.py">Edit Page</a></li>
   </ul>
   </nav>
 </div>
@@ -89,30 +89,24 @@
 		</div>
 
 
-<a href="/Problems/prob019/models/Magicsequence.py">Download</a>
+<a href="/Problems/prob041/models/NFractions_PyCSP3.py">Download</a>
 <pre class ='brush: py'>"""
 PyCSP3 Model (see pycsp.org)
 
-Examples:
-  python Magicsequence.py
-  python Magicsequence.py -data=10
+Execution:
+  python Nfractions.py
 """
 
 from pycsp3 import *
 
-n = data or 8
-
-# x[i] is the ith value of the sequence
-x = VarArray(size=n, dom=range(n))
+digits = VarArray(size=9, dom=range(1, 10))
+a, b, c, d, e, f, g, h, i = digits
 
 satisfy(
-    # each value i occurs exactly x[i] times in the sequence
-    Cardinality(x, occurrences={i: x[i] for i in range(n)}),
+    AllDifferent(digits),
 
-    # tag(redundant-constraints)
-    [Sum(x) == n, Sum((i - 1) * x[i] for i in range(n)) == 0]
+    a * (10 * e + f) * (10 * h + i) + d * (10 * b + c) * (10 * h + i) + g * (10 * b + c) * (10 * e * f) == (10 * b + c) * (10 * e + f) * (10 * h + i)
 )
-
 
 </pre>
 

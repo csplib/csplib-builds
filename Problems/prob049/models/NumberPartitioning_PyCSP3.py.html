@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-	<title>028: Balanced Incomplete Block Designs</title>
+	<title>049: Number Partitioning</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -46,16 +46,16 @@
     	  <li><a href="/">CSPLib</a></li>
 
   <li><a href="/Problems">Problems</a></li>
-  <li><a href="/Problems/prob028">prob028</a></li>
+  <li><a href="/Problems/prob049">prob049</a></li>
 
-  <li><a href="/Problems/prob028/models">Models</a></li>
-  <li>Bibd.py</li>
+  <li><a href="/Problems/prob049/models">Models</a></li>
+  <li>NumberPartitioning_PyCSP3.py</li>
 	</ol>
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1>028: Balanced Incomplete Block Designs</h1>
+			<h1>049: Number Partitioning</h1>
 
 
 <!-- macro to Not made a link if on the page the link links to -->
@@ -65,21 +65,21 @@
 <div class="nav-container">
   <nav class="nav">
   <ul>
-     	<li><a href="/Problems/prob028/">Specification</a></li>
+     	<li><a href="/Problems/prob049/">Specification</a></li>
 
-     	<li><a href="/Problems/prob028/data">Data files</a></li>
+     	<li><a class='no-files' href="/Problems/prob049/data">Data files</a></li>
 
-     	<li><a href="/Problems/prob028/results">Results</a></li>
+     	<li><a href="/Problems/prob049/results">Results</a></li>
 
-     	<li><a href="/Problems/prob028/references">References</a></li>
+     	<li><a href="/Problems/prob049/references">References</a></li>
 
-     	<li><a href="/Problems/prob028/models">Models</a></li>
+     	<li><a href="/Problems/prob049/models">Models</a></li>
 
-     	<li><a href="/Problems/prob028/cite">Cite</a></li>
+     	<li><a href="/Problems/prob049/cite">Cite</a></li>
 
-    <li><a href="/Problems/prob028.json" >Json</a></li>
+    <li><a href="/Problems/prob049.json" >Json</a></li>
 
-    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob028/models/Bibd.py">Edit Page</a></li>
+    <li style="float:right"><a href="https://github.com/csplib/csplib/blob/main/Problems/prob049/models/NumberPartitioning_PyCSP3.py">Edit Page</a></li>
   </ul>
   </nav>
 </div>
@@ -89,60 +89,48 @@
 		</div>
 
 
-<a href="/Problems/prob028/models/Bibd.py">Download</a>
-<pre class ='brush: py'>from Numberjack import *
+<a href="/Problems/prob049/models/NumberPartitioning_PyCSP3.py">Download</a>
+<pre class ='brush: py'>"""
+PyCSP3 Model (see pycsp.org)
 
-# Balanced Incomplete Block Design (BIBD) --- CSPLib prob028
+Examples:
+  python Numberpartitioning.py
+  python Numberpartitioning.py -data=10
+"""
 
-# A BIBD is defined as an arrangement of v distinct objects into b blocks such
-# that each block contains exactly k distinct objects, each object occurs in
-# exactly r different blocks, and every two distinct objects occur together in
-# exactly lambda blocks. Another way of defining a BIBD is in terms of its
-# incidence matrix, which is a v by b binary matrix with exactly r ones per row,
-# k ones per column, and with a scalar product of lambda 'l' between any pair of
-# distinct rows.
+from pycsp3 import *
 
+n = data or 8
+assert n % 2 == 0, "The value of n must be even"
 
-def get_model(v, b, r, k, l):
-    matrix = Matrix(v, b)
-    model = Model(
-        [Sum(row) == r for row in matrix.row],  # every row adds up to r
-        [Sum(col) == k for col in matrix.col],  # every column adds up to k
+# x[i] is the ith value of the first set
+x = VarArray(size=n // 2, dom=range(1, n + 1))
 
-        # the scalar product of every pair of columns adds up to l
-        [Sum([(row[col_i] * row[col_j]) for row in matrix.row]) == l
-            for col_i in range(v) for col_j in range(col_i)],
-    )
-    return matrix, model
+# y[i] is the ith value of the second set
+y = VarArray(size=n // 2, dom=range(1, n + 1))
 
+satisfy(
+    AllDifferent(x + y),
 
-def solve(param):
-    matrix, model = get_model(param['v'], param['b'], param['r'], param['k'], param['l'])
+    # tag(power1)
+    [
+        Sum(x) == n * (n + 1) // 4,
+        Sum(y) == n * (n + 1) // 4
+    ],
 
-    if param['solver'] == 'Mistral':
-        model += [matrix.row[i] &lt;= matrix.row[i+1] for i in range(param['v']-1)]
-        model += [matrix.col[i] &lt;= matrix.col[i+1] for i in range(param['b']-1)]
+    # tag(power2)
+    [
+        Sum(x[i] * x[i] for i in range(n // 2)) == n * (n + 1) * (2 * n + 1) // 12,
+        Sum(y[i] * y[i] for i in range(n // 2)) == n * (n + 1) * (2 * n + 1) // 12
+    ],
 
-    solver = model.load(param['solver'])
-    solver.setVerbosity(param['verbose'])
-    solver.setTimeLimit(param['tcutoff'])
-    solver.solve()
-
-    out = ''
-    if solver.is_sat():
-        out += str(matrix)
-    elif solver.is_unsat():
-        out += "UNSAT"
-    out += ('\nNodes: ' + str(solver.getNodes()))
-    return out
-
-
-default = {'solver': 'Mistral', 'v': 7, 'b': 7, 'r': 3, 'k': 3, 'l': 1, 'verbose': 0, 'tcutoff': 10}
-
-
-if __name__ == '__main__':
-    param = input(default)
-    print solve(param)
+    # tag(symmetry-breaking)
+    [
+        x[0] == 1,
+        Increasing(x, strict=True),
+        Increasing(y, strict=True)
+    ]
+)
 
 </pre>
 
