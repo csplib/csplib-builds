@@ -1063,6 +1063,17 @@
     ],
     "title": "Medical Appointment Sequence Scheduling Problem (MASSP)"
   },
+  "prob092": {
+    "category": [
+      "Timetabling"
+    ],
+    "id": "prob092",
+    "number": 92,
+    "proposer": [
+      "B\u00e9r\u00e9nice Dubois"
+    ],
+    "title": "Half-block School Timetabling"
+  },
   "prob110": {
     "category": [
       "Combinatorial mathematics",
